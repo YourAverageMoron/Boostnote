@@ -1,0 +1,244 @@
+createdAt: "2019-03-14T19:21:49.147Z"
+updatedAt: "2019-03-14T20:03:59.128Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "CSS Selector Examples"
+tags: [
+  "Computer_Science"
+  "CSS"
+  "Web_Development"
+  "CSS_Selectors"
+]
+content: '''
+  # CSS Selector Examples
+  In CSS, selectors are patterns used to select the element(s) you want to style.
+  
+  ### `.class` ###
+  This allows you to define a class that you that can be added to HTML elements using the the class attribute.
+  ```
+  ### CSS FILE ###
+  
+  .intro {
+       color: red
+  }
+  
+  ```
+  ```
+  ### HTML FILE ###
+  
+  <h1 class=”intro”> this will be red </h1>
+  
+  <h1> this will not be red </h1>
+  
+  ```
+  You can specify multiple classes in the HTML element, e.g:
+  	`<h1 class=”intro active”>` this will show the attributes in .intro and .active
+  
+  
+  ---
+  
+  
+  ### `#id` ###
+  This is similar to class but you can only use id to identify one element.
+  ```
+  ### CSS FILE ###
+  
+  #top {
+       background-color: red
+  }
+  ```
+  ```
+  ### HTML FILE ###
+  
+  <h1 id=”top”> 
+        this will have a red background 
+  </h1>
+  ```
+  
+  ---
+  
+  ### `*` ###
+  This is used on all HTML elements.
+  ```
+  ### CSS FILE ###
+  
+  * {
+       text-align: right;
+  }
+  ```
+  ```
+  ### HTML FILE ###
+  
+  <h1> This will be aligned right </h1>
+  
+  <p> this will be right aligned too </p>
+  ```
+  
+  ---
+  
+  ### `element` ###
+  
+  This will style all instances of that element.
+  ```
+  ### CSS FILE ###
+  
+  h1 {
+       color: green;
+  }
+  ```
+  ```
+  ### HTML FILE ###
+  
+  <h1> This will be green</h1>
+  
+  <p> This will not be green </p>
+  ```
+  
+  ---
+  
+  ### `element1, element2` ###
+  This styles all instances both of element1 and element2 specified.
+  ```
+  ### CSS FILE ####
+  
+  h1, p {
+       color: green;
+  }
+  ```
+  ```
+  ### HTML FILE ###
+  
+  <h1> This will be green</h1>
+  
+  <p> This will also be green </p>
+  ```
+  
+  ---
+  
+  ### `element1 element2` ###
+  This will style all instances of element2 what exist within element1.
+  ```
+  ### CSS FILE ###
+  
+  h1 p {
+       color: green;
+  }
+  ```
+  ```
+  ### HTML FILE ###
+  
+  <h1>
+      <p> 
+          This will be green
+      </p>
+  </h1>
+  
+  <p> This will not be green </p>
+  ```
+  
+  ---
+  
+  ### `element1 < element2` ###
+  This will style all instances of element2 which has a parent of element1 (i.e similar to “element1 element2”, but element1 is one above element2)
+  ```
+  ### CSS FILE ###
+  
+  h1 > p {
+       color: green;
+  }
+  ```
+  ```
+  ### HTML FILE ###
+  
+  <h1>
+    <p> 
+      This will be green
+    </p>
+  </h1>
+  
+  <h1>
+      <div>
+          <p> This will not be green </p>
+      </div>
+  </h1>
+  ```
+  
+  ---
+  
+  ### `element1 + element2` ###
+  This will style any instance of element2 that is exactly after an instance of element1.
+  ```
+  ### CSS FILE ###
+  
+  h1 + p {
+       color: green;
+  }
+  ```
+  ```
+  ### HTML FILE ###
+  
+  <h1> not green </h1>
+  
+  <p> this will be green </p>
+  ```
+  
+  ---
+  
+  ### `:hover` ###
+  This will change the style of the element when you hover your mouse over it.
+  ```
+  ### CSS FILE ###
+  
+  p :hover {
+       color: red;
+  }   
+  ```
+  ```
+  ### HTML FILE
+  
+  <p>
+       this will be red when mouse hovers over it
+  </p>
+  ```
+  
+  ---
+  
+  ### `:last-child` ###
+  This will only apply to the last specified element.
+  ```
+  ### CSS FILE ###
+  
+  .intro:last-child {
+       color: red
+  }
+  ```
+  ```
+  ### HTML FILE ###
+  
+  <h1 class=”intro”> this will not be red </h1>
+  <h1 class=”intro”> this will not be red </h1>
+  <h1 class=”intro”> this will be red </h1>
+  ```
+  
+  ---
+  
+  ### `:first-child` ###
+  This will only apply to the first specified element.
+  ```
+  ### CSS FILE ###
+  
+  .intro:first-child {
+       color: red
+  }
+  ```
+  ```
+  ### HTML FILE ###
+  
+  <h1 class=”intro”> this will be red </h1>
+  <h1 class=”intro”> this will not be red </h1>
+  <h1 class=”intro”> this will not be red </h1>
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

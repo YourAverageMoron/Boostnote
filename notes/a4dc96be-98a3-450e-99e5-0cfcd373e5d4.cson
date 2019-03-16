@@ -1,0 +1,79 @@
+createdAt: "2019-03-15T20:00:43.917Z"
+updatedAt: "2019-03-15T20:46:08.749Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "DOM Manipulation"
+tags: [
+  "CSS"
+  "CSS_Selectors"
+  "Computer_Science"
+  "HTML"
+  "Web_Development"
+]
+content: '''
+  # DOM Manipulation
+  ## Document Object Model
+  
+  The DOM defines what should be displayed on a web page.
+  
+  A web browser has an object called window which has a property document.
+  
+  Document specifies the DOM, modify the DOM through the document object.
+  
+  ![6f18a447.png](:storage\\a4dc96be-98a3-450e-99e5-0cfcd373e5d4\\6f18a447.png)
+  
+  ---
+  
+  ## DOM Selectors
+  
+  #### `document.getElementsByTagName(tagName)`
+  This returns an array of elements with the the tag “tagName”
+  
+  #### `document.getElementsByClassName(className)`
+  This returns an array of elements with the classname “className”
+  
+  #### `document.getElementById(id)`
+  Returns the element with the ID “id”
+  
+  #### `document.querySelector(selector)`
+  Returns the first element located by the css query selector “selector”
+  
+  #### `document.querySelectorAll(selector)`
+  Returns the all the elements located by the css query selector “selector”
+  
+  #### `element.getAttribute(attribute)`
+  This returns the attribute “attribute” of the element
+  
+  #### `element.setAttribute(attribute, value)`
+  This sets the attribute “attribute” of the element to equal “value”
+  
+  #### `Prefered method of editing an element`
+  Do to the separation of concerns it is better to select the element e.g:
+  ```
+  var h1 = document.querySelector('h1')
+  h1.className : "new Class"
+  ```
+  
+  ---
+  
+  ## DOM Events
+  These allow us to respond to user actions e.g clicking a button.
+  
+  ##### Example
+  ```
+  var button = document.getElementById("buttonId");
+  button.addEventListener("click", function() {
+  	console.log("click!!");
+  })
+  ```
+  
+  ---
+  
+  ## Useful Links
+  [Web events resource](https://developer.mozilla.org/en-US/docs/Web/Events)
+  [JavaScript char codes](https://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes)
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,49 @@
+createdAt: "2019-03-16T15:50:39.804Z"
+updatedAt: "2019-03-16T15:55:48.919Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Developing good scripts"
+tags: [
+  "Bash"
+  "Computer_Science"
+  "Linux"
+  "Shell"
+]
+content: '''
+  # Developing good scripts
+  
+  ## Properties of good scripts
+  - A script should run without errors.
+  - It should perform the task for which it is intended.
+  - Program logic is clearly defined and apparent.
+  - A script does not do unnecessary work.
+  - Scripts should be reusable.
+  
+  ---
+  
+  ## Structure
+  When creating a new script you should ask yourself these questions:
+  - Will I be needing any information from the user or from the user’s environment?
+  - How will i store the information?
+  - Are there any files that need to be created?
+  - Where and with which permissions and ownerships?
+  - What commands will I use?
+  - When using the script on different systems, do all these systems have these commands in the required versions?
+  - Does the user need notification?
+    - When?
+    - Why?
+  
+  ---
+  
+  ## Terminology
+  **Command control** - Testing exit status of a command in order to determine whether a portion of the program should be executed.
+  **Conditional branch** - Logical point in the program when a condition determines what happens next.
+  **Logic flow** - The overall design of the program. Determines logical sequence of tasks so that the result is successful and controlled.
+  **Loop** - Part of the program that is performed zero or more times.
+  **User input** - Information provided by an external source while the program is running, can be stored and recalled when needed.
+'''
+linesHighlighted: [
+  19
+]
+isStarred: false
+isTrashed: false

@@ -1,0 +1,60 @@
+createdAt: "2019-03-16T08:16:28.571Z"
+updatedAt: "2019-03-16T08:40:29.043Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Shell built-in commands"
+tags: [
+  "Bash"
+  "Computer_Science"
+  "Linux"
+  "Shell"
+]
+content: '''
+  # Shell built-in commands
+  Built-in commands are contained within itself. When the name of a built-in command is used as the first word of a simple command, the shell executes directly, without creating a new process. Built-in commands are necessary to implement functionality impossible or inconvenient to obtain with separate utilities.
+  
+  ### Bash supports 3 types of built-in commands
+  
+  #### Bourne shell built-ins:
+  
+  | `:`      | `.`    |`break` | `cd`    |`continue`|`eval`|
+  |:--------:|:------:|:------:|:-------:|:--------:|:----:|
+  |`exec`    |`exit`  |`export`|`getopts`|`hash`    |`pwd` |
+  |`readonly`|`return`|`set`   |`shift`  |`test`    |`[`   |
+  |`times`   |`trap`  |`umask` |`unset`  |
+  
+  
+  #### Bash built-in scripts
+  |`alias` |`bind` |`builtin`|`command`|`declare`|`echo`   |
+  |:------:|:-----:|:-------:|:-------:|:-------:|:-------:|
+  |`enable`|`help` |`let`    |`local`  |`logout` |`printf` |
+  |`read`  |`shopt`|`type`   |`typeset`|`ulimit` |`unalias`|
+  
+  
+  #### Special built in commands
+  When Bash is executing in POSIX mode, the special built-ins differ from other built-in commands in three respects:
+  Special built-ins are found before shell functions during command lookup.
+  
+  If a special built-in returns an error status, a non-interactive shell exists.
+  
+  Assignment statements preceding the command stay in effect in the shell environment after the command completes.
+  
+  The POSIX special built-ins are:
+  | `:`  | `.`    |`break`   |`continue`|`eval`|`exec` |
+  |:----:|:------:|:--------:|:--------:|:----:|:-----:|
+  |`exit`|`export`|`readonly`|`return`  |`set` |`shift`|
+  |`trap`|`unset` |
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,38 @@
+createdAt: "2019-03-14T19:19:11.343Z"
+updatedAt: "2019-03-14T19:21:32.917Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "CSS Basics"
+tags: [
+  "Computer_Science"
+  "Web_Development"
+  "CSS"
+]
+content: '''
+  # CSS Basics
+  
+  ## Basic Syntax
+  Its basic syntax its:
+  ``````
+  Selector{
+      Property1: Value1;
+      Property2: Value2;
+  }
+  ``````
+  You should write tags in order of specificity, e.g body then header then h1. This is because as you move down the css file you can override the styles added above.
+   
+  ## Linking the CSS file to HTML file 
+  To link a CSS file into an HTML file you can use a link tag in the head of the html file e.g:
+  ```
+  	<head>
+  		<link rel=”stylesheet” type=”text/css” href=”style.css”>
+  	</head>
+  ```
+  **rel** - Specifies the relationship between the current document and the linked document
+  **type** - Specifies the media type of the linked document
+  **href** - Specifies the location of the linked document
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

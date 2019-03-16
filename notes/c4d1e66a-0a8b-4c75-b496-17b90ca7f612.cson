@@ -1,0 +1,128 @@
+createdAt: "2019-03-15T06:18:11.497Z"
+updatedAt: "2019-03-15T07:43:58.498Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "CSS Grid"
+tags: [
+  "CSS"
+  "Computer_Science"
+  "HTML"
+  "Web_Development"
+]
+content: '''
+  # CSS Grid
+  ## Setup
+  CSS grid consists of a parent element, with one or more child elements, for example:
+  ``` 
+  <div class="grid-container">
+    <div class="grid-item">1</div>
+    <div class="grid-item">2</div>
+    <div class="grid-item">3</div>
+    <div class="grid-item">4</div>
+  </div>
+  ```
+  
+  In order to display the contents of .grid-container as a grid you need to use the property 
+  grid: display; like this:
+  ```
+  .grid-container{
+  	display: grid;
+  }
+  ```
+  
+  To define the number of columns you can use the property grid-template-columns, this allows you to define the size of the columns as well, for 2 columns that are 10 pixels wide you grid container would look something like this:
+  ```
+  .grid-container{
+  	display: grid;
+        grid-template-columns: 10px 10px;
+  }
+  ```
+  
+  The number of rows is defined by the number of grid items that you add inside of the grid container.
+  
+  ---
+  
+  ## grid-template-columns properties
+  
+  #### px
+  There are a few different ways to size the columns within the CSS grid layout, one is to use exact pixels as shown above however that may not work for a responsive UI.
+  
+  #### auto
+  In this the size of the columns are determined by the size of the container and ton the size of the content of the items in the column.
+  This can be thought of as the max size as the content.
+  
+  #### %
+  This will size the column as a percentage of the column, it can be useful however it can be tricky to work out the exact percentages when you take into account other properties such as grid-gap. 
+  
+  #### fr
+  This stands for fraction and is probably the way to go for most cases, it divides the columns into fractions of the container but there is no overflow on the x-axis. It also allows you to define multiple fractions for a single column. For example:
+  ```
+  .grid-container{
+  	display: grid;
+        grid-gap: 10px;
+        grid-template-columns: 1fr 1fr 2fr 1fr
+  }
+  ```
+  This would produce something like this:
+  ![grid1.png](:storage\\c4d1e66a-0a8b-4c75-b496-17b90ca7f612\\f0600ddf.png)
+  
+  #### grid-template-rows
+  This will define the way that rows will look, for example:
+  ```
+  .grid-container{
+  	display: grid;
+        grid-gap: 10px;
+        grid-template-columns: 1fr 1fr
+        grid-template-rows: 1fr 2fr 1fr
+  }
+  ```
+  This would look something like this
+  ![grid2.png](:storage\\c4d1e66a-0a8b-4c75-b496-17b90ca7f612\\3a4a685f.png)
+  
+  #### Repeat function in CSS
+  This is a useful tool for writing the grid templates as it allows you to define multiple columns or rows more simply.
+  
+  
+  #### Syntax
+  `grid-template-columns: repeat(4, 1f);`
+  This will do the same as:
+  `grid-template-columns: 1fr 1fr 1fr 1fr;`
+  
+  ---
+  
+  ## Completely responsive CSS grid
+  To do this we will use a property called `auto-fill`, this fills the row with as many columns as it can.
+  
+  It also uses a function called `minmax(minSize, maxSize)` which defines a size range greater than or equal to minSize and less than or equal to maxSize (minSize ≤ value ≤ maxSize).
+  
+  This creates this:
+  `grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));`
+  
+  ---
+  
+  ## Manipulating grid items
+  
+  #### grid-column and grid-row
+  These allow you to specify a grid item’s size and location in a grid layout.
+  ```
+  For example:
+   .individual-item{
+    grid-column-start: 1;
+  grid-column-start: 3; 
+  }
+  ```
+  This will start at the first column in the grid and end at the third column (it will take up 2 columns)
+  
+  Another way to write this is to use `grid-column: 1/3;` 
+  
+  You can also use `grid-column: 1/ span 2;` to achieve the same thing, span 2 just means that it will take up 2 columns.
+  
+  You can use `grid-column: 1/-1;` to make an item span the entire row.
+  grid-row works is exactly the same but it affects rows instead of columns.
+  
+  _**Note**- flexbox is great in one direction whereas css grid is useful in two directions._
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

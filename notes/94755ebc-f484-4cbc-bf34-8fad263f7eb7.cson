@@ -1,0 +1,37 @@
+createdAt: "2019-03-14T18:31:34.024Z"
+updatedAt: "2019-03-14T19:12:55.477Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Basics of web browsing"
+tags: [
+  "Computer_Science"
+  "Web_Development"
+  "HTML"
+  "CSS"
+]
+content: '''
+  # Basics of web browsing
+  
+  ## How browsing the web works
+  When you enter the domain your ISP queries the DNS.
+  The DNS returns an IP address for the domain.
+  The IP address is just the location of a server.
+  You can then connect to the server which serves (sends) the websites files (e.g HTML, CSS and JavaScript files).
+  
+  ## History of the world wide web
+  Invented by Tim Berners Lee in 1989.
+  He created the first web server, web browser and website whilst working at CERN.
+  The three main files
+  **HTML** - A standardised way to tag text files to archive font, colour, graphics and hyperlinks on the world wide web.
+  **CSS** - A way to describe the presentation of a document such as a HTML file.
+  **JavaScript** - This allows you to add interactivity like buttons.
+  
+  ## Browser support
+  Different browsers can use different standards.
+  This means that the same webpage can look differently on different browsers.
+  This is also a problem for devices of different sizes.
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

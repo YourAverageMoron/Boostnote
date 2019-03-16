@@ -1,0 +1,31 @@
+createdAt: "2019-03-14T20:43:26.675Z"
+updatedAt: "2019-03-14T21:20:20.101Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "The Critical Render Path"
+tags: [
+  "CSS"
+  "Computer_Science"
+  "HTML"
+  "Web_Development"
+]
+content: '''
+  # The Critical Render Path
+  
+  ### Basic Overview
+  The critical render path is the site that a website takes to display something to the user.
+  When a computer receives a HTML file it will read through it te see what resources are needed in order to render the webpage. While the website is able to render without items such as image or font files, it cannot render without the CSS file, this makes CSS a render blocking file.
+  
+  ### Minify CSS
+  This is a method of reducing the size of the CSS file in order to reduce the render time of a webpage.
+  It works by removing whitespace from the CSS file ultimately reducing its size.
+  
+  ### Further Work
+  //TODO write the information in this up, it further expands on the critical render path. 
+  [Medium article on critical render paths](https://medium.com/@luisvieira_gmr/understanding-the-critical-rendering-path-rendering-pages-in-1-second-735c6e45b47a)
+'''
+linesHighlighted: [
+  2
+]
+isStarred: false
+isTrashed: false

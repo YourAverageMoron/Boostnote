@@ -1,0 +1,32 @@
+createdAt: "2019-03-14T20:00:59.970Z"
+updatedAt: "2019-03-14T20:23:29.280Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Overwriting CSS Selectors"
+tags: [
+  "CSS"
+  "CSS_Selectors"
+  "Computer_Science"
+  "Web_Development"
+]
+content: '''
+  # Overwriting CSS Selectors
+  ### Specificity
+  This is how specific your selector.
+  The more specific a selector is the less likely that it will be overwritten by another entry in the style sheet
+  
+  ### Importance
+  If you have used the important selector (!)
+  
+  ### Source order
+  The order in which the sources have been added to the HTML file, e.g. if you have two style sheets style1.css and style2.css and you add them in the order:
+  ```
+  <link rel="stylesheet" type="text/css" href="style1.css">
+  <link rel="stylesheet" type="text/css" href="style2.css">
+  ```
+  The attributes in style1.css will be overwritten in style2.css as the later added style gets used. 
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

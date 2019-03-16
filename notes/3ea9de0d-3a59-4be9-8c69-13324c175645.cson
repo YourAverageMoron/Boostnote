@@ -1,0 +1,180 @@
+createdAt: "2019-03-15T20:27:10.859Z"
+updatedAt: "2019-03-16T15:55:06.530Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Advantages Of Using Bash"
+tags: [
+  "Bash"
+  "Computer_Science"
+  "Linux"
+  "Shell"
+]
+content: '''
+  # Advantages Of Using Bash
+  ## Bash is the GNU shell
+  The GNU project provides tools for UNIX-like system administration which are free pieces of software and comply with UNIX standards.
+  
+  It is an sh-compatible shell that includes features from Korn shell and C shell. It offers functional improvements over sh for both programming and interactive use.
+  
+  ---
+  
+  ## Features only in Bash
+  #### Ivocation
+  In addition to several single-character command line option which can be configured using the set shell built-in command, there are several multi-character options that can be used.
+  
+  #### Bash startup files
+  These are scripts that are read and executed by Bash when it starts.
+  
+  #### Invoked as an interactive login shell, or with ‘--login’
+  Interactive means that you can enter commands. The shell is not running because the script has been activated. A login shell means that you get the shell after authenticating (usually using a username and password) to the system.
+  
+  This reads three files:
+  - etc/profile
+  - ~/.bash_profile     //the first existing readable file
+  - ~/.bash_logout      //on logout 
+  
+  Error messages are printed if the configuration file is not readable. If the file does not exist it looks for another one.
+  
+  #### Invoked as an interactive non-login shell
+  A non-login shell means that you did not have to authenticate to the system. For instance, when you open a terminal using an icon, or menu item, that is a non-login shell.
+  
+  This reads the file:
+  - ~/.bashrc
+  
+  #### Invoked non-interactivity
+  All scripts use non-interactive shells, they are programmed to do certain tasks and cannot be instructed to do anything else.
+  
+  This reads the files defined by:
+  - BASH_ENV
+  
+  PATH is not used to search for this file, do if if you want to use it you should refer to it by giving it the full path and file name.
+  
+  #### Invoked with the sh command
+  Bash tries to behave like the original Bourne sh program while conforming to the POSIX standard as well.
+  
+  Files Read:
+  - /etc/profile
+  - ~/.profile
+  
+  When invoked interactively, the ENV variable can point to extra startup information.
+  
+  **POSIX** - This is a family of standards specified by the IEEE, they clarify and make uniform the programming interfaces provided by UNIX-y operating systems.
+  
+  #### POSIX mode
+  This option can be enabled in two ways:
+  - set -o posix 
+  - By calling the bash program with the --posix option
+  
+  Bash will try to behave as compliant as possible to the POSIX standard shell.
+  
+  Reads files defined by:
+  - ENV variable 
+  
+  Invoked remotely
+  
+  Reads files invoked by rshd:
+  - ~/.bashrc
+  
+  Avoid the use of r-tools
+  
+  Be aware of the dangers when using tools such as rlogin,telnet, rsh and rcp.
+  
+  They are intrinsically insecure because confidential data is sent over the network unencrypted.
+  
+  If you need tools for remote execution, file transfer and so on, use an implementation of Secure Shell (SSH).
+  
+  Invoked when UID is not equal to EUID.
+  
+  No startup files are read in this case.
+  
+  #### Interactive Shells
+  What is an interactive shell?
+  An interactive shell generally reads from, and write to, a user’s terminal: input and output are connected to a terminal. Bash interactive behaviour is started when the bash command is called upon without non-option arguments, except when the option is a string to read from or when the shell is invoked from standard input, this allows for positional parameters to be set.
+  
+  Is this shell interactive?
+  To see if a shell is interactive use:
+  	`echo $-`
+  This will return himBH if it is interactive and PS1, is unset if not.
+  
+  ###### Interactive shell behaviour
+  - Differences in interactive mode:
+  - Bash reads startup files
+  - Job control is enables by default
+  - Prompts are set, PS2 is enabled for multi-line commands.
+    - It is usually set to “>” 
+  - Commands are by default read from the command line by readline
+  - Bash interprets the shell option ignoreeof instead of exiting immediately upon receiving EOF 
+  - Command history expansion are enabled by default. History is saved in the file pointed to by HISTFILE when the shekk xits. B default HISTFILE points to ~/.bash_history 
+  - Alias expansion is enabled
+  - In the absence of traps, the SIGTERM signal is ignored
+  - In the absence of traps, SIGINT is caught and handled. Thus typing Ctrl+C, for example, will not quit your interactive shell.
+  - Sending SIGHUP signals to all jobs on exit is configured with the huponexit option
+  - Commands are executed upon read
+  - Bash checks form mail periodically 
+  - Bash can be configured to exit when it encounter unreferenced variables. In interactive mode the behaviour is disabled
+  - When shell built in commands encounter redirection errors, this will not cause the shell to exit
+  - Special built-ins returning errors used in POSIX mode don't cause the shell to exit
+  - Failure of exec will not cause the shell to exit
+  - Parser syntax don’t cause the shell to exit
+  - Simple spell check for the arguments to the cd  built-in is enabled by default
+  - Automatic exit after the length of time specified in the TMOUT variable has passed, is enabled.
+  
+  #### Conditionals
+  Conditional expressions are used by the \\[\\[ compound command and by the test and \\[ built-in commands.
+  
+  Expressions may be unary or binary. 
+  Unary expression are often used to examine the status of a file. You only need one object, for instance a file, to do the operation.
+  
+  There are string operators and numeric comparison operators:
+  - These are binary operators, requiring two objects to so the operation on
+  - If the FILE argument to one of the primaries is in the form /dev/fd/N, then the file descriptor N is checked. If the FILE argument to one of the primaries is one of the /dev/stdin, /dev/stdout, or /dev/stderr then the file descriptor 0, 1 or 2 respectively is checked 
+  
+  #### Shell arithmetic
+  The shell allows arithmetic expressions to be evaluated, as one of the shell expansion or by the let built-in.
+  
+  Evaluation is done in fixed-width with no check for overflow.
+  
+  Division by 0 is trapped and flagged as an error.
+  
+  The operators and precedence and associativity are the same as in the C language.
+  
+  #### Aliases
+  These allow a string to be substituted for a work when it is used as the first work of a simple command. The shell maintains a list of aliases that may be set and sunset with alias and unalias commands.
+  
+  Bash always reads at least one complete line of input before executing any of the commands on that line.  Aliases are explained when a command is read, not when it is executed. Therefore an alias definition appearing on the same line as another command does not take effect until the next line of input is read. 
+  
+  Aliases are expanded when a function definition is read, not when the function is executed, because the function itself is a compound command. As a consequence, aliases defined in a function are not available until after that function is executed.
+  
+  #### Arrays
+  Bash provides one-dimensional array variables. Any variables may be used as an array; the declare built-in will explicitly declare an array.
+  
+  There is no maximum limit on the size of an array, no any requirement that members be indexed or assigned contiguously. Arrays are zero-based.
+  
+  #### Directory stack
+  The directory stack is a list of recently-visited directories.
+  The pushd built-in adds directories to the stack as it changes the current directory.
+  
+  The popd built-in removes specified directories from the stack and changes the current directory to the directory that was removed.
+  
+  #### The prompt
+  Bash has improvements when controlling the prompt.
+  
+  #### The restricted shell
+  When invoked as rbash or with the --restricted or -r option, the following happens:
+  - The cd built-in is disabled.
+  - Setting on unsetting SHELL, PATH, ENV or BASH_ENV is not possible.
+  - Command names can no longer contains slashes.
+  - The hash built-in does not accept slashes with the -p option.
+  - Import of functions at startup is disabled.
+  - SHELLOPTS is ignored on startup.
+  - Output redirection using >, >|, ><, >&, &> and >> is disabled.
+  - The exec built-in is disabled.
+  - The -f and -d options are disabled for the enable built-in.
+  - A default PATH cannot be specified with the command built-in.
+  - Turning off restricted mode is not possible.
+  
+  When a command is found to be a shell script is executed, rbash turns off any restrictions in the shell spawned to execute the script.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

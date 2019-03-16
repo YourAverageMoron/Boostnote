@@ -1,0 +1,51 @@
+createdAt: "2019-03-15T20:20:39.817Z"
+updatedAt: "2019-03-16T15:57:40.932Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Bash Introduction"
+tags: [
+  "Bash"
+  "Computer_Science"
+  "Linux"
+  "Shell"
+]
+content: '''
+  # Bash Introduction
+  ## Introduction
+  Bash or Bourne Again Shell is a Unix shell and command language. It typically runs in a text window where users type in commands to cause actions. Bash can also read commands from files known as shell scripts.
+  
+  The UNIX shell interprets user commands, in the case of shell scripts the commands are read line by line and searched for in the system one at a time.
+  
+  ---
+  
+  ## Shell Types
+  #### Bourne Shell or sh
+  The original shell still used on UNIX systems and UNIX-related environments. Is a small program with few features, while it is not the standard shell it is still available on every Linux system for compatibility with unix systems.
+  
+  #### Bash or Bourne Again Shell
+  The standard GNU shell, it is intuitive, flexible and powerful for advanced users. It is the standard shell for common users on shell. It is a so-called superset of the Bourne shell as it includes add ons and plug-ins, this means that it can run all of the commands that exist in sh.
+  
+  #### GNU
+  This refers to the UNIX-like operating system that comes with source code that can be copied modified, and redistributed. Linux distributions such as Ubuntu, Mint and Red Hat Linux are all examples of UNIX-like operating systems.
+  
+  #### C Shell or csh
+  The syntax of this shell resembles that of the C programming language. It is sometimes asked for in programmers.
+  
+  #### TENEX C Shell or tcsh
+  This is a superset of the common C shell, it enhances the user-friendliness and speed. Often known as Turbo C Shell.
+  
+  #### Korn Shell or ksh
+  This is a superset of Bourne shell however it can be a nightmare for beginning users. It is appreciated by many with a strong UNIX background.
+  
+  #### Further information about types of shell
+  The file /etc/shell gives an overview of known shells on a Linux system.
+  To switch between shells you can just type the name of the shell you want to use e.g sh or bash.
+  
+  ---
+  
+  ## Useful Links
+  [Complete Bash Tutorial](http://tldp.org/LDP/Bash-Beginners-Guide/html/index.html)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,21 @@
+createdAt: "2019-03-16T08:40:59.137Z"
+updatedAt: "2019-03-16T08:42:15.677Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Executing programs from a script"
+tags: [
+  "Bash"
+  "Computer_Science"
+  "Linux"
+  "Shell"
+]
+content: '''
+  # Executing programs from a script
+  When the program being executed is a shell script, Bash will create a new process using fork. This subshell reads the lines from the shell script one line at a time. Commands on each line are read, interpreted and executed as if they would have come directly from a keyboard.
+  
+  While the subshell processes each line of the script, the parent shell waits for its child process to finish. When there are no more lines in the shell script to read, the subshell terminates. The parent awakes to display a new prompt.
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,91 @@
+createdAt: "2019-03-16T14:20:23.418Z"
+updatedAt: "2019-03-16T14:30:41.219Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Shell building blocks"
+tags: [
+  "Bash"
+  "Computer_Science"
+  "Linux"
+  "Shell"
+]
+content: '''
+  # Shell building blocks
+  ## Shell syntax
+  If input is not commented, the shell reads it and divides it into words and operators, employing quoting rules to define the meaning of each character of input. These words and operators are then translated into commands and constructs, which return an exit status available for inspection or processing. The fork-and-exec scheme is only applied after the shell has analysed input in the following way:
+  - The shell reads its input from a file, string or the user’s terminal.
+  - Input is broken up into works and operators, obeying the quotes rules. These tokens are separated by metacharacters. Alias expansion is performed.
+  - The shell parses (analyses and substitutes) the tokens into simple and compound commands.
+  - Bash performs various shell expansions, breaking the expanded tokens into lists of file names, commands and arguments.
+  - Redirection is performed if necessary, redirection operators and their operands are removed from the argument list.
+  - Commands are executed.
+  - Optionally the shell waits for the command to complete and collects its exit status.
+  
+  ---
+  
+  ## Shell commands
+  A simple shell command such as `touch file1 file2 file3` consists of the command itself followed by arguments, separated by spaces.
+  
+  More complex shell commands are composed of simple commands arranged together in a variety of different ways, for example:
+  - A pipeline in which the output of one command the output of one command becomes the input of the second command.
+  - A loop or conditional struct.
+  - Some other grouping
+  
+  #### Example of pipelining:
+  ```
+  ls | more
+  ```
+  
+  ---
+  
+  ## Shell functions
+  Shell functions are a way to group commands for later executions using a sing name for the group. They are executed just like a regular command. When the name of a shell function is used as a simple command name, the list of commands is associated with that function name is executed.
+  
+  ---
+  
+  ## Shell parameters
+  A parameter is an entry that stores value. It can be a name, number or special value.A variable has a value and zero or more attributes. Variables are created with the declare shell built-in command.
+  
+  If no value is given, a variable is assigned the null string.
+  Variables can only be removed using the unset built-in command.
+  
+  ---
+  
+  ## Shell expansions
+  Shell expansion is performed after each command line has been split into tokens.
+  The expansion performed are:
+  - Brace expansion
+  - Tilde expansion
+  - Parameter and variable expansion
+  - Command substitution
+  - Arithmetic expansion
+  - Filename expansion
+  
+  ---
+  
+  ## Redirections
+  Before a command is executed, its input and output may be redirected using a special notation interpreted by the shell.
+  
+  Redirection may also be used to open and close files for the current shell execution environment.
+  
+  ---
+  
+  ## Executing commands
+  When executing a command, the words that the parser has marked as variable assignments (preceding the command name) and redirections are saved for later reference. Words that are not variable assignments or redirections are expanded; the first word after expansion is taken to be the name of the command and the rest are arguments to that command. The redirection are performed, then strings assigned to variables are expanded. If no command name results, variables will affect the current shell environment.
+  
+  An important part of the task of the shell is to search for commands, Bash does it as follows:
+  - Check whether the command contains slashes. If not, first check with the function list to see if it contains a command by the name we are looking for. 
+  - If command is not a function, check for it in the built-in list.
+  - If command is neither a function nor a built-in, look for it analyzing the directories listed in PATH. Bath uses a hash table to remember the full path names of executables so extensive PATH searches can be avoided.
+  - If the search is unsuccessful, bash prints an error message and return status 127.
+  - If execution fails because the file is not executable and not a directory it is assumed to be a shell script.
+  - If the command wasn’t not begun asynchronously, the shell waits for the command to complete and collects its exit status.
+  
+  ---
+  
+  ## Shell scripts
+  When a file containing shell commands is used as the first non-option argument when invoking Bash (without -c or -s), this will create a non-interactive shell. This shell first searches for the script file in the current directory, if the file cannot be found it then looks in the PATH.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

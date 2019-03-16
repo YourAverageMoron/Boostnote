@@ -1,0 +1,35 @@
+createdAt: "2019-03-14T20:24:04.374Z"
+updatedAt: "2019-03-14T20:29:46.976Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "The Box Model"
+tags: [
+  "CSS"
+  "Computer_Science"
+  "Web_Development"
+]
+content: '''
+  # The Box Model
+  ## Overview
+  All HTML elements can be considered as boxes. The box model is a term used to describe the aa design and layout of a website.
+  The CSS box is essentially a box that wraps every HTML element, it consists of:
+  -- Margins
+  -- Borders
+  -- Padding
+  
+  The actual content of the web element
+  The box model can be viewed in the developer tools in chrome.
+  #### Content
+  The content of the box, where the text and images appear.
+  #### Padding
+  Padding clears an area around the content. Padding is transparent.
+  #### Border
+  The border goes around the padding and content, the border can be made visible as a solid or dashed line.
+  #### Margin
+  The margin clears an area outside the border. The margin is transparent.
+  
+  ![alt text](https://www.maketecheasier.com/assets/uploads/2016/12/google-chrome-inspect-element-box-model-2.png)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

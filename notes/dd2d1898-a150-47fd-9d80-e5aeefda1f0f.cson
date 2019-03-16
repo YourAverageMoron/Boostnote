@@ -1,0 +1,46 @@
+createdAt: "2019-03-14T20:46:35.972Z"
+updatedAt: "2019-03-14T20:59:46.686Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Flexbox"
+tags: [
+  "CSS"
+  "Computer_Science"
+  "Web_Development"
+]
+content: '''
+  # Flexbox
+  ## Overview
+  Flexbox aims to provide a more efficient way to lay out, align and distribute space among items in a container, even if the size is unknown and/or dynamic.
+  
+  The main aim is to give the container the ability to alter its item’s width/height (and order) to bes fit the space available. This is a very useful tool when you take into account the different types of devices and screen sizes available. It expands items to fill available space, or shrinks them  to prevent overflow.
+  
+  It is direction-agnostic as opposed to the regular layouts (block which is vertically placed and inline which is horizontally-based). 
+  
+  _**Note:** Flexbox is the most appropriate to the components of an application, and small-scale layouts, while the Grid layout is intended for larger scale layouts_
+  
+  ## Basics and Terminology
+  ![flex container example 1](https://css-tricks.com/wp-content/uploads/2018/11/00-basic-terminology.svg =400x)
+  **Flex Container** - This is the parent element, also known as the “container”
+  
+  **Flex Items** - These are the children of the flex container
+  Items are layed out following either the main axis (from main-start to main-end) or the cross axis (from cross-start to cross-end).
+  
+  **Main Axis** - The main axis is the primary axis along which flex items are laid out. This is not necessary horizontal and depends on the flex-direction property.
+  
+  **main-start | main-end** - The flex items are placed within the container starting from the main-start and going to the main-end.
+  
+  **Main Size** - A flex item’s width or height, whichever is the main dimension.
+  
+  **Cross Axis** - The axis perpendicular to the main axis.
+  
+  **cross-start | cross-end** - Flex lines are filled with items placed into the container starting on the cross-start side of the flex container and going toward the cross-end side.
+  
+  **Cross Size** - The width or height of the flex item, whichever is the cross dimension.
+  
+  ![4694b1da.png](:storage\\dd2d1898-a150-47fd-9d80-e5aeefda1f0f\\4694b1da.png)![79a18cc0.png](:storage\\dd2d1898-a150-47fd-9d80-e5aeefda1f0f\\79a18cc0.png)
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

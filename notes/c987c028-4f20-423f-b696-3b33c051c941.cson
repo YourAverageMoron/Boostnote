@@ -1,0 +1,191 @@
+createdAt: "2019-03-16T15:58:22.997Z"
+updatedAt: "2019-03-16T16:11:16.073Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Factory method"
+tags: [
+  "Computer_Science"
+  "Design_Patterns"
+]
+content: '''
+  # Factory method
+  
+  ## The problem it solves
+  #### Coupling of client code that used the class
+  For example, if a class SomeClass has a line var x = new OtherClass(), that couples SomeClass to OtherClass.
+  
+  #### It encapsulates the construction of an object
+  Instead of having multiple `new MyObject` calls across the code base, you keep the initialization in one place, satisfying the Don’t Repeat Yourself (DRY) principle.
+  
+  #### Easily return newer version of an object to the client
+  You can just update the factory, this will update the older versions with the new ones.
+  _**Note** - Make sure the derived classes satisfy the Liskov substitution principle_
+  
+  #### You can mock a factory
+  This makes it easier to mock and return objects.
+  
+  ---
+  
+  ## Overview
+  It suggests that you replace direct object construction calls (using new operator) with calls to a factory method.
+  
+  The objects will still be created via a new operator, however this will take place in the factory method.
+  
+  The objects returned are often called products.
+  
+  This then allows use to override the methods in the subclass and change the class of products being created by the method.
+  
+  However, different products may return different types, this means that you will have to use a common case class or interface which can define the types that will be returned.
+  
+  Code that uses the factory method (often called client code) does not see the difference between the actual products returned by the various subclasses.
+  
+  The client treats all the products as the abstract interface or class that the products implement.
+  
+  The client knows that all the products have a the methods that are defined in the interface and therefore it is not important how they work exactly.
+  
+  ---
+  
+  ## Structure
+  #### Product
+  Declares the interface, which is common to all objects that can be produced by the creator and its subclasses.
+  
+  #### Concrete products
+  Different implementations of the product interface.
+  
+  #### Creator
+  Declares the factory method that returns new products and objects. It’s important that the return type of this method matches the product interface.
+  You can declare the factory method as abstract to force all subclasses to implement their own versions of the method. As an alternative the base factory method can return some default product type.
+  
+  #### Concrete creators
+  Override the base factory method in the creator so that is returns a different product.
+  _**Note** -  the factory method may not have to create a new instance of the product every time, it can return existing objects from a cache, object pool or other source._
+  
+  ![914cda55.png](:storage\\c987c028-4f20-423f-b696-3b33c051c941\\914cda55.png)
+  
+  ---
+  
+  ## Applicability
+  #### When you don’t know the exact types
+  Use the factory method when you don’t know the exact types and dependencies of the objects your code should work with.
+  
+  The factory separates product construction code from the code that actually uses the product. Therefore it’s easier to extend the product construction code independently from the rest of the code. 
+  
+  For example, to add a product type to the app, you only need to create a new subclass and override the factory method in it.
+  
+  #### Make it easy for users to expand your library
+  Use the factory method when you want to provide users of your library or framework with a way to extend its internal components.
+  
+  Inheritance makes extending a library’s default behaviour. In order to make your framework recognise that your subclass should be used instead of a standard component you can reduce the code that constructs the component across the framework into a single factory method and let anyone override this method in addition to extending on the component itself.
+  
+  #### Reuse existing objects instead of rebuilding
+  Use the factory method when you want to save system resources by reusing existing objects instead of rebuilding them each time.
+  
+  You can often experience this need when dealing with large, resource intensive objects such as database connection, file resources, and network resources.
+  
+  ###### How
+  1. Create an object that keeps track of all the created objects.
+  2. When an object is requested, the program should looks for a free object inside the pool.
+  3. Then it should return the client code.
+  4. If there are no free objects, the program should create a new one and add it to the pool.
+  This lends itself to factory method as it provides a regular method capable of creating new objects as well as reusing existing ones.
+  
+  ---
+  
+  ## Pros and cons
+  #### Pros
+  You can avoid tight coupling between the creator and concrete products.
+  **Single responsibility principle**. You can move the product creation into one place in the program, this makes code changes easier.
+  **Open/closed principle**. You can introduce new types of products into the program without breaking client code.
+  
+  #### Cons
+  Code may become more complicated since you need to introduce a lot of new subclasses to implement the pattern. The best scenario is when you are introducing the pattern into an existing hierarchy of creator classes.
+  
+  ---
+  
+  ## Relations with other patterns
+  Many designs start by using the factory method and then evolve toward an abstract factory, prototype, or builder.
+  
+  **Abstract factory** - Classes are often based of a set of factory methods, but you can also use prototype to compose the methods in these classes.
+  
+  You can use a factory method along side iterator to let a collection of subclasses return different iterators that are compatible with the collections.
+  
+  **Prototype** - This isn’t based on inheritance, so doesn’t have its drawbacks. On the other hand, prototype require a complicated initialization of the cloned object. Factory method is based on inheritance so it doesn’t require the initialization step.
+  
+  ---
+  
+  ## Very basic example
+  #### The product interface
+  ```
+  public interface Product {
+     String method1();
+  }
+  ```
+  
+  #### A concrete product
+  ```
+  public class ConcreteProd1 implements Product{
+     public String method1(){
+         return "this is product 1";
+     }
+  }
+  ```
+  
+  #### Another concrete product
+  ```
+  public class ConcreteProd2 implements Product{
+     public String method1(){
+         return "this is product 2";
+     }
+  }
+  ```
+  
+  #### Creator abstract class
+  ```
+  public abstract class Creator {
+     public abstract Product createProduct();
+  }
+  ```
+  
+  #### Concrete creator
+  ```
+  public class ConcreteCreator1 extends Creator {
+     @Override
+     public Product createProduct(){
+         return new ConcreteProd1();
+     }
+  }
+  ```
+  
+  #### Another concrete creator
+  ```
+  public class ConcreteCreator2 extends Creator {
+  
+     @Override
+     public Product createProduct(){
+         return new ConcreteProd2();
+     }
+  }
+  ```
+  
+  #### Demo
+  ```
+  public class Demo {
+  
+     private static Product product;
+     private static Creator creator;
+  
+     public static void main(String[] args){
+         creator = new ConcreteCreator1();
+         product = creator.createProduct();
+         System.out.println("prod 1:    " + product.method1());
+  
+         creator = new ConcreteCreator2();
+         product = creator.createProduct();
+         System.out.println("prod 2:    " + product.method1());
+     }
+  }
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

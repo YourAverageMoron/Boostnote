@@ -1,0 +1,24 @@
+createdAt: "2019-03-16T08:14:34.100Z"
+updatedAt: "2019-03-16T08:40:32.736Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Executing commands"
+tags: [
+  "Bash"
+  "Computer_Science"
+  "Linux"
+  "Shell"
+]
+content: '''
+  # Executing commands
+  ### General
+  Bash determines the type of program that is to be executed. Normal programs are system commands that exist in compiled form on your system. When such a program is executed a new process is created because Bash makes an exact copy of itself. This child process has the same environment as its parent, only the process ID is different. This procedure is called forking.
+  
+  After the forking process, the address spaces of the child process is overwritten with the new data. This is done through an `exec`call to the system.
+  
+  The fork-and-exec mechanism switches an old command with a new one, while the environment in which  the program is executed remains the same, including configuration of input and output devices, environment variables and priority.
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

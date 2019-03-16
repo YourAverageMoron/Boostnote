@@ -1,0 +1,22 @@
+createdAt: "2019-03-16T16:52:22.413Z"
+updatedAt: "2019-03-16T17:39:51.595Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Monte Carlo"
+tags: [
+  "Algorithm"
+  "Computer_Science"
+  "Mathematics"
+  "Statistics"
+]
+content: '''
+  # Monte Carlo
+  ## What is it?
+  It is a simulation method that helps estimate the value of an unknown quantity using the principles of inferential statistics.
+  
+  ---
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

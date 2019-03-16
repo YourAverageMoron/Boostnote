@@ -1,0 +1,34 @@
+createdAt: "2019-03-14T19:13:32.145Z"
+updatedAt: "2019-03-14T19:21:14.470Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "HTML Basics"
+tags: [
+  "Computer_Science"
+  "HTML"
+  "Web_Development"
+]
+content: '''
+  # HTML Basics
+  ## Tags
+  Tags are keywords that describe how a web page should show information.
+  
+  `<!DOCTYPE HTML>`
+  HTML files always start with <!DOCTYPE HTML> which in an instruction to tell the web browser to which version of HTML the file is written in.
+  
+  `<html>`
+  The html tag tells the browser that it is a HTML document. It represent the root of the document, the container for all the HTML elements.
+  
+  `<head>`
+  The head tag is the container for the metadata of the document such as the title, character set, styles, links, scripts located between the html tag and the body tag. 
+  
+  `<title>`
+  This defines the title of in the web browser which provides the title when added to favorites, displays the title for the page in search engine results.
+  
+  `<body>`
+  Defines the body of the document and contains all the content of the HTML document, e.g text and images.
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

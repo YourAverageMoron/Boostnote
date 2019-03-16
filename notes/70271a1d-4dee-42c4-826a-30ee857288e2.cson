@@ -1,0 +1,64 @@
+createdAt: "2019-03-14T21:00:57.159Z"
+updatedAt: "2019-03-14T21:10:37.194Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "CSS 3"
+tags: [
+  "CSS"
+  "Computer_Science"
+  "Web_Development"
+]
+content: '''
+  # CSS 3
+  ## Overview
+  This is just a newer version of CSS, and adds some extra features by extending on CSS 2.1.
+  Extra features include:
+  -- Rounded Corners
+  -- Shadows
+  -- Gradients
+  -- Transitions
+  -- Animations
+  -- Updated layouts such as flex box and multi columns
+  
+  _**Note:** Not all browsers support CSS 3 and it also includes some experimental parts that shouldn’t be used in production environments._
+  
+  ---
+  
+  ## Transitions
+  The transition property is a shorthand property used to represent up to four transition-related longhand properties:
+  -- **transition-property:** The CSS property that the transition effect is for.
+  -- **transition-duration:** The time taken in seconds for the transition to occur.
+  -- **transition-timing-function:** The speed curve of the transition effect, there are a couple of built in options but you can set up your own.
+  -- **transition-delay:** The delay time in seconds that will occur before starting the transition.
+  
+  ---
+  
+  ## Transform
+  This applies to the 2D or 3D transformation of an element. It allows you to rotate, scale, move, skew, e.t.c elements.
+  #### Using Transition and Transform Example
+  ```
+  img {
+  	Transition: all 1s;
+  }
+  
+  img:hover: {
+  	transform : scale(1.1);
+  }
+  ```
+  This will scale images to 1.1 times their original size when the image is hovered over, it will take 1 second to do this.
+  
+  ---
+  
+  ## Animations
+  //TODO fill this part in with the animation stuff you can do in css
+  
+  ---
+  
+  ## Browser Support
+  Some of the CSS3 features are not supported on some browsers.
+  
+  Sometimes you may have to add a browser prefix for some browsers that do not yet support the feature.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

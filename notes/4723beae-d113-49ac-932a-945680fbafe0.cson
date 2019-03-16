@@ -1,0 +1,65 @@
+createdAt: "2019-03-14T21:10:15.382Z"
+updatedAt: "2019-03-14T21:21:46.854Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Bootstrap"
+tags: [
+  "CSS"
+  "Computer_Science"
+  "Web_Development"
+]
+content: '''
+  # Bootstrap
+  ## Overview
+  This is a free open-source front-end framework for developing websites and web applications.
+  It contains a combination of CSS AND HTML along with optional JavaScript extensions.
+  
+  ---
+  
+  ### Why use Bootstrap?
+  It provides tonnes of pre made and pre styled elements that can be used in your web application. These elements can be built on using custom CSS files to make them your own.
+  
+  Another neat feature of Bootstrap is that it is fully responsive, this means that you will not have to worry as much about whether your site scales on mobile devices.
+  
+  ---
+  
+  ## Setting Up Bootstrap
+  You can use a CDN (content delivery network) to access the Bootstrap files, this is done using the link tag to access the CSS in your HTML file.
+  To access the JavaScript use the script tags and place them at the bottom of the body tag.
+  
+  ---
+  
+  ## Overwriting Bootstrap
+  You can overwrite bootstrap by adding the classes to your CSS file and changing the properties that you are not happy with.
+  
+  ---
+  
+  ## Bootstrap Grid
+  This layout allows 12 columns across the page, it allows you to use the columns individually or group them together to create wider columns.
+  
+  In order to make the grid responsive, you can specify the number of columns an element will take up depending on the size of the screen. For example two times mike look better side by side on a computer screen but stacked on top of each other on mobile.
+  
+  ![bootstrap grid](https://www.formget.com/wp-content/uploads/2015/07/Bootstrap-grid.png)
+  
+  ---
+  
+  ## Grid Classes
+  **xs** - For phones (screens less than 768px wide)
+  **sm** - For tablets (screens equal to or greater than 768px wide)
+  **md** - For small laptops (screens equal or greater than 992px wide)
+  **lg** - For laptops and desktops (screens equal to or greater than 1200pz wide)
+  These classes can be combined to create a more dynamic and reactive layout.
+  
+  ---
+  
+  
+  ## Syntax
+  `<div class="col-md-12 col-md-6" />`
+  This will create a div that fills the entire screen for a medium sized device or half the screen for a large device.
+  
+'''
+linesHighlighted: [
+  35
+]
+isStarred: false
+isTrashed: false

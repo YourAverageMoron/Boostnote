@@ -1,0 +1,81 @@
+createdAt: "2019-03-16T17:00:16.307Z"
+updatedAt: "2019-03-16T17:47:21.657Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Statistics Dictionary"
+tags: [
+  "Dictionary"
+  "Mathematics"
+  "Statistics"
+]
+content: '''
+  # Statistics Dictionary
+  
+  ## Inferential statistics
+  Uses random samples taken from a population to make inferences about the population
+  
+  #### Population
+  Set of examples.
+  
+  #### Sample
+  A proper subset of a population.
+  
+  If we choose the sample at random, it will tend to exhibit the same properties as the population from which it is drawn.
+  
+  ---
+  
+  ## Law of large numbers
+  In repeated independent tests with the same actual probability p of a particular outcome in each test, the chance that the fraction of times that the outcome occurs differs from p converges to zero as the number of trials goes to infinity.
+  
+  ---
+  
+  ## Regression to the mean
+  Following an extreme even, the next random event is likely to be less extreme. Note this is not the gambler’s fallacy.
+  
+  I.e this leads to the law of large numbers as the more attempts you take the closer to the mean you will get.
+  
+  ###### Example
+  If you toss a coin 10 times and get 10 heads.
+  If you then toss the coin 10 more times you expect to get less than 10 heads:
+  - Expected would be 5
+  So in the 20 spins the expected mean would be closer to 50% heads than to  to the original 100% estimate from 10 tosses.
+  
+  ---
+  
+  ## Population Variance
+  
+  ###### Definition
+  Variance is the expectation of the squared deviation of a random variable from its mean.
+  
+  ###### Explanation
+  This is essintialy the avarage squared distance of the population from the population's mean.
+  ![f37fc110.png](:storage\\e4170150-0daf-4d09-91d5-d5b75745da2a\\f37fc110.png =400x)
+  - **σ²** = The Variance
+  - **x**  = Each individal data point in the population
+  - **μ**  = The mean of the population
+  - **N**  = The number of items in the population
+  
+  ###### Other Formulas
+  You can expand the squared bracket and simplify, this prduces this alternate formula:
+  
+  ![3379f506.png](:storage\\e4170150-0daf-4d09-91d5-d5b75745da2a\\3379f506.png =400x)
+  
+  ---
+  
+  ## Population Standard Deviation
+  
+  ###### Definition
+  A quantity expressing by how much the members of a group differ from the mean value for the group.
+  
+  ###### Explanation
+  This is the square root of the variance.
+  It's symbol is **σ**.
+  
+  _**Remember** - Always consider variance in relation to the mean_
+  
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

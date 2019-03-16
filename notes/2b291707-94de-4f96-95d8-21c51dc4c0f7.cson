@@ -1,0 +1,52 @@
+createdAt: "2019-03-15T19:57:06.416Z"
+updatedAt: "2019-03-15T20:07:27.783Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Random CSS Notes"
+tags: [
+  "CSS"
+  "CSS_Selectors"
+  "Computer_Science"
+  "Web_Development"
+]
+content: '''
+  # Random CSS Notes
+  
+  ## Normalizing CSS
+  This is CSS that is predefined by the browser, for example the margins in body, if you want objects to reach the end of a row make sure add:
+  ```
+  body{
+      margin: auto 0;
+  }
+  ```
+  
+  --- 
+  
+  ## margin-left
+  You can use margin-left: auto; to move the content to the right of the page.
+  
+  This is cool as it is responsive!
+  
+  ---
+  
+  ## Height and vh
+  You can use `height: 50vh;` to make an element 50% of the view height (the view of the current window) this is really useful for responsive design.
+  
+  ---
+  
+  ## Useful Links
+  [For information about css attributes](https://css-tricks.com)
+  [A useful tool for selecting colour palettes](http://paletton.com)
+  [A selection of fonts and the links so you can add them to a site](https://fonts.google.com)  
+  [CSS selector cheat sheet ](https://gist.github.com/magicznyleszek/809a69dd05e1d5f12d01) 
+  [Minify CSS tool](https://www.cleancss.com/css-minify)
+  [Flexbox cheetsheet](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) 
+  [A really good way to learn flexbox](http://flexboxfroggy.com/)
+  [Checks for supported attributes](https://www.w3schools.com/cssref/css3_browsersupport.asp)
+  [CSS grid cheat sheet](http://grid.malven.co/)
+  [Has a bunch of free resources and ilustrations and stuff](https://noshit.xyz/)
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

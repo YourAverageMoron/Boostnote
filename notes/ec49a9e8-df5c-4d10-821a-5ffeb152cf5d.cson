@@ -1,0 +1,23 @@
+createdAt: "2019-03-14T21:09:04.541Z"
+updatedAt: "2019-03-14T21:11:00.293Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Responsive UI"
+tags: [
+  "CSS"
+  "Computer_Science"
+  "HTML"
+  "Web_Development"
+]
+content: '''
+  # Responsive UI
+  
+  This is a priority when building websites it refers to sites that scale well when moving between types of devices. For example a website should be usable on mobile devices as well as on a computer.
+  
+  ---
+  
+  //TODO MORE ON THIS
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
