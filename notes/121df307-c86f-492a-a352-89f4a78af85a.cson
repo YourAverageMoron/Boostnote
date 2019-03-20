@@ -1,0 +1,46 @@
+createdAt: "2019-03-19T06:32:48.574Z"
+updatedAt: "2019-03-20T07:25:03.757Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "jQuery"
+tags: []
+content: '''
+  # jQuery
+  
+  ## Introduction
+  This is just a js library that aimed to make dom manipulation easier and compatable with more browsers.
+  
+  ## Example
+  ```
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    $("p").click(function(){
+      $(this).hide();
+    });
+  });
+  </script>
+  </head>
+  <body>
+  
+  <p>If you click on me, I will disappear.</p>
+  <p>Click me away!</p>
+  <p>Click me too!</p>
+  
+  </body>
+  </html>
+  ```
+  This assigns `<p>` tags an on click function such that when the element it clicked it hide (and becomes invisible)
+  
+  ## Problems
+  It is very imperitive -> you have to tell the program exactly what you need it to do, it adds dependencies when the size of the project increases.
+  This often leads to hadouken code.
+  
+  [You Might Not Need jQuery](http://youmightnotneedjquery.com/)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

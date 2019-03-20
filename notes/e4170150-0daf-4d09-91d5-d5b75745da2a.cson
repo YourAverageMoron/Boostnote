@@ -1,81 +1,41 @@
 createdAt: "2019-03-16T17:00:16.307Z"
-updatedAt: "2019-03-16T17:47:21.657Z"
+updatedAt: "2019-03-20T08:05:02.499Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
-title: "Statistics Dictionary"
+title: "Confidence Intervals"
 tags: [
-  "Dictionary"
   "Mathematics"
   "Statistics"
 ]
 content: '''
-  # Statistics Dictionary
-  
-  ## Inferential statistics
-  Uses random samples taken from a population to make inferences about the population
-  
-  #### Population
-  Set of examples.
-  
-  #### Sample
-  A proper subset of a population.
-  
-  If we choose the sample at random, it will tend to exhibit the same properties as the population from which it is drawn.
-  
-  ---
-  
-  ## Law of large numbers
-  In repeated independent tests with the same actual probability p of a particular outcome in each test, the chance that the fraction of times that the outcome occurs differs from p converges to zero as the number of trials goes to infinity.
-  
-  ---
-  
-  ## Regression to the mean
-  Following an extreme even, the next random event is likely to be less extreme. Note this is not the gambler’s fallacy.
-  
-  I.e this leads to the law of large numbers as the more attempts you take the closer to the mean you will get.
-  
-  ###### Example
-  If you toss a coin 10 times and get 10 heads.
-  If you then toss the coin 10 more times you expect to get less than 10 heads:
-  - Expected would be 5
-  So in the 20 spins the expected mean would be closer to 50% heads than to  to the original 100% estimate from 10 tosses.
-  
-  ---
-  
-  ## Population Variance
+  # Confidence Intervals
   
   ###### Definition
-  Variance is the expectation of the squared deviation of a random variable from its mean.
+  A range of values defined so that there is a specified probability that the value of a parameter lies within it.
   
-  ###### Explanation
-  This is essintialy the avarage squared distance of the population from the population's mean.
-  ![f37fc110.png](:storage\\e4170150-0daf-4d09-91d5-d5b75745da2a\\f37fc110.png =400x)
-  - **σ²** = The Variance
-  - **x**  = Each individal data point in the population
-  - **μ**  = The mean of the population
-  - **N**  = The number of items in the population
+  This is easy to explain using a bell curve:
+  ![maxresdefault.jpg](https://i.ytimg.com/vi/gdCvrpPZyRQ/maxresdefault.jpg =400x)
   
-  ###### Other Formulas
-  You can expand the squared bracket and simplify, this prduces this alternate formula:
+  So there is a 95% change that a value is within two standated deviations of the sample mean. 
   
-  ![3379f506.png](:storage\\e4170150-0daf-4d09-91d5-d5b75745da2a\\3379f506.png =400x)
+  ###### The Empirical Rule
+  Under some assumptions:
+  - ~68% of data is within 1 standard deviation of the mean
+  - ~94% of data is within 1.96 standard deviations of the mean
+  - ~99.7 of data is with i3 standard deviations of the mean
+  _(this is shown in the bell curve above)_
   
-  ---
+  ###### The assumptions:
+  - The mean estimation error is zero
+  - The distribution of the errors in the estimates is normal 
   
-  ## Population Standard Deviation
-  
-  ###### Definition
-  A quantity expressing by how much the members of a group differ from the mean value for the group.
-  
-  ###### Explanation
-  This is the square root of the variance.
-  It's symbol is **σ**.
-  
-  _**Remember** - Always consider variance in relation to the mean_
-  
-  
-  
+  ###### Intergration
+  You can use integration to find the probability of a value being between two points.
+  The probability is equal to the area under the curve.
 '''
-linesHighlighted: []
+linesHighlighted: [
+  0
+  59
+]
 isStarred: false
 isTrashed: false

@@ -1,5 +1,5 @@
 createdAt: "2019-03-15T20:00:43.917Z"
-updatedAt: "2019-03-15T20:46:08.749Z"
+updatedAt: "2019-03-20T07:40:12.489Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "DOM Manipulation"
@@ -66,6 +66,11 @@ content: '''
   	console.log("click!!");
   })
   ```
+  
+  ---
+  
+  ## Reduce DOM Manipulation
+  A key idea is to reduce dom manipulation by only rendering things that need to be rendered, i.e if you click on a dropdown you only render the new dropdown and not the re-render the entire page.
   
   ---
   

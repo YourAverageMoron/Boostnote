@@ -1,0 +1,24 @@
+createdAt: "2019-03-20T07:42:43.256Z"
+updatedAt: "2019-03-20T07:42:53.964Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Regression to the mean"
+tags: [
+  "Mathematics"
+  "Statistics"
+]
+content: '''
+  # Regression to the mean
+  Following an extreme even, the next random event is likely to be less extreme. Note this is not the gambler’s fallacy.
+  
+  I.e this leads to the law of large numbers as the more attempts you take the closer to the mean you will get.
+  
+  ###### Example
+  If you toss a coin 10 times and get 10 heads.
+  If you then toss the coin 10 more times you expect to get less than 10 heads:
+  - Expected would be 5
+  So in the 20 spins the expected mean would be closer to 50% heads than to  to the original 100% estimate from 10 tosses.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

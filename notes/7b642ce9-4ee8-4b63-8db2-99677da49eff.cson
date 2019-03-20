@@ -1,0 +1,24 @@
+createdAt: "2019-03-20T07:41:54.590Z"
+updatedAt: "2019-03-20T07:42:14.709Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Inferential statistics"
+tags: [
+  "Mathematics"
+  "Statistics"
+]
+content: '''
+  # Inferential statistics
+  Uses random samples taken from a population to make inferences about the population
+  
+  #### Population
+  Set of examples.
+  
+  #### Sample
+  A proper subset of a population.
+  
+  If we choose the sample at random, it will tend to exhibit the same properties as the population from which it is drawn.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

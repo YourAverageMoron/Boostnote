@@ -1,0 +1,16 @@
+createdAt: "2019-03-20T07:42:24.423Z"
+updatedAt: "2019-03-20T07:42:34.140Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Law of large numbers"
+tags: [
+  "Mathematics"
+  "Statistics"
+]
+content: '''
+  # Law of large numbers
+  In repeated independent tests with the same actual probability p of a particular outcome in each test, the chance that the fraction of times that the outcome occurs differs from p converges to zero as the number of trials goes to infinity.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

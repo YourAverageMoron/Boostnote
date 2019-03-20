@@ -1,0 +1,46 @@
+createdAt: "2019-03-20T07:43:06.475Z"
+updatedAt: "2019-03-20T07:44:07.177Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Variance and Standard Deviation"
+tags: [
+  "Mathematics"
+  "Statistics"
+]
+content: '''
+  # Variance and Standard Deviation 
+  
+  ## Population Variance
+  
+  ###### Definition
+  Variance is the expectation of the squared deviation of a random variable from its mean.
+  
+  ###### Explanation
+  This is essintialy the avarage squared distance of the population from the population's mean.
+  ![f37fc110.png](:storage\\e4170150-0daf-4d09-91d5-d5b75745da2a\\f37fc110.png =400x)
+  - **σ²** = The Variance
+  - **x**  = Each individal data point in the population
+  - **μ**  = The mean of the population
+  - **N**  = The number of items in the population
+  
+  ###### Other Formulas
+  You can expand the squared bracket and simplify, this prduces this alternate formula:
+  
+  ![3379f506.png](:storage\\e4170150-0daf-4d09-91d5-d5b75745da2a\\3379f506.png =400x)
+  
+  ---
+  
+  ## Population Standard Deviation
+  
+  ###### Definition
+  A quantity expressing by how much the members of a group differ from the mean value for the group.
+  
+  ###### Explanation
+  This is the square root of the variance.
+  It's symbol is **σ**.
+  
+  _**Remember** - Always consider variance in relation to the mean_
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
