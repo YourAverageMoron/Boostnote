@@ -1,5 +1,5 @@
 createdAt: "2019-03-20T07:43:06.475Z"
-updatedAt: "2019-03-20T07:44:07.177Z"
+updatedAt: "2019-03-23T08:00:05.443Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Variance and Standard Deviation"
@@ -17,7 +17,7 @@ content: '''
   
   ###### Explanation
   This is essintialy the avarage squared distance of the population from the population's mean.
-  ![f37fc110.png](:storage\\e4170150-0daf-4d09-91d5-d5b75745da2a\\f37fc110.png =400x)
+  ![8cbe1255.png](:storage\\b067ba3e-09c8-4183-9d74-82acf4ab69f1\\8cbe1255.png =400x)
   - **σ²** = The Variance
   - **x**  = Each individal data point in the population
   - **μ**  = The mean of the population
@@ -26,7 +26,7 @@ content: '''
   ###### Other Formulas
   You can expand the squared bracket and simplify, this prduces this alternate formula:
   
-  ![3379f506.png](:storage\\e4170150-0daf-4d09-91d5-d5b75745da2a\\3379f506.png =400x)
+  ![variance2.png](:storage\\b067ba3e-09c8-4183-9d74-82acf4ab69f1\\d960c391.png =400x)
   
   ---
   

@@ -1,5 +1,5 @@
 createdAt: "2019-03-14T20:43:26.675Z"
-updatedAt: "2019-03-14T21:20:20.101Z"
+updatedAt: "2019-03-24T22:34:40.403Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "The Critical Render Path"
@@ -8,6 +8,7 @@ tags: [
   "Computer_Science"
   "HTML"
   "Web_Development"
+  "TODO"
 ]
 content: '''
   # The Critical Render Path

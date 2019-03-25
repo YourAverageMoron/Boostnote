@@ -1,5 +1,5 @@
 createdAt: "2019-03-16T17:00:16.307Z"
-updatedAt: "2019-03-20T08:05:02.499Z"
+updatedAt: "2019-03-23T07:53:56.494Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Confidence Intervals"
@@ -14,7 +14,7 @@ content: '''
   A range of values defined so that there is a specified probability that the value of a parameter lies within it.
   
   This is easy to explain using a bell curve:
-  ![maxresdefault.jpg](https://i.ytimg.com/vi/gdCvrpPZyRQ/maxresdefault.jpg =400x)
+  ![Bell curve.png](:storage\\e4170150-0daf-4d09-91d5-d5b75745da2a\\2f1db1dd.png =440x)
   
   So there is a 95% change that a value is within two standated deviations of the sample mean. 
   
