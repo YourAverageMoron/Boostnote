@@ -1,0 +1,46 @@
+createdAt: "2019-03-23T08:01:15.488Z"
+updatedAt: "2019-03-25T07:45:01.277Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Docker Introduction"
+tags: [
+  "Computer_Science"
+  "Docker"
+]
+content: '''
+  # Docker Introduction
+  
+  Containers are the next once-in-a-decade shift in infastructure and process.
+  
+  ## What is docker?
+  It is a tool designed to make it easy to create, deploy, and run applicaitons using containers. 
+  
+  ##### What are containers
+  Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies. These can all be shipped as one package.
+  
+  ---
+  
+  ## Benefits of docker
+  ##### Docker is all about speed:
+  - Develop faster
+  - Build faster
+  - Test faster
+  - Deploy faster
+  - Recover faster
+  
+  ##### Reduce complexity:
+  It introduces consistency across your services, whether you are running on a desktop or on the cloud the container will not have to change.
+  You can run and test teh software in the same way.
+  Reduces a lot of pain in the software lifecycle.
+  
+  ##### No required code changes
+  You can easily package existing code into docker containers.
+  
+  ---
+  
+  ## Links
+  [CNCF Cloud Native Interactive Landscape](https://landscape.cncf.io/)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

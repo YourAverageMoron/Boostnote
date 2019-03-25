@@ -1,0 +1,136 @@
+createdAt: "2019-03-25T07:48:33.336Z"
+updatedAt: "2019-03-25T09:17:43.043Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Docker Basics"
+tags: [
+  "Docker"
+  "Computer_Science"
+]
+content: '''
+  # Docker Basics
+  
+  ## Management Commands
+  As the number of commands expaned in docker the developers were forved to introduce a management command, so instead of running `docker <command>` you can run `docker <command> <sub-command>`
+  ###### E.g
+  ```
+  docker run
+  docker container run
+  ```
+  However as docker is focused on backward compatability you should be able to run either of these.
+  
+  ---
+  
+  ## Images vs Containers
+  ###### Image
+  An image is the application we want to run.
+  ###### Container
+  This is an instance of an image.
+  
+  You can have multiple containers that are running the same image.
+  
+  Docker's default image "registry" is called docker hub (hub.docker.com).
+  
+  ## Starting an Nginx container
+  To start running an nginx container run:
+  ```
+  docker container run --publish 80:80 nginx
+  ```
+  If you then go to your localhost (or the ip that docker is running on).
+  
+  ##### What is this command doing?
+  Docker looks for an image called 'nginx', if it can't find the image locally it will download it from docker hub.
+  
+  It then starts a new container from that image
+  
+  `--publish 80:80` opens the port 80 on the host IP. This will send all traffic from that port to the executable running inside the container.
+  
+  ##### `--detach`
+  Docker containers default to running in the forground of the terminal, if you want to run the container in the background you can `--detach` command, e.g:
+  ```
+  docker container run --publish 80:80 --detach nginx
+  ```
+  Running this will return the unique container id of the new container. This can be used to manipulate the specific container.
+  
+  ##### `--name`
+  You can use `--name` to specify the name of the containter, e.g:
+  ```
+  docker container run --publish 80:80 --name webhost nginxd
+  ```
+  The container will be called webhost.
+  
+  ---
+  
+  ## Listing docker containers
+  To list the running docker containers use you can use:
+  ```
+  #### NEW WAY ####
+  docker container ls
+  
+  #### OLD WAY ####
+  docker ps
+  ```
+  This will list some information about the running containers.
+  
+  The `-a` option can be used to list all containers even if they are not currently running, e.g:
+  ```
+  docker ls -a
+  ```
+  
+  ## Stopping a docker container
+  You can stop a container using the following `docker container stop`, e.g:
+  ```
+  #### NEW WAY ####
+  docker container stop <container ID or name>
+  
+  #### OLD WAY ####
+  docker stop <container ID or name>
+  ```
+  You dont actually have to type in the whole id of the container, you only have to write enough character to make it unique.
+  
+  ---
+  
+  ## Getting the logs of containers
+  
+  Getting the logs of container can be useful, especially if you are running a container in detached mode, you can use:
+  ```
+  docker container logs <container ID or name>
+  ```
+  This will print the logs of the docker container.
+  
+  ---
+  
+  ## Find container processes
+  To get the processes running within a container you can use the top command:
+  ```
+  docker container top <container ID or name>
+  ```
+  ---
+  
+  ## Removing a container completely
+  You can use the `rm` to delete the container, e.g:
+  ```
+  docker container rm <container ID or name>
+  ```
+  You can chain containers to delete multiple at once, e.g:
+  ```
+  docker container rm <container 1> <container 2> <container 3>
+  ```
+  You cannot delete running containers.
+  You can use the `-f` option to force a deletion of a running container, e.g:
+  ```
+  docker container rm -f <contaner ID or name>
+  ```
+'''
+linesHighlighted: [
+  14
+  13
+  30
+  37
+  69
+  92
+  82
+  99
+]
+isStarred: false
+isTrashed: false

@@ -1,0 +1,43 @@
+createdAt: "2019-03-25T09:17:47.224Z"
+updatedAt: "2019-03-25T09:49:38.660Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Docker Container Run Details"
+tags: [
+  "Docker"
+  "Computer_Science"
+]
+content: '''
+  # Docker Container Run Details
+  
+  ## What happens when you run a container?
+  
+  #### Looks for the image locally in the image cache
+  When you use docker container run it will look to see if the image you specified in the local image cache.
+  
+  #### What if it can't find the image locally?
+  If the image cannot be found in the image cache it then looks in the remote repository.
+  This defaults to Docker Hub.
+  If the image can be found it then downloads the image and stores it in the image cache.
+  
+  #### Creates a new container
+  Docker then creates a new container based on the image and prepares to start.
+  
+  #### Customise networking
+  It gives a virtual IP on a private network inside the docker engine.
+  
+  #### Open port
+  Docker opens up the specified port to the container host 
+  ###### E.g:
+  To map the TCP port 8080 in the container to the port 80 on the Docker host:
+  ```
+  docker container run --publish 80:8080 nginx
+  ```
+  So to access this webserver you can go to localhost:8080.
+  
+  #### Start container
+  Strts container by using a command in the image Dockerfile.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

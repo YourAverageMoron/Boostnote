@@ -1,0 +1,112 @@
+createdAt: "2019-03-23T08:40:49.517Z"
+updatedAt: "2019-03-24T22:30:08.329Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Docker Setup"
+tags: [
+  "Computer_Science"
+  "Docker"
+]
+content: '''
+  # Docker Setup
+  
+  ## Docker editions
+  Docker is no longer just a "container runtime".
+  Docker movers fast and it matters how you install it.
+  
+  #### There are two main version:
+  1. **Docker CE** (community edition) -  This is free.
+  2. **Docker EE** (enterprise edition) - This has other functionality and support.
+  
+  #### It also has three major types:
+  1. **Direct** - This is a supported operating system (most distributions of linux, and now windows server 2016)
+  2. **Mac or windows** - These use a suite of tools that allow you to develop containers on these opterating systems. It works by creating a small VM which can run the container.
+  3. **Cloud** - E.g AWS, Azure or Google. These do have features that are specific to the different cloud vender.
+  
+  #### Stable vs Edge:
+  Edge is the beta version which is only supported for a month.
+  Stable is the current version of docker.
+  
+  ---
+  
+  
+  ## Setup
+  
+  #### Windows
+  
+  ###### Windows 10 (pro and enterprise)
+  Here is the link to download the latest version of docker on windows:
+  [Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
+  
+  It's a pretty standard install for windows, it may require a restart as it will have to update hyperv which may not have been configured yet.
+  To check it's running open power shell and run `docker version`. There should also be an icon in the bottom right of your screen.
+  
+  ###### Windows 7, 8, or 10 Home Edition
+  You cannot actually download docker directly onto older versions of windows and home editions as the OS's features for docker and hyperv dont work :cry:
+  You will have to install docker toolbox, this is a slightly different approach to usinf docker with a VirtualBox VM. This means that you will run a Virtual Machine that will run behind the IP of your OS, that uses NAT to access the internet.
+  
+  _**NOTE** - for any projects that use local hose you will have to replace `http://localhost` with `http://192.168.99.100`_
+  
+  The docker toolbox download can be found in the docker store.
+  
+  When the docker toolbox is run, docker creates  very limited version of linux in the background. You can however go into virtual box and change the properties of the vm. The command `docker-machine` allows you to manipulate the default VM (and other docker VMs that you set up).
+  
+  #### Installing on Linux
+  Do **NOT** use your build in default packages like apt/yum install docker.io, these packages are old and are not the official Docker-Build packages.
+  
+  You can use Docker's automated script to add their repository and install all dependencies:
+  ```
+  curl -sSl https://get.docker.com | sh 
+  ```
+  
+  You can also use the manual method of which are described on the docker store for each of the supported distributions of Linux.
+  
+  _**Note** - If you are installing docker CE onto Redhat Linux you will have to use the CentOS docker store page for installation instructions, this is because docker only officailly supports RHEL using docker EE_
+  
+  Foc Linux Mint 18 the install is a bit off on the site, i used this:
+  ```
+  sudo apt-get remove docker docker-engine docker.io
+  
+  sudo apt-get update
+  
+  sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+  
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  
+  sudo apt-key fingerprint 0EBFCD88
+  
+  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu \\
+  xenial \\
+  stable"
+  
+  sudo apt-get update
+  
+  sudo apt-get install docker-ce
+  
+  sudo docker run hello-world
+  ```
+  Finally if you dont want to use sudo every time you run docker you can run:
+  ```
+  ### Change <username> to your username
+  sudo usermod -aG docker <username>
+  ```
+  You will have to log out an back in for this to take effect.
+  
+  On linux you will also need to install:
+  - Docker-Machine
+    - [Install Docker Machine](https://docs.docker.com/machine/install-machine/)
+  - Docker-Compose
+    - [Install Docker Compose](https://github.com/docker/compose/releases)
+  
+  You will need to be logged in as root in oder to do the docker-compose installation.
+  As these are installed manually you will have to update them periodically :weary:
+'''
+linesHighlighted: [
+  10
+  15
+  6
+  22
+  24
+]
+isStarred: false
+isTrashed: false

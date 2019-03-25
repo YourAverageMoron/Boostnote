@@ -1,0 +1,56 @@
+createdAt: "2019-03-25T09:49:43.697Z"
+updatedAt: "2019-03-25T14:47:13.249Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Containers vs Virtual Machines"
+tags: [
+  "Docker"
+  "Computer_Science"
+]
+content: '''
+  # Containers vs Virtual Machines
+  
+  #### Containers are **NOT** mini-VMs
+  Containers are just processes, that run inside the host operating system.
+  They are limited to which resources they can access.
+  They exit when the process stops.
+  
+  #### Just a process
+  As containers are just processes if you list all of the processes runnning on a system the whatever you are running inside the container will be listed.
+  There will be some different settings such as the user, this is because it is running with different security (not running as the docker container and not as root).
+  
+  #### Architecture
+  
+  ##### Virtual Machine
+  VMs provide hardware virtualisation and contain their own applications and anything it needs to run.
+  It also carries an entirely virtualized hardware stack of its oen, including virtualized network adapters, storage and CPU - This means it also needs a fully fledged operating system and kernel. It behaves like its own unit, but from the outside we know that its a VM - it can share resources proveded by the host machine.
+  
+  ![virtualMachineArchitecture.png](:storage\\43b8ec23-d3a3-4b0a-9651-4e7e46d268d9\\ee35d08a.png =400x)
+  
+  As this image shows the VMs package up the virtual hardware, a kernel and the user space for each VM.
+  
+  ##### Container
+  Containers provide operating-system-level virtualization bu abstracting the "user space".
+  They aim to look like a VM as they have a private space, can execute commands as root, have a private network interface and IP address, allow for custom iptable rules, can mount file systems etc.
+  The main difference is that they *share* the gost system's kernel with other containers.
+  
+  ![containerArchitecture.png](:storage\\43b8ec23-d3a3-4b0a-9651-4e7e46d268d9\\648135eb.png =400x)
+  
+  You can see that containers just package up the user space and not kernel or virtual hardware. Each container gets its own isolates user space toallow multiple containers to run on a single host machine. We can also see that the OS is being shared across the containers. The only parts that are created from scratch are the bins and libs.
+  This is what makes containers so lightweight.
+  
+  ##### Docker
+  This allows you to create containers onto an operating system. Containerisation has been around for a fair while (google has been doing it for years), however docker has made it a lot more accessible as it has been made for developers and has a bunch of pre-made images.
+  
+  ---
+  
+  ## Links
+  [A Beginner-Friendly Introduction to Containers, VMs and Docker](https://medium.freecodecamp.org/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b)
+  
+'''
+linesHighlighted: [
+  7
+  2
+]
+isStarred: false
+isTrashed: false
