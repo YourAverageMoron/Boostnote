@@ -1,0 +1,54 @@
+createdAt: "2019-03-25T18:54:07.751Z"
+updatedAt: "2019-04-03T10:44:25.070Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Getting inside a container"
+tags: [
+  "Docker"
+  "Computer_Science"
+]
+content: '''
+  # Getting inside a container
+  
+  ## No need to SSH
+  There us no real need to add ssh to a docker container as use the docker cli to get inside the docker container.
+  
+  ---
+  
+  ## `docker container run -it`
+  This starts a new container interactively.
+  `-it` is actiually two different options:
+  - **i** - interactive, keeps the session open to recieve terminal input.
+  - **t** - pseudo-tty, simulates a real terminal (similar to ssh).
+  E.g.
+  ```
+  docker container run -it nginx bash
+  ```
+  This will create a the docker container and open a bash shell inside the running container.
+  
+  When you close the shell using exit, it will also stop the docker container. This is because the command that is being run is bash instead of in the example's case nginx.
+  
+  ---
+  
+  ## `docker container exec -it`
+  This allows you to open a shell on a pre-existing container.
+  E.g.
+  ```
+  docker container exit -it nginx bash
+  ```
+  When you exit the shell it will not stop the container, this is because when docker runs an additional process on an existing container it wont effect the process that is running on the container.
+  
+  ---
+  
+  ## Alpine Linux
+  This is a really lightwight version of linux that you can create an image with.
+  However you cannot run bash on alpine as it is not installed onto the image, instead you can run sh.
+  You can install bash using alpine's apk package manager.
+'''
+linesHighlighted: [
+  7
+  22
+  32
+]
+isStarred: false
+isTrashed: false

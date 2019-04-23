@@ -1,0 +1,56 @@
+createdAt: "2019-03-29T16:31:48.199Z"
+updatedAt: "2019-04-01T09:25:00.262Z"
+type: "MARKDOWN_NOTE"
+folder: "e18bbc0c08e12d905b86"
+title: "Useful Data"
+tags: []
+content: '''
+  Call home Kibana:
+  
+  # Useful Data
+  
+  
+  - Batv.BlockAtRx
+    - What is this?
+    - Format -> String
+  - _id
+    - Looks like an id for each indvidual entry
+    - Format -> String
+  - CompanyName
+    - Format -> String
+  - Delivered
+    - What is this?
+    - Integer
+  - DeliveredCount
+    - What is this?
+    - Integer
+  - GreyListing.AllowListDBSize
+    - Look into this
+    - Integer
+  - GreyListing.GreyListDBSize
+    - Look into this
+    - Integer
+  - GreyListing.GreyListed
+    - Look into this
+    - Integer
+  - GreyListed.MovedToAllowList
+    - Look into this
+    - Integer
+  - GreyListing.OnAllowList
+    - Look into this
+    - Integer
+  - Identity.GatewayType
+    - The type of gateway e.g Email or Web
+    - String
+  - Jemd.
+    - There are quite a few in here, some pretty good ones!
+  - MailConfig.
+    - Same as Jemd
+  - 
+  
+'''
+linesHighlighted: [
+  24
+]
+isStarred: false
+isTrashed: false

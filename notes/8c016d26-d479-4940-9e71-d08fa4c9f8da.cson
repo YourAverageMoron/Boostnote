@@ -1,0 +1,127 @@
+createdAt: "2019-04-04T06:58:30.422Z"
+updatedAt: "2019-04-18T08:19:40.417Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Container Lifecycle and Persistent Data"
+tags: [
+  "Docker"
+  "Dockerfile"
+  "Computer_Science"
+]
+content: '''
+  
+  # Container Lifecycle and Persistent Data
+  
+  ## Contaioners are _usually_ immutable and ephemeral
+  
+  This just means that containers are unchanging, temporaty and disposable.
+  
+  The idea is that you can just throw away a container and start afresh from the image, this isn't a limitiation, it's more of a design goal.
+  
+  **Immutable Infastructure** - Only re-deploy containers, never change them when they are running if you need to change a config or upgrade. This is more consistent and reliable.
+  
+  #### What about data?
+  If your container contains the data such as databases or keys it will be lossed when you redeploy.
+  
+  Ideally you shouldn't mix your unique data with the application binaries inside a docker container. (**seperation of concerns**).
+  This ends up being benificial as you can update the application without affecting the unique data.
+  
+  This data is known as **persistent data**.
+  
+  #### Docker Volumes and Bind Mounts
+  These are docker's solutions to persistent data.
+  
+  **Docker volumes** - allow you to specify a location outside of the container's union file system to store persistent data.
+  
+  **Bind Mount** - Link container path to host path, these allow us to share or mount a host directory into a container.
+  
+  ---
+  
+  ## Docker Volumes
+  
+  These are specified in the Dockerfile:
+  ```
+  VOLUME <FILE PATH>
+  ```
+  This will tell Docker that when we start a new container, to create a new volume location and assign it to this directory in the container.
+  This means any files that we put in there in the container will outlive the container until we manually delete the volume. 
+  
+  If we run a container using volumes and inspect that cotainer, there will be a section called mounts.
+  Inside this section you will an entry that is has a type "volume" this is the volume that the container is using, it has a set of other values:
+  
+  #### Name
+  The unique id given to the volume.
+  
+  #### Source
+  The location where the data is living on the host.
+  
+  #### Destination
+  Where the container thinks it is writing to, this is just a location in the container that is mapped to the "Source" (the location in the host).
+  
+  ### Viewing the different volumes on your system
+  To get a list all the volumes on a system you can run:
+  ```
+  docker volume ls
+  ```
+  Then to inspect a volume you can run:
+  ```
+  docker volume inspect
+  ```
+  
+  To clean up unused volumes you can use:
+  ```
+  docker volume prune
+  ```
+  
+  ### Named volumes
+  This is a more frendly way to assign volumes to containers.
+  
+  When running a container you can use the `-v` command to specify either a new volume or a named volume 
+  
+  #### Normal volume (same as method in Dockerfile)
+  ```
+  docker container run -v /var/lib/mysql mysql
+  ```
+  
+  #### Named volume
+  ```
+  -
+  ```
+  This will assign the name mysql-db to the new volume. 
+  
+  ### `docker volume create`
+  You can create a volume ahead of time, this does allow you to specify a driver and some labels.
+  
+  ---
+  ---
+  
+  ## Bind Mounting
+  
+  #### Overview
+  This is just a mapping of the host file or directory into a container file or directory.
+  
+  You point the two locations at the same physical location in memory.
+  
+  As they need specific data of the host in order to work, they can only be specified at run time.
+  
+  #### How to use
+  
+  ##### Windows example
+  ```
+  docker container run -v //c/Users/ryan/file:/path/container nginx
+  ```
+  
+  #### Linux (or mac) example
+  ```
+  docker container run -v /Uers/ryan/file:/path/container nginx
+  ```
+  The way docker distinguishes between a named volume and a bind mount is by the `/` at the start of the bind mount.
+  
+  
+'''
+linesHighlighted: [
+  3
+  28
+]
+isStarred: false
+isTrashed: false

@@ -1,0 +1,177 @@
+createdAt: "2019-04-01T09:46:46.915Z"
+updatedAt: "2019-04-15T15:14:49.195Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Kibana Introduction"
+tags: [
+  "Kibana"
+  "Data_Analytics"
+  "Statistics"
+  "TODO"
+]
+content: '''
+  # Kibana Introduction
+  
+  ## Discover
+  
+  #### Overview
+  This is used to view the list of documents and search for specific ones.
+  
+  #### Search
+  The bar at the top allows to search for documents, it provides options to save, open and share searches.
+  
+  ![39143c1a.png](:storage\\8c62484c-f135-465a-a3c6-ec838bccf1bd\\39143c1a.png =500x)
+  
+  ##### Equals (:)
+  ```
+  Identity.GatewayType:EmailGateway
+  ```
+  Returns all of the documents where GatewayType equals EmailGateway.
+  
+  ##### Negating (!)
+  ```
+  Identity.GatewayType:EmailGateway
+  ```
+  Returns all of the documents where GatewayType does not equal EmailGateway.
+  
+  #### Fields
+  On the left hand side there is a list of all the fields in the documents.
+  You can click add on a field to add it to the table in the main area, this allows you to quickly see the values for that field.
+  Clicking on a field name will give you the top 5 values for that field amungst all the documents shown.
+  
+  ![2ad4f390.png](:storage\\8c62484c-f135-465a-a3c6-ec838bccf1bd\\2ad4f390.png =500x)
+  
+  #### Main area
+  In the main central area you will find a distribution graph of the number of documents over time. Underneath the graph you will see the individual documents.
+  You can expand a document to see each field and its actual value.
+  You are presented with a series of icons for each field to allow you to filter for documents with the same value, where you can exclude documents with this value, you can a the field as a column to the table, or filter for documents with this field present (this is useful as not all documents must look the same within elastic search).
+  
+  ![cedd06f7.png](:storage\\8c62484c-f135-465a-a3c6-ec838bccf1bd\\cedd06f7.png =500x)
+  
+  #### Index pattens
+  Above the field list you can see the index pattern you want to look at.
+  
+  ![96750e80.png](:storage\\8c62484c-f135-465a-a3c6-ec838bccf1bd\\96750e80.png =500x)
+  
+  #### Time Picker
+  In the top right of the page there is a time picker that allows you to select the time range you want to view. This will filter the data to be within that time range.
+  
+  ![c0906475.png](:storage\\8c62484c-f135-465a-a3c6-ec838bccf1bd\\c0906475.png =500x)
+  
+  ---
+  
+  ## Visualize
+  This is used to create visualizations such as graphs.
+  You can use saved searches that you create in discover to feed your visualisations.
+  
+  #### Pie charts
+  
+  
+  ---
+  
+  ## Dashboard
+  You can add multiple visualizations so you can see an overview of the data.
+  
+  d
+  
+  ---
+  
+  ## Timelion
+  This allows you to create advanced timseries analysis.
+  
+  s
+  
+  ---
+  
+  ## Management
+  The settings of kibana
+  
+  
+  ## Aggregations
+  
+  There are two types of aggrigations: Bucket aggregations and metrics aggregations
+  
+  #### Bucket aggregations
+  These are reponsible for grouping documents into so called buckets.
+  Each bucket can contain several documents, a single document, or no documents at all.
+  Depending on the concrete type of bucket aggregation, buckets might overlap itself and one document might fall into two or more buckets.
+  There may be documents that do not fall into any buckets.
+  
+  ![6ed14d04.png](:storage\\8c62484c-f135-465a-a3c6-ec838bccf1bd\\6ed14d04.png =500x)
+  
+  ##### Types:
+  - Histogram
+    - This operates on numbers
+    - Inerval: Number
+    - Groups together documents within the same interval
+    - E.g an interval of 50 will give a bucket containing documents whose aggregated field lies in 0-50 and then another bucket for 50-100 and then 100-150 and so on.
+  - Date Histogram
+    - This operates on dates
+    - Interval: Milliseconds, Seconds, Minutes, ...
+    - This creates buckets containing documents that fall with in the same time range.
+    - E.g if you set the interval as an hour you will get a bucket containing all documents that has a date between 12:00 to 13:00, another bucket for 13:00 to 14:00 and another for 14:00 to 15:00 and so on.
+    - There is an auto interval that lets Kibana choose a suitable time period to give a good graph.
+  - Range
+    - This operates on numbers
+    - You can specify custom ranges, which creates a bucket containing all documents with an aggregated value within that range
+    - E.g if you can specify a range of 1-20, another range of 20-100 and a final range of 100-1000.
+    - As you can see the ranges do not have to be consistent.
+  - Date Range
+    - The same as range but for dates
+  - IPv4 Range
+    - Same as range but for IP addresses
+  - Filters
+    - Each filter is a regular query (similar to the search field in kibana)
+    - This will create one bucket for each filter and add all the relevant documents.
+    - e.g x:>=42 all documents where x is greater than or equal to 42.
+    - e.g y:dave all documents where y equals dave.
+  - Geohash
+    - This operates on geo points
+    - This will group all docuents that are in a specific area together
+    - You can adjust the precision, this will control how larege the area will be.
+  - Terms
+    - This can operate on most types
+    - It will create buckets for the terms that appear most (or least) often and place all documents into those buckets.
+    - You can chage whether it looks for the most or least common term, and the number of buckets it creates.
+  - Significant Terms
+  
+  
+  #### Metrics aggregations
+  These are responsible for calculating a value for each bucket based on the documents inside this bucket.
+  
+  
+  ##### Types:
+  - Count
+      - The number (count) of document within the bucket
+  - Sum
+    - This operates on a numerical field
+    - It adds together all the values of a given field
+    - e.g if you have field age, this will give you the sum of all the ages within the bucket
+  - Average
+    - This operates on a numerical field
+    - Calculates the mean average of the given field in a bucket
+  - Median
+    - This operates on a numerical field
+    - Calculates the median average of the given field in a bucket
+  - Min
+    - Operates on numbers and dates
+    - Returns the lowest value
+  - Max
+    - Operates on numbers and dates
+    - Returns the highest value
+  - Unique Count
+    - Returns the destinct count of values of all documents
+  - Standard Deviation
+      - This operates on number fields
+      - This calculates the upper and lower bounds the standard deviation
+  - Percentiles
+    - This operates on a number field
+    - You can provide it with a set of percentages, it will return the number of values that percentage will contain.
+    - 50% will be the mean.
+  - Percentile Ranks
+    - This is the opersite of the percentile.
+    - It gives the percentage of how many documents align under that value.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

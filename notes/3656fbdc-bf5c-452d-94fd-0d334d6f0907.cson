@@ -1,0 +1,138 @@
+createdAt: "2019-04-01T06:58:29.703Z"
+updatedAt: "2019-04-03T10:44:50.616Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Building Docker Images"
+tags: [
+  "Docker"
+  "Computer_Science"
+  "Images"
+  "Dockerfile"
+]
+content: '''
+  # Building Docker Images
+  
+  ## Dockerfile overview
+  You can create a docker image using a docker file.
+  This is like a recipie for your docker image.
+  
+  #### Building from a Dockerfile
+  
+  You can run the command:
+  ```
+  docker build -f <Dockerfile Name>
+  ```
+  
+  ---
+  
+  ## Dockerfile instructions
+  
+  Each instruction is a layer in in the docker image.
+  Their order matters! The file is read from top to bottom.
+  
+  
+  ### `FROM`
+  This is used to specify the image you want to build your docker image from (the base image).
+  You would usually use a small image such as debian or alpine.
+  This is pretty useful as it allows you get the barebones of an image including stuff like a package manager.
+  
+  `ARG` is the only instruction that can precede `FROM`, arg can be used to define tags that the `FROM` command uses to pull the base image, e.g: 
+  ```
+  ARG VERSION = latest
+  FROM alpine:$VERSION
+  ```
+  
+  ### `ENV`
+  This is a way of setting enviroment variables for use withing the container.
+  It allows you to set keys and values for container building and running containers.
+  The reason enviroment variables are used to inject key/values is they work everywhere, and on overy OS and config.
+  E.g.
+  ```
+  ENV name="Dave" age=12
+  ```
+  
+  ### `EXPOSE`
+  This exposes ports in the docker virtal network.
+  This doesn't mean that these ports will be opened automatically on our host, you will have to use the -p command whed using docker container run.
+  E.g.
+  ```
+  EXPOSE 80/udp
+  ```
+  
+  ### `CMD`
+  This is used to provide defaults for executing a container. These defaults can include an executable, or they can omit an executable, in which case you must speecify the `ENTRYPOINT` instruction as well.
+  
+  It can be used in exec form:
+  ```
+  CMD ["executable","param1","param2"]
+  ```
+  It can be used with default parameters to `ENTRYPOINT`:
+  ```
+  CMD ["param1","param2"]
+  ```
+  It can be used in shell form:
+  ```
+  CMD command param1 param2
+  ```
+  
+  ### `RUN`
+  
+  This can be used to run shell commands (e.g install a package), run a shell script.
+  The `RUN` instruction will execute any commands in a new layer on top of the current image and commit the results. The resulting image will be used for the next step in the Dockerfile.
+  
+  Run can be used in shell command form:
+  
+  ```
+  RUN <command>
+  ```
+  
+  It can also be used in exec form:
+  
+  ```
+  RUN ["executable", "param1", "param2"]
+  ```
+  
+  In shell form you can use a `\\` to continue a single `RUN` instruction on the next line, e.g:
+  ```
+  RUN /bin/bash -c `source $HOME/.bashrc; \\
+  echo $HOME`
+  
+  #### THIS IS EQUIVELENT TO ####
+  RUN /bin/bash -c 'source $HOME/.bashrc; echo $HOME`
+  ```
+  
+  
+  ### [List of Dockerfile Instructions](https://docs.docker.com/engine/reference/builder/#from)
+  
+  ---
+  
+  ## Building from a Dockerfile
+  
+  You can use the image build command to build an image from a Dockerfile e.g:
+  ```
+  docker image build <directory with the Dockerfile>
+  ```
+  You will want to specify a name using the `-t` command, whhich gives you something like this:
+  ```
+  docker image build -t <name:tag> <Dockerfile directory>
+  ```
+  
+  It caches the steps in the build by saving a hash, this means that re-running the command without any changes to the Dockerfile will not be run again (this is super quick!).
+  
+  If you change something at the top of the Dockerfile the whole of the image build process will be re-run as there will not be anything cached.
+  Top tip keep the things that change the least at the top of the Dockerfile.
+  
+  
+  
+'''
+linesHighlighted: [
+  6
+  32
+  61
+  93
+  2
+  122
+  15
+]
+isStarred: false
+isTrashed: false

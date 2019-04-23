@@ -1,0 +1,108 @@
+createdAt: "2019-03-25T21:24:35.890Z"
+updatedAt: "2019-03-29T06:34:11.226Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Docker Networks Basics"
+tags: [
+  "Docker"
+  "Computer_Science"
+  "Networks"
+]
+content: '''
+  # Docker Networks Basics
+  
+  ## Docker network commands
+  
+  To view the docker networks you can run:
+  ```
+  docker network ls
+  ```
+  This will give you a basic overview, for a more detailed description you can use:
+  ```
+  docker network inspect
+  ```
+  
+  ---
+  
+  ## Docker network defaults
+  
+  Each container defaults to connecting to a private virtual network using a bridged adapter.
+  
+  Each virual network routes through a NAT firewall on the host IP.
+  
+  All containers on a virtual network can talk to each other without -p.
+  
+  Best practice is to create a new virtual network for each app e.g:
+  - Network "my_web_app" for mysql and php/apache containers
+  - Network "my_api" for mongo and nodejs containers
+  
+  Docker comes with three built in network types: bridged, none, and host. 
+  
+  #### Bridge
+  All docker installations represent the docker0 network with bridge. Docker connects to bridge by default. Run ifconfig on the linux host to view the bridge network.
+  
+  You can run `docker network inspect bridge` to get a JSON object which describes the bridge network, this includes information regarding which containers run on the network, the option set, and the listing subnet and gateway.
+  
+  Docker automatically creates a subnet and gateway for teh bridge network, and docker run automatically adds containers to it. If you have containers running on your network, `docker network inspect` displays networking information for your containers.
+  
+  Any containers on the same network may communicate with one another via IP addresses. Docker does not support automatic service discovery on bridge. You must connect containers using the --link option when using the docker run command.
+  
+  Docker bridge supports port mappings and docker run --link allows communications between containers on the docker0 network. However, these error-prone techniques require unnecessary complexity.
+  
+  #### None
+  This offers a container-specific network stack that lacks a network interface. This container only has a local loopback interface (i.e. no external interface).
+  
+  #### Host
+  This enables a container to attach to your host's network, this means that the configuration inside teh container matches teh configuration outside the container.
+  
+  ---
+  
+  ## Docker network security
+  Create apps so that the frontend and backend sit on the same network, however their inter-communication never leaves the host.
+  You never over expose the network (only the ports that use -p or --publish).
+  
+  ---
+  
+  ## Defining your own networks
+  You can use:
+  ```
+  docker network create <network name>
+  ```
+  You can create multiple networks with docker and add containers to one or more networks. Containers can communicate within networks but not _across_ networks. A container attached to multiple networks can connect to all of the containers on those networks. This lets you build a "hub" of sorts to connect multiple networks with seperate concerns.
+  
+  ---
+  
+  ## Attaching and detaching networks to and from containers
+  
+  #### Connect a container to a network when it starts
+  You can also use:
+  ```
+  docker run --network=<network-name> 
+  ```
+  option to start a container and immediately connect it to a network e.g:
+  ```
+  docker run --network=my_network nginx
+  ```
+  
+  #### Attach
+  ```
+  docker network connect <network> <container>
+  ```
+  
+  #### Detach
+  ```
+  docker network disconnect
+  ```
+  
+'''
+linesHighlighted: [
+  0
+  43
+  48
+  54
+  63
+  79
+  75
+]
+isStarred: false
+isTrashed: false

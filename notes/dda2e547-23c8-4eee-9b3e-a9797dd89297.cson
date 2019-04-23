@@ -1,0 +1,46 @@
+createdAt: "2019-03-25T15:49:18.936Z"
+updatedAt: "2019-03-25T18:53:57.418Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "What's inside a container?"
+tags: [
+  "Computer_Science"
+  "Docker"
+]
+content: '''
+  # What's inside a container?
+  
+  ## `docker container top`
+  This lists the processes running inside a docker container.
+  E.g.
+  ```
+  docker container top <container ID or name>
+  ```
+  
+  ---
+  
+  ## `docker container inspect`
+  This gives the details of the container's config.
+  E.g.
+  ```
+  docker container inspect <container ID or name>
+  ```
+  This returns a JSON array of how the container was started.
+  
+  ---
+  
+  ## `docker container stats`
+  This gives the performance stats of all the containers in a real time stream.
+  Including the memory, CPU usage and storage usage.
+  E.g.
+  ```
+  docker container stats
+  ```
+  
+'''
+linesHighlighted: [
+  2
+  11
+]
+isStarred: false
+isTrashed: false

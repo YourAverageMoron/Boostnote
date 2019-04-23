@@ -1,0 +1,57 @@
+createdAt: "2019-04-17T06:43:49.692Z"
+updatedAt: "2019-04-18T07:23:20.366Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Docker Compose"
+tags: [
+  "Docker"
+  "Docker_Compose"
+  "Computer_Science"
+]
+content: '''
+  # Docker Compose
+  
+  ## What is it?
+  It is a tool for defining multi-container applications; it allows you to define all the running and tear down conditions of the applications, and run the multiple containers with a single command.
+  
+  ---
+  
+  ## YAML File
+  
+  #### Versions
+  The first line in the file specifies the version, try and make this at least version 2.
+  
+  #### Structure
+  It is hierachical in structure, this will be supported by some IDEs 
+  
+  #### Defines the solution options 
+  
+  ##### `services`
+  This command specifies the container, works in a similar way to docker run.
+  
+  ###### `servicename`
+  This is just a name, it is also the DNS name inside the network. 
+  
+  ###### `image`
+  Specify the image
+  
+  ###### `enviroment`
+  Same as -e for docker run
+  
+  ###### `volumes`
+  Same as -v for docker run 
+  
+  ##### networks
+  Used to create networks and specify their details
+  
+  ##### Volumes
+  Used to create volumes and specify their details
+  
+  ---
+  
+  ## CLI tool for docker-compose
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

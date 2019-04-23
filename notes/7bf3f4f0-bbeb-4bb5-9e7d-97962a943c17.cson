@@ -1,0 +1,32 @@
+createdAt: "2019-03-31T12:12:22.761Z"
+updatedAt: "2019-04-03T06:18:53.494Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Docker Image Tagging"
+tags: [
+  "Docker"
+  "Computer_Science"
+  "Images"
+]
+content: '''
+  # Docker Image Tagging
+  
+  ## Overview
+  Docker images dont actually have a name, they are usually refered to by their user, repository and tags in the format: `<user>/<repo>:<tags>`
+  
+  Tags allow you to version the images.
+  Tags are just lables that point to an image ID, if you run `docker image ls` you might have two enteries with different tags that both point to the same image ID, this is because you do not download the image twice for each tag but both taggs point to that image.
+  
+  ---
+  
+  ## Tagging existing images
+  
+  You can tag an existing image by using the command:
+  ```
+  docker tag <source image> <target image:tag>
+  ```
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

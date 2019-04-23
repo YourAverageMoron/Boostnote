@@ -1,0 +1,37 @@
+createdAt: "2019-03-28T08:37:28.904Z"
+updatedAt: "2019-03-28T09:15:06.936Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Docker Network: DNS"
+tags: [
+  "Docker"
+  "Computer_Science"
+  "Networks"
+]
+content: '''
+  # Docker Network: DNS
+  
+  ## Overview
+  Docker has a boult-in DNS server that containers use by default.
+  
+  Containers shouldn't use IP addresses as they are not reliable due to the fact that containers can stop and start again with other IP addresses and handling the IP addresses is just a nightmare in general.
+  
+  #### Hostnames
+  Docker uses the container names as an equivelent to a hostname for containers to talk to each other. You can also set aliases if you want to.
+  This means that you don't need to know the IP addresses of containers, you can just reference them using their container name.
+  
+  --
+  
+  ## Default bridge network
+  The default bridge container does not have the DNS server built into it by default.
+  
+  #### `--link`
+  When setting up a container you can use the --link option to specify other containers that will be linked to that container, e.g:
+  ```
+  docker container run --link [<container2>, <container3>, <container4>] --name container1 nginx
+  ```
+  But it's a lot easier to create a custom network and use its DNS.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

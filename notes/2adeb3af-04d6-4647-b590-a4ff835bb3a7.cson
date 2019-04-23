@@ -1,0 +1,53 @@
+createdAt: "2019-03-29T06:51:37.144Z"
+updatedAt: "2019-03-29T07:11:48.914Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Network Aliases"
+tags: [
+  "Docker"
+  "Computer_Science"
+  "Networks"
+]
+content: '''
+  # Network Aliases
+  
+  ## What are network aliases?
+  These are super useful when you have two containers on a network that you want to reference using the same command, for instance if you have a loadbalancer or if you have a production and dev enviroment.
+  You can give the containers the same network alias and then use that instead of the individual container name.
+  
+  ## How they work
+  When creating a new container you can use the `--network-alias` option, e.g:
+  ```
+  docker container run --network alias <alias name> elasticsearch
+  ```
+  
+  ## Working example
+  
+  You can create a network called "net" which contains two containers, both of the containers will run elasticsearch:2 and an alias search, we will try to set them up as a dns loadbalancer:
+  
+  #### The network
+  ```
+  docker network create net
+  ```
+  
+  #### The containers
+  ```
+  docker container run -d --network=net --network-alias search elasticsearch:2
+  docker container run -d --network=net --network-alias search elasticsearch:2
+  ```
+  _**Note** - I didn't set a container name as there is no real need for one_
+  
+  #### Checking the containers are running correctly
+  ```
+  docker container run --rm --net my_network alpine nslookup search
+  ```
+  
+  #### Tesing the loadbalancer
+  Curling an elastic search returns a json file, if you run the following a few times you will get two different results (one from each of the containers) :+1: 
+  ```
+  docker container run --rm --net my_network centos curl -s search:9200
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

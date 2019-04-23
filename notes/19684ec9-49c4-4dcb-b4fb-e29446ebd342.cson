@@ -1,0 +1,83 @@
+createdAt: "2019-03-29T07:22:06.844Z"
+updatedAt: "2019-04-03T06:19:01.108Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Docker Image Basics"
+tags: [
+  "Docker"
+  "Computer_Science"
+  "Images"
+]
+content: '''
+  # Docker Image Basics
+  
+  ## What is in an image
+  
+  #### Simple definition
+  
+  App binaries and dependencies
+  
+  Metadata about the image data and how to run the image
+  
+  It can be as small as one static binary (if you are using the language Go to write the application)
+  
+  #### Official definition
+  
+  An image is an ordered collection of root filesytem changes and correspondin execution parameters for use within a container runtime.
+  
+  #### What isn't in an image
+  
+  The is not a complete OS, no kernel, no kernel modules (e.g drivers):
+  - The host provides the kernel and any modules
+  
+  ---
+  
+  ## Image layers
+  
+  #### What are they?
+  Images are designed by the union file system concept of creating layers about the changes. 
+  
+  When we create an image we start with a base layer called scratch. This base layer gets its own SHA that allows the system to check if that layer is identical to another layer. 
+  You can then add layers on top of this scratch layer to add functionality, the sum of these layers gives the image.
+  
+  Docker images are made up of a readable/writable layer on the top and a bunch of read-only layer below that.
+  These layers (also  called imtermediate images) are generated whn the commahds in the dockerfile are executed during the Docker image build.
+  
+  #### Where are layers found?
+  To dig down into each layer of the image and view its contents you will need to view th elayers on the Docker host at:
+  ```
+  /var/lib/docker/aufs
+  ```
+  This directory points at three other directories: `diff`, `layers`, `mnt`.
+  
+  - **diff** stores the image layers and their contents.
+  - **layers** contains how the layer are stacked.
+  - **mnt** running containers are mounted below the mnt container.
+  
+  #### Union mount
+  This is a way of combining numerous directories ubti ibe directory that looks like it containers the contents of all of them. 
+  
+  ##### This dipicts the layers in a docker image
+  ![46524ba9.png](:storage\\19684ec9-49c4-4dcb-b4fb-e29446ebd342\\46524ba9.png =500x)
+  As you can see you have the readable/writable layer `c283f215c57f` that sits on top of the read only layers. These are union mounted into the mnt directory.
+  
+  #### Layer Caching
+  Implementing union mount to manage the layers allows you to use the same layer for different images, as each layer has a unique SHA you can match the layers against the local cache and the build off the layers in the cache.
+  
+  This means that you are not storing the same layers more than once.
+  
+  ---
+  
+  ## Inspecting an image
+  
+  If you run: 
+  ```
+  docker image inspect <image>
+  ``` 
+  You will recive a json file with all of the meta data about the image.
+  This has info about how it wants you to run it, architecture, OS, even the author.
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

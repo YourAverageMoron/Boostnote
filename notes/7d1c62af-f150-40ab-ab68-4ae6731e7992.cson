@@ -1,5 +1,5 @@
 createdAt: "2019-03-23T08:40:49.517Z"
-updatedAt: "2019-03-24T22:30:08.329Z"
+updatedAt: "2019-03-27T12:08:06.259Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Docker Setup"
@@ -35,6 +35,12 @@ content: '''
   #### Windows
   
   ###### Windows 10 (pro and enterprise)
+  
+  **BE CAREFUL HYPERVISOR MAY BREAK BIRTUALBOX**
+  To turn 
+  bcdedit /set hypervisorlaunchtype off
+  bcdedit /set hypervisorlaunchtype auto
+  
   Here is the link to download the latest version of docker on windows:
   [Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
   

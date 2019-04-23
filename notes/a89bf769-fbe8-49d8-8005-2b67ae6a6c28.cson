@@ -1,0 +1,131 @@
+createdAt: "2019-04-08T06:30:28.517Z"
+updatedAt: "2019-04-10T07:37:54.697Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "ES5 vs ES6"
+tags: [
+  "JavaScript"
+  "ES6"
+  "Computer_Science"
+  "Web_Development"
+]
+content: '''
+  # ES5 vs ES6
+  
+  ## Babel
+  
+  ### Overview
+  Babael is a Js transpiler, it converts edge JavaScript into plain ES5 which can be run on any browser!
+  
+  ### Why is it useful?
+  It allows you to program using newer js syntactic sugar (e.g ES6) whilst allowing your code to be supported by older browsers that do not nativley support those features.
+  
+  ---
+  
+  ## let and const
+  These are variables and can be used to replace var.
+  
+  #### const
+  This is a variable that cannot be updated, it will always have the same value, useful for functions.
+  
+  When using const with an object it, you can change the properties in that object, e.g:
+  ```
+  const obj = {
+      name = "Dave"
+      age = 20
+  }
+  obj.age = 21;
+  
+  console.log(obj.age); //Will print 21
+  ```
+  
+  #### let
+  Let this can be used to replace var, it creates a new scope inside of any curly brackets (i.e functions, if statements etc.)
+  **E.g:**
+  ```
+  let x = 5;
+  if(true){
+    let x = 10;
+    console.log(x); //prints 10
+  }
+  console.log(x); //prints 5
+  ```
+  ```
+  let x = 5;
+  if(true){
+    x = 10;
+    console.log(x); //prints 10
+  }
+  console.log(x); //prints 10
+  ```
+  
+  ---
+  
+  ## Destructuring
+  This allows you to extract properties from objects with out having to write a bunch of code, e,g:
+  ```
+  const obj = {
+      name = "Dave"
+      age = 20
+      otherInfo = "something"
+  }
+  
+  
+  #### OLD WAY ####
+  const name = obj.name;
+  const age = obj.age;
+  
+  
+  #### NEW DESTRUCTURING WAY ####
+  const {name, age} = obj;
+  ```
+  
+  ---
+  
+  ## Onject properties
+  You can now have dynamic property values e.g:
+  ```
+  const name = "Dave";
+  
+  obj ={
+    [name] = "Smith"
+  }
+  
+  console.log(obj.Dave);  //PRINTS "Smith"
+  ```
+  
+  You can also reduce the amount of code when creating objects e.g:
+  ```
+  const a = "something";
+  const b = "another thing";
+  const c = "a final thing";
+  
+  const obj = {
+      a,
+      b,
+      c
+  }
+  
+  console.log(b);  // PRINTS "another thing"
+  ```
+  
+  ---
+  
+  ## Template Strings
+  These use \\` instead of " or ' to write strings this allows you to do something like this:
+  ```
+  let name = "Dave";
+  
+  console.log(`I met a man called $(name) he said to me "ES6 is awesome!". `)
+  //this prints 'I met a man called Dave he said to me "ES6 is awesome!".'
+  ```
+  
+'''
+linesHighlighted: [
+  29
+  2
+  12
+  51
+]
+isStarred: false
+isTrashed: false
