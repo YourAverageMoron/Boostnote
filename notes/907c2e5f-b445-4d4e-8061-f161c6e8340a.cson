@@ -1,0 +1,56 @@
+createdAt: "2019-05-07T10:20:55.467Z"
+updatedAt: "2019-05-15T08:28:40.882Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Abstract Factory"
+tags: [
+  "Design_Patterns"
+  "Computer_Science"
+  "Object-Oriented"
+  "TODO"
+]
+content: '''
+  # Abstract Factory
+  
+  ## The problem it solves
+  
+  #### When you need multiple factories
+  This is used when you have a "family of classes" so to speak.
+  E.g.
+  If you were to to have a car factory base class:
+  ```
+  public abstract class CarAbstractFactory
+  {
+    public abstract Wheel CreateWheel();
+  
+    public abstract Engine CreateEngine();
+  
+    public abstract CarBody CreateCarBody();
+  }
+  ```
+  You can implement more specific classes for this abstract class, e.g. FordFocusCarFactory, FerrariF1Factory, Porsche911Factory e.t.c.
+  The method implementation would return Wheel, Engine and CarBody objects specific to the car type.
+  
+  _**Note** - Wheel, Engine and CarBody are also abstract base classes._
+  
+  ---
+  
+  ## Overview
+  
+  #### Abstract products
+  Interfaces for a set of distinct but related products
+  
+  #### Concrete products
+  The various implementations of abstact products, grouped by variants. Each abstract product must be implemented in all given variants.
+  
+  #### Abstract factory interface
+  Declares a set of methods for creating each of the abstract products.
+  
+  #### Concrete factories
+  Implement the creation methods of the abstract factory. Each concrete factory corresponds to a specific variant of product and creates products of that variant.
+  
+  #### 
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

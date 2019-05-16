@@ -1,0 +1,79 @@
+createdAt: "2019-05-01T07:24:45.133Z"
+updatedAt: "2019-05-08T07:30:45.608Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "The Scope Chain"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # The Scope Chain
+  
+  ## Scope
+  This refers to where a veriable is available in your code.
+  _And if it's truy the same variable, or a new copy._  
+  
+  ---
+  
+  ## Overview
+  JS does more than just look in the variable enviroment of the currently executing context.
+  It has a reference to the outer enviroment, this is often the global execution context. The outer enviroment isn't nessesaraly the context directly below it in the context stack, it is determined by the lexical enviroment.
+  
+  #### Example
+  ```
+  function b() {
+    console.log(myVar);  // This prints 1
+  }
+  
+  function a() {
+    var myVar = 2;
+    b();
+  }
+  
+  var myVar = 1;
+  a();
+  ```
+  
+  As function b() sits lexically on top of the global enviroment, it will use the global variable enviroment if `myVar` is not defined.
+  
+  ---
+  
+  ## Changing the scope chain
+  
+  #### Example
+  ```
+  function a() {
+  
+    function b() {
+      console.log(myVar); // will print 2
+    }
+    
+    var myVar = 2;
+  }
+  
+  var myVar = 1;
+  
+  a();
+  
+  b(); // this will throw an error as it is not defined in this context
+  ```
+  As function b() sits lexically in function a() it will use function a()'s variable enviroment if `myVar` is not defined.
+  _**Note** - As b() is defined in the global execution enviroment as it will not be added as a variable in the global in the global variable enviroment (it is added to a()'s global variable enviroment). You can think of this as b() isn't created until a()'s execution context is created._
+  
+  ---
+  
+  ES6 and `let`
+  
+  ### What is `let`
+  This can be used instead of var, however it does not replace it.
+  Firstly it can only accessed once it has been defined (does not return undefined). Despite being set to undefined in memory, similar to `var`, `let` will throw an error if referenced before it is defined.
+  It allows the Javascript engine to use block scoping.
+  
+  #### Block scoping
+  Let variables are defined within a block, blocks are genrally defined by curly brackets (e.g a for loop).
+  When a `let`variable is defined in a block, it is only available within that block.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

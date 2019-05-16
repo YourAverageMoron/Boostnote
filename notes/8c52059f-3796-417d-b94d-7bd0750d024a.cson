@@ -1,0 +1,46 @@
+createdAt: "2019-05-01T06:02:19.987Z"
+updatedAt: "2019-05-01T06:51:19.008Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Function Invocation and the Execution Stack"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # Function Invocation and the Execution Stack
+  
+  ## Function invocation
+  
+  ### Invocation definition
+  The act of running (calling) a function, this is done in JavaScript by using parenthesis `()`.
+  
+  ### What happens when you invoke a function?
+  
+  ```
+  function b() {
+  }
+  function a() {
+    b();
+  }
+  a();
+  ```
+  
+  #### 1. Creates a global execution context
+  This will create a global variable this and a global object, it will then attach these functions to it.
+  It will set up memory space for them in the creation phase of the execution context, this means that in our case functions b and a will be in memory.
+  
+  #### 2. Invoking a function
+  The code is executed line by line, however it will not execute the definitions of functions a and b as they have not been invoked.
+  When it reaches line 6: `a();` (invoking funtion a) a new execution context is created and placed on the execution stack; the execution context that is highest on the stack is the context that is currently running.
+  The new execution contexts have their own space for functions and variables, it goes through the same create phase as the initial execution context.
+  It then executes line by line the code withing the function.
+  If there is another function invocation (in the case above `b();`) it eill create another execution context and add that to the execution stack.
+  
+  ![d453da92.png](:storage\\8c52059f-3796-417d-b94d-7bd0750d024a\\d453da92.png =400x)
+  
+  When a function finishes its execution context will be popped off of the stack. 
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

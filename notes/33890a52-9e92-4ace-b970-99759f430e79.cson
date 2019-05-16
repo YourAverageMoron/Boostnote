@@ -1,0 +1,45 @@
+createdAt: "2019-04-23T18:36:49.620Z"
+updatedAt: "2019-04-27T19:29:03.319Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Syntax parsers, execution contexts, lexical enviroment"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # Syntax parsers, execution contexts, lexical enviroment
+  
+  ## Syntax parser
+  
+  ### Definition
+  A program that reads your code and determines what it does and if the grammar is valid.
+  
+  ### Overview
+  You have your code, this code is translated into computer readable language, this is done by a compiler or interpreter.
+  
+  The syntax parser works as an interpreter between the code and the computer, it translates JS code into machine code.
+  
+  This means that the engine that is interpreting your code can decide to do different things with the same code.
+  
+  ---
+  
+  ## Execution contexts
+  
+  ### Definition
+  A wrapper to help manage the code that is running.
+  
+  _**Note** - There are a lot of lexical envroments. Which one is currently running is managed via execution contexts. It can contain things beyond the code you have written.
+  
+  ---
+  
+  ## Lexical enviroment
+  
+  ### Definition
+  Where something sites physically in the code you write.
+  
+  _**Lexical** - means having to do with words or grammar. A lexical enviroment exist in programming languages in which the location of code is important._
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

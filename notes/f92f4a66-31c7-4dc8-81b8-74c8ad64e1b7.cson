@@ -1,0 +1,96 @@
+createdAt: "2019-05-15T07:30:47.938Z"
+updatedAt: "2019-05-15T08:10:56.789Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Default Values"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # Default Values
+  
+  ## If you don't specify a default value
+  
+  #### E.g
+  ```
+  function greet(name){
+    console.log("Hello " + name);
+  }
+  
+  greet();  // prints "Hello undefined"
+  ```
+  As we are calling greet without setting name, the variable is created in the execution context but isn't defined. When we `console.log` undefined is coerced into a string and then printed.
+  
+  ---
+  
+  ## Non ES6 fix
+  
+  ```
+  function greet(name){
+    name = name || "<your name here>" ;
+    console.log("Hello " + name);
+  }
+  
+  greet();  // prints "Hello undefined"
+  ```
+  
+  The `||` (or) operator returns the first value (as it is left to right) that can be coerced to true e.g:
+  ```
+  undefined || "hello"         // returns hello
+  
+  "Hello" || "something else"  // returns hello
+  ```
+  So in the case of `name = name || "<your name here>"` is that if `name` is empty, undefined or null; it will return `<your name here>`.
+  
+  This works because `||` has a higher precidance than `=`.
+  
+  #### Be careful with 0
+  This will break if you pass in 0, as it will be coerced to false e.g:
+  ```
+  0 || 5 / /returns 5
+  ```
+  So you would have to guard for this if 0 is an expected value.
+  
+  ---
+  
+  ## ES6 Default values
+  
+  You can specify a default value when defining a function e.g:
+  
+  ```
+  function greet(name = "<your name here>"){
+    console.log("Hello " + name);
+  }
+  
+  greet();  // prints "Hello <your name here>"
+  ```
+  
+  #### Multiple parameters
+  If your method has multiple parameters you have to be careful with the order which you specify the default parameters
+  
+  ##### E.g:
+  ```
+  function mult(a, b = 5){
+    console.log(a * b);
+  }
+  
+  mult(10) // prints 50
+  ```
+  
+  But if you specify the defualt as the first parameter:
+  
+  ```
+  function mult(a = 5, b){
+    console.log(a * b);
+  }
+  
+  mult(10) // prints NaN
+  mult(undefined, 10) // prnits 50
+  ```
+  This is because in `mult(10)` a is set to 10 and b is left undefined
+  Whereas in `mult(undefined, 10`) a is set to undefined (then set to 5 by default) and b is set to 10
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

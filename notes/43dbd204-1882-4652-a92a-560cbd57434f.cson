@@ -1,0 +1,103 @@
+createdAt: "2019-05-12T17:52:58.210Z"
+updatedAt: "2019-05-14T08:01:46.374Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Operators in JavaScript"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # Operators in JavaScript
+  
+  ## Overview
+  A function that is syntactically different, they are often called using operator symbol(s).
+  
+  They use overloading to handle use over different types, for instance:
+  ```
+  console.log(1 + 2); // prints 3
+  console.log("woopdy" + "doo") // prints woopdydoo
+  ```
+  This is because there are multiple functions using the same operator, but they act on different types.
+  
+  ---
+  
+  ## Operator precedence and associativity
+  
+  #### Operator precedence
+  Which operator function gets called first when there are more than one on the same line.
+  Functions are called in order of precedence (higher precedence called first).
+  
+  ##### E.g:
+  ```
+  var a = 3 + 4 * 5
+  console.log(a); //prints 23
+  ```
+  `*` has a higher precedence than `+`
+  
+  #### Operator associativity
+  What order an operator gets called in:
+  - left-to-right (left associativity)
+  - right-to-left (right associativity)
+  This occurs when the operators have the same precedence.
+  
+  ##### E.g:
+  
+  In the case of `=` it uses right associativity, this means that is operates from right to left; so it sets `b = c` then `a = b`.
+  ```
+  var a = 2; b = 3; c = 4;
+  
+  a = b = c
+  
+  console.log(a); // prints 4
+  console.log(b); // prints 4
+  console.log(c); // prints 4
+  ```
+  
+  ---
+  
+  ## Comparison operators
+  
+  ### Why shouldn't compare three numbers e.g `3 < 2 < 1`
+  
+  As the operators (`<`) will have the same precidence, the outcome of the line will be determined by associativity.
+  `<` uses left associativity so it will run `3 < 2` first.
+  
+  However the outcome of `3 < 2` is then passed into the `< 1` so you get `false < 1`.
+  
+  false is then coerced into a number (0), so in the end we are running 0 < 1, this returns true.
+  
+  ### Equality and strict equality
+  
+  #### `==`
+  This is normal equality.
+  This uses coercion, which means that you can compare values that are different types.
+  
+  ##### E.g
+  ```
+  "3" == 3      // true
+  
+  false == 0   // true
+  ```
+  
+  There are some cases where things don't work as expected e.g:
+  ```
+  Number(null)  //  0
+  
+  null == 0     // false
+  ```
+  
+  #### `===`
+  This is strict equality.
+  This does not attempt to coerce values into other types.
+  ```
+  3 === 3     // true
+  
+  3 === "3"   // false
+  ```
+  This is generally prefered as it prevents odd errors caused by coercion.
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

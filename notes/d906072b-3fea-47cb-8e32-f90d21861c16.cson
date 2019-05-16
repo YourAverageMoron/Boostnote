@@ -1,0 +1,57 @@
+createdAt: "2019-05-08T07:15:48.167Z"
+updatedAt: "2019-05-12T15:47:32.952Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Asyncronous Callbacks"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # Asyncronous Callbacks
+  
+  ## Asyncronous
+  
+  ### Definition
+  This just means more than one at once, so multiple lines of code can execute at the same time.
+  
+  ---
+  
+  ## How does JavaScript engine handle asyncronous events?
+  It is not necessarily the JavaScript engine that is running asyncronously. There are other conponents of the browser such as the rendering engine and HTTP requests, the Javascript Engine has hooks to access these other parts of the browser, but the JavaScript engine can still run whilst other parts of the browser are working (e.g making a HTTP request).
+  
+  ---
+  
+  ## Event queue
+  This contains all of the events and notifications of events that are happening outside the JavaScript engine.
+  
+  When there is an event that is happening outside of the JavaScript engine that we want to be notified of it gets placed on the event queue.
+  
+  The event queue gets looked at when the execution stack is empty, at this point JavaScript periodically looks at the event queue (if the execution stack is empty), if something is there it looks to see if a particular function should be run when that event was triggered.
+  
+  #### E.g 
+  ```
+  function waitThreeSeconds() {
+    var ms = 3000 + new Date().getTime();
+    while (new Date() < ms){}
+    console.log('finished function'); // printed 1st
+  }
+  
+  function clickHandler(){
+    console.log('click event!'); // printed 2nd
+  }
+  
+  document.addEventListener('click', clickHandler);
+  
+  waitThreeSeconds();
+  console.log('finished executing'); // printed 3rd
+  ```
+  If you were to click around on the page when the waitThreeSeconds() function is running the console.logs will appear in the following order:
+  1. `finished function`
+  2. `finished executing`
+  3. `click event!`
+  This is because the global execution context is created, then the execution context for running waitThreeSeconds() is added on top of the stack, the event queue containing the click listener is only looked at once the waitThreeSeconds() exection context has been executed allong with the global execution context.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

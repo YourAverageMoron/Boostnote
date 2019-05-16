@@ -1,0 +1,61 @@
+createdAt: "2019-05-01T06:51:20.873Z"
+updatedAt: "2019-05-01T07:24:40.969Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Functions, Contexts and Variable Enviroments"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # Functions, Contexts and Variable Enviroments
+  
+  ## Variable enviroments
+  ### Definition
+  This refers to where the variables live and how they relate to each other in memory.
+  
+  ### E.g
+  What is the value of `myVar` at any point in time?
+  ```
+  function b() {
+    var myVar;
+  }
+  function a() {
+    var myVar = 2;
+    b();
+  }
+  
+  var myVar = 1;
+  a();
+  ```
+  
+  ##### Global execution context
+  So initially you create the global execution context and myVar is allocated space in memory, but set to undefined.
+  When we reach the `var myVar=1;` line, the memory space for myVar will get the value 1.
+  
+  ##### a() execution context
+  When a is invoked, a new execution is created for it. Every execution context has its own variable enviroment, this will allocate space in memory for myVar and initially set it yo undefined. When we execute and reach `var myVar = 2;` the memory space for myVar will get the value 2.
+  
+  ##### b() execution context
+  When a is invoked, b new execution is created for it. Every execution context has its own variable enviroment, this will allocate space in memory for myVar and initially set it yo undefined. As myVar is never given a value in b's execution context it will remain undefined.
+  
+  ```
+  function b() {
+    var myVar;
+    console.log(myVar);  // undefined
+  }
+  function a() {
+    var myVar = 2;
+    console.log(myVar);  // 2
+    b();
+  }
+  
+  var myVar = 1;
+  console.log(myVar);   // 1
+  a();
+  console.log(myVar);   // 1
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,50 @@
+createdAt: "2019-05-16T07:38:58.890Z"
+updatedAt: "2019-05-16T08:05:53.995Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Objects in JavaScript"
+tags: []
+content: '''
+  # Objects in JavaScript
+  
+  ## Overview
+  An object is a collection of name value pairs, those values can be other collections of name value pairs.
+  It can have properties and methods e.g:
+  - It can have a primitive (this is a property)
+  - It can have an object (this is a property)
+  - It can have a function (this is a method)
+  
+  The core object will have a sort of address in memory, it will then have references to these different properties and methods which are also somethere in memory.
+  This means that the object doent actually store the values of the properties and methods, it just has a pointer to tell it where those values are stored.
+  
+  ---
+  
+  ## Accessing object properties
+  
+  #### Example
+  ```
+  var person = new Object();
+  person[firstname] = "Dave";
+  
+  console.log(person[firstname]); // prints Dave
+  
+  ///// or you can use /////
+  console.log(person.filename);  // prints Dave
+  ```
+  This will allow you to access the value in relating to the given property.
+  
+  #### Objects containing objects
+  ```
+  var person = new Object();
+  person.address = new Object();
+  person.address.street = "New Street";
+  
+  console.log(person.address.street); // prints New Street
+  
+  ///// or you can use /////
+  console.log(person["address"]["street"]);
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

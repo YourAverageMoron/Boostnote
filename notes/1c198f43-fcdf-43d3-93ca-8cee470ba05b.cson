@@ -1,0 +1,86 @@
+createdAt: "2019-05-12T15:47:48.869Z"
+updatedAt: "2019-05-15T07:26:41.286Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Types in JavaScript"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # Types in JavaScript
+  
+  ## Primitive types
+  There are 6 primitive types in JavaScript; a primitive type is a type of data that represents a single value.
+  It is not an object.
+  
+  #### undefined
+  Represent a lack of existence.
+  You shouldn't set a variable to this.
+  
+  #### NULL
+  Represents a lack of existence.
+  You can set a variable to this.
+  
+  #### BOOLEAN
+  Represents true or false.
+  
+  #### NUMBER
+  Represents a floating point number (there are always some decimals).
+  In JavaScript there is only one numeric type, this is different to most other programming languages such as int, long, or float etc.
+  You can fake the different number types.
+  
+  #### STRING
+  Represents a sequence of characters.
+  Can be specified using single quotes '' or double quotes "".
+  
+  #### SYMBOL
+  Represents a description for a variable, but is unique to the variable, e.g:
+  ```
+  console.log(Symbol("foo") === Symbol("foo"));; //will print false
+  ```
+  This is really useful as they allow you to create a predictable description and they create a unique value for it; this can prevent naming collisions.
+  Used in ES6, it isn't  fully supported by JS in all browsers.
+  
+  ---
+  
+  ## Dynamic typing
+  You dont need to tell the engine what type of data a variable holds, it figures it out while your code is running.
+  Variables can hold different types of values because it is figured out during execution.
+  
+  ---
+  
+  ## Coercion
+  Converting a value from one type to another.
+  ##### E.g:
+  ```
+  var a = 1 + "2";
+  console.log(a); // print "12"
+  ```
+  In this the 1 is coerced into a string which can be concatenated onto "2".
+  
+  You don't ask JavaScript to coerce values, it just does it for you instead of throwing an error.
+  
+  #### Existance and booleans
+  This is also useful when checking if a variable is defined
+  ##### E.g
+  ```
+  var a;
+  
+  /// some code that might set a to a value
+  
+  if(a){
+    console.log("a is defined")
+  }
+  ```
+  However if a equals 0 it will also return false, so you might want to try this:
+  ```
+  if(a || a === 0){
+    console.log("a is defined including zeroes")
+  }
+  ```
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

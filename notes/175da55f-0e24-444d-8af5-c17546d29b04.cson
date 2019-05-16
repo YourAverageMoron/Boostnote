@@ -1,0 +1,63 @@
+createdAt: "2019-04-28T09:55:19.298Z"
+updatedAt: "2019-04-29T06:52:45.256Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "The Execution Context - Creation and Hoisting"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # The Execution Context - Creation and Hoisting
+  
+  ## Execution context phases
+  
+  The execution context is created in two phases:
+  
+  #### Creation phase
+  This creates the global objext, 'this' and the outer enviroment.
+  It recognises where you have created functions and variables.
+  In this phase it sets up memory space for variable and functions, this is known as hoisting.
+  For functions the entire function is stored in memory. 
+  For variables it adds a placeholder (undefined); undefined is a special key word that means the value hasn't been set yet, it is technically a value and takes up physical memory.
+  
+  #### Execution phase
+  This runs your code line by line.
+  It will execute any functions that are called.
+  If variables are given a value it will set this in memory, bear in mind the variable will already exist in memory (created in creation phase) but this will assign it a new value.
+  
+  ##### Single threaded and syncronous
+  JavaScript executes commands one at a time and in the order it appears.
+  
+  ---
+  
+  ## Hoisting
+  
+  Variables and functions seem to be moved to the top by the JavaScript engine, for example:
+  
+  ```
+  foo();            // prints "this is a function"
+  console.log(a);   // prints undefined
+  console.log(b);   // throws an error (no such variable)
+  
+  var a = "a variable";
+  
+  function foo(){
+     console.log("this is a function");
+  }
+  ```
+  #### function (foo)
+  foo exists in memory at execution time, so when the code runs line by line they can be executed
+  
+  #### variable (a)
+  a is undefined because the space has been set aside for the variable, but it has not be allocated a value yet. 
+  
+  #### variable (b)
+  b has not been allocated space in memory and therefore cannot be found at runtime.
+  
+  ### Unreliable
+  You should not rely on hoisting in any way, you can often run into undefined variables.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

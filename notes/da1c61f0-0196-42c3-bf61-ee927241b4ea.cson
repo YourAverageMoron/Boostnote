@@ -1,0 +1,27 @@
+createdAt: "2019-04-27T22:14:05.008Z"
+updatedAt: "2019-04-28T09:55:16.386Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Global Object and Global Enviroment"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # Global Object and Global Enviroment
+  
+  ## Global
+  At its core global just means "**Not inside a function**".
+  
+  ---
+  
+  ## Global object
+  The global execution contentext creates a global object and a special variable called _**'this'**_.
+  The JavaScript engine creates these two things for you whenever your code it run because your code is wrapped inside an execution context. 
+  
+  When you create a variable or object and you are not in a function, these variables or objects get attached to the global object.
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
