@@ -1,5 +1,5 @@
 createdAt: "2019-05-25T13:31:12.330Z"
-updatedAt: "2019-05-25T16:00:38.585Z"
+updatedAt: "2019-05-25T17:15:30.624Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Function Overloading JavaScript"
@@ -12,7 +12,7 @@ content: '''
   
   ## Other languages
   You cannot overload a function in the same way as you would in other languages, e.g:
-  ```
+  ``` Java
   /// Java ///
   public void printInput(String s){
       System.out.println(s);

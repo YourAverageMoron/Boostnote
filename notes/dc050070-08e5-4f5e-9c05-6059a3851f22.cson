@@ -1,5 +1,5 @@
 createdAt: "2019-05-25T12:40:46.619Z"
-updatedAt: "2019-05-25T15:59:40.045Z"
+updatedAt: "2019-05-25T17:16:05.337Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Arguments and Spread"
@@ -18,7 +18,7 @@ content: '''
   It contains a list of all the values of all the values that you pass to a function.
   
   During the process of hoisting, memory space is allocated to each of the parameters in a function; this allows you to call a function with less arguments than a function requires, e.g:
-  ```
+  ``` js
   function foo(name){
       console.log("Hi " + name);
   }
@@ -31,7 +31,7 @@ content: '''
   ## Arguments are processed from left to right
   
   #### E.g
-  ```
+  ``` js
   function foo(firstname, lastname, age){
       console.log(
           firstname + " " + lastname + " " + age
@@ -52,7 +52,7 @@ content: '''
   JavaScript gives you a keyword that contains all of the arguments.
   
   ##### E.g.
-  ```
+  ``` js
   function foo(firstname, lastname, age){
       console.log(arguments);
   }
@@ -63,7 +63,7 @@ content: '''
   
   ##### More arguments than parameters:
   
-  ```
+  ``` js
   function foo(firstname, lastname, age){
       console.log(arguments);
   }
@@ -76,7 +76,7 @@ content: '''
   
   ## Spread parameter
   You can add a parameter starting with `...`, to create an array of all other arguments, e.g:
-  ```
+  ``` js
   function foo(firstname, lastname, age, ...other){
       console.log(other);
   }
