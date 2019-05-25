@@ -1,0 +1,113 @@
+createdAt: "2019-05-24T06:59:16.408Z"
+updatedAt: "2019-05-24T08:11:03.074Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "this"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # `this`
+  
+  This varies depending on how it is set up
+  
+  ## Global `this` object
+  `this` will be the `Window` object in the browser.
+  
+  ---
+  
+  ## Inside a simple function
+  ```
+  function a() {
+      console.log(this);
+  }
+  
+  a();
+  ```
+  In this case the `this` object is still `Window`; when creating a function in the global context enviroment, the function's `this` object will be the global object (`Window`).
+  
+  ##### This allows you to do some cool stuff like this:
+  
+  ```
+  function a() {
+      this.newVariable = "Woooo";
+  }
+  
+  a();
+  
+  console.log(newVariable) // Woooo
+  ```
+  This assumes that you are looking for a new variable on the global object.
+  
+  ---
+  
+  ## Inside an object method
+  ```
+  var a = {
+      name: "Some object",
+      log: function() {
+          console.log(this);
+      }
+  }
+  
+  c.log(); // { name: "Some object", log: function}
+  ```
+  In the case that the function is a method attached to an object, the this keyword becomes the object that the method is sitting inside of.
+  
+  ##### So you can change properties on the parent object e.g:
+  ```
+  var a = {
+      name: "Some object",
+      log: function() {
+          this.name = "Another name!!!"
+          console.log(this);
+      }
+  }
+  
+  c.log(); // { name: "Another name!!!", log: function}
+  ```
+  _Notice that `c.name` has changed in the log message._
+  
+  ---
+  
+  ## Function inside an object method
+  ```
+  var a = {
+      name: "Some object",
+      log: function() {
+          var newFunction = function(newName){
+              this.name = newName;
+          }
+          setName("ANOTHER NAME");
+          console.log(this);
+      }
+  }
+  a.log(); // { name: "Some object", log: function}
+  
+  console.log(this.name) // ANOTHER NAME
+  ```
+  In this case the internal function points to the global object, this is often regarded as a bug by many developers.
+  
+  ##### How to make sure that you use the correct object:
+  ```
+  var a = {
+      name: "Some object",
+      log: function() {
+          var self = this; 
+          var newFunction = function(newName){
+              self.name = newName;
+          }
+          setName("ANOTHER NAME");
+          console.log(self);
+      }
+  }
+  a.log(); // { name: "ANOTHER NAME", log: function}
+  ```
+  Self is pointing at the same place as `this` for log (`this` for log is pointing to the c object), this is because objects are interacted with by reference.
+  This just means that you dont have to worry about the `this` pointing at different places, `self` will always point at the same object.
+  When we reach `self.name = newName;` the variable `self` isn't actually defined in the function, but the JavaScript engine will look down the scope change and as self is defined directly outside of the functions lexical envioment it will be picked up.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,67 @@
+createdAt: "2019-05-24T08:29:36.647Z"
+updatedAt: "2019-05-25T10:55:59.797Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Builder Pattern"
+tags: [
+  "Design_Patterns"
+  "Computer_Science"
+  "TODO"
+]
+content: '''
+  # Builder Pattern
+  
+  ## Intent
+  Builder is a creational design pattern that lets you construct complex objects step by step. The pattern allows you to produce different types and representation of an object using the same construction code.
+  
+  ---
+  
+  ## Problem it solves
+  
+  When you want to create complex objects that requre labourous step-by-step initialization of many fields and nested objects.
+  Often this type of code is burried in one large consructor with lots of perameters.
+  
+  ##### E.g
+  If you are building a House class, which then create a set of subclasses to cove all combinations of the parameters. This may lead to a load of different subclasses and new parameters will require you to grow the hierachy even more.
+  
+  The other aproach to that doesn't require you to breed subclasses is to create a giant constructor with all the possible parameters to control the house objct. This can look pretty grim:
+  ```
+  House(windows, doors, rooms,hasGarage, hasSwimPool, gardenSize, hasStatue, ....);
+  
+  new house(2, 4, 5, null, null, 21, ...)
+  new house(3, 4, 3, true, true, null, ...)
+  ```
+  In a lot of cases parameters are unused, e.g not many houses have swimming pools.
+  
+  ---
+  
+  ## Structure
+  
+  ### Builder interface
+  Declares the product construction steps that are common to all builders.
+  
+  ### Concrete builder
+  Provides different implementations of the construction steps. 
+  Concrete builders may produce products that don't follow the common interface.
+  
+  ### Products
+  These are the resulting objects.
+  Products constructed by different builders dont have to belong to the same class, hierachy or interface.
+  
+  ### Director
+  Defines the order in which to call construction steps.
+  This allows you to create and reuse specific configurations of products.
+  
+  ### Client
+  Must associate one of the builder objects with the director. 
+  Usually, it's done just once, via parameters of the director's constructor.
+  Then the director uses that builder object for all further construction.
+  However, there's an alternative approach for when the client passes the builder object to the production method of the director. In this case, you can use a different builder each time you produce something with the director.
+  
+  ![a14cf7a9.png](:storage\\a31a5f1e-8eda-4b69-89ef-8e2fc638eb48\\a14cf7a9.png)
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

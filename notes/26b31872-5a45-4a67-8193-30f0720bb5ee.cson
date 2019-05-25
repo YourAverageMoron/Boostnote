@@ -1,0 +1,66 @@
+createdAt: "2019-05-24T05:54:30.629Z"
+updatedAt: "2019-05-24T06:47:46.012Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "By Value vs By Reference in JavaScript"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # By Value vs By Reference in JavaScript
+  
+  ## Primative types interact by value
+  If you set two variables equal to each other, the new varialbe will copy the value into a new space in memory, e.g:
+  ```
+  var a = "Dave";
+  
+  var b = "Bob";
+  
+  b = 10;
+  
+  console.log(b); // "Dave"
+  console.log(a);  // "Bob"
+  ```
+  ![f3684fcc.png](:storage\\26b31872-5a45-4a67-8193-30f0720bb5ee\\f3684fcc.png)
+  
+  ---
+  
+  ## Objects interact by reference
+  Two variable names can point to the same place in memory, e.g:
+  ```
+  var a = {
+    name: "Dave",
+    age: 31
+  }
+  
+  var b = a;
+  b.age = 10
+  
+  console.log(b.age);  //10
+  console.log(a.age);  //10
+  ```
+  `a` and `b` point at the same object, this means that if you change a property of b, you will also change the property for `a`.
+  
+  ![e1d07856.png](:storage\\26b31872-5a45-4a67-8193-30f0720bb5ee\\e1d07856.png)
+  
+  This also occurs when passing objects as parameters:
+  ```
+  var a = {
+    name = "Dave";
+  }
+  var b = a;
+  
+  function changeObject(obj){
+    obj.name = "Alan";
+  }
+  
+  changeObject(b);
+  
+  console.log(a); // Alan
+  console.log(b); // Alan
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

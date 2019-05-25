@@ -1,0 +1,97 @@
+createdAt: "2019-05-19T02:50:30.171Z"
+updatedAt: "2019-05-23T07:31:05.729Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Functions in JavaScript"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # Functions in JavaScript
+  
+  ## Functions are objects
+  ### First class functions
+  Everything you can do with other types (such as objects, boolean, strings, etc.) you can do with functions.
+  
+  _E.g you can assign them as variables, pass them as arguments, create them on the fly._
+  
+  
+  ---
+  
+  ## Unique properties for functions
+  #### Name
+  Each function can have a name, however it is not required.
+  Functions without names are known as anonymous functions.
+  
+  #### Code property
+  The code that is partof the function is stored in a special property of the function object.
+  Therefore the code you write inside a funciton is not the actual function itself, the function is an object with properties and the code you write is just another property.
+  ###### Invocable
+  The reason why the code property is special is the fact that it is invocable, this means that you can ask for the code within it to be run.
+  
+  ---
+  
+  ## Function expressions and statements
+  
+  ### Expression
+  An expression is a unit of code that results in a value.
+  _**Note** - It doesn't have to save to a variable._
+  
+  ### Statement
+  This is just a unit of code that does work.
+  
+  ### E.g:
+  `a === 3` is an expression
+  Whereas the if is a statement
+  ```
+  var a = 3;
+  
+  if(a === 3){
+    
+  }
+  ```
+  
+  ### Function statement
+  ##### E.g
+  ```
+  function greet() {
+    console.log("Hi!");
+  }
+  
+  greet();
+  ```
+  This doesn't return a value, it just does work (in this case `console.log("Hi!")`).
+  
+  ### Function expression
+  ##### E.g
+  ```
+  var greet = function() {
+    console.log("Hi!");
+  }
+  
+  greet();
+  ```
+  As functions are objects, you can set variables equal to an object, so the point in memory that the variable points to will contain a function object.
+  This is known as an anonymous function.
+  It is an expression as it results in a function object.
+  
+  **Remember** - This will not be hoisted, the variable greet will not be executable before the is set to the function, it will be undefined.
+  
+  #### Passing a function as an argument
+  ```
+  function callAnotherFunction(a){
+    a()
+  }
+  
+  callAnotherFunction( function() {
+    console.log("Hi");
+  });
+  ```
+  This will print `Hi`.
+  Because functions are just objects, they can be passed into other functions!
+  This is similar to how you could use lambdas.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

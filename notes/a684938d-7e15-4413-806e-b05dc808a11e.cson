@@ -1,9 +1,12 @@
 createdAt: "2019-05-16T07:38:58.890Z"
-updatedAt: "2019-05-16T08:05:53.995Z"
+updatedAt: "2019-05-19T02:49:46.781Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Objects in JavaScript"
-tags: []
+tags: [
+  "Computer_Science"
+  "JavaScript"
+]
 content: '''
   # Objects in JavaScript
   
@@ -44,6 +47,122 @@ content: '''
   ///// or you can use /////
   console.log(person["address"]["street"]);
   ```
+  
+  ---
+  
+  ## Object literals
+  This is a shorthand version of creating an object, e.g
+  
+  ```
+  // Instead of using
+  var person = new Object();
+  
+  // Use this
+  var persion = {};
+  ```
+  The JavaScript engine when it encounters the brace in this context (and not when it is used for a if or a loop etc) assumes that you are creating a new object.
+  
+  #### Initialising an object
+  ```
+  var person = {
+    firstname : "Dave",
+    age : 31,
+    address : {
+      street : "New Street"
+    }
+  };
+  ```
+  This is just a quicker way of creating an object, there is no difference between creating an object with literals and when using `new Object()`.
+  
+  #### Creating objects on the fly using literals
+  ```
+  function greet(person) {
+    console.log("Hi " + person.firstname);
+  }
+  
+  greet({
+    fistname: "Dave", 
+    Age : 31
+  })
+  ```
+  
+  ---
+  
+  ## Faking namespaces
+  ### Namespaces
+  Namespaces are containers for variables and functions.
+  _Typically used the keep variables and functions with the same namespace seperate._
+  
+  ### Using objects to fake namespaces
+  ##### E.g without namespaces:
+  ```
+  var greet = "Hello";
+  var greet = "Hola";
+  
+  console.log(greet); // prints Hola
+  ```
+  But what if you wanted to switch between the languages, maybe there is a file for each language that define the strings.
+  
+  ##### Creating a name space with an object:
+  ```
+  var english = {};
+  var spanish = {};
+  
+  english.greet = "Hello";
+  spanish.greet = "Hola";
+  
+  console.log(english.greet);
+  ```
+  You can create these namespaces as deep as you want, for instance you could have a sub section for greetings:
+  ```
+  var english = {};
+  
+  english.greetings = {
+    basic = "Hello",
+    other = "Hi"
+  };
+  ```
+  
+  ---
+  
+  ## JSON (JavaScript object notation)
+  
+  This is inspired by object literal synax, but it is **NOT** the same!
+  
+  JSON was designed to replace XML as the primary way of sending data across the internet as it is much more efficient.
+  
+  You create a string that has the same structure as a JavaStript object.
+  
+  #### Difference
+  
+  ###### Properties have to be in quotes
+  Properties are wrapped in quotes in JSON where as they do not not in JS, e.g:
+  ```
+  // JSON
+  {
+    "name" : "Dave"
+  }
+  ```
+  Notice `name` is in quotes.
+  However it is completely valid JavaScript as well, you can choose to wrap properties in quotes in JS or leave them without; but in JSON you must use quotes.
+  
+  JSON is a subset of JS object literal syntax, any valid JSON is valid JS, but not vice versa.
+  
+  #### Stringify and parsing
+  ```
+  var object = {
+    firstname : "Dave",
+    age : 31
+  };
+  
+  console.log(JSON.stringify(object)); // prints a JSON version of the object
+  
+  var jsonParsed = JSON.parse("{"firstname" : "Dave","age" : 31}");
+  
+  console.log(jsonParsed);  // prints an object version of the JSON
+  ```
+  _**NOTE** - Stringify adds quotes to property names, so you don't have to worry about that if you didn't add them._
+  
 '''
 linesHighlighted: []
 isStarred: false

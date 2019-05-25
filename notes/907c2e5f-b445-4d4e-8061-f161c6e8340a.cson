@@ -1,5 +1,5 @@
 createdAt: "2019-05-07T10:20:55.467Z"
-updatedAt: "2019-05-15T08:28:40.882Z"
+updatedAt: "2019-05-23T15:56:37.817Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Abstract Factory"
@@ -35,7 +35,7 @@ content: '''
   
   ---
   
-  ## Overview
+  ## Structure
   
   #### Abstract products
   Interfaces for a set of distinct but related products
@@ -49,7 +49,210 @@ content: '''
   #### Concrete factories
   Implement the creation methods of the abstract factory. Each concrete factory corresponds to a specific variant of product and creates products of that variant.
   
-  #### 
+  #### Wrapping the parts together
+  Although concrete factories instantiate croncrete products, signatures of their creation mehtods must return corresponding abstract products. This way the client code that uses a factory doesn't get coupled to the specific variant of the product it gets from a factory. The client can work with any concrete factory/product variant, as long as it communicates with their objects via abstract interfaces.
+  
+  ![5ff83ec5.png](:storage\\907c2e5f-b445-4d4e-8061-f161c6e8340a\\5ff83ec5.png)
+  
+  ---
+  
+  ## Applicibility
+  
+  You can use an abstract factory when your code needs to work with various families of related products, but you dont want to depend on the concrete classes of those products.
+  The classes could be unknown before the initial creation of code, abstract factories allow for future extensibility.
+  
+  They provide you with an interface for creating object from each class of product family. As long as your code creates objects via this interface, you dont have to worry about creating the wring variant of the product which doesnt match th eproducts already created in the app.
+  
+  - Consider implementing an abstract factory when you have a class with a set of factory methods that blur its promary responsibility.
+  - In a well defined program each class is responsible for one _thing_. When a class deals with multiple product types, it may be worth extracting its factory methods into a stand-alone factory class or a full-blown abstract factory implementation.
+  
+  ---
+  
+  ## How to implement
+  1. Map out a matrix of distinct product types versus variants of these products.
+  2. Declare abstract product interfaces for all product types. Then make all concrete product classes implement these interfaces.
+  3. Declare the abstract factory interface with a set of creation methods for all abstract produts.
+  4. Implement a set of concrete factory classes, one for each product variant.
+  5. Create factory initialization code somewhere in the app. It should instantiate one of the concrete factory classes, depending on the applicaion configuration or the current enviroment. Pass this factory object to all classes that construct products.
+  6. Scanthrough the code and find all ddirect call to product constructors. Replace them with calls to the appropriate creation method on the factory object.
+  
+  ---
+  
+  ## Pros and Cons
+  
+  #### Pros
+  - You can be sure that the products you are getting from a factory are compatible with each other.
+  - You avoid tight coupling between concrete producta and client code.
+  - Single responsibility principle, you can extract the product creation code into one place, making the code easier to support.
+  - Open/closed principle, you can introduce new variants of products without breaking existing client code.
+  
+  #### Cons
+  - The code may become more complicated than it should be, since a lot of new interfaces are introduced along with the pattern.
+  
+  ---
+  
+  ## Simple example
+  
+  ### Abstract products
+  ##### Abstract product 1
+  ```
+  /**
+   * Defines the methods that this product needs to implement
+   */
+  public interface AbstractProduct1 {
+      String method1Product1();
+      String method2Product1();
+  }
+  ```
+  ##### Abstract product 2
+  ```
+  /**
+   * Defines the methods that this product needs to implement
+   */
+  public interface AbstractProduct2 {
+      String method1Product2();
+      String method2Product2();
+  }
+  ```
+  
+  ### Concrete products
+  ##### Concrete product 1A
+  ```
+  /**
+   * This is the concrete product that implements AbstractProduct1 and will be created by ConcreteFactoryA
+   */
+  public class ConcreteProd1A implements AbstractProduct1 {
+  
+      public String method1Product1() {
+          return "This is method 1 for product 1 for factory a";
+      }
+  
+      public String method2Product1() {
+          return "Aaaaa this is getting confusing 1 A 2 A 3";
+      }
+  }
+  ```
+  ##### Concrete product 1B
+  ```
+  /**
+   * This is the concrete product that implements AbstractProduct1 and will be created by ConcreteFactoryB
+   */
+  public class ConcreteProd1B implements AbstractProduct1 {
+      public String method1Product1() {
+          return "Prod 1 for factory b";
+      }
+  
+      public String method2Product1() {
+          return "ARRRR HELP!!!";
+      }
+  }
+  ```
+  ##### Concrete product 2A
+  ```
+  /**
+   * This is the concrete product that implements AbstractProduct2 and will be created by ConcreteFactoryA
+   */
+  public class ConcreteProd2A implements AbstractProduct2 {
+  
+      public String method1Product2() {
+          return "This is method 1 for product 2 for factory A";
+      }
+  
+      public String method2Product2() {
+          return "Still pretty confusing";
+      }
+  }
+  ```
+  ##### Concrete product 2B
+  ```
+  /**
+   * This is the concrete product that implements AbstractProduct2 and will be created by ConcreteFactoryB
+   */
+  public class ConcreteProd2B implements AbstractProduct2 {
+      public String method1Product2() {
+          return "Prod 2 for factory b";
+      }
+  
+      public String method2Product2() {
+          return "ARRRR HELP!!!";
+      }
+  }
+  ```
+  
+  ### Abstract factory interface
+  ```
+  /**
+   * Defines the products that factories need to create
+   */
+  public interface AbstractFactory {
+      AbstractProduct1 createProd1();
+      AbstractProduct2 createProd2();
+  }
+  ```
+  
+  ### Concrete factory A
+  ```
+  /**
+   * Factory that creates products of type A
+   */
+  public class ConcreteFactoryA implements AbstractFactory{
+  
+      public AbstractProduct1 createProd1() {
+          return new ConcreteProd1A();
+      }
+  
+      public AbstractProduct2 createProd2(){
+          return new ConcreteProd2A();
+      }
+  }
+  ```
+  
+  ### Concrete factory B
+  ```
+  /**
+   * Factory that creates products of type A
+   */
+  public class ConcreteFactoryB implements AbstractFactory{
+  
+      public AbstractProduct1 createProd1(){
+          return new ConcreteProd1B();
+      }
+  
+      public AbstractProduct2 createProd2(){
+          return new ConcreteProd2B();
+      }
+  }
+  ```
+  
+  ### Demo
+  ```
+  public class Demo {
+  
+     private static AbstractFactory factory;
+     private static AbstractProduct1 product1;
+      private static AbstractProduct2 product2;
+  
+      public static void main(String[] args){
+          /////////// Factory A /////////////
+          factory = new ConcreteFactoryA();
+  
+          product1 = factory.createProd1();
+          System.out.println(product1.method1Product1());
+  
+          product2 = factory.createProd2();
+          System.out.println(product2.method1Product2());
+  
+          ///////////// Factory B //////////////
+          factory = new ConcreteFactoryB();
+  
+          product1 = factory.createProd1();
+          System.out.println(product1.method1Product1());
+  
+          product2 = factory.createProd2();
+          System.out.println(product2.method1Product2());
+      }
+  }
+  ```
 '''
 linesHighlighted: []
 isStarred: false
