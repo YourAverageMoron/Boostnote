@@ -1,0 +1,39 @@
+createdAt: "2019-05-25T13:31:12.330Z"
+updatedAt: "2019-05-25T16:00:38.585Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Function Overloading JavaScript"
+tags: [
+  "Computer_Science"
+  "JavaScript"
+]
+content: '''
+  # Function Overloading JavaScript
+  
+  ## Other languages
+  You cannot overload a function in the same way as you would in other languages, e.g:
+  ```
+  /// Java ///
+  public void printInput(String s){
+      System.out.println(s);
+  }
+  
+  public void printInput(String s1 , String s2){
+      System.out.println(s1 + " , " + s2);
+  }
+  
+  printInput("String"); // String
+  printInput("String", "Another String"); String , Another String
+  ```
+  This allows you to create a function that accepts different numbers, or different types of parameter and handle the difference accordingly by defining a new function with the same name.
+  
+  ---
+  
+  ## In JavaScript
+  You cannot do conventional overloading in JavaScript as functions are objects.
+  
+  But there is no real need to overload in JS as you can add the logic to the function; this is possible becuase JS is so flexible with parameters.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

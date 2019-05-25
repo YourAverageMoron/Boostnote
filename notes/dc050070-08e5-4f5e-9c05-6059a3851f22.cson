@@ -1,0 +1,89 @@
+createdAt: "2019-05-25T12:40:46.619Z"
+updatedAt: "2019-05-25T15:59:40.045Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Arguments and Spread"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # Arguments and Spread
+  
+  An argument is just a value that is passed between programs, subroutine or functions.
+  
+  ## Setup of parameters and arguments
+  In JavaScript arguments are created as part of the execution context of a function.
+  
+  It contains a list of all the values of all the values that you pass to a function.
+  
+  During the process of hoisting, memory space is allocated to each of the parameters in a function; this allows you to call a function with less arguments than a function requires, e.g:
+  ```
+  function foo(name){
+      console.log("Hi " + name);
+  }
+  
+  foo(); // Hi undefined
+  ```
+  
+  ---
+  
+  ## Arguments are processed from left to right
+  
+  #### E.g
+  ```
+  function foo(firstname, lastname, age){
+      console.log(
+          firstname + " " + lastname + " " + age
+      );
+  }
+  
+  foo(); // undefined undefined undefined
+  foo("Dave"); // Dave undefined undefined
+  foo("Dave", "Smith"); // Dave Smith undefined
+  foo("Dave", "Smith", 31); // Dave Smith 31
+  ```
+  
+  This can be really useful when you take into account ES6 default parameters as you will be able to call functions without needing to provide parameters!
+  
+  ---
+  
+  ## Arguments keyword
+  JavaScript gives you a keyword that contains all of the arguments.
+  
+  ##### E.g.
+  ```
+  function foo(firstname, lastname, age){
+      console.log(arguments);
+  }
+  
+  foo("Dave", "Smith", 31); // ["Dave", "Smith", 31]
+  ```
+  So this returns an array-like object, it is **NOT** a regular JavaScript array (it lacks some functionality of normal arrays).
+  
+  ##### More arguments than parameters:
+  
+  ```
+  function foo(firstname, lastname, age){
+      console.log(arguments);
+  }
+  
+  foo("Dave", "Smith", 31, 4); // ["Dave", "Smith", 31, 4]
+  ```
+  Using the arguments array you can access arguments that aren't specified when writing the function.
+  
+  ---
+  
+  ## Spread parameter
+  You can add a parameter starting with `...`, to create an array of all other arguments, e.g:
+  ```
+  function foo(firstname, lastname, age, ...other){
+      console.log(other);
+  }
+  
+  foo("Dave", "Smith", 31, 4, "woo"); // [4, "woo"]
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

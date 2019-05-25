@@ -1,5 +1,5 @@
 createdAt: "2019-05-25T10:57:38.611Z"
-updatedAt: "2019-05-25T10:59:34.845Z"
+updatedAt: "2019-05-25T12:40:31.282Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Arrays in JavaScript"
@@ -10,6 +10,41 @@ tags: [
 content: '''
   # Arrays in JavaScript
   
+  ## Array
+  An array is a collection of things
+  ##### E.g
+  ```
+  var arr = new Array();
+  
+  /// or ///
+  
+  var arr = [1, 2, 3]; 
+  
+  console.log(arr[0]); // 1
+  ```
+  
+  ---
+  
+  ## Contain multiple types
+  As JS is dynamically typed arrays can contain multiple types.
+  
+  ##### E.g
+  ```
+  var arr = [1, 
+      false, 
+      "Woo",
+      {
+          name: 'Dave',
+          address: '1 street'
+      },
+      function(name){
+          console.log("Hello " + name);
+      }
+  ];
+  
+  arr[4](arr[3].name) // Hello Dave
+  ```
+  _**Note** - invoking a function like this is probably a little bit grim to use in reality, but i just did it to prove a point._
 '''
 linesHighlighted: []
 isStarred: false

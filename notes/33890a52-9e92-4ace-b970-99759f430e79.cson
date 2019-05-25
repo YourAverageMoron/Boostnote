@@ -1,5 +1,5 @@
 createdAt: "2019-04-23T18:36:49.620Z"
-updatedAt: "2019-04-27T19:29:03.319Z"
+updatedAt: "2019-05-25T16:47:45.614Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Syntax parsers, execution contexts, lexical enviroment"
@@ -12,10 +12,57 @@ content: '''
   
   ## Syntax parser
   
+  This goes through the code character by character, e.g if it sees an an `r` it might expect a return statement and expext it to be followed by an `e` and so on; but if there is a character it doesn't expect, it will throw an error; if it sees what it expects as valid syntax it will continue until it reaches an ending character such as a `;`.
+  It can make changes to code before it is executed, it decides what you intending to do. 
+  
+  #### Automatic semi-colon insertion
+  **Be really careful of this**
+  JavaScript will try to complete parts of your code that it thinks you have written wrong, one instance of this is it will try to add semi-colons to the end of lines.
+  
+  It may sometimes see a carage return in certain places, and insert a semi-colon for you; this is why semi-colons are "optional", not because you don't need them, it is because the engine will insert them for you.
+  
+  But you should always put in your own semi-colons as you want to be certain that lines are ending where you expect them to.
+  
+  ##### Big problem with automatic semi-colon insertion
+  ``` JavaScript
+  function getPerson(){
+  
+      return 
+      {
+          name: "Dave"
+      };
+  }
+  
+  console.log(getPerson()); // prints "undefined"
+  ```
+  
+  This is because the the engine will see the `return` keyword and that there is nothing else on that line, it will automatically insert a semi-colon.
+  This mean that the engine will never reach the object.
+  
+  To fix this:
+  
+  ``` JavaScript
+  function getPerson(){
+      return {
+          name: "Dave"
+      };
+  }
+  
+  console.log(getPerson()); // prints "{name:'Dave'}"
+  ```
+  
+  This works because it reads return, but then it reads the curly bracket which signifies that we are defining an object literal.
+  
+  This is why you should always put braces on the same line, just to be safe.
+  
+  ---
+  
   ### Definition
+  
   A program that reads your code and determines what it does and if the grammar is valid.
   
   ### Overview
+  
   You have your code, this code is translated into computer readable language, this is done by a compiler or interpreter.
   
   The syntax parser works as an interpreter between the code and the computer, it translates JS code into machine code.
@@ -27,6 +74,7 @@ content: '''
   ## Execution contexts
   
   ### Definition
+  
   A wrapper to help manage the code that is running.
   
   _**Note** - There are a lot of lexical envroments. Which one is currently running is managed via execution contexts. It can contain things beyond the code you have written.
@@ -36,10 +84,15 @@ content: '''
   ## Lexical enviroment
   
   ### Definition
+  
   Where something sites physically in the code you write.
   
   _**Lexical** - means having to do with words or grammar. A lexical enviroment exist in programming languages in which the location of code is important._
 '''
-linesHighlighted: []
+linesHighlighted: [
+  11
+  8
+  37
+]
 isStarred: false
 isTrashed: false
