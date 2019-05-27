@@ -1,0 +1,80 @@
+createdAt: "2019-05-25T17:42:01.863Z"
+updatedAt: "2019-05-26T05:48:01.361Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Immediately Invoked Function Expressions"
+tags: [
+  "Computer_Science"
+  "JavaScript"
+]
+content: '''
+  # Immediately Invoked Function Expressions
+  
+  ## Overview
+  This allows you to invoke (call) a function straight after defining a function expression, e.g:
+  ```js
+  var greeting = function(name){
+    return 'Hello ' + name;
+  }('Dave');
+  
+  console.log(greeting); // Hello Dave
+  ```
+  
+  ---
+  
+  ## Problems with syntax parsers
+  If you attempt to run an immediately invoked function expression on its own the syntax parser may get sad, e.g:
+  ```js
+  function(name){
+    console.log("Hello " + name);
+  }("Dave");
+  ```
+  
+  This results in a `Uncaught SyntaxError: Unexpected token (`.
+  The reason for this is that the syntax parser expexts a function statement, not a function expression.
+  
+  A way to solve this is to add something to the line before the function expression, this can be almost any vaid syntax.
+  Most people use () surrounding the function expression, e.g:
+  
+  ```js
+  (function(name){
+    console.log("Hello " + name);
+  }("Dave"));
+  ```
+  
+  ---
+  
+  ## Why are they useful?
+  When an immediately invoked function expression is called it will create a new execution context (it's just a function). This will have many safety benifits
+  Such as having its own variable enviroment, this prevents variables from creeping into other sections of code and sometimes colliding:
+  ```js
+  var greeting = "Hola";
+  
+  (function(name){
+    var greeting = "Hello ";
+    console.log(greeting + name); // Hello Dave
+  }('Dave'));
+  
+  console.log(greeting); // Hola
+  ```
+  
+  A lot of frameworks use this to the extreme to ensure that their code is safe.
+  They will wrap an entire file with a function, this means that if a variable name is used elsewhere, it will not inteterfere with their code.
+  
+  ###### But what if you want access to the global object?
+  
+  ```js
+  var greeting = "Hola";
+  
+  (function(global, name){
+    var greeting = "Hello ";
+    global.greeting = greeting;
+    console.log(greeting + name); // Hello Dave
+  }(window, 'Dave'));
+  
+  console.log(greeting); // Hello
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

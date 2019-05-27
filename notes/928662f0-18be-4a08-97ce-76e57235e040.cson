@@ -1,0 +1,197 @@
+createdAt: "2019-05-26T05:48:09.558Z"
+updatedAt: "2019-05-27T15:05:26.811Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Closures in JavaScript"
+tags: [
+  "Computer_Science"
+  "JavaScript"
+]
+content: '''
+  # Closures in JavaScript
+  
+  ## Introduction
+  ```js
+  function greet(whatToSay){
+    return function(name) {
+      console.log(whatToSay + " " + name);
+    };
+  }
+  
+  greet("Hi")("Dave"); // Hi Dave
+  ```
+  
+  This gets really weird if you set greet to a variable:
+  
+  ```js
+  function greet(whatToSay){
+    return function(name) {
+      console.log(whatToSay + " " + name);
+    };
+  }
+  
+  var sayHi = greet("Hi");
+  sayHi("Dave"); // Hi Dave
+  ```
+  In this case, how does the sayHi still know what the whatToSay variable is? You might expect greet to have run on the `var sayHi = greet("Hi");` line; this will create a new execution context, run the greet code, return an anonymous function and then the execution context for greet will be removed from the execution stack. But in this case what has happened to the enviroment variable whatToSay?
+  
+  #### What is actually happening?
+  Then the function `greet` is called, it creates a new execution context which is added to the stack. Thie code in the function `greet` is run and returns a function object, the execution context is then popped off of the stack.
+  Although the execution context has been removed from the stack, it still exists in memory (this would be cleaned up at some point by garbage collection).
+  When the function that `sayHi` is pointing at is envoked it will create a new execution context.
+  When we reach the line `console.log(whatToSay + " " + name);` it will go up the scope chain to find `whatToSay`. 
+  The function that sayHi is pointing to greet as its outer lexical enviroment, even though the execution context for greet has been popped off of the stack.
+  
+  ---
+  
+  ## Example
+  ```js
+  function buildFunctions() {
+    var arr = [];
+    
+    for (var i=0; i < 3; i++) {
+      arr.push(
+        function() {
+          console.log(i);
+        }
+      );
+    }
+    return arr;
+  }
+  
+  var fs = buildFunctions();
+  
+  fs[0]();  // 3
+  fs[1]();  // 3
+  fs[2]();  // 3
+  ```
+  This may seem a bit weird but it makes sense when you think about it.
+  
+  The for loop will run and push the functions to the array, but it will finish when `i=3` (this is because i is not less than three); `i` will remain 3. The rest of buildFunctions is run, the array is returned then the buildFunctions execution is popped off of the stack.
+  When each of the `fs` functions are envoked they will look inside of its own execution context then when it cant find `i` it will go up the scope chain to buildFunctions and find that `i = 3`.
+  
+  #### How to get this to work
+  
+  ##### With ES6 `let`
+  ```js
+  function buildFunctions() {
+    var arr = [];
+    
+    for (var i=0; i < 3; i++) {
+      let j = i; // this is scoped to the block
+      arr.push(
+        function() {
+          console.log(j);
+        }
+      );
+    }
+    return arr;
+  }
+  
+  var fs = buildFunctions();
+  
+  fs[0]();  // 0
+  fs[1]();  // 1
+  fs[2]();  // 2
+  ```
+  Each time the for loop runs and creates a new variable j, it will create a new variable in memory which is only scoped within the for loop; this means that each loop will not be able to access a previouly created value for j. This means that there will be 3 segmented, seperately scoped variables.
+  
+  So when when the each of fs functions are evoked, they will find their individual versions of j.
+  
+  ##### Without ES6 `let` using immediately invoked function expression
+  ```js
+  function buildFunctions() {
+    var arr = [];
+    
+    for (var i=0; i < 3; i++) {
+      arr.push(
+        (function(j) {
+          return function(){
+            console.log(j);
+          }
+        }(i))
+      );
+    }
+    return arr;
+  }
+  
+  var fs = buildFunctions();
+  
+  fs[0]();  // 0
+  fs[1]();  // 1
+  fs[2]();  // 2
+  ```
+  We wrap the returned function in an immediately invoked function expression; so each time we push a new function to the array we create a new execution context for the IIFE which sits outside the returned function.
+  This means that when we look down the scope chain we reach the IIFE and find that i.
+  
+  ---
+  
+  ## Function factories
+  ```js
+  function makeGreeting(language){
+    return function(name){
+      if(language === `en`){
+        console.log(`Hello ` + name);
+      }
+      if(language === `es`){
+        console.log('Hola ' + name);
+      }
+    }
+  }
+  
+  var greetEnglish = makeGreeting('en');
+  var greetSpanish = makeGreeting('es');
+  
+  greetEnglish('Dave'); // Hello Dave
+  greetSpanish('Dave'); // Hola Dave
+  ```
+  This works becuase the language is closed up into the makeGreeting execution context which can still be accessed the greetEnglish or the greetSpanish functions.
+  
+  But there will be different execution contexts for makeGreeting when it is envoked by `var greetEnglish = makeGreeting('en');` and `var greetSpanish = makeGreeting('es');`, this means that the closed language values will be different for greetEnglish and greetSpanish. 
+  
+  This allows you to specify some values to manipulate the initial creation of a function, but you will not need to specify that value each time you use a function.
+  
+  ---
+  
+  ## Closures and callbacks
+  
+  ```js
+  function sayHiLater() {
+    var greeting = 'Hi';
+    
+    setTimeout(function() {
+      console.log(greeting);
+    }, 3000);
+  }
+  
+  sayHiLater();
+  ```
+  So we are passing in a function object and a time to setTimeout.
+  The sayHiLater will finish and its execution context will be popped off the stack; but setTimeout will run asyncrounously in the browser.
+  So when the event call the anonymous function expression, it tries to find greeting but it is not there so it looks up the scope chain and finds greeting in sayHiLater.
+  
+  #### Callback
+  A function that you give to another function, to be run when the other function is finished.
+  So the function you call, 'calls back' by calling the function you gave it when it finishes.
+  
+  ###### E.g.
+  
+  ```js
+  function tellMeWhenDone(callback){
+    var something = "something"; //some work
+    
+    callback(); // the callback runs the function that you gave it
+  }
+  
+  tellMeWhenDone(function() {
+    console.log("done");
+  })
+  
+  tellMeWhenDone(function() {
+    console.log("done another time");
+  })
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

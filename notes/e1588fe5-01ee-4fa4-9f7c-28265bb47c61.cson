@@ -1,0 +1,104 @@
+createdAt: "2019-05-27T16:58:10.076Z"
+updatedAt: "2019-05-27T20:44:47.470Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Functional Programming in JS"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+  "Functional_Programming"
+]
+content: '''
+  # Functional Programming in JS
+  
+  This is written in a non-functional way
+  ```js
+  var arr1 = [1,2,3];
+  console.log(arr1);
+  
+  var arr2 = [];
+  for (var i=0; i < arr1.length; i++){
+    arr2.push(arr1[i]*2);
+  }
+  console.log(arr2); // [2, 4, 6]
+  ```
+  
+  However writing this functionally, we may be able to reduce the amount of code.
+  
+  ```js
+  function mapForEach(arr, fn){
+    var newArr = []
+    for (var i=0; i < arr1.length; i++){
+      newArr.push(
+        fn(arr1[i])
+      );
+    }
+    return newArr;
+  }
+  
+  var arr1 = [1,2,3];
+  
+  var arr2 = mapForEach(arr1, function(val) {return val*2});
+  
+  console.log(arr2); // [2, 4, 6]
+  
+  var arr3 = mapForEach(arr1, function(val) {return val > 2});
+  console.log(arr3); // false false true
+  ```
+  
+  This is super useful as it allwos you to pass in any function you like, as shown for `arr3`.
+  
+  You can use bind to make this even more powerful:
+  ```js
+  function mapForEach(arr, fn){
+    var newArr = []
+    for (var i=0; i < arr1.length; i++){
+      newArr.push(
+        fn(arr1[i])
+      );
+    }
+    return newArr;
+  }
+  
+  function checkPassedLimit(limiter, val){
+    return val > limiter; 
+  }
+  
+  var arr1 = [1,2,3];
+  
+  
+  var arr3 = mapForEach(arr1, checkPassedLimit.bind(this, 2));
+  console.log(arr3); // false false true
+  
+  var arr4 = mapForEach(arr1, checkPassedLimit.bind(this, 1));
+  console.log(arr4); // false true true
+  ```
+  
+  You can further simplify this using currying:
+  ```js
+  function mapForEach(arr, fn){
+    var newArr = []
+    for (var i=0; i < arr1.length; i++){
+      newArr.push(
+        fn(arr1[i])
+      );
+    }
+    return newArr;
+  }
+  
+  function checkPassedLimitSimplified(lim){
+    return function(limiter, item){
+      return item > limiter;
+    }.bind(this, lim)
+  }
+  
+  var arr1 = [1,2,3];
+  
+  var arr3 = mapForEach(arr1, checkPassedLimitSimplified(2));
+  console.log(arr3); // false false true
+  ```
+  Now we dont have to specify bind this every time!
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
