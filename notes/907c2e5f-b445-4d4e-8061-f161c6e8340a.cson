@@ -1,5 +1,5 @@
 createdAt: "2019-05-07T10:20:55.467Z"
-updatedAt: "2019-05-23T15:56:37.817Z"
+updatedAt: "2019-05-29T14:49:58.557Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Abstract Factory"
@@ -7,7 +7,6 @@ tags: [
   "Design_Patterns"
   "Computer_Science"
   "Object-Oriented"
-  "TODO"
 ]
 content: '''
   # Abstract Factory
@@ -18,7 +17,7 @@ content: '''
   This is used when you have a "family of classes" so to speak.
   E.g.
   If you were to to have a car factory base class:
-  ```
+  ``` java
   public abstract class CarAbstractFactory
   {
     public abstract Wheel CreateWheel();
@@ -95,7 +94,7 @@ content: '''
   
   ### Abstract products
   ##### Abstract product 1
-  ```
+  ``` Java
   /**
    * Defines the methods that this product needs to implement
    */
@@ -105,7 +104,7 @@ content: '''
   }
   ```
   ##### Abstract product 2
-  ```
+  ``` java
   /**
    * Defines the methods that this product needs to implement
    */
@@ -117,7 +116,7 @@ content: '''
   
   ### Concrete products
   ##### Concrete product 1A
-  ```
+  ```java
   /**
    * This is the concrete product that implements AbstractProduct1 and will be created by ConcreteFactoryA
    */
@@ -133,7 +132,7 @@ content: '''
   }
   ```
   ##### Concrete product 1B
-  ```
+  ``` java
   /**
    * This is the concrete product that implements AbstractProduct1 and will be created by ConcreteFactoryB
    */
@@ -148,7 +147,7 @@ content: '''
   }
   ```
   ##### Concrete product 2A
-  ```
+  ```java
   /**
    * This is the concrete product that implements AbstractProduct2 and will be created by ConcreteFactoryA
    */
@@ -164,7 +163,7 @@ content: '''
   }
   ```
   ##### Concrete product 2B
-  ```
+  ```java
   /**
    * This is the concrete product that implements AbstractProduct2 and will be created by ConcreteFactoryB
    */
@@ -180,7 +179,7 @@ content: '''
   ```
   
   ### Abstract factory interface
-  ```
+  ```java
   /**
    * Defines the products that factories need to create
    */
@@ -191,7 +190,7 @@ content: '''
   ```
   
   ### Concrete factory A
-  ```
+  ```java
   /**
    * Factory that creates products of type A
    */
@@ -208,7 +207,7 @@ content: '''
   ```
   
   ### Concrete factory B
-  ```
+  ```java
   /**
    * Factory that creates products of type A
    */
@@ -225,7 +224,7 @@ content: '''
   ```
   
   ### Demo
-  ```
+  ```java
   public class Demo {
   
      private static AbstractFactory factory;

@@ -1,0 +1,71 @@
+createdAt: "2019-06-11T08:41:29.878Z"
+updatedAt: "2019-06-11T09:32:28.249Z"
+type: "MARKDOWN_NOTE"
+folder: "e18bbc0c08e12d905b86"
+title: "Connected to SpamLogicSettingsWhiteListTab"
+tags: []
+content: '''
+  ## Connected to SpamLogicSettingsWhiteListTab
+  
+  #### Used by
+  SpamLogicSettingsWhiteListTabSteps
+  SpamLogicWhiteListAddServerSteps
+  SpamlogicWhitelistFeature
+  
+  #### Other features
+  DkimVerificationHelper
+  DkimVerificationSteps
+  DmarcVerificationHelper
+  DmarcVerificationSteps
+  PhishingAndSpamMessageAreaSteps
+  SpfSteps
+  SpfHelper
+  SpoofDetectionSteps
+  
+  ---
+  
+  ## SpamlogicWhitelistFeature
+  
+  #### Uses
+  SpamLogicSettingsWhiteListTab
+  SpamLogicViewWhitelistEntryDialog (only used by this feature)
+  
+  #### Used by
+  SpamLogicWhiteListAddServerFeatureSteps
+  
+  ---
+  
+  ## SpamLogicSettingsWhiteListTabSteps
+  
+  #### Uses
+  SpamLogicSettingsWhiteListTabSteps
+  
+  #### Used by
+  Feature: SpamLogic white list tab
+  Feature: SpamLogic Whitelist Import
+  
+  ---
+  
+  ## SpamLogicWhiteListAddServerSteps
+  
+  #### Uses
+  SpamLogicSettingsWhiteListTab
+  
+  #### Used by
+  Feature: SpamLogic Whitelist Add Server
+  
+  ---
+  
+  ## SpamLogicWhiteListAddServerFeatureSteps
+  
+  #### Uses
+  SpamlogicWhitelistFeature
+  
+  #### Used by
+  Feature: SpamLogic Whitelist Add Server
+'''
+linesHighlighted: [
+  4
+]
+isStarred: false
+isTrashed: false

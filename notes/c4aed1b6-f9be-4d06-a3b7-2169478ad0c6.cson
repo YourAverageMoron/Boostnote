@@ -1,0 +1,50 @@
+createdAt: "2019-06-06T07:38:03.349Z"
+updatedAt: "2019-06-06T07:49:32.950Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Strict Mode"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # Strict Mode
+  ```js
+  var person;
+  persom = {};
+  
+  console.log(persom); // {}
+  console.log(person)  // undefined
+  ```
+  This can cause some errors that are difficult to track down.
+  
+  You can use strict mode to fix this:
+  ```js
+  "use strict";
+  var person;
+  persom = {};
+  
+  console.log(persom); // {}
+  console.log(person)  // undefined
+  ```
+  _**Note** - this wont work in the console of browsers_
+  
+  You can put this at the top of a file, or at the top of a function:
+  ```js
+  (function (){
+    "use strict";
+    
+    var person;
+    persom = {};
+    console.log(person);
+  })();
+  ```
+  This will work in the console.
+  
+  It adds some extra checks, here is a list of all the checks:
+  [Strict mode - JavaScript \\| MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

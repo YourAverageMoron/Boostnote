@@ -1,0 +1,208 @@
+createdAt: "2019-06-07T06:53:24.626Z"
+updatedAt: "2019-06-18T07:47:59.696Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "SOLID"
+tags: [
+  "Principles"
+  "Computer_Science"
+  "TODO"
+]
+content: '''
+  # SOLID
+  
+  [SOLID Java - Filippo Buletto](https://filippobuletto.github.io/solid-java/#dip-code-smells)
+  
+  These are five design principles that help you to create easily extendable and maintainable software.
+  
+  ## Single responsibility principle
+  
+  > A class should have one, and only one, reason to change.
+  
+  A class should have only one responsibility which means class should be highly cohesive and implement strongly related logic.
+  A class implementing feature 1 and feature 2 and feature 3 (and so on) vuolates SRP
+  
+  ### Example
+  #### Bad Example
+  ```java
+  public class UserSettingService {
+    public void changeEmail(User user) {
+      if(checkAccess(user)){
+        // Grant option to change email
+      }
+    }
+    
+    public boolean checkAccess(User user) {
+      // verify the user is valid
+    }
+  }
+  ```
+  This isn't ideal because there are two features wrapped up into a single class, there is one for changing the users info (email) and one that verifies handles security and whether the user has access.
+  
+  ###### Code smells
+  - More that one contextually seperated piece of code within a single class
+  - Large setup in tests (TDD is very useful when it comes to seperating SRP violations) 
+  
+  #### Better example
+  ```java
+  public class UserSettingService {
+    public void changeEmail(User user) {
+      if(SecurityService.checkAccess(user)){
+        // Grant option to change email
+      }
+    }
+  }
+  
+  public class SecurityService {
+    public static boolean checkAccess(User user) {
+      // verify the user is valid
+  
+    }
+  }
+  ```
+  
+  ###### Why this is good
+  - Seperated classes responsible for given use cases can be reused in other parts of an application.
+  - Sperated classes responsible for a given use case can be tested seperately.
+  
+  ---
+  
+  ## Open/closed principle
+  
+  > You should be able to extend a class's behavior, without modifying it.
+  
+  Classes should be open for extention and closed for modification.
+  You should be able to extend a class's behavior without the need to modify it implementation.
+  This done by allowing your class to use new pieces of code.
+  
+  ### Example
+  #### Bad Example
+  ```java
+  public class Logger {
+    String logging;
+    public Logger(String logging) {
+      this.logging = logging;
+    }
+    
+    public void log() {
+      if ("console".equals(logging)) {
+        // log to console
+      }
+      elseif ("file".equals(logging)) {
+        // file to console
+      }
+    }
+  }
+  ```
+  The problem with this is if you want to add another log type you would have to add to the if statement, this will not only get super grim, but it also requires the Logger class which dou don't really want.
+  
+  ###### Code smells
+  - If class X directly references another class Y from within its code base, it's a sign that class Y should be passed to class X (either though the constructor or in a method) e.g. through dependency injection.
+  
+  #### Good example
+  ```java
+  public interface Log {
+    void logMessage();
+  }
+  
+  public class ConsoleLog implements Log {
+    void logMessage() {
+      // log to console
+    }
+  }
+  
+  public class FileLog implements Log {
+      void logMessage() {
+      // log to file
+    }
+  }
+  
+  public class Logger {
+    Log log
+    public Logger(Log log) {
+      this.log = log;
+    }
+    public void log() {
+      this.log.logMessage();
+    }
+  }
+  ```
+  As you can see there isn't any need to edit any code to add a new logger, you just create a new class that implements the Log interface.
+  
+  ###### Why is this good?
+  - Class X functionality can be easily extended with the new functionality encapsulated in a seperate class without the need to change class X's implementation (it's not aware of introduced changes)
+  - Code is loosly coupled
+  - Injected class Y can easiy be mocked in tests
+  
+  
+  ---
+  
+  ## Liskov substitution principle 
+  > Derived classes must be substitutable for their base classes.
+  
+  This is an extention of the open/clse principle. Derived classes should not change the behavior of the base class (behavior of inherited methods). Provided a class Y is a subclass of class X any instance referencing class X should be able to reference class Y as well (derived types must be complete substitutes for their base class).
+  
+  ### Example
+  #### Bad example
+  ```java
+  public abstract class Car {
+    
+    void changeGear();
+    void drive();
+  }
+  
+  public class ManualCar extends Car {
+    public void changeGear() {
+      // change gear
+    }
+    public void drive() {
+      // do manual driving  
+    }
+  } 
+  
+  public class AutomaticCar extends Car {
+    public void changeGear() {
+      // This wont do anything as it is automatic
+    }
+    public void drive() {
+      // do automatic driving  
+    }
+  } 
+  ```
+  This isn't ideal as the AutomaticCar has to implement the change gear method despite not being able to change gear.
+  
+  ###### Code smells
+  - If it looks like a duck, quacks like a duck but needs batteries for that purpose; then it is probably violating LSP
+  - Modification of inherited behavior in subclass
+  - Exceptions raised in overridden inherited methods
+  
+  #### Good example
+  ```java
+  public abstract class Car {
+    void drive();
+  }
+  
+  public abstract class ManualCar extends Car {
+    void changeGear();
+  }
+  ```
+  This is a lot better as you can create a car but not have to implement the change gear method, but there is still an option to create a manual car that can change gear.
+  
+  ###### Why is this good?
+  - Avoids unexpected and incorrect results
+  - Clear distinction between shared inherited interface and extended functionality
+  
+  ---
+  
+  
+  ## Interface segregation principle
+  > Make fine grained interfaces that are client specific
+  
+  Once an interface is becoming too large / fat, we should split it into small interfaces that are more specific. And interface will be defined by the client that will use it, which means that client of the interface will only know about the mehtods that are related to them.
+'''
+linesHighlighted: [
+  66
+  58
+]
+isStarred: false
+isTrashed: false

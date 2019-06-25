@@ -1,0 +1,72 @@
+createdAt: "2019-06-05T07:56:31.928Z"
+updatedAt: "2019-06-05T08:29:25.778Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "ES6 and Classes"
+tags: [
+  "Computer_Science"
+  "JavaScript"
+  "ES6"
+  "Object-Oriented"
+]
+content: '''
+  # ES6 and Classes
+  
+  ```js
+  class Person {
+    constructor(firstname, lastname){
+      this.firstname = firstname;
+      this.lastname = lastname;
+    }
+    
+    getName() {
+      return this.firstname + " " + this.lastname;
+    }
+  }
+  
+  var dave = new Person('Dave', 'Smith');
+  
+  dave.getName(); // Dave Smith
+  ```
+  This is **NOT** the same as a class in other languages like Java, the class is actually an object, and you are creating objects from that object.
+  
+  ## Inheritance with classes
+  ```js
+  class Person {
+    constructor(firstname, lastname){
+      this.firstname = firstname;
+      this.lastname = lastname;
+    }
+    
+    getName() {
+      return this.firstname + " " + this.lastname;
+    }
+  }
+  
+  var dave = new Person('Dave', 'Smith');
+  
+  class PersonMiddleName extends Person {
+  
+    constructor(firstname, middlename, lastname){
+      super(firstname, lastname); // this calls the constructor of the class it extends
+      this.middlename = middlename
+    }
+    
+    getFullName () {
+      return `${this.firstname} ${this.middlename} ${this.lastname}`;
+    }
+  }
+  
+  var dave = new PersonMiddleName('Dave', 'Alan', 'Smith');
+  
+  dave.getName(); // Dave Smith
+  dave.getFullName(); // Dave Alan Smith
+  ```
+  
+  The idea of classes is just syntactic sugar.
+'''
+linesHighlighted: [
+  35
+]
+isStarred: false
+isTrashed: false

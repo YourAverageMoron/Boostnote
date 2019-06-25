@@ -1,0 +1,177 @@
+createdAt: "2019-05-31T06:48:59.200Z"
+updatedAt: "2019-06-05T07:27:41.278Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Building Objects"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # Building Objects
+  
+  ## Funciton constructors (`new`)
+  
+  ```js
+  function Person(firstname, lastna me) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+  }
+  
+  var dave = new Person('Dave', 'Smith');
+  
+  console.log(dave) // Person(firstname:'Dave', lastname:'Smith')
+  ```
+  `new` is just an operator.
+  It creates an empty object. It then envokes the function, calling a funciton creates a new execution context, `new` points the `this` variable at the empty object. If the function that you use the `new` operator on doesnt return a value, then JS will return the object for you.
+  So in our case the firstname and lastname are added to the empty function and then the object with firstname and lastname is returned.
+  
+  Functions that are designed to construct an object (like Person) are known as function constructors.
+  
+  #### Prototype in function constructors
+  When we use function constructors, JavaScript sets the prototype for you .
+  ```js
+  function Person(firstname, lastname) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+  }
+  
+  var dave = new Person('Dave', 'Smith');
+  
+  console.log(dave.__proto__) // Person{}
+  ```
+  All functions have a prototype property, that is an empty object by default, this isn't used unless you use a function as a function constructor.
+  
+  When we use the `new` operator to invoke a function the prototype property will be used.
+  
+  This prototype is not the prototype of the function, (that's `__proto__`), prototype is the prototype of any objects that are created using the function. 
+  ```js
+  function Person(firstname, lastname) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+  }
+  
+  Person.prototype.getFullName = function() {
+    return `${this.firstname} ${this.lastname}`
+  }
+  
+  var dave = new Person('Dave', 'Smith');
+  
+  console.log(dave.__proto__) // Person{getFullName; f}
+  
+  console.log(dave.getFullName()) // Dave Smith
+  ```
+  
+  You can also add to the prototype on the fly and after objects have been created:
+  ```js
+  function Person(firstname, lastname) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+  }
+  
+  Person.prototype.getFullName = function() {
+    return `${this.firstname} ${this.lastname}`
+  }
+  
+  var dave = new Person('Dave', 'Smith');
+  
+  Person.prototype.age = 31;
+  
+  console.log(dave.age) // 31
+  ```
+  This works because the dave object is just pointing at the prototype, this allows you to add or change properties of all objects at the same time.
+  
+  It is good convention to add functions to the prototype of an object and not put them in the function constructor, this means that you are not using as much memory as there is only one instance of the function in memory.
+  
+  ### Be careful with funciton constructors
+  As function constructors are just functions, if you run them without the new operator they will still run, the problem with this is that the object you are creating will just be undefined and you will change this (global enviroment variable).
+  
+  The convention to help this is to use a capital letter to start a function constructor (e.g Person), linters can also use the capital letter to let you know if you are doing something wrong.
+  
+  ---
+  
+  ## Built in function constructors
+  ```js
+  var a = new Number(3);
+  console.log(a); // Number{[[PrimitiveValue]]:4}
+  ```
+  Note this does not set a to a primitive value, this is because function constructors create objects.
+  
+  Number will also have a prototype with methods that all Number objects can use.
+  
+  The primitive value is boxed inside of the object.
+  
+  #### Wrapping primitives in objects
+  The JavaScript engine will sometimes wrap primitives in objects to give them access to more functions:
+  ```js
+  var name = "Dave";
+  console.log(name.length);
+  ```
+  This will tempereraly turn the name into an object so it can use the length property.
+  
+  Although this works for strings, it does not work for numbers so **BE CAREFUL**
+  
+  #### We can add to the build in function constructors:
+  ```js
+  String.prototype.isLengthGreaterThan = function(limit) {
+    return this.length > limit;
+  }
+  
+  console.log("woo".isLengthGreaterThan(5)); // false
+  console.log("wooooo".isLengthGreaterThan(5)); // true
+  ```
+  
+  #### Problems with built in function constructors
+  ```js
+  var a = 3;
+  
+  var b = new Number(3);
+  
+  a == b // returns true
+  a === b // returns false
+  ```
+  This is because b is an object and not a primitive 
+  
+  #### Date
+  Instead of using the date constructor you can use libraries like moment.js.
+  
+  ---
+  
+  ## Arrays
+  As arrays are objects, you can add extra properties to their prototype, however this can lead to issues whwen you use for in:
+  ```js
+  Array.prototype.customProperty = "WOO";
+  
+  var arr = [0, 1, 2];
+  
+  for (var prop in arr){
+    console.log(`${prop} : ${arr[prop]}`);
+  }
+  /**
+  0 : 0
+  1 : 1
+  2 : 2
+  customProperty : WOO
+  **/
+  ```
+  So whats happening is that iterating over properties means that you can iterate down into the prototype.
+  
+  It is better to do:
+  ```js
+  Array.prototype.customProperty = "WOO";
+  
+  var arr = [0, 1, 2];
+  
+  for (var i=0; i<arr.length; i++){
+    console.log(`${i} : ${arr[i]}`);
+  }
+  /**
+  1:1
+  2:2
+  3:3
+  **/
+  ```
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

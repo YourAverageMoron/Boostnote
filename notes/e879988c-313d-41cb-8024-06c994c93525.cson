@@ -1,0 +1,47 @@
+createdAt: "2019-05-30T06:55:27.293Z"
+updatedAt: "2019-05-31T06:45:47.255Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Refelection and Extend"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # Refelection and Extend
+  
+  ## Reflection
+  An object can look at itself, listing and changing its properties and methods.
+  
+  This allows libraies to implemetent methods such as extend, for example in underscore.js:
+  ```js
+  var person = {
+    firstname : 'Default',
+    lastname : "Default",
+    getFullName : function () {
+      return firstname + " " + lastname
+    }
+  }
+  
+  var dave = {
+    firstname : 'Dave',
+    lastname : "Smith",
+  }
+  
+  var alan = {
+    lastName : "Alanson"
+    getLastName : function () {
+      return firstname + " " + lastname
+    }
+  }
+  
+  _.extend(dave, person, alan);
+  
+  dave.getFullName(); // returns Dave Smith
+  dave.getLastName(); // returns Smith
+  ```
+  This allows you to add properties from one object to another, i.e the properties of person and alan are being added to dave.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

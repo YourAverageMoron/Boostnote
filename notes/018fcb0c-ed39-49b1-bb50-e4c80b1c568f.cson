@@ -1,0 +1,57 @@
+createdAt: "2019-06-05T08:30:55.642Z"
+updatedAt: "2019-06-06T07:35:57.814Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "typeof and instance of"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # `typeof` and `instance of`
+  
+  ## `tyoeof`
+  This tells us the type of a value:
+  ```js
+  console.log(`
+  ${typeof(3)}
+  ${typeof("woo")}
+  ${typeof({abc: 123})}
+  ${typeof([])}
+  ${typeof([{z:1},{x:1}])}
+  ${typeof(undefined)}
+  ${typeof(null)}
+  `);
+  
+  /**
+           3  -> number
+        "woo" -> string
+   {abc: 123} -> object
+           [] -> object
+  [{z:1},{x}] -> object
+    undefined -> undefined
+         null -> object (this is a bug)
+  **/
+  ```
+  Arrays are a bit weird, `typeof([])` returns object, well this is technically true, arrays are objects.
+  Toget it to print the array type you can use:
+  ```js
+  console.log(Object.prototype.toString.call([])); //[object Array]
+  ```
+  This works becuase the base object has a toString property, we use .call() to tell the toString function to use [] as the this variable.
+  
+  ---
+  
+  ## `instanceof`
+  ```js
+  function Person(name){
+    this.name = name;
+  }
+  var dave = new Person(`Dave`);
+  console.log(`${dave instanceof Person}`);  //true
+  ```
+  This checks all of the objects down the prototype chain, if it matches the object provieded then it will return true.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

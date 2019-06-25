@@ -1,5 +1,5 @@
 createdAt: "2019-03-16T15:58:22.997Z"
-updatedAt: "2019-05-07T10:31:05.327Z"
+updatedAt: "2019-05-29T14:50:41.352Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Factory method"
@@ -116,14 +116,14 @@ content: '''
   
   ## Very basic example
   #### The product interface
-  ```
+  ```java
   public interface Product {
      String method1();
   }
   ```
   
   #### A concrete product
-  ```
+  ```java
   public class ConcreteProd1 implements Product{
      public String method1(){
          return "this is product 1";
@@ -132,7 +132,7 @@ content: '''
   ```
   
   #### Another concrete product
-  ```
+  ```java
   public class ConcreteProd2 implements Product{
      public String method1(){
          return "this is product 2";
@@ -141,14 +141,14 @@ content: '''
   ```
   
   #### Creator abstract class
-  ```
+  ```java
   public abstract class Creator {
      public abstract Product createProduct();
   }
   ```
   
   #### Concrete creator
-  ```
+  ```java
   public class ConcreteCreator1 extends Creator {
      @Override
      public Product createProduct(){
@@ -158,7 +158,7 @@ content: '''
   ```
   
   #### Another concrete creator
-  ```
+  ```java
   public class ConcreteCreator2 extends Creator {
   
      @Override
@@ -169,7 +169,7 @@ content: '''
   ```
   
   #### Demo
-  ```
+  ```java
   public class Demo {
   
      private static Product product;

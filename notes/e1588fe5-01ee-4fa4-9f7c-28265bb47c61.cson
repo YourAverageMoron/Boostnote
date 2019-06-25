@@ -1,5 +1,5 @@
 createdAt: "2019-05-27T16:58:10.076Z"
-updatedAt: "2019-05-27T20:44:47.470Z"
+updatedAt: "2019-05-29T06:00:35.049Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Functional Programming in JS"
@@ -98,6 +98,18 @@ content: '''
   console.log(arr3); // false false true
   ```
   Now we dont have to specify bind this every time!
+  
+  ---
+  
+  ## Useful Links
+  
+  #### Underscore.js
+  [Underscore.js](https://underscorejs.org/)
+  Have a read through the source code, it is well annotated and super interesting.
+  
+  #### Lodash
+  [Lodash](https://lodash.com/)
+  A faster version of Underscore.js
 '''
 linesHighlighted: []
 isStarred: false

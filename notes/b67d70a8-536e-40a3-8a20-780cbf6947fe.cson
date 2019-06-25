@@ -1,0 +1,18 @@
+createdAt: "2019-06-18T07:40:45.013Z"
+updatedAt: "2019-06-18T07:47:54.897Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Safe Subtyping"
+tags: [
+  "Object-Oriented"
+  "Principles"
+  "TODO"
+]
+content: '''
+  # Safe Subtyping
+  [How to Safely Subtype in Java - DZone Java](https://dzone.com/articles/how-to-safely-subtype-in-java)
+  This 
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

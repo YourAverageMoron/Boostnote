@@ -1,0 +1,58 @@
+createdAt: "2019-06-05T07:14:57.377Z"
+updatedAt: "2019-06-05T07:56:10.019Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Object.create"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+  "Object-Oriented"
+]
+content: '''
+  # Object.create
+  
+  This is pure prototypal inheritance.
+  You define an object that you base other objects off, and then overide properties on the new objects.
+  
+  ```js
+  var person = {
+    firstname: `Default`,
+    lastname: `Default`,
+    getFullName: function () {
+      return this.firstname + " " + this.lastname
+    }
+  }
+  
+  var dave = Object.create(person);
+  
+  console.log(dave); // {}  <- empty object
+  
+  console.log(dave.getFullName()); // Default Default
+  ```
+  `Object.create()` creates an empty object with its prototype pointing at the object that you pass in to it.
+  
+  The pattern is that you overide the properties that you want:
+  ```js
+  var person = {
+    firstname: `Default`,
+    lastname: `Default`,
+    getFullName: function () {
+      return this.firstname + " " + this.lastname
+    }
+  }
+  
+  var dave = Object.create(person);
+  
+  dave.firstname = 'Dave';
+  dave.lastname = 'Smith';
+  
+  console.log(dave.getFullName()); // Dave Smith
+  ```
+  With this you can modify the prototype allong the way and it will affect all of the objects that use it.
+  
+  #### Problem
+  This is only available on newer browsers, but you can just use a pollyfill
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,114 @@
+createdAt: "2019-05-29T05:56:19.581Z"
+updatedAt: "2019-05-30T07:00:27.037Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Object-Oriented JS and Prototypal Inheritance"
+tags: [
+  "JavaScript"
+  "Object-Oriented"
+  "Computer_Science"
+]
+content: '''
+  # Object-Oriented JS and Prototypal Inheritance
+  
+  ## Inheritance
+  One object gets access to the properties of another object.
+  _**Note** - this is a simplified definition for JS, other languages will implement different it in a more complex way._
+  
+  JavaScript uses prototypal inheritance.
+  
+  ---
+  
+  ## Prototypal inheritance
+  All objects in JavaScript have a prototype property.
+  This is reference to another object called `proto`, that is the objects prototype.
+  
+  The `proto` is the protoype of an object, the object will be able to aggess the properties of the `proto` object.
+  
+  If an object does not have a property, it will look for the property in the object's prototype. You do not need to explicity state to look at an objects prototype for a propery, JS will do it for you if it can't find a property in the object.
+  
+  Prototypes can also have prototypes, this means that if you can't find a property in the objects prototype, it will look in the prototypes prototype. This creates a sort of prototype chain.
+  
+  You can point two objects at the same prototype as the objects just have a reference to an prototype object.
+  
+  #### E.g.
+  ```js
+  var person = {
+    firstname : 'Default',
+    lastname : 'Default',
+    getFullName : function () {
+      return this.firstname + ' ' + this.lastname;
+    }
+  }
+  
+  var dave = {
+    firstname: `Dave`,
+    lastname: `Smith`
+  }
+  
+  // Dont do this (for demo purposes):
+  dave.__proto__ = person;
+  dave.getFullName(); // Returns "Dave Smith"
+  
+  var alan = {
+    firstname : "Alan"
+  }
+  
+  alan.__proto__ = person;
+  alan.getFullName(); // Returns "Alan Default"
+  ```
+  
+  ##### `dave.getFullName();`
+  JS will look inside of the dave object for a getFullName property but it won't find it there, it will then look in dave's proto object which in this case it person and find the funciton getFullName.
+  The `this` object that is passed into the function is the dave object despite the function exisiting in person, this means this.firstname and this.lastname give dave's first and last name and not "Default".
+  
+  ##### `alan.getFullName()`
+  As with dave js will look for getFullName in alan and not find it, it will find it in alan's proto `person`.
+  The `this` object will be alan, this means that this.firstname is "Alan".
+  When JS looks for this.lastname in alan it cant find it, therefore it looks for lastname in person where it is set to "Default".
+  
+  ##### `object.__proto__ = object2`
+  You shouldn't use this as it is really inefficient. However it is really useful when trying to understand what is going on.
+  
+  ### Common base prototype
+  Unless specified otherwise, all objects will share a single proto object e.g:
+  ```js
+  var a = {
+    something : 3
+  }
+  
+  a.__proto__.share = "WOO";
+  
+  var b = {};
+  
+  console.log(b.share); // WOO
+  ```
+  So we set a property of the `__proto__` object by accessing it through a. When we try to find share in b it is not defined so it looks in b's prototype and finds that share is set to WOO.
+  
+  #### Arrays and functions
+  These still share a common prototype as all other objects, but they have another `__proto__` layer above it:
+  
+  ```js
+  //// Array ////
+  var a = [];
+  
+  console.log(a.__proto__); // []
+  console.log(a.__proto__.__proto__); // Object{}
+  
+  a.__proto__.push("something");
+  
+  var b = [];
+  console.log(v.__proto__); // ["something", ...]
+  
+  //// Funciton ////
+  var b = function (){};
+  
+  console.log(c.__proto__); // function(){}
+  console.log(c.__proto__.__proto__); // Object{}
+  ```
+  This just allows all arrays and function to inherit properties and methods that are specific to them, e.g you can push and pop from an array.
+  Also by default, these special versions of `__proto__` are accessable by all objects, e.g all arrays will have access to the same `__proto__` object unless specified otherwise.
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

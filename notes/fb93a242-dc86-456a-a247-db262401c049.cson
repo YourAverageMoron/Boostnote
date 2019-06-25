@@ -1,0 +1,59 @@
+createdAt: "2019-06-05T07:45:57.749Z"
+updatedAt: "2019-06-05T07:55:54.205Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Polyfill"
+tags: [
+  "JavaScript"
+  "Computer_Science"
+]
+content: '''
+  # Polyfill
+  
+  Code that adds a feature which the engine may lack.
+  
+  ## E.g Object.create()
+  ```js
+  // Polyfill
+  if (typeof Object.create !== "function") {
+      Object.create = function (proto, propertiesObject) {
+          if (typeof proto !== 'object' && typeof proto !== 'function') {
+              throw new TypeError('Object prototype may only be an Object: ' + proto);
+          } else if (proto === null) {
+              throw new Error("This browser's implementation of Object.create is a shim and doesn't support 'null' as the first argument.");
+          }
+  
+          if (typeof propertiesObject != 'undefined') {
+              throw new Error("This browser's implementation of Object.create is a shim and doesn't support a second argument.");
+          }
+  
+          function F() {}
+          F.prototype = proto;
+  
+          return new F();
+      };
+  }
+  
+  var person = {
+    firstname: `Default`,
+    lastname: `Default`,
+    getFullName: function () {
+      return this.firstname + " " + this.lastname
+    }
+  }
+  
+  var dave = Object.create(person);
+  
+  dave.firstname = 'Dave';
+  dave.lastname = 'Smith';
+  
+  console.log(dave.getFullName()); // Dave Smith
+  ```
+  This is just adding a new property `create` to the Object which handles creating an object in the same way as Object.create would in newer browsers.
+  
+  You can find a lot of these polyfillers on the internet.
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

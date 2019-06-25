@@ -1,5 +1,5 @@
 createdAt: "2019-05-24T08:29:36.647Z"
-updatedAt: "2019-05-25T10:55:59.797Z"
+updatedAt: "2019-05-29T14:50:52.947Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Builder Pattern"
@@ -7,6 +7,7 @@ tags: [
   "Design_Patterns"
   "Computer_Science"
   "TODO"
+  "Object-Oriented"
 ]
 content: '''
   # Builder Pattern
