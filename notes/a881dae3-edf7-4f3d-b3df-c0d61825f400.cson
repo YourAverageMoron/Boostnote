@@ -1,5 +1,5 @@
 createdAt: "2019-03-14T20:24:04.374Z"
-updatedAt: "2019-03-14T20:29:46.976Z"
+updatedAt: "2019-07-04T07:19:24.829Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "The Box Model"
@@ -7,6 +7,7 @@ tags: [
   "CSS"
   "Computer_Science"
   "Web_Development"
+  "TODO"
 ]
 content: '''
   # The Box Model
@@ -29,7 +30,67 @@ content: '''
   The margin clears an area outside the border. The margin is transparent.
   
   ![alt text](https://www.maketecheasier.com/assets/uploads/2016/12/google-chrome-inspect-element-box-model-2.png)
+  
+  ---
+  
+  ## Block vs inline elements
+  
+  #### Block elements
+  Headings and paragraphs are examples of block elements.
+  Block elements use the full width of the browser and force a line break.
+  
+  #### Inline elements
+  Images, links, strong and em elements are inline.
+  Do not do take the full width of the browser or force a line break (cannot set height or width).
+  
+  ---
+  
+  ## `box-sizing`
+  
+  ### Overview
+  The `box-sizing` CSS property was added to make layoutes easier and more intuitive.
+  
+  The origional way of that the box model was sized used these:
+  - `width + padding + border = actual visible/rendered width of an element's box`
+  - `height + padding + border = actual visible/rendered height of an element's box`
+  
+  Which can seem a bit counter intuitive as the width and height you set change when you start adding borders and padding to the element.
+  
+  This wasnt too much of a problem back when webpages were mostly set to one size, but when more responsive design became popular the box model needed to be updated.
+  
+  ### How it works
+  The `box-sizing` property has 3 possible values (`content-box`, `padding-box` and `border-box`), the most popular of these three is `border-box`.
+  
+  #### `boarder-box`
+  This tells the browser to account for any border or padding in the values you specify for an elements width or height.
+  If you set an element's height to 100px with a padding of 10px and a boarder of 5px, the content will be resized to 85px (100px - 10px - 5px = 85px).
+  
+  #### `content-box`
+  This is the default CSS box-sizing behaviour. The specified width and height will just resize the content box, any padding or boarders will be added on top of this.
+  If you set an element's height to 100px with a padding of 10px and a border of 5px, the content will be set to 100px, but the element including padding and boarders will be 115px (100px + 10px + 5px = 115px).
+  
+  #### `padding-box`
+  This isnt really used as it isnt particulaly useful and isnt supported by most browsers.
+  It acts as an intimediate stage between `boarder-box` and `content-box`.
+  The content size and the padding are set in the width and height, but not the boarder.
+  
+  //TODO GET SOME IMAGES OF THESE FROM HERE
+  [box-sizing - CSS: Cascading Style Sheets \\| MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing)
+  
+  ### Best practice when setting `boarder-box`
+  ```css
+  html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  ```
+  This is the best way of universally setting box-sizing, the reason for using inheritance is that it wont override your CSS.
 '''
-linesHighlighted: []
+linesHighlighted: [
+  23
+  1
+]
 isStarred: false
 isTrashed: false

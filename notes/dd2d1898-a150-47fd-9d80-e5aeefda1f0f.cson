@@ -1,5 +1,5 @@
 createdAt: "2019-03-14T20:46:35.972Z"
-updatedAt: "2019-03-14T20:59:46.686Z"
+updatedAt: "2019-07-04T08:11:11.717Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Flexbox"
@@ -7,9 +7,13 @@ tags: [
   "CSS"
   "Computer_Science"
   "Web_Development"
+  "TODO"
 ]
 content: '''
   # Flexbox
+  
+  [A Complete Guide to Flexbox \\| CSS-Tricks](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+  
   ## Overview
   Flexbox aims to provide a more efficient way to lay out, align and distribute space among items in a container, even if the size is unknown and/or dynamic.
   

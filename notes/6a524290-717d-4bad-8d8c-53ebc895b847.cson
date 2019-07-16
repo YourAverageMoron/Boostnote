@@ -1,0 +1,131 @@
+createdAt: "2019-07-04T07:19:49.591Z"
+updatedAt: "2019-07-04T08:21:01.073Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Useful CSS Properties"
+tags: [
+  "CSS"
+  "Computer_Science"
+  "Web_Development"
+  "TODO"
+]
+content: '''
+  # Useful CSS Properties
+  [Let's Look at 50+ Interesting CSS Properties & Values \\| CSS-Tricks](https://css-tricks.com/lets-look-50-interesting-css-properties-values/)
+  
+  ## Background
+  
+  ---
+  
+  ## Border
+  
+  ---
+  
+  ## Clearing floats
+  
+  ---
+  
+  ## Color
+  
+  ---
+  
+  ## Display
+  
+  This specifies the display behaviour (the type of rendering box) of an element.
+  Its default value is `inline`, however most "User Agent stylesheets" (default styles the browser applies to all sites) reset many elements to `block`.
+  
+  ```css
+  div {
+    display: inline;        /* Default of all elements, unless UA stylesheet overrides */
+    display: inline-block;  /* Characteristics of block, but sits on a line */
+    display: block;         /* UA stylesheet makes things like <div> and <section> block */
+    display: run-in;        /* Not particularly well supported or common */
+    display: none;          /* Hide */
+  }
+  ```
+  
+  #### Inline
+  This is the default value for elements, for example `<span>`, `<b>` or `<em>`.
+  These elements within a string of tesxt don't break the flow of the text.
+  ###### Example
+  ![Inline example](https://css-tricks.com/wp-content/uploads/2011/09/inline-element.png =300x)
+  
+  Inline elements will accept margines and padding, however you cannot set their height or width.
+  
+  #### Inline block
+  This is similar to inline as it will stick with the natuar flow of the text, however it also allows you to set a height and width.
+  ###### Example
+  ![Inline block example](https://css-tricks.com/wp-content/uploads/2011/09/inline-block.png =300x)
+  
+  #### Block
+  A number of elements are set to this by the browser UA stylesheet.
+  They are usually container elements like `<div>`, `<selection>` and `<ul>`, but they also include text "blocks" like `<p>` and `<h1>`.
+  Block level elements do not sit inline, but instead break past them and appear on a new line.
+  By default they take up as much horizontal space as possible.
+  ###### Example
+  ![Block example](https://css-tricks.com/wp-content/uploads/2011/09/block.png =300x)
+  
+  #### Run-in
+  This isnt well supported (even firefox hasnt implemented it).
+  This aims to make elements like headers sit inline with the text below.
+  Simply floating items wont fix this problem as you dont want the header to be a child of the text element below it (you want it to be an indpendent element).
+  ###### Example
+  ![Run-in example](https://css-tricks.com/wp-content/uploads/2011/09/Run-in.png =300x)
+  
+  Don't count on this working though
+  
+  #### Flexbox
+  This allows you to use flexbox, this is a bit too complex to explain here so I have created its own dedicated note.
+  
+  #### Flow-root
+  This creates a new "block formatting context", but otherwise is like a block.
+  This is supported by most browser (not IE though)
+  
+  #### Grid
+  Allows you to display items in a grid.
+  Again it is a bit too complex to explain here, and there is a dedicated note for it.
+  
+  #### None
+  This totaly removes the image from the page.
+  The element will still appear in the DOM, but you can not access it on the webpage in any way (e.g you can't tab to it or its children)
+  
+  #### Table values
+  There are a whole set of display values that force non-table elements to behave like table-elements.
+  ```css
+  div {
+    display: table;
+    display: table-cell;
+    display: table-column;
+    display: table-colgroup;
+    display: table-header-group;
+    display: table-row-group;
+    display: table-footer-group;
+    display: table-row;
+    display: table-caption;
+  }
+  ```
+  
+  ---
+  
+  ## Floats
+  
+  ---
+  
+  ## Height and width
+  
+  ---
+  
+  ## Margin and padding
+  
+  ---
+  
+  ## Overflow
+  
+  ---
+  
+  ## Position
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
