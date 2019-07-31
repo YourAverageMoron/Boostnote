@@ -1,5 +1,5 @@
 createdAt: "2019-06-06T07:38:03.349Z"
-updatedAt: "2019-06-06T07:49:32.950Z"
+updatedAt: "2019-07-16T10:24:54.121Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Strict Mode"
@@ -25,7 +25,7 @@ content: '''
   persom = {};
   
   console.log(persom); // {}
-  console.log(person)  // undefined
+  console.log(person)  // throws an undefined error
   ```
   _**Note** - this wont work in the console of browsers_
   
@@ -33,7 +33,6 @@ content: '''
   ```js
   (function (){
     "use strict";
-    
     var person;
     persom = {};
     console.log(person);
