@@ -1,0 +1,31 @@
+createdAt: "2019-10-05T16:02:31.867Z"
+updatedAt: "2019-10-05T16:07:23.306Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Introduction and Overview"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # Introduction and Overview
+  
+  ## Essentials of critical systems
+  
+  ### Safety
+  The system should not harm people or the system's environment
+  
+  ### Reliability
+  The system must operate without serious failures
+  
+  ### Availability
+  The system must be available to deliver services when requested to do so
+  
+  ### Security
+  The system must be able to protect itself and its data from malicious use
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

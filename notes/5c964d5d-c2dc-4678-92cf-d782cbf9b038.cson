@@ -1,0 +1,73 @@
+createdAt: "2019-10-06T10:00:50.137Z"
+updatedAt: "2019-10-06T12:22:33.260Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Risk"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # Risk
+  
+  ## What is risk?
+  
+  #### Risk is a combination of:
+  - The Likelihood of an accident
+  - The severity of the potential consequences
+  
+  ---
+  
+  ## Risk factors in technological sociaties
+  
+  ### Increasing complexity
+  - High tech systems are often made up of networks of closely related subsystems
+    - A problem in one subsystem may cause problems in other subsystems
+  - Analyses of major industrial accidents invariably revial **high complex sequences of events** leading up to accidents
+    - Rather than **single components failures**
+  - More subcomponents leads to more complexity
+  - Operation of a complex system may be hard
+  
+  ### Increased exposure
+  - More people are exposed to a given hazard today than in the past
+  - For example motor vehicle related deaths in the US:
+    - 1921: 13000 (worst if miles travelled are considered)
+    - 2011: 32000 (Safest year in history)
+    - As you can see although there are more deaths in 2011, the deaths per mile are actually less, this is due to the increased number of drivers
+  - This is always increasing with the increase in the human population (more people = more exposure)
+  
+  ### Increased automation
+  - Automation might appear to reduce the risk of human opperator error
+  - However, it just moves the humans to other functions
+    - Maintenance
+    - Supervisory
+    - Higher-level decision making
+    - Programming
+    - E.t.c
+  - Automation has not removed human error, it has kusted mored it elsewhere, and the effects of human decisions and actions can be extremely serious.
+  
+  ### Increased centralisation and scale
+  - Increasing automation has lead to centralisation of industrial production in very large plants giving the potential for great loss and damage in the event of an accident
+  - E.g:
+    - Ocean shipping - Supertankers are huge, when an accident occurs the cansequences are similarly huge
+    - Centralised power generation - If a power plant shuts down, large areas of the country are left without power
+  
+  ### Increasing pace of technological change
+  - The average time to translate a basic technical descover into a comercial product in the early part of the twentieth century was 30 years
+    - that has not decreased to 5 years
+  - Economic pressures change with technology
+    - May lead to less extensive testing
+    - Lessens the opportunaty to learn from expreience
+  - Impetus placed on shipping and selling so there is less time to iron out bugs or learn from experience 
+'''
+linesHighlighted: [
+  2
+  12
+  28
+  38
+  10
+]
+isStarred: false
+isTrashed: false

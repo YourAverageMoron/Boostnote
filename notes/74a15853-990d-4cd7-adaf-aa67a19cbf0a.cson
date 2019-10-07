@@ -1,0 +1,205 @@
+createdAt: "2019-10-06T12:23:49.560Z"
+updatedAt: "2019-10-07T18:52:41.515Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Intoduction to Networks"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # Intoduction to Networks
+  
+  ## Overview
+  A network is any means to connect entities together so they can communicate
+  
+  ### Reasons to network
+  - Resource sharing
+  - Communication and collaboration
+  - Informaion gathering
+  - Reliability through replication
+  - Entertainment
+  
+  ### Existing examples of networks
+  - The telephone system
+  - The mobile phone system
+  - TV and radio
+  - System control networks
+    - Controller area network (CAN bus) which are used in cars
+  - Sensor control networks
+    - Bluetooth
+    - ANT
+  - Cable networks (TV)
+  - The internet
+  
+  ### Metcalfe's Law
+  > The value of a network expands exponentionally as the number of users increases
+  
+  The bigger the network the more links it has
+  
+  ---
+  
+  ## Classification of networks
+  
+  There are many different kinds of network, this we need classifications to put things into easy boxes
+  
+  ### Classification by size
+  
+  This generally refers to the distance that the network covers
+  
+  ![c9ff88aa.png](:storage\\74a15853-990d-4cd7-adaf-aa67a19cbf0a\\c9ff88aa.png =400x)
+  
+  #### Local area network (LAN)
+  - Connects network devices in such a way that personal computers and workstations can share data, tools and programms
+  - Generally a group od devices are commected together using a swich, or stack of switches, using a private addressing scheme as defined by the TCP/IP protocol
+  - Routers can be used to connect a LAN to a WAN
+  - The rate at which data is transmitted is only limited by the devices in the LAN
+  - Usually high speed and use relatively inexpensive hardware
+  - LANs can accomodate thousands of computers
+  - There is more fault tolerance and less congestion in LANs
+  - E.g
+    - Schools
+    - Offices
+    - Homes
+    
+  #### Metropolian are network (MAN)
+  - Covers a larger area than a LAN but a smaller area than a WAN
+  - It connects two or more devices that are apart but reside in the same or different cities
+  - It covers a large geographical area and may serve as an ISP (internet service provider)
+  - MAN is designed for computers that need high speed connectivity
+  - They can be hard to design and maintain
+  - There is less fault tolerance and more congestion in a MANs
+  - They are generally costly and may or may not be owned by a single company
+  - They have a moderate data transmission rate in comparisson to LANs and WANs
+  - Generally use a modem and wire/cable to transmit data
+  - E.g
+    - Telephone company network that can provide a high speed DSL (digital subscriber line) to a customer 
+    - Cable TV netwoek in a city
+  
+  #### Wide area network (WAN)
+  - These generally extend over a large geographical area
+    - Although it might be confined within the bounds of a state or country
+  - A WAN could be a LAN connecting to other LANs
+  - It may be limited to an enterprise or be accessable to the project
+  - Are relatively expensive
+  - There are two types of WAN:
+    - Switched WAN
+    - Point-to-Point WAN
+  - Similar to a MAN, they have lower fault tolerance and higher congestion
+  - They generally connect using a PSTN (public switched telephone network) or a satellite link
+  - They can be more difficult to design or maintain
+  - They generally have a 10th of the speed of a LAN as it involves an increased distance and a larger number of devices
+  - Propagation delay is one of the biggest problems faced
+    - The amount of time that it taked for a head of a signal to travel from the sender to the reciever
+  - Generally transmit data using optic wires, microwaves and satellites
+  - E.g
+    - A switched WAN is the asyncronous transfer mode network
+    - A point-to-point WAN is the dial-up line that connects a home network to the internet
+  
+  #### Personal area network (PAN)
+  - A network for interconnected devices on an persons individual workspace
+  
+  ### Classification by speed
+  These are generally marketing terms, such as:
+  - Fast
+  - Superfast
+  - Ultrafast
+  - E.t.c
+  But you can ususally just use the speed in bits per second (or something similar)
+  
+  ### Classification by technology
+  - Voiceband modem
+  - Local wired
+  - Medium distance wired
+  - Optical fiber
+  - Hybrid
+  - Cable
+  - Local wireless
+  - Longer distance wireless
+  - Very long distance wireless
+    - satellite
+  - Power line
+  ### Narrowband and broadband
+  This is a kind of extention to classification by technology
+  But it has been wrongly used to refer to speed by distorted marketing
+  
+  ![7475d7da.png](:storage\\74a15853-990d-4cd7-adaf-aa67a19cbf0a\\7475d7da.png =400x)
+  
+  #### Broadband
+  - Generally used for applications which require higher data rate
+  - In order to accomodate higher data rates it uses a higher frequency rate
+  - It ocupies more bandwidth than the narrowband system
+  - The transmit power is less than narrowband
+  
+  #### Narrowband
+  - Generally used for applications that require longe range and reliable communications
+  - Less bandwidth than broadband
+  - Transmit power is higher than broadband
+  
+  |Specification          |Broadband|Narrowband|
+  |-----------------------|---------|----------|
+  |Spectrum efficiency    |Low      |Very High |
+  |Power efficiency       |Low      |High      |
+  |Data rate              |High     |Low       |
+  |Coverage range         |Less     |Very Long |
+  |Environment penetration|Low      |High      |
+  |Preamble code length   |Long     |Short     |
+  
+  ---
+  
+  ## Introduction to the Internet
+  
+  The Interntet is a hierachy of networks, managed by different groups (in the example of a university):
+  - Department
+  - University
+  - Region
+  - Country
+  - World
+  
+  This delegation of control is essential to the way the Internet works
+  
+  ### The **I**nternet (capital 'I')
+  The world wide collection of networks
+  
+  ### An **i**nternet (lowercase 'i')
+  A collection of some networks, it is an abbreviation of 'internetwork'
+  
+  ### An intr**a**net (with an 'a')
+  Some collection of networks belonging to a single organisation; for example china has its own intranet, or a company might have one to host its internal websites
+  
+  ### The Web is not the Internet
+  
+  **The Internet** - a global collection of networks
+  **The Web** - A collection of information that is accessed via the Internet
+  
+  ### What is the point of the Internet
+  The basis of the Internet is collaboration between its member hosts
+  Data travels from source to destination by being passed from machine to machine
+  
+  ### The reason for the Internet's cooperative design
+  This comes from the history of the Internet:
+  - 1957: The Russians launch Sputnik
+  - Mid 1960s: Advanced Research Projects Agency (ARPA) formed. A project to share expensive resources, namely their computers
+  - The design was to be non-centralised to avoid single points of failure, particularly nuclear attacks
+  - So there is no single point of coordination or oversight in the network
+  - And there must be multiple paths between hosts
+  
+  Using simple circuits (such as the telephone system used) between machines would be too vulnerable, so packet switching was devised
+  Data is chopped into small chunks called packets, each packed is sent individually, possibly over different paths
+  The origional data can then be reconstructed using these packets when they have been recieved by the reciving host
+'''
+linesHighlighted: [
+  41
+  54
+  68
+  88
+  35
+  91
+  99
+  31
+  2
+]
+isStarred: false
+isTrashed: false

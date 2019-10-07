@@ -1,0 +1,76 @@
+createdAt: "2019-10-05T16:07:28.793Z"
+updatedAt: "2019-10-05T17:34:19.929Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Accidents"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # Accidents
+  
+  ## Ariane 5
+  
+  ### Overview
+  In June 1996 the Ariane 5 rocket was launched for its maiden flight, carrying a payload of scientific satellites.
+  The rocket took 10 years and $7 billion to produce, but it could cary a much larger load than the Ariane 4 rockets.
+  However the rocket began to swivell uncontrollably and forced ground-control to initiate its self destruct functionality.
+  
+  ### What went wrong?
+  The software in Ariane 5 was reused from Ariane 4 despite Ariane 5 being a much larger rocket.
+  Because of the difference in size Ariane 5 could reach a much higher horizontal velocity than Ariane 4.
+  However, the software was using a short int (16 bits) for velocity; this wasnt a problem for Ariane 4 as it never reached a high enough velocity, but in order to handle the higher velocity in Ariane 5 the software would have had to use a double (64 bits).
+  
+  ### Why did this not get tested before launch?
+  The functionality of the software that failed was not required by Ariane 5, this meant that there was not requirement associated with it.
+  As there was no requirement, there were not tests as part of software development.
+  This means that during system testing no error was generated.
+  
+  ---
+  
+  ## Other examples of accidents in the last 45 years
+  
+  ### Three mile island (USA - 1979)
+  A nuclear power plant accident.
+  A partial nuclear meltdown in two reactors costing over $1.5 billion plus the loss of the plant.
+  Caused by design oversights relating to ambiguous control room indicators in the power plant's user interface.
+  
+  ### Bhopal (India - 1984)
+  Toxic chemical escape from a pesticide plant killed 10000 people and seriously injured 200,000.
+  
+  ### Challanger explosion (USA - 1986)
+  Challanger space shuttle explodes after take off.
+  
+  ### Chernobyl (Ukraine - 1986)
+  Nuclear power plant explosion and fire caused a huge radioactive cloud over most of Europe.
+  
+  ### Piper alpha (North Sea - 1988)
+  Oil rig platform set on fire killing 167 people.
+  Was caused by a litany of errors and had some striking similarities to Grenfell Tower in London.
+  
+  ### And many more
+  
+  ---
+  
+  ## Asiana Airlines Flight 214
+  
+  ### Overview
+  A boeing 777 from Seoul to San Fransisco
+  Crashed on landing in San Fransisco.
+  All three pilots told the National Transportation Safety Board investigators that they were relying on the 777's automated devices for speed control during final descent.
+  The NTSB chairman emphasized that it is the pilots responsibility to monitor and maintiain correct approach speed.
+  
+  ### What went wrong?
+  Over reliance on the automation and lack of system understanding by the pilots.
+  Pilot's faulty mental model of the planes automation logic lead to his inadvertant deactivation of the system.
+  Insufficient crew monitoring the airspeed indications during the approach likely resulted from the expectency, increased workload, fatigue, and automation reliance.
+'''
+linesHighlighted: [
+  21
+  2
+]
+isStarred: false
+isTrashed: false
