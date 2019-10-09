@@ -1,0 +1,32 @@
+createdAt: "2019-10-09T07:39:36.550Z"
+updatedAt: "2019-10-09T07:49:55.703Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Introduction to Intelligent Agents"
+tags: [
+  "CM30174"
+  "Computer_Science"
+  "Intelligent_Agents"
+  "University"
+]
+content: '''
+  # Introduction to Intelligent Agents
+  
+  ## Motivation for using agents
+  Agents can help solve some difficult problems
+  
+  ### But they also create new problems:
+  - Independent action -> responsibility
+    - Whose responsibility?
+    - For what?
+  - How to engineer reliable multi agent systems?
+  - It's a new paradigm for software engineers
+  - How do we handle software that can cooperate, coordinate, negotiate, adapt, and argue
+  
+  ### Where are agents used?
+  #### Production scheduling optimisation
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

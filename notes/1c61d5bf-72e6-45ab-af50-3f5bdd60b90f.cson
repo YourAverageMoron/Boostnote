@@ -1,0 +1,66 @@
+createdAt: "2019-10-08T19:23:05.956Z"
+updatedAt: "2019-10-08T19:55:11.570Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "How Accidents Happen"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # How Accidents Happen
+  
+  Few accidents are clear cut and easy to explain
+  They often have a variaty of complex factors contributing in the accident
+  
+  > The main issue for accident investigations is to prevent reoccurrences of accidents that have occured before
+  
+  ## Cause and effect
+  A cause must precede a related effect
+  
+  ### Why can it be difficult to find causes?
+  - A condition or event may preced another event without causing it
+    - **A** then **B** occured, therefore **A** caused **B**
+    - This is very wrong 
+    - For example
+      - The rooster crows immediately before sunrise, therefore the rooster causes the run to rise
+  - A condition may be considered to cause an event without the event occuring every time the condition holds
+  
+  The cause of an event (such as an accident) is composed of a set of conditions, each of which is necessary, and which together are sufficient for the event to occur
+  
+  ### Oversimplification of the cause
+  This is a common problem
+  Interpreting statements about a cause requires care, the cause may be oversimplified or biased
+  Often a single cause if chosen as 'the cause' out of a large number of necessary conditions
+  This is wrong as in many cases all the factors are indispensable
+  
+  #### Common oversimplifications
+  ##### Assuming human error
+  This a very common as it can be appied to virtually any accident
+  It is often used to say that 'the opperator failed to step in and preven the accident'
+  This is often not very helpful when investigating an accident
+  
+  ###### Why should we be sceptical about blaming human error?
+  - Data may be biased or incomplete
+  - Positive actions are not usually recorded
+  - Blam my be biased on the assumption that the human opperator can overcome every emergency
+  - Operators often have to intervene at the limits (very difficult situations)
+  - Hindsight is always 20/20
+  - Seperating operator error from design error is very difficult
+  
+  ##### Assuming technical failures
+  Don't concentrate on only the immediate physical factors such as component failure
+  Are there other resons that lead to the technical failure?
+  Why weren't there any processes in place to handle such kind of failure
+  
+  ##### Ignoring organisation factors
+  Accidents are often blamed on computer, operator, or equipment failures
+  We should not ignore the underlying factors which make such accidents inevitable
+  
+  Accident causes are very frequently rooted in the organisation, its culture, management and structure
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
