@@ -1,5 +1,5 @@
 createdAt: "2019-10-09T07:39:36.550Z"
-updatedAt: "2019-10-09T07:49:55.703Z"
+updatedAt: "2019-10-09T11:01:25.551Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Introduction to Intelligent Agents"
@@ -11,9 +11,10 @@ tags: [
 ]
 content: '''
   # Introduction to Intelligent Agents
-  
   ## Motivation for using agents
   Agents can help solve some difficult problems
+  
+  They allow you to easily simulate different scenarios only by creating agents that mimic the different actors that work in a given environment
   
   ### But they also create new problems:
   - Independent action -> responsibility
@@ -23,10 +24,174 @@ content: '''
   - It's a new paradigm for software engineers
   - How do we handle software that can cooperate, coordinate, negotiate, adapt, and argue
   
-  ### Where are agents used?
-  #### Production scheduling optimisation
+  ### Where would you use agents?
+  - In environments that change unpredictably
+  - Where there are limited resources or resources with changing availablity
+  - Where you need resilience
+    - Known-unknowns
+    - Even some unknown-unknowns
+  - Decentralized/No overall control: autonomous actors
+  
+  ---
+  
+  ## Agent characteristics
+  ### What is an agent?
+  An intelligent agent is a computer system capable of flexable, **autonomous** action in some environment
+  ![0c9a4e62.png](:storage\\6a4c985a-b57e-4ca2-8463-47437811f874\\0c9a4e62.png =400x)
+  
+  ### What are multi-agent systems?
+  An agent can be more useful in the context of others:
+  - Can **concentrate** on tasks within competence
+  - Can **delegate** other tasks
+  - Can use the ability to **communicate**, **coordinate**, and **negotiate**
+  - Howeve they lack organisation
+  ![90843436.png](:storage\\6a4c985a-b57e-4ca2-8463-47437811f874\\90843436.png =400x)
+  
+  ### Reactive
+  > Agents continuously interract with the environment and respond to changes
+  
+  Fixed programs execute blindly and there is no success or failure
+  However the real in the real world the environment often changes or is incomplete which means that if you execute the same thing twice it is unlikely that you will get the same result
+  
+  Reactive systems interact continuously with the environment and respond to any changes
+  
+  ### Pro-active
+  > Agents will generate goals and attempt to achieve them
+  
+  Goal directed behaviour often requires AI techniques (e.g reasoning with rules)
+  
+  Pro-active systems **generate** and **achive** (or **maintain**) goals:
+  - This isn't just driven by events
+  - The agent will take the initiative
+  - Recognises opportunaties
+  
+  The agent needs an environment model for decision-making:
+  - Knowledge-driven (classical AI, logic, rules)
+  - Data-driven (neural networks, time series, Markov decision process)
+  
+  ### Social ability
+  > Agents will interact with each other (even humans), using an agent-communication language, in order to achieve goals
+  
+  The real world is a multiagent environment where the actor cannot achieve goals without taking into account others
+  
+  Some goals requre cooperation:
+  - Information/models of othere agents' state
+  - Trust metrics
+  - Reputation models
+  - Communication language
+  - Common domain of discourse
+  - Capacity to reach agreements
+  - Capacity for (bounded) rational reasoning
+  
+  ### Minor agent characteristics
+  
+  #### Mobility
+  Can move around in a (computer) network
+  
+  #### Veracity
+  Will an agent intentionally communicate false information?
+  
+  #### Benevolence
+  If agents have conflicting goals, will they help each other?
+  
+  #### Rationality
+  Will an agent to achieve its goals, and not deliberately act to prevent their achievement?
+  
+  #### Learning/adaption
+  Will an agent get better over time
+  Some times we don't want this
+  
+  ### Difference between agents and objects
+  #### Objects
+  - Encapsulate some state
+  - Communicates via message passing
+  - Has methods which operate on the objects state
+  - Objects do what they are told
+  
+  #### Agents
+  - Are **autonomous** and have an internal decision procedure which determines whether or not to perfor an action on request
+  - Are **smart** and capable of flexable (reactive, proactive and social) behaviour
+  - Are **active** and a multiagent system is a set of processes
+  - Are **benevolent** and act because they want to do so
+  - Are **utilitarian** as they act in order to gain something
+  
+  ### Difference between agents and expert systems
+  Expert systems contain 'expertise' about some topic
+  #### Difference
+  - Agents are situated where expert systems are not
+  - Expert systems obtain information from asking the user questions where agents do not
+  - Agents act where expert system do not
+  
+  Some real time (typically process control) expert systems are agents
+  
+  Expert systems are useful **components** of agents
+  
+  ---
+  
+  
+  ## Environment of agents
+  Agents act within environments, the characteristics of these environemnts can make it harder for agents to act in them
+  
+  ### Accessible vs inaccessible
+  Accessible environments have complete, accurate, and up-to-date information about the state of the environment
+  
+  Inaccessible environments are often harder to work with
+  
+  ### Deterministic vs non-deterministic
+  In a deterministic environment any single action has a guarenteed effect
+  There is no uncertainty about the resulting state
+  
+  Non-deterministic environments are generally harder to work with
+  
+  ### Static vs dynamic
+  In a static environment only the actions of the agents will change the environment
+  
+  Dynamic environments are generally harder to work with
+  
+  ### Episodic vs non-episodic
+  Episodic environments have several, independent, discrete episodes
+  The action choice depends on the current episode 
+  
+  Non-episodic environments are generally harder to work with
+  
+  ### Discrete vs continuous
+  Discrete environments have a fixed, finite number of actions and percepts
+  
+  Continuous environments have an unknown number of actions and percepts
+  
+  Continuous environments are generally harder to work with
+  
+  ---
+  
+  ## Agents as intentional systems
+  > An intentional system is used to describe entities whose behaviour can be predicted by attributing beliefs, desires and rational capability
+  
+  It is the basis for Belief-Desire-Intention (BDI) model of agency
+  
+  ### Levels of intentional system
+  #### First order
+  Beliefs and desires, but no beliefs and desires about beliefs and desires...
+  
+  #### Second order
+  Beliefs and desires (and other intentional states) about beliefs and desires (and other intentional states) - of others itself
+  
+  ### Abstractions
+  Abstractions replace detail with a single concept
+  The more complex a system is the more levels of absraction that are needed
+  
+  Agents, and agents as intentional systems are just an abstraction
+  
   
 '''
-linesHighlighted: []
+linesHighlighted: [
+  25
+  29
+  45
+  59
+  91
+  127
+  138
+  1
+]
 isStarred: false
 isTrashed: false
