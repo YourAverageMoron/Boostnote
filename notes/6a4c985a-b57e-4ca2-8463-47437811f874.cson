@@ -1,5 +1,5 @@
 createdAt: "2019-10-09T07:39:36.550Z"
-updatedAt: "2019-10-09T11:01:25.551Z"
+updatedAt: "2019-10-14T13:33:15.357Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Introduction to Intelligent Agents"
@@ -181,17 +181,119 @@ content: '''
   
   Agents, and agents as intentional systems are just an abstraction
   
+  ---
   
+  ## Agent architecture
+  ### Abstract architecture for agents
+  Environment is a finite set E of discrete continuous states:
+  ```
+  E = {e0, e1, ..., en}
+  ```
+  
+  Agent actions change the environment:
+  ```
+  Ac = {α0, α1, ..., αn}
+  ```
+  
+  Agent acting in an environment generates a run, r:
+  ```
+  r: e0 --α0--> e1 --α1--> e2 --α2--> e3 ... en
+  ```
+  
+  An agent senses the environment state `ei ∈ E` and takes action `αi ∈ Ac`
+  
+  ### Environemts
+  We define `R` as the set of all runs `{r1, r2, ..., rn}`
+  
+  Then <code>R<sup>Ac</sup> ⊂ R</code> that end in an action ei --`αi`-->
+  
+  And <code>R<sup>E</sup> ⊂ R</code> that end with an environment --`αi-1`--> ei
+  
+  We define a state transformer function:  <code>t: R<sup>Ac</sup> -> 2<sup>E</sup></code>
+  
+  Where `t` takes a run ending in an action and determines the next state and <code>2<sup>E</sup></code> denotes the power set `(P(E))` i.e all possible environment
+  
+  `t(r) = Ø` means that there is no sucessor state for r: run at end
+  
+  Define Env = <E, e0, t> where:
+  `E` is the set of all environments
+  `e0 ∈ E` is the initial state
+  t is teh state transformer function
+  
+  ### Agents and systems
+  Agents will map runs to actions: <code>Ag: R<sup>E</sup> --> Ac</code>
+  
+  Agents choose actions using the run history
+  
+  Let `AG = {Ag1, Ag2, ..., Agn}` be the set of all agents
+  
+  A multi agent system is <Ag, Env>
+  
+  A system has a set of possible runs: R(Ag, Env)
+  
+  R(Ag, Env) contains only complete runs that is: `∀r ∈ R : t(r) = Ø`
+  
+  ### Traces
+  A sequence `(e0, α0, e1, α1, e2, α2, ..., en, αn)` is a run of agent Ag in environment `Env = <E, e0, t>` if:
+  e0 is the initial state of the Env
+  `α0 = Ag(e0)`
+  and
+  ```
+  for i<0:
+    en ∈ t((e0, α0, ..., αn-1))
+    and
+    αn = Ag((e0, α0, ..., en))
+  ```
+  
+  ### Building an agent
+  #### Purely reactive agents
+  Act in response to each and every sensing operation
+  
+  Choose action regardless of history:
+  ```
+  Action: E --> Ac
+  ```
+  
+  A thermostat os a purely reactive agent
+  
+  #### Perception: interpretation of sensing
+  Add perception: act in response to 0 or more sensing operations
+  
+  See observes environment
+  
+  Output of the see function is a percept:
+  ```
+  see: E --> Per
+  action: Per* --> Ac
+  ```
+  
+  #### Agents with state: add memory
+  `S = {s0, s1, ... sn}` internal agent states: how an agent remembers preception states of the environment
+  
+  Redefine action and introduce next:
+  ```
+  action: S --> Ac
+  next: S x Per --> S
+  ```
+  
+  #### Agents with state: agent control loop
+  1. Agent starts in some initial state s0
+  2. Observe environment state ei
+  3. Generates percept pi=see(ei)
+  4. Update agent state s<sub>i+1</sub> = next(si, pi)
+  5. Choose to do: action(s<sub>i+1</sub>) or nothing at all
+  6. Repeat from step 2
 '''
 linesHighlighted: [
-  25
   29
   45
   59
   91
-  127
   138
-  1
+  24
+  236
+  210
+  223
 ]
 isStarred: false
 isTrashed: false
