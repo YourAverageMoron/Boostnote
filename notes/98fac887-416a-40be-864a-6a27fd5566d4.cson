@@ -1,0 +1,177 @@
+createdAt: "2019-10-15T09:59:36.238Z"
+updatedAt: "2019-10-15T11:30:43.571Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Finding the root causes of accidents"
+tags: [
+  "CM30072"
+  "Safety-Critical_Systems"
+  "Computer_Science"
+  "University"
+]
+content: '''
+  # Finding the root causes of accidents
+  
+  ## Hierarchical model of accident causes
+  ### Level 3: Constraints
+  Constraints (or lack of constraints) that allowed conditions to cause events, or allowed to conditions to exist
+  
+  These are often refered to as root causes
+  
+  #### Examples
+  - Lack of street signs
+  - Penalties for not wearing seatbelt 
+  - Lack of pedestrian crossings
+  - Safety culture
+  
+  ### Level 2: Conditions
+  Conditions (or lack of conditions) that allow the events in level 1 to occur
+  
+  #### Examples
+  - Inexperienced driver
+  - No ABS
+  - Wet roads (less friction)
+  - No (or defective) seatbelt
+  - Person crossing the street
+  
+  ### Level 1: Mechanisms
+  Succession of events
+  
+  #### Examples
+  Driver hit the break, the car skidded into a tree, the driver was then thrown from the car and injured
+  
+  ---
+  
+  ## Analyzing level 3: constraints
+  ### What does it include?
+  - Constraints on the technical and physical conditions
+  - Social dynamics/human actions
+  - Management system and organisational culture
+  - Govermental and socioeconomic policies
+  
+  These causes are most likely affect future accidents, however we often pay more attention to levels 1 and 2
+  
+  ---
+   
+  ## Finding root causes of accidents
+  Finding the root cause of an accident is key to preventing similar accidents.
+  
+  The root level causes of accidents can be divided into three categories:
+  1. Deficiencies in the safety culture of the industry or organisation
+  2. Flawed organisational structures
+  3. Superficial or ineffective technical activities
+  
+  ### Deficiencies in the safety culture of the industry or organisation
+  **Safety culture** - The general attitude and approach to safety reflected by those who participate in the industry
+  e.g workers, management, industry regulators, and government regulators
+  
+  Ideally participants are all equally concerned about safety, both in the processes they use and in the final product
+  
+  However this is not always the case, this is why we have industry and government regulators
+  
+  #### The deficiencies in safety culture
+  - Overconfidence and complacency
+    - Discounting risk
+    - Over-reliance on redundancy
+    - Unrealistic risk assessment
+    - Ignoring high-consequence, low probability events
+    - Assuming risk decreases over time
+    - Underestimating software related risks
+    - Ignoring warning signs
+  - Disregard or low priority for safety
+  - Flaws resolution of conflicting goals
+  
+  #### Overconfidence and complacency
+  ##### Discounting risk
+  Major accidents are often preceded by the belief that they cannot happen
+  
+  A good example of this is the Titanic:
+  Nobody thought it could sink, and because of this a lot of safety protocols were glossed over or disregarded all together
+  
+  ###### The Titanic effect:
+  >Used to explain the fact that
+  major accidents are often
+  preceded by a belief that they
+  cannot happen.
+  
+  ##### Over-reliance on redundancy
+  Redundant systems use extra components to ensure that the failure of one component doesn't result in the failure of the whole system
+  
+  Many accidents can be traced back to "common-cause failures" in redundant systems
+  
+  **Common-cause failure** - these occure when multiple redundant components fail at the same time, for the same reason
+  For example in the case of a fire or electrical outage
+  
+  Therefore we must be aware that although redundancy may help if one component fails, but we must be aware that all components can fail
+  
+  ###### Challanger space shuttle
+  This had a redundant system for the rocket boosters, however both rings failed at once
+  
+  ##### Unrealistic risk assessment
+  It is common for developers to overestimate how resilient a system is and make unrealistic risk assesments
+  This can lead to a lack of investigation into how it actually performs
+  
+  ###### Therac-25 
+  The software risk assessment was 10<sup>-11</sup> chance that the computer selects the wrong energy level
+  This pretty much meant that accidents were impossible
+  Because of this there were no investigations around possible overdoses
+  
+  This resulted in 6 accidents between 1985 and 1987 with doses approximetly 100 times the intended dose
+  
+  ##### Ignoring high-consiquence, low probability events
+  A common discovery after accidents is that the events involved were regarded as very hazardous before the accident, but were dismissed as increadible
+  
+  > risk = severity x probability
+  
+  ###### Apollo 13
+  Ground control did not believe what their instruments were telling them
+  There were no pre scenarios where two oxygen tanks and two fuel cells were damaged at the same time
+  They thought it could not happen
+  
+  ##### Assuming risk decreases over time
+  There is a common belief that a system must be fine because it operated without any accidents for many years
+  
+  Risk may decrease, remain constant, or increase over time
+  
+  It depends on the system
+  
+  It can increase due to operators becoming over-familiar with safety procedures and hence becoming lax or even missing them out
+  
+  ###### Therac-25
+  This system operated thousands of times before the first accident. With time, operators began to use the system faster, triggering a software error that had not surfaced before
+  
+  ##### Underestimating software related risks
+  There is a pervading belief that software cannot fail, and that all errors can be removed by testing
+  
+  Hardware backups, interlocks, etc, are being replaced with software
+  
+  Many of these mechanical safety devices are well tested, cheap, reliable, and failsafe (based on physical principles to fail in a safe state)
+  
+  Most industries that are run with computers are not computer scientists
+  People that are not in the software industry often thing that systems cannot fail
+  
+  It is therefore misguided to replace the mechanical safety devices with software alternatives
+  
+  A similar argument can be made for changing existing software, where some changes can appear easy, there are often more factors that need to be taken into account
+  
+  ###### Mars climate orbiter
+  The software was changed to include a new thruster equation, but the 4.45 correction factor (the difference between the metric and imperial units), blured in the origional code was not noticed when the new vendor-supplied equation was used to update the software
+  
+  ##### Ignoring warning signs
+  Accidents are frequently preceded by public warnings or a series of minor occurences
+  
+  ###### Kings cross underground fire
+  This was apparently caused by a lighted match which droped into an escalator, which fell through and set fire to dust and grease on the track beneath
+  
+  There had actually been an average of 20 fires a year from 1958 to 1987, which were called "smoulderings" presumably to make them sound less serious.
+  They caused some damage but nobody was killed
+  This may have lead to the views that these fires were not dangerous
+'''
+linesHighlighted: [
+  33
+  51
+  78
+  84
+]
+isStarred: false
+isTrashed: false
