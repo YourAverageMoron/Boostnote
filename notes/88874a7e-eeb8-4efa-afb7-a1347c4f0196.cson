@@ -1,0 +1,70 @@
+createdAt: "2019-10-15T20:10:54.303Z"
+updatedAt: "2019-10-16T09:47:44.203Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Layering Models"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # Layering Models
+  
+  We need a common language (protocol) for the Internet
+  
+  This common language is called the Transmission Control Protocol/Internet Protocol (TCP/IP)
+  
+  This name is more historical than accurate, but to see what it
+  means we need to think of layers
+  
+  ## Introduction to the layering model
+  
+  ### How will two computers communicate?
+  There needs to be some form of physical connection whether it is electrical or otherwise
+  
+  They must be compatible on voltages, how bits are represented as electrical or optical signals
+  
+  They must agree on how to represent data as bits, this is for any type of data ranging from how characters are encoded to how you would encode a colour
+  
+  ### Why do we represent building the standards for networks as layers?
+  Building the standard all in one go would be a massive challange all at once, there is way too much to think about
+  
+  By splitting the design into chunks that have well defined functionality we can make the problem a lot easier
+  
+  These chunks are known as layers
+  
+  ---
+  
+  ## Layering models
+  
+  ### What is a layering model?
+  A layering model is just a suggestion of how you might want to slice up the problem of designing a network standard
+  
+  A layering molel is **not** a networking standard
+  
+  The standard we create using a layering model can then be used to create implementations
+  
+  ### How do we use a layering model and implementations?
+  First we pick a layering model
+  
+  This can be used to guide us in making a standard
+  
+  We use the standard to direct the implementations
+  
+  We can then use the implementations
+  
+  There will likely be several differing implementations, but these can all use the same comprehensive standard
+  These implementations will interoperate
+  
+  ### Types of layering models in networks
+  For networks there are two main layering models:
+  1. ISO Open Systems Interconnection Seven-Layer Model
+  2. Internet Four-Layer Model
+  
+  The OSI model is widely used while the Internet model is not, despite closely mirroring the Internet standard
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

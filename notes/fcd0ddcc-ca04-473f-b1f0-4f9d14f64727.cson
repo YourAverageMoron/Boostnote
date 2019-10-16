@@ -1,0 +1,83 @@
+createdAt: "2019-10-15T16:57:23.019Z"
+updatedAt: "2019-10-15T20:10:49.727Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Basics of Networking Protocols"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # Basics of Networking Protocols
+  ## Introduction and why we need protocols
+  A packet doesnt know how to get to its destination
+  #Even the source host doesnt generally know a route to the destination (only if the destination is on the local network)
+  
+  A packet is like a postcard with and address written on it
+  It relies on the routers it passes through to make the right decisions
+  
+  To ensure maximum interoperability, the Internet relies on standards and standardised protocols
+  
+  The use of standards means that machine A will be able to communicate with machine B even if A and B are made by completely different companies
+  Or if they are completely different technologies that have never previously interacted
+  
+  It is clear that you must have standards for interoperability in hardware: you cant just plug an electrical plug into an optical socket
+  
+  However you also need standards in software too
+  For example if you try to use a web page authoring tool that doesnt produce standard HTML
+  
+  ---
+  
+  ## RFCs
+  Most of the internet follows a collection of specifications called Request for Comments (RFCs) 
+  
+  These are freely available on the Internet for everyone to read and implement 
+  
+  The RFC philosophy:
+  > Be as close to the RFC as possible in what you do yourself, but be as liberal as possible regarding what you accept other to do
+  
+  ---
+  
+  ## There are several bodies that oversee the structure and working of the Internet:
+  - **Internet Society (ISOC)** - oversees the Internet standard development processes
+  - **Internet Architecture Board (IAB)** - an ISOC committee that oversees the technical and engineering development of the Internet, particularly the IETF and IRTF
+  - **Internet Engineering Task Force (IETF)** - IAB committee that develops standards and publishes RFCs
+  - **Internet Engineering Steering Group (IESG)** - an executive sub-committee of IETF that has final say over RFCs
+  - **Internet Research Task Force (IRTF)** - IAB committee that does long-term research and development of Internet technology
+  - **Internet Research Steering Group (IRSG)** - a sub comittee of the IRTF that manages the research groups
+  - **Internet Corporation for Assigned Names and Numbers (ICANN)** - a nonprofit internationally-organised organisation to oversee global resources such as names and numbers
+  - **Internet Assigned Numbers Authority (IANA)** - an affiliate body to ICANN that deals with domain names, IP addresses and other things, it is run by a company named "Public Technical Identifiers"
+  
+  The IANA delegates management of various things to **Regional Internet Registries** RIRs 
+  For example domain names and addresses
+  
+  ### The current RIRs
+  - African Network Imformation Centre (AfriNIC) - Africa
+  - American Registry for Internet Numbers (ARIN) - North America and Antartica
+  - Asia-Pacific Network Information Centre (APNIC) - Asia, Australia, New Zealand
+  - Latin America and Caribbean Network Information Centre (LACNIC) - South America
+  - Reseaux IP Europens Network Coordination Centre (RIPE) - Europe, Russia, the Middle East, and Central Asia
+  
+  The RIRs further delegate things like management of domain names to comercial companies
+  E.g 123-reg, GoDaddy and houndreds of others
+  
+  ### Other important specification bodies include
+  - **Institute for Electric and Electronic Engineers (IEEE)** - hardware like Ethernet and WIFI
+  - **International Standards Organisation (ISO)** - e.g XML standards
+  - **International Electrotechnical Commission (IEC)** - e.g Digital Living Network Alliance (DLNA)
+  - **Telecommunication Standardization Sectior of the International Telecommunication Union (ITU-T)** - e.g DSL standards
+  - Lots more national and international institutions
+  
+  ---
+  
+'''
+linesHighlighted: [
+  1
+  20
+  43
+  30
+]
+isStarred: false
+isTrashed: false
