@@ -1,5 +1,5 @@
 createdAt: "2019-10-15T20:10:54.303Z"
-updatedAt: "2019-10-16T09:47:44.203Z"
+updatedAt: "2019-10-16T20:01:15.834Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Layering Models"
@@ -64,7 +64,107 @@ content: '''
   2. Internet Four-Layer Model
   
   The OSI model is widely used while the Internet model is not, despite closely mirroring the Internet standard
+  
+  ---
+  
+  ## Encapsulation
+  Conceptually data from an application is passed down through the layers until it reaches the hardware
+  I.e through a sequence of pieces of software that perform the functions of each layer
+  
+  As it passes from layer to layer it is encapsulated - a transformation of the data in such a way that the layer below can cope with it transparrently 
+  
+  It is done in a way that can be untransformed back again
+  
+  ### Each layer transformation might
+  - Add an identifying header or trailer or both that is needed for the functionality of the layer
+  - Encode any bit patterns that might be misinterpreted or mis-transmitted by the next layer
+  - Put items in a standard form
+    - e.g integers into a well-known format
+  - Do some arbitrarily complicated manipulation
+  - Do nothing at all
+  
+  ### Example
+  Some early modems treated byte values less than 32 as commands to the modem, this means that data would not be transmitted
+  
+  E.g the value 4 might mean "end of transmission" and the modem should drop the connection
+  
+  How sould the modem handle the data that contains the value 4?
+  
+  You need to transform the data such that "4" is never seen by the modem in the datastream
+  
+  This transformation must be reversable, so the other end can reconstruct the 4
+  
+  So the idea of encapsulation is to allow data to be transmitted accutately, even if you are using weird hardware
+  
+  ### Byte stuffing
+  Transformations can use byte stuffin - the link layer could replace byte value "04" by a pair of bytes "DB D4" (hexadecimal)
+  
+  Both bytes will be transmitted unaffected by the modem
+  
+  The link layer at the other end can recognise this pair and replace it by a single byte "04"
+  
+  The "DB" is called an escape character, and its presence in the datastream means that the next character is encoded, so no special action is taken
+  
+  #### But what if the origional data is DB D4?
+  Not only do the bytes under 32 need to be stuffed, do does the escape character
+  
+  For example "DB" in the origional data is stuffed as "DB FF"
+  
+  So the datastream "DB D4" becomes "DB FF D4"
+  
+  With byte stuffing, we exchange some expansion of the data for the correct transmission of that data
+  
+  ---
+  
+  ## Example of using a layering model
+  An example where you are sending an email
+  - The email application might add a standard email header (MAIL FROM, RCPT TO, etc.)
+  - This is passed to the presentation layer. As far as layer is concerned it gets passed a chunk of text from the application layer
+    - It doesn't (or shouldn't) know that the first few characters are an email header
+    - It may transform the characters in some way - e.g. putting characters int a standard format; it might prepend its own header
+  - This is passed to the session layer. As far as this layer is concerned it gets a bunch of bits from the previous layer
+    - It doesn't (or shouldn't) know that the first few bits are a layer header
+    - It may transform the bits in some way - e.g it might prepend a header
+  - And so on through the layers
+  
+  At the destination
+  - At the destination a bunch of bits is recieved by the hardware
+  - We now proceed up the layers, unwrapping and untransforming as we go
+  
+  ---
+  
+  ## Pros and cons
+  When we consider it this way it seems a bit waseful, the origional data is small but the data transmitted on the wire can mostly be the headers added by the various layers
+  
+  It may seem like encapsulation adds complexity to the implementation as sell as overhead which reduces the effective throughput
+  
+  However layering and encapsulation actually **reduce** the overall complexity
+  It also adds flexability
+  
+  ### Example
+  Suppose we have a 1Gb network card in our machine and someone comes along with a 10Gb card
+  
+  Because the physical layer is (mostly) seperate from the data link layer we can just write a new standard for the 10Gb physical layer and slot in where the onld 1Gb standard was
+  
+  The upper layers don't need to know anything has changed
+  
+  And we can slot in the implementation for the new hardware in exactly the same way
+  
+  We don't have to rewrite our email application (or web browser, etc.) because of some upgraded hardware
+  
+  In the same way we can replace any od the other layers without affecting the rest of the stack
+  
+  ---
+  
+  ## Wrapping up
+  Each layer simply hands off to the next, it doesnt care what the next layer does
+  As long as it has the right behaviour it doenst matter how it is actually implemented
+  This enables useful tricks like tunnelling
 '''
-linesHighlighted: []
+linesHighlighted: [
+  36
+  9
+  57
+]
 isStarred: false
 isTrashed: false

@@ -1,0 +1,135 @@
+createdAt: "2019-10-16T11:03:29.902Z"
+updatedAt: "2019-10-16T18:13:22.364Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "OSI Layer Model"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # OSI Layer Model
+  
+  ## Overview
+  There are 7 OSI layers:
+  1. Physical
+  2. Data Link
+  3. Network
+  4. Transport
+  5. Session
+  6. Presentation
+  7. Application
+  
+  ---
+  
+  ## Physical layer (PHY) - layer 1
+  The physical layer, or layer 1, is the hardware layer and deals with the transmission of bits over the channel
+  
+  ### For example
+  - What voltages to use
+    - Or colours of light pulses
+    - Or radio wavelengths to use
+  - What encoding for bits
+    - How much time a bit should be
+  - How many wires to use in a cable
+  - What plugs to use in a cable
+  - And many more
+  
+  Generally, anything to do with choices regarding hardware
+  
+  ---
+  
+  ## Data link layer - layer 2
+  Also know as the media access layer (MAC) or layer 2
+  
+  Takes the physical layer and tries to create a channel where there are no undetected errors of transmission
+  
+  We know networks are not 100% reliable, so we must take into account possible errors and deal with them
+  It is in the data link layer that the ISO recommends you think about these layers
+  
+  If a frame is corrupted, the MAC layer may attempt to resend it; or send a message to the next layer indicating the problem
+  
+  A popular choice is to do nothing at all and allow a higher lever to figure out what is wrong and choose a remedy
+  
+  It is up to the standard we are designing to decide what actually happens
+  The layering model just says it is a goodidea to consider these errors here
+  
+  In real implementations, this layer is often strongly intertwined with the physical layer
+  
+  ---
+  
+  ## Network layer - layer 3
+  The network layer, layer 3, controls the operation of the network, in particular the issue of routing data from source to destination
+  
+  It can also deal with congestion - if there is too much data for a particular link it might route some data via another link, or use flow control to slow down the rate of transmission
+  
+  It can speed up rates if things are going well
+  
+  Accounting might be managed in this layer - counting the number of bits so we can bill the user
+  
+  Finally quality of service might be handled - e.g ensuring there is always enough bandwidth to stream a video
+  
+  --
+  
+  ## Transport layer - layer 4
+  Layer 4 accepts data from the session layer (layer 5) and arranges it into packets suitable for the network layer: **packetisation**
+  
+  It takes packets from the network layer (layer 3) and reassembles it into the orrigional data stream: **depacketisation**
+  This needs to deal with packets arriving out of order
+  
+  It must make sure the network is reliable
+  It must make sure that data is recieved is the same as the data that was sent
+  Ensure that there is no corruption or loss in data
+  
+  Reliability is not always a requirement of a network
+  
+  ---
+  
+  ## Session layer - layer 5
+  Layer 5 manages sessions between source and destination
+  
+  Establishing and terminating connections - e.g remote login connection
+  
+  Restarting interrupted connections
+  
+  Sessions can be quite short, e.g just long enough for an email or web page to be transmitted
+  
+  In general, a session is just some logically connected set of exchanges that have some unified identity
+  
+  For example, if the network crashes and reboots halfway through a big data transfer, the session can be picked up from where it left off, rather than starting again
+  
+  Protocols such as HTTP don't automatically pick up from where they left off
+  Therefore there is possibly a gap or omission somewhere - something the designers did not address
+  
+  ---
+  
+  ## Presentation layer - layer 6
+  This provides functionlity that we dont want to implement in every application
+  
+  In particular it decides the representations of data such as:
+  - characters
+  - integers
+  - floating point values
+  
+  It does this so the source and destination can agree on the data communicated
+  
+  ---
+  
+  ## Application layer - layer 6
+  This is used by programmers - ideally they would not have to worry about the lower layers in their application
+  
+  It contains protocols like HTTP for the Web, SMTP for email, and so on
+  
+  Built on top of these protocols are the applications that the users can interact with e.g chrome and thunderbird
+  
+  
+'''
+linesHighlighted: [
+  63
+  31
+  50
+]
+isStarred: false
+isTrashed: false

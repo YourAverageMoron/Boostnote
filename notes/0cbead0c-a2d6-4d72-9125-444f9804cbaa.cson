@@ -1,0 +1,51 @@
+createdAt: "2019-10-16T09:51:17.136Z"
+updatedAt: "2019-10-16T10:44:24.859Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Proposal Outline"
+tags: [
+  "CM30082"
+  "Computer_Science"
+  "Individual_Project"
+  "University"
+]
+content: '''
+  # Proposal Outline
+  
+  ## Description of problem
+  a detailed description of the problem you will seek to address in the project (normally 2-3 pages plus references)
+  
+  - Explain the problems with over use of social media
+    - There is that research paper into facebook
+  - Explain about addictive user experience
+  - Talk about the current solutions to this, maybe talk about their problems (blocking doesnt always work) ?foggs grid?
+  - Propose my solution -> using persuasive techniqes 
+  
+  ---
+  
+  ## Requirements specification
+  a high-level Requirements Specification identifying the main objectives and deliverables for the project (1-2 pages)
+  
+  - Requirements of how the application will work:
+    - Functional 
+    - Non functional
+  - Testing requirements:
+    - Any user testing that i will do to test how effective my version is against its competitors
+  
+  ---
+  
+  ## Project plan
+  a detailed Project Plan using appropriate techniques (e.g. Gantt Chart) that identifies the tasks you will undertake and the initial time allocation to these tasks
+  
+  - Development of app
+  - User testing -> Making sure app is usable
+  - User testing -> testing how effective the application is
+  
+  ---
+  
+  ## Required resources
+  a list of resources required to complete the project and their availability
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
