@@ -1,0 +1,49 @@
+createdAt: "2019-10-20T18:10:37.815Z"
+updatedAt: "2019-10-21T11:07:52.884Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Problem proposal Draft 1"
+tags: [
+  "CM30082"
+  "Computer_Science"
+  "University"
+  "User_Experience"
+]
+content: '''
+  # Problem proposal Draft 1
+  
+  As more of the worlds population begin to use smartphones [Pergentage of smartphone users], the danger of smartphone related addictions becomes more of a risk as the exposiure to addictive applications such as social media increases [percentage of social media time].
+  
+  There are three main issues, problematic smartphone usage, problematic social media usage, and internet addiction **(reword this + include gamning addiction?)**. **(Similar to gambling addictions?)**
+  
+  **(Find a way to descibe each of the addictions - Can be a brief example)**
+  Social media addiction is described as "an unhealthy dependence on interactive platforms such as Facebook, Twitter and Instagram. [What is social media addiction? - Definition from WhatIs.com](https://whatis.techtarget.com/definition/social-media-addiction)
+  **(Find a better reference?)**
+  
+  
+  
+  Although these are not recognised as mental disorders by many of the psychiatric journals **(Check and reference this)**, similar disorders such as gaming addiction are mentioned. Despite not being mentioned, reasearch has shown overuse of these systems can lead to mental and physical problems **(find a better word)**
+  
+  **(Discription of the problems caused by the addictions)**
+  
+  **(Description of why we become addicted to certain applticaitons)**
+  - Wikipedia has a bunch of ideas
+  - Research some more as well
+  - Addictive UX hooked book?
+  
+  **(Possible solutions for fixing this)**
+  - **(Talk about some of the non application solutions such as removing notifications)**
+  - There are a range of applications that attempt to solve this problem
+    - Googles digital wellbeing initiative 
+    - Apple screen time (Android might have similar)
+    - Apps that do the same thing
+    - Blloc Zero 18 - Minimilist android OS
+    -  These can be intrusive forcing apps to stop and locking users out
+    -  Or they simply monitor what the user is doing
+      - they dont give too many soluctions to the problem
+    - It might be more beneficial to encourage users to stop
+    - Thereby encouraging a healthy relationship with mobile and social media usage
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
