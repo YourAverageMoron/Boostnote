@@ -1,0 +1,84 @@
+createdAt: "2020-01-16T15:11:11.459Z"
+updatedAt: "2020-01-16T16:37:45.538Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Reinforcement Learning for Cooperative Overtaking"
+tags: []
+content: '''
+  # Reinforcement Learning for Cooperative Overtaking
+  
+  - Solves the cooperative overtaking problem for autonomous driving **WHAT**
+  - Uses reinforcement learning **WHAT**
+  - Learning in such a situation is challenging due to vehicular mobility  **WHAT**
+    - which renders a continuously changing environment for each learning vehicle
+    - drawing on Coordination Graph (CG) to explicitly model dependency among vehicles and decrease computation complexity of the overall decision making problem 
+    - Dynamic CG (DCG) problem
+  - Without no explicit coordination mechanisms, inefficient behaviors among vehicles might cause fatal uncoordinated outcomes **WHY**
+  - Uses 2 coordingation models to enable distributed learning of cooporative overtaking maneuvers in a group of vehicles **WHAT**
+    - identity-based approach
+      - distinguishes each vehicle’s identification and builds a new CG once the topology has changed
+    - position-based approach
+      - that builds a constant CG based on the relative positions of the vehicles
+  - Then adds extention mechanisims to make them work in comlex real situations with any number of vehicles **WHAT**
+    - The primary difficulty for this extension is how to properly tackle the conflicts and coordination among different subgroups of vehicles, each of which is governed by a basic coordination model
+  - Experiments verify that, by capturing the underlying consistency of identities or positions during vehicles’ movement, efficient coordinated behaviors can be achieved simply through vehicles’ local learning interactions **WHAT FOUND?**
+  - Automated vehicles is a big industery, promises to improve safety, efficiency, energy consumption, comfort and mobility **WHY**
+  - There is a wide range of scentarios that the automated car can be in, too many to realistically tackle manualy (**WHY**)
+    - Doing it manually would result in suboptimal policies
+  - The challanges presented lend themselves to reenforcement learning **WHY**
+    - Adapt to learn optimal driving strategies
+  - Previous studies have been successfull in showing that RL can be applied to a single multi agent system, but not multi agent systems **WHY**CO
+    - This is the environment that it will be working in in the real world
+  - There has been reasearch into connected autonomous vehicles (CAV) **WHY**
+    - The main problem to be solved in this is how to aviod potential conflicts in high-level strategic control policies
+  - There has been research into: **WHY**
+    - cooperative adaptive cruise control
+    - cooperative lane changing
+    - intersection navigation
+    - But:
+      - All these studies, however, directly applied simple distributed RL in a multi-vehicle context.
+      - no explicit coordination mechanisms have been applied
+      - this simplification may result in inefficient driving policies and sometimes fatal uncoordinated outcomes
+  - This paper aims to solve the coordination problems in autonomous driving using multiagent RL (MARL) techniques **WHAT**
+    - Particularly, we focus on high-level strategic decision making of following or overtaking in a group of vehicles on highways
+  - This problem is considered because determining if and when to make lane changing and overtaking maneuvers are the two main strategies for autonomous driving **WHY**
+  
+  ## Coordinated MARL and CG
+  - We cast such coordination problems as factored MDP problems **METHOD**
+  - The major difficulty in multi agent RL is that the computation complexity grows exponentially with the number of agents **PROBLEM**
+  - One way to alleviate this problem is to exploit certain level of independence among agents
+  - Coordination Graph (CG) is one of such effective approaches, which decomposes global payoff function 𝑄(s, a) into a linear combination of local payoff functions
+  -  This decomposition can be depicted usingan undirected graph 𝐺 = (𝑉, 𝐸)
+  - 𝑖 ∈ 𝑉 represents an agent and an edge (𝑖, 𝑗) ∈ 𝐸
+  - indicates that the corresponding agents have to coordinate their actions
+  - The main goal of CG is to find a coordination strategy of actions for the agents to maximize the payoff 𝑄(s, a) at state s
+    - We can use Variable Elimination (VE) algorithm for this
+  - In VE, an agent first collects all payoff functions related to its edges before it is eliminated
+    - It then computes a conditional payoff function which returns the maximal value it is able to contribute to the system for every action combination of its neighbors
+    - It can then get the best-responce function
+      - The action with the maximum value
+    - The VE produces the optimal joint action
+  
+  ### Markov and RL
+  - Rewards based on distance (if the distance is less than 3 meters between vehicles) RL is deducted 5 (-5 for being too close)
+  - Other stuff added like gradient penalty for speed and distance
+  - Reward function evaluationed following strategic decision like overtaking
+  - Overall it forces the agent to make the tradoff between forward and backward safety
+    - Mimics actual driving
+  - Only considers safety not:
+    - Smoothness of driving etc
+  - Uses q learning
+  
+  ### Coordiation models
+  - ONly consideres cooperative agents
+    - Not taking into account drivers that act for themselves
+  - We are now interested in how multiple vehicles can achieve coordinated overtaking policies through their distributed and concurrent learning behaviors
+  
+  ### Dynamic CG
+  - link may disappear from the graph due to the break of link between two agents or it may connect two distinct agents at different time steps
+  - not only need to reason about the behaviors of otheragents, but also need to reason about how to adapt to these behaviors under a continuously changing environment.
+  - Agent keeps identities no matter their spacial conditions
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

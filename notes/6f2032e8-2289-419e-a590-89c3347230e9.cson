@@ -1,0 +1,318 @@
+createdAt: "2020-05-15T15:29:37.935Z"
+updatedAt: "2020-05-17T14:32:56.338Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Culture and Language"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Culture and Language
+  
+  ## Sociality
+  
+  ### Why not be social?
+  - Why not be social?
+  - Competition for food, shelter, mates
+  - Time spent maintaining social structure
+  
+  ### Traditional Explanation 
+  - Galton 1871, Hamilton 1973
+  - Aggregation as a form of cover seeking
+  - Isolation increases probability of being near a predator
+  
+  ---
+  
+  ## Culture – Biological Perspective
+  - Culture: Behaviour acquired from conspecifics by non-genetic means 
+    - (Richerson & Boyd 2005)
+  - Neo-diffusionist hypothesis: cultural diffusion of adaptive behaviours more likely than neutral or negative traits
+    - (Kashima 2008)
+  
+  ### Culture as Concurrency
+  - If each agent has a 1% chance of discovering a skill (e.g. making yogurt) in its lifetime and there are 2000 agents, at any instant probably some agents will know the skill
+  - If it is easier to learn the skill from a knowledgeable agent than by discovery, then selective pressure for culture
+  - Inclusive fitness c < b × r 
+    - (Hamilton 1964; West et al 2007)
+  
+  ### What About Selfish Genes?
+  - How can evolution select traits that help the community but hurt the individuals?
+  - Inclusive fitness & kin / group selection:
+    - What is transmitted is the replicator
+    - The unit of selection is the vehicle (or interactor.)
+    - Most current vehicles are composed of many, many replicators
+    - (Dawkins e.g. The Extended Phenotype)
+  
+  ---
+  
+  ## Multiple Levels of Interaction => Cooperation
+  
+  ![3e05570f.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\3e05570f.png)
+  
+  ---
+  
+  ## Strategies for Speeding Search
+  - Concurrency
+    - Multiple searches at the same time
+    - Only effective if solutions can be communicated
+  - Pruning
+    - Limit search to likely space of solutions
+  - Culture lets humans search faster
+    - Language
+    - Built conture
+  
+  ---
+  
+  ## Other animals that implement cultures
+  - Culture in nonhuman primates
+  - Chimpanzees (Whiten, Goodall, McGew, Nishida, Reynolds, Sugiyama, Tutin, Wrangham, & Boesch 1999, p . 684)
+  - Macaques (de Waal & Johanowicz 1993)
+  - Capuchins (Perry et al 2003)
+  -  Orangutans (van Schaik et al 2003)
+  
+  ![adf53ecc.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\adf53ecc.png)
+  
+  - Even bacteria have cultures and share info
+  
+  ---
+  
+  ## How Culture is Transmitted
+  - Intentionally versus unintentionally
+  - By instruction or by demonstration
+  
+  ![7882763c.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\7882763c.png)
+  
+  ### Ways to Transmit Culture
+  - Intentionally versus unintentionally
+  - By instruction or by demonstration
+  - Language and teaching
+  
+  ### Human Uniqueness
+  - Tool use / built culture
+  - Self concept
+  - Moral sensibility
+  - Culture
+  - Teaching
+  - Language
+  
+  ---
+  
+  ## Language: Many Types of Information
+  
+  ### Phonetics/phonology/morphology
+  - What words (or subwords) are we dealing with?
+  - Understanding a speech (or character) stream requires decomposing it into the units that have meaning: segmentation
+  - Phonemes are relatively discrete (though they can be merged in transitions.)
+    - Infants babble all(?) initially then settle on the ones they hear / in their language
+  
+  #### Segmentation
+  - Objects in a scene
+  - Gestures in a video
+  - Words in speech
+  - Actions in sequence
+  - Very, very hard in all domains; better with multiple information sources
+  
+  #### Speech Recognition
+  
+  ![4d406e5e.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\4d406e5e.png)
+  
+  ![c5608a14.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\c5608a14.png)
+  
+  - Lots of machine learning or pattern recognition
+  
+  ![91d59f8b.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\91d59f8b.png)
+  
+  ### Syntax
+  - What phrases are we dealing with?
+  - Which words modify one another?
+  
+  #### The Plan For Translation
+  - Build something that parses and generates individual language syntax
+  - Automatically morph sentences between languages’ syntaxes
+  - Use dictionaries to look up replacement words (semantics)
+  
+  #### Syntax: Chomsky’s Grammar(s)
+  - Vocabulary: terminal symbolsclosed classes
+  - S → NP + VP
+  - NP → N | D + NP | ADJ + N | PN
+  - VP → IV | AUX + VP | TV + NP
+  - IV → laughed | cried | ...
+  - AUX → can | will | shall | ... 
+  - TV → throw | catch | ...
+  - N → dog | peacock | justice | ...
+  - D → the | a | an
+  - PN → he | she | they | ...
+  
+  ![c2510eb0.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\c2510eb0.png)
+  
+  #### Parsing
+  - What to Do With a Grammar: Parse
+  - Use it to parse a sentence
+  - Ambiguous sentences have multiple parse trees
+  - Ambiguity can came from multiple definitions (remember, plug in semantics last – often FOPL)
+  - Other words or context may resolve
+  - The farmer pulls the cow on the barn
+  
+  #### Generation
+  - What to Do With a Grammar: Generate
+  - Use it to generate a sentence
+  - Associate a probability with every option
+  - Throw dice
+  - Automatic language
+  
+  #### Compositionality / Recursion
+  - NP → N | D + NP | ADJ + N | PN
+  - VP → IV | AUX + VP | TV + NP
+  - Allows language to be infinitely productive
+  - What no animal language learner has shown
+  
+  #### Chomsky on Cognition
+  - Language is for computation / thought, not communication
+  - Grammars can tell you the limits of human intelligence (e.g. CFG?)
+  
+  #### Chomsky’s Universal Grammar
+  - Hypothesis: every human is born with the universal grammar capacity
+  - Learns to set parameters from listening (know this is true of phonemes)
+  - Evidence: Poverty of the stimulus – children don’t hear enough negative examples to learn language from scratch
+  
+  ##### Critiques of Universal Grammar
+  - You can learn a stochastic grammar model without many negative examples (Chomsky assumed a deterministic one, Chater & Manning, 2006)
+  - Many characteristics of the UG evolve in the language naturally in simulation – necessary characteristics of something learnable (Kirby 1999)
+  - Dual replicator theory: Culture & biology both evolve at the same time under each other’s influence
+  
+  #### Why are humans special? (Bryson 2008; 2009)
+  - Humans are the only primate species capable of precise vocal imitation (Fitch 2000; 2007).
+  - Communicates lots of information, including volume, pitch, timbre and time.
+  - Allows redundant encoding to preserve important details while others can mutate.
+  - Allows communication of complex, sustainable behaviour
+  
+  #### Why should temporal imitation matter?
+  - More information contained in the ‘genetic’ substrate
+  - Allows for more variation while providing redundancy, robustness – assists GAs (Baluja1992; Weicker & Weicker; 2001;Miglino & Walker 2002)
+  - Aligns with Wray (2000) on the evolution of language from phrases, Kirby (2000) on cultural selection for language efficacy
+  
+  #### Why Humans are Special (Bryson 2008, 2009)
+  
+  **(Bryson 2008, 2009)**
+  
+  ![88894340.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\88894340.png)
+  
+  **(Bryson EoL 2010)**
+  
+  ![a1d7c80a.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\a1d7c80a.png)
+  
+  ### Semantics
+  - Semantics and Grounding
+  - What’s the literal meaning?
+  
+  #### Embodiment
+  - Hypothesis: NLP has failed so far because semantics isn’t grounded in human-like experience
+  - E.g. life & career are understood via a metaphor to path which you learn about the hard way in your first few years. (Lakoff & Johnson 1999)
+  
+  **Building Brains for Bodies”, Brooks & Stein (1993), MIT AI lab tech report 1439**
+  
+  ![952f0d69.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\952f0d69.png)
+  
+  #### Large Corpus Linguistics
+  - An alternative to embodyment? -> i dont really know to be honest
+  - Do pattern recognition across many texts
+  - The more one word is used like another word, the more they mean the same thing
+  - Mathematically related to the way web pages are indexed (Lowe 2001)
+  - Human semantics can be replicated by statistical learning on large corpra (Finch 1993, Landauer & Dumais 1997, McDonald & Lowe 1998)
+  - Only information gathered on each word’s ‘meaning’ is what words occur in a small window before and after it
+  - Normally just choose 75 fairly frequent words to watch out for
+  
+  #### Data to Be Matched
+  - Semantic Priming – reaction times showing how similar people consider words’ meanings to be
+  - How quickly you are able to tell that a collection of letters is a real word is dependent on how similar the word’s meaning is to words / concepts you have recently been exposed to
+  
+  ##### Semantic Priming Replication, visualised with a 2-D projection (Lowe 1998). Analysis for comparison to human data uses similarity measured using 75-D cosine
+  
+  ![3e62aba4.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\3e62aba4.png)
+  
+  ##### Bilovich 2006 text: British National Corpus (contemporary word use)
+  
+  ![d3c72dc8.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\d3c72dc8.png)
+  
+  ##### Evolution of moral agency terms (Bilovich & Bryson 2008) terms from the implicit bias task (Banaji & Greenwald 1994) text: Bible
+  
+  ![60e9e5f6.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\60e9e5f6.png)
+  
+  ##### Bilovich 2006 text: Shakespeare
+  
+  ![0f628117.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\0f628117.png)
+  
+  #### Humanlike Biases in Corpus Semantics
+  - Bilovich & I did not replicate Banaji (2003).
+    - Nearest miss was Shakespeare – (nearly) single author?
+  - Macfarlane & I (2013) found matches.
+  - Caliskan, Bryson & Narayanan (2017) matched every general-population text-based implicit bias
+  
+  ##### Macfarlane (2013) Results
+  - Life terms more like pleasant & Death terms more like unpleasant words
+  - Elderly & Youth did not go as per Banaji on pleasantness, though did on competence.
+  -  Male terms more like Career & Female terms more like Family
+  
+  #### Traditional Theory of Semantics
+  **E.g. Deacon (1997) The Symbolic Species**
+  
+  ![3480ae92.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\3480ae92.png)
+  
+  ##### Corpus Semantics Allows...
+  
+  ![66c79201.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\66c79201.png)
+  
+  ### Pragmatics
+  - What should you conclude from what was said?
+  - How should you act?
+  - Much elaborate work on reference. 
+  - E.g. “They thought I was going to town but that wasn’t what I meant.”
+  - Still doesn’t get you to “uh”→ /no don’t go in there keep going straight/ (Agre & Chapman 1988)
+  
+  ---
+  
+  ## Natural language processing (NLP)
+  ### N-grams
+  - Large corpus technique for both language generation and speech recognition
+  - Given previous N words, what is a probable following term? Memorise a sliding window through text
+  - Recognition: disambiguates parses
+  - Generation: just press go
+  
+  ### Speech Recognition
+  
+  ![cf2c09eb.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\cf2c09eb.png)
+  
+  #### Rooter a methodology for the typical unification of access points and redundancy
+  
+  [SCIgen - An Automatic CS Paper Generator](http://pdos.csail.mit.edu/scigen/)
+  
+  ![647d0029.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\647d0029.png)
+  
+  - Krohn cofounded OKCupid as an undergraduate
+  - accepted to the World Multiconference on Systemics, Cybernetics and Informatics, 1995
+  - This created over 120 gibberish papers
+  - Note: probably more about a) reviewing & b) “academic” incentives esp. in China than NLP
+  
+  #### SCIgen Architecture
+  [At MIT we created SCIgen, which generates gibberish science papers that continue to fool academic conferences. Ask us anything! : IAmA](https://www.reddit.com/r/IAmA/comments/32l0ym/at_mit_we_created_scigen_which_generates/)
+  
+  ![3211ba99.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\3211ba99.png)
+  
+  ### Generally, Still Need ‘Real’ Natural Language Processing (NLP)
+  - Negation
+  - Referents for “this” and “that”
+  - Recognising multiple meanings for single word
+  - Motivation, meaning tracking, turn taking
+  - Ethics (not propagating stereotypes)
+  - Cognitive Systems
+  
+  #### (Ferrucci et al., AI Magazine 2010)
+  
+  ![094dd24d.png](:storage\\6f2032e8-2289-419e-a590-89c3347230e9\\094dd24d.png)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

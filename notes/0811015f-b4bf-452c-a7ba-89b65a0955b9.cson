@@ -1,0 +1,112 @@
+createdAt: "2020-05-16T20:56:36.782Z"
+updatedAt: "2020-05-16T21:13:10.541Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Fairness in AI"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Fairness in AI
+  
+  ## The Problem
+  - AI used for making predictions that involve humans
+    - For instance, recommendations while shopping online
+    - Presently, many automated AI programs are used to shortlist candidates for roles
+    - Credit, loan, mortgage decisions are increasingly being automated
+    - Applications are being used in law enforcement to predict recidivism to decide applications of bail or sentencing
+  - Common to all applications is that they use data and make a model to predict future behaviour
+  - Fairness is concerned with how different kinds of errors are distributed among subpopulations
+  
+  ![700446b7.png](:storage\\0811015f-b4bf-452c-a7ba-89b65a0955b9\\700446b7.png)
+  
+  Turkish has gender neutral pronouns, and when translating such a pronoun to English, the system picks the sentence that best matches the statistics of the training set (which is typically a large, minimally curated corpus of historical text and text found on the web).
+  
+  ![2779bdce.png](:storage\\0811015f-b4bf-452c-a7ba-89b65a0955b9\\2779bdce.png)
+  
+  ---
+  
+  ## Machine bias
+  A commercial tool, COMPAS, an acronym for Correctional Offender Management Profiling for Alternative Sanctions, is a case management and decision support tool developed and owned by Northpointe (now Equivant) used by U.S. courts to assess the likelihood of a defendant becoming a recidivist
+  
+  ![be7098e7.png](:storage\\0811015f-b4bf-452c-a7ba-89b65a0955b9\\be7098e7.png)
+  
+  ---
+  
+  ## The Challenge
+  - “risk assessment tool / instrument” = “risk tool / instrument”
+  - Calibration
+  - Balance for the positive class
+  - Balance for the negative class
+  
+  ![267ea070.png](:storage\\0811015f-b4bf-452c-a7ba-89b65a0955b9\\267ea070.png)
+  
+  - given the output of a risk tool, likelihood of belonging to the positive class is independent of group membership
+  - 0.6 means 0.6 for any defendant - likelihood of recidivism
+  - why do we want calibration?
+  
+  ### Calibration in COMPAS Title Text
+  - Predictive parity (also called calibration)
+  - An risk tool identifies a set of instances as having probability x of constituting positive instances, then approximately an x fraction of this set are indeed positive instances, over-all and in sub-populations
+  - COMPAS is well-calibrated: in the window around 40%, the fraction of defendants who were re-arrested is ~40%, both over-all and per group
+  
+  ![7088331a.png](:storage\\0811015f-b4bf-452c-a7ba-89b65a0955b9\\7088331a.png)
+  
+  ### Balance
+  - Balance for the positive class: 
+    - Positive instances are those who go on to re-offend. The average score of positive instances should be the same across groups.
+  - Balance for the negative class:
+    - Negative instances are those who do not go on to re-offend. The average score of negative instances should be the same across groups.
+  - Generalization of: 
+    - Both groups should have equal false positive rates and equal false negative rates.
+  - Different from statistical parity!
+  - the chance of making a mistake does not depend on race
+  
+  ### Desiderata, restated
+  - For each group, a vb fraction in each bin b is positive
+  - Average score of positive class same across groups
+  - Average score of negative class same across groups
+  - can we have all these properties?
+  
+  ### Achievable only in Trivial Cases
+  - Perfect information: 
+    - the tool knows who recidivates (score 1) and who does not (score 0)
+  - Equal base rates: 
+    - the fraction of positive-class people is the same for both groups
+  - cannot even find a good approximate solution
+  - a negative result, need tradeoffs 
+  
+  ### Ways to evaluate Binary Classifiers Title Text
+  
+  ![4d7fabf0.png](:storage\\0811015f-b4bf-452c-a7ba-89b65a0955b9\\4d7fabf0.png)
+  
+  - there is no single answer! 
+  - need transparency and public debate
+  - Consider harms and benefits to different stakeholders
+  - Be transparent about which fairness criteria we use, how we trade them off 
+  
+  ---
+  
+  ## An ML Approach
+  
+  ![acf1f138.png](:storage\\0811015f-b4bf-452c-a7ba-89b65a0955b9\\acf1f138.png)
+  
+  ![09c6c82f.png](:storage\\0811015f-b4bf-452c-a7ba-89b65a0955b9\\09c6c82f.png)
+  
+  ---
+  
+  ## Conclusion
+  - Ensuring fairness needs us to define clearly what our desired objectives are in various socially conscious manner
+  - Try to obtain and specify consistent measures that correlate with the desired outcome
+  - Validate the outcome in a transparent manner
+  - Needs more effort from all players to ensure that the systems are indeed using optimal choices
+  - A very active topic of research
+'''
+linesHighlighted: [
+  63
+]
+isStarred: false
+isTrashed: false

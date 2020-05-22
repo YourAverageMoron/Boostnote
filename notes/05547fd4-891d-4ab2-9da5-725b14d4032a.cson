@@ -1,0 +1,131 @@
+createdAt: "2020-01-16T10:00:56.325Z"
+updatedAt: "2020-01-16T10:59:55.678Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Norm Emergence"
+tags: [
+  "CM30174"
+  "Computer_Science"
+  "Intelligent_Agents"
+  "University"
+]
+content: '''
+  # Norm Emergence
+  
+  ## Two perspectives of norms
+  
+  ### Norms as Denotic concepts
+  - Norms a denotic concepts or logic refer to norms as permissions/prohibitions and obligations, or commitments
+  - For example, one is perhibited to go forward if there is a car to the left
+  - Also called:
+    - Norms as perctriptions
+    - Prescriptive apprioach
+  
+  ### Norms as preference behaviour
+  - Norms are looked at as predetermined or computed preference behaviour to execute from among a **set of behaviours** for a given situation
+  - For example, when there is a car to the left, the potential actions are to stay or go, then one must stay either invariably or with a certain probability
+  
+  ---
+  
+  ## Norm emergence
+  > Reaching a threshold where the norm is followed by a predefined percentage of the population
+  
+  - This is also refered to as Norm Convergence
+  - Typically the threshold value is 90%
+  - Variable
+    - Some consider norm convergence to have happened when more agents choose that not over any other competing norms
+  - Entire population
+    - 100% of the population chooses the same action
+  
+  ### How do norms emerge
+  - For norms to emerge agents must become aware of the norm
+  - Agents learn using active learning
+  - The effects of active learning of norms, can be either experiential, observational or communication based
+  
+  **Active learning of norms:**
+  - **Experemental**:
+    - Agents perform an action and observe the effects of doing so
+    - E.g the punishments
+  - **Observational**
+    - Agents ovserve the actions of other agents in similar situations and adopt their behaviour
+  - **Communication based**
+    - Agents are informed by another agent of the prefered action to perform in a situation
+    - Informtion sharing or norm propigation
+  
+  ---
+  
+  ## Norm lifecycle
+  - The norm lifecycle defines the phases that a norm goes through in its lifetime
+  - The widely accepted norm lifecycle basd on simulation studies include this stage process:
+    - Norm formation//creation
+    - Norm propagation
+    - Norm emergence
+  - There is a final stage where the norm is removed from the norm set, norm removal or dissolution, bit is not considered in the norm emergence literature
+  
+  ![aa0d72ae.png](:storage\\05547fd4-891d-4ab2-9da5-725b14d4032a\\aa0d72ae.png)
+  
+  ---
+  
+  ## Characteristics of norm emergence mechanisms
+  ![0b3f32a4.png](:storage\\05547fd4-891d-4ab2-9da5-725b14d4032a\\0b3f32a4.png)
+  
+  ### Interaction topology
+  #### What is it?
+  - The interaction or network topology that specifies how agents are connected in society
+  - Ulitmately defines how they interact
+  - The neighbourhood size directly relates to this
+  
+  #### Impact on emergence:
+  - Has an impact on the interactions that can occur between agents 
+  - The number of interactions, and whether two agents actually interact, etc are all determined by the network structure
+  
+  ### Cognative abilities of agents
+  #### What is it?
+  - Cognative ability or decision making mechanism refers to how the agent makes a decition
+  - An agent can be programmed to follow a single action every time or randomly follow an action selected from a set of actions
+  - An agent might be programmed to determine its action based on the situation, or internalise the state of the environment and intelligently select the most appropriate action
+  
+  #### Impact on emergence
+  - Event simple trivial avility agents are able to emerge to a norm
+  
+  ### Propogation mechanism used
+  #### What is it?
+  - A propagation mechanism is the way everyone in society is made aware of the existence of the norm
+  - Examples of mechanisims:
+    - Normative advisor
+    - Role model
+    - Learning from interaction
+    - Enforcements and punishment
+  
+  #### Impact on emergence:
+  - The propogation mechanisim will depend on the type of agent system required
+  - One mehtod is more suitable than others
+  - For example the role model is more useful for situations requiring distributed authority whereas normative mechanisims is more suited for central authority
+  
+  ### Learning algorithm
+  #### What is it?
+  - Agents utilise known learning strategies to descover appropriate behaviour based on previous interactions
+  
+  #### Impact on emergence
+  - There are a variaty of learning algorithms
+  - Q-learning out performs WoLF-PHC, Fictitious play and Highest Cumulative Reward-based models when trying to achieve  faster norm emergence
+  
+  ### Observation copabilities
+  #### What is it?
+  - Observations capabilities speak of whether agents have information about other agents
+  
+  #### Impact on emergence
+  - Mechanisms that utilise observation as the only way of learning about norms heavily rely on being able to observe some information about other agents
+  - However other mechanisms have been successful without requiring any observational capabilities of the agents
+  
+  ### Offline or online mechanism
+  #### What is it?
+  - Online method refers to mechanism in place during runtime
+  - Offline is a mechanisim in place before the system is run
+  
+  #### Impact on emergence
+  - THe mehtod chosen by the designer will determine the amount of work required by the designer throught the lifetime of the system
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

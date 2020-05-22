@@ -1,0 +1,70 @@
+createdAt: "2020-01-14T20:00:45.667Z"
+updatedAt: "2020-01-16T12:03:16.375Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Game Theory"
+tags: [
+  "CM30174"
+  "Computer_Science"
+  "Intelligent_Agents"
+  "University"
+]
+content: '''
+  # Game Theory
+  
+  ## Introduction
+  - A bag of analytical tools designed to help us inderstand what we observer when decision-makers interact
+  - Two basic assumptions
+    - Rationality
+    - Strategy
+  - Where can it be used?
+    - Multi-agent systems
+    - Political competetitions
+    - Theoretical computer science
+    - Distributions of natural phenomena
+  - Uses mathematics to express ideas formally
+  
+  ---
+  
+  ## Strategic games
+  
+  ![3234ac7f.png](:storage\\0b1c2bfd-4e71-43fd-a6fa-466f3e333c2c\\3234ac7f.png)
+  
+  - An element a ∈ A is called a profile
+  - For a profile *a* we use *a<sub>i</sub>* to denote the actions of agents i
+    - *a<sub>−i</sub>* denotes the actions taken by the other agents
+  
+  ### Example 
+  - sume we have two agents N={1,2) each with 2 actions A<sub>i</sub>={C,D}
+  - Therefore we have 4 outcomes or profiles:
+    - A= {CC,DD,CD,DC}
+  
+  ![972ca441.png](:storage\\0b1c2bfd-4e71-43fd-a6fa-466f3e333c2c\\972ca441.png)
+  
+  ### Payoff or utility preference
+  ![d50444bb.png](:storage\\0b1c2bfd-4e71-43fd-a6fa-466f3e333c2c\\d50444bb.png)
+  
+  ### Prisoner's dilemma
+  - Two men are collectively charged with a crime and held in separate cells, with no way of meeting or communicating.
+  - They are told that:
+    - if one confesses and the other does not, the confessor will be freed, and the other will be jailed for three years.
+    - if both confess, then each will be jailed for two years
+    - Both prisoners know that if neither confesses, then they will each be jailed for one year.
+  - The payoff matrix could be:
+  
+  ![768b31af.png](:storage\\0b1c2bfd-4e71-43fd-a6fa-466f3e333c2c\\768b31af.png)
+  
+  - (Note that the numbers are flipped, 0 years = 3, whereas 3 years = 0)
+    - Because 0 years is most desirable, therefore highest number
+  
+  ### Nash equilibrium
+  - If one cell results in both dominant stategy outcomes it is a nash equilibruim
+  #### Dominant strategy
+  - Regardless of what the other player chooses to do, we will change the same thing
+  - 
+'''
+linesHighlighted: [
+  44
+]
+isStarred: false
+isTrashed: false

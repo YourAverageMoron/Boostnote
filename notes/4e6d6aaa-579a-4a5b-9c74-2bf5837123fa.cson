@@ -1,0 +1,108 @@
+createdAt: "2020-05-14T19:35:18.233Z"
+updatedAt: "2020-05-14T19:52:04.862Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Design of Systems"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Design of Systems
+  
+  ## How do we design systems?
+  - In previous lectures (and in course work 2) we have considered simulations that model for concepts such as communication and co-operation
+  - In this lecture we will consider an interesting question: How do we design systems that are able to fulfill objectives?
+  - The aim will be to understand about designing systems with strategic participants that have good performance guarantees
+  
+  ---
+  
+  ## The challange
+  - Consider a guessing game
+  - In this game participants can guess any number from 0 to 100
+  - Participants whose guess is closer to 2/3rd of the average would win
+  
+  ### Playing rationally
+  - If participants draw any number between 0 and 100 at random, then the average should be close to 50
+  - 2/3rd of 50 should be 33
+  - However, assuming everyone guesses rationally and average is closer to 33, then 2/3rd of that would be 22 and so on
+  - The challenge is, deciding systems with respect to behaviour of rational agents is hard
+  - In the following slides, the reference is “Twenty lectures on Algorithmic Game Theory” by Tim Roughgarden and his course on this topic
+  
+  ---
+  
+  ## How not to design systems
+  - We will start by studying a contradictory example
+  - In 2012, the Olympic games were held in London
+  - There was a scandal in one of the sports
+  - It was in women’s doubles for badminton
+  - The scandal was a failed tournament design that did not consider incentives correctly
+  
+  ### The system design
+  - There were two phases for the women’s badminton games
+  - There were four groups A,B, C and D with four teams each playing a round-robin
+  - The top two teams advanced to the second - phase that was a knock-out tournament
+  - There were four quarter-finals, then two semi-finals (and an extra match-played by losers of semi-finals to decide the third place) and a final
+  
+  ### Incentive Mis-match
+  - What do the players want?
+    - To win as high a medal as they can
+  - What does the Olymics committee want?
+    - In hindsight, they want every team to try their best to win every match
+  
+  ### Where is the flaw?
+  - Winner from A plays second team from group C and winner from team C plays second team from group A in the quarterfinals
+    - Similarly for groups B and D
+  - On the last day of round-robin there was an upset
+  - The Danish team of Pedersen and Juhl (PJ) beat the Chinese team of Qing and Yunlei (QY), and as a result PJ won group D with QY coming in second
+  
+  ### The controversy
+  - The first controversial match involved another team from China, Xiaoli and Yang (XY), and the South Korean team of Kyung-eun and Ha-na (KH) in group A
+  - The issue: the group-A winner would meet the QW team in the semifinals of the knockout tournament while the the second-best team in group-A would not have to face QW until the final
+  - Two group C teams (from Indonesia and another team from South Korea ) also used the same strategy for the same reason
+  
+  ### The problem
+  - In systems with strategic participants, the rules matter
+  - Poorly designed systems suffer from unexpected and undesirable results
+  - The system designer needs to anticipate strategic behaviour
+  - A branch of game theory termed ‘Mechanism Design’ deals with the science of rule making
+  
+  ---
+  
+  ## Auctions
+  - Suppose a seller has something to sell. Seller would like best price for the item
+  - Let there be n bidders for the item. The bidder would like to minimize the amount to be paid
+  - Let each bidder have an independent valuation vi for the item
+  - If a bidder loses an auction, then the utility is 0
+  - If the bidder wins at price p, then the utility is vi − p
+  
+  ### Sealed Bid Auction
+  - We will first consider a simple class of auction format: sealed bid auction
+  - STEP1: Each bidder i privately communicates a bid bi to the auctioneer
+  - STEP2: The auctioneer decides who gets the good
+  - STEP3: The auctioneer decides the selling price
+  - We can consider that STEP2 is implemented by giving the good to the highest bidder
+  - How do we implement STEP3 will influence the bidder behaviour
+  - Suppose the auctioneer decides to implement STEP3 by giving it away for free
+  - Clearly, the auction would not work and it will devolve into naming a high price for no cost
+  
+  #### First Price Auction
+  - We next consider the case where the auctioneer gives it to the highest bidder at the price that was bid
+  - Based on the utility for the bidder, the price will differ
+  - if the bidder i bids the price vi, the utility would be 0
+  - If the bidder bi wins at a price x, the utility is vi − x
+  - Therefore there is an incentive to the bidder to not bid the truthful valuation of the item
+  
+  #### Second Price Auction
+  - We would like to actually have an auction mechanism that results in each bidder revealing the true valuation of the item
+  - This can be achieved through a second price auction
+  - In this case, the auctioneer awards the bid to the highest bidder but the bidder has to pay the second highest price in the auction
+  - Let the bidder i bid the true value vi and the second highest bid is a price x
+  - The highest bidder would still receive a utility vi − x that is non-zero
+  - In this method, each bidder has an incentive to reveal the true value
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

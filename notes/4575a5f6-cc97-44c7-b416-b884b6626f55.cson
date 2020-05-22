@@ -1,0 +1,236 @@
+createdAt: "2020-01-11T15:31:22.242Z"
+updatedAt: "2020-01-11T19:29:19.985Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Human Computer Interaction and Safety-Critical Systems"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # Human Computer Interaction and Safety-Critical Systems
+  
+  ## Introduction
+  - Many safety critical systems require interaction with a human operator
+  - The design of the interaction with the sytem to enable the human to control the system sffectively is important
+  - Many systems today only use computer displays
+  - One of the key reasons why humans are still used as part of the control and running of safety critical systems is that we are adaptable and flexable
+  
+  ---
+  
+  ## Accidents related to design problems
+  
+  ### Three miles island (1979)
+  - The provwm with the reactor control system's user interace
+  - Despite the valve being struck open, a light on the control pannel indicated that the valve was closed
+  - The light did not actually indicate the position of the valve
+    - Only the status of the solenoid
+    - This have salse evidence that the calve was closed
+  
+  ### Air Canada Flight 143 (Boeing 767) (1983)
+  - Cockpit Feul Quantity System (FQIS)
+  - Fuel loading was miscalculated due to missunderstanding of the recently adopted metric system that replaced the imperial system
+  - Instead of 22,300kg of fuel they had 22,300 pounds on board
+    - 10,100kg about half the amount required to reach the their destination
+    - Glided and landed safely
+  
+  ### Air France Flight 447 (Airbus A330) (2009)
+  - 228 people killed
+  
+  ![0eb9eedd.png](:storage\\4575a5f6-cc97-44c7-b416-b884b6626f55\\0eb9eedd.png)
+  
+  ![20f5b3cd.png](:storage\\4575a5f6-cc97-44c7-b416-b884b6626f55\\20f5b3cd.png)
+  
+  ![355d2dfe.png](:storage\\4575a5f6-cc97-44c7-b416-b884b6626f55\\355d2dfe.png)
+  
+  - Captain Marc Dubois, 58
+  - Pierre-Cédric Bonin, 32, was young and inexperienced
+  - David Robert, 37, had more experience but he had recently become an Air France manager and no longer flew full-time.
+  - Bad weather:
+    - "It’s good we’re in a A330, isn’t it?”
+    - "Dead right"
+  - Captain Dubois was sleeping
+  - Cold temperatures blocks 3 vital speed sensors (ptot tubes)
+    - Used to calculate airspeed
+  - It disengages autopilor
+  - The fly-by-wire system downgrades itself to a mode that gave the pilor less help and more latitude to control the plane (no envelope protection)
+  - Bonin makes changes that are unnecessary
+    - Decides to climb rapidly (pulling back his side-stick) thinking airplane is losing altitude
+  - It starts to go too slow but they don’t notice it
+    - Stall alarm is dismissed (it went off 58 times) and there are too many things happening at the same time
+  - Captain Dubois arrived in the cockpit 1min 38secs after the airspeed indicator had failed
+  - Captain doesn’t realise co-pilot is still putting the nose up with his sidestick
+  - The 3 pilots couldn’t figure out what was going on: “The crew never understood they were in a stall situation and therefore never undertook any recovery manoeuvres.”
+  
+  #### Paradox of automation:
+  - In the previous 6 months:
+    - Captain: 346 hours of flight
+    - But only controlled an plane for 4 hours (takeoffs and landing)
+      - The rest was autopilot
+    - Co-pilots even less
+    - Pilots became automation mangers
+  
+  >The better the automatic systems, the more out-of-practice human operators will be, and the more extreme the situations they will have to face.
+  
+  #### Human elements
+  - Human judgements are never made in a vacuum
+  - Pilots are part of a complex system that can either increase or reduce the probability that they will make a mistake
+  - Aspects to consider:
+    - Training
+    - Instrumentation
+    - Cockpit procedures
+  
+  “The side-stick redesign was a popular change because it reduced pilot fatigue and generally did not need to be used when the plane was in auto-pilot. However, in the stressful emergency situation of Flight 447, when the pilots needed to fly the plane manually, it meant that their shared understanding of the flight environment, their distributed cognition, was hindered by the lack of feedback” 
+  
+  ![d6026282.png](:storage\\4575a5f6-cc97-44c7-b416-b884b6626f55\\d6026282.png)
+  
+  ---
+  
+  ## Human cognition
+  - A given activity involves several cognative processes
+    - Attention
+    - Memory
+    - Learning
+    - Reading, speaking and listening
+    - Problem solving, planning, reasoning and decision making
+  
+  ### Attention
+  - Selecting things to concentrate
+    - Involves auditory and/or visual senses
+    - Allows us to attend to information that is relevant to what we are doing
+  - Multitasking and attention
+    - Possible?
+    - Single pool of attentional resources that can be freely divided among multiple tasks?
+      - Challanged
+      - E.g multi-modality
+    - Depends on the nature of the task and how much attention is needed
+    - Individual differences, anxiety, arrousal, task difficulty, skills...
+  
+  ### Perception
+  - How information is aquired from the environment
+  - Organisation, identification, and interpretation of sensory information in order to represent and understand the environment
+  - Involves other cognative processes
+    - Attention, memory, language
+  
+  #### Perception and design
+  - Grouping (Gestalt lays of grouping)
+    - Humans naturally percive objects as organised patterns
+    - Proximity, similarity, closure, good continuation, common fate and good form
+  
+  ![b986dd70.png](:storage\\4575a5f6-cc97-44c7-b416-b884b6626f55\\b986dd70.png)
+  
+  #### Model human processor
+  - Perceptual processor
+    - Outputs into audio storage
+    - Outputs into visual storage
+  - Cognative processor
+    - Outputs into working memory
+    - Has access to working memory and long term memory
+  - Motor processor
+    - Carries out actions
+  
+  ![87aee5b8.png](:storage\\4575a5f6-cc97-44c7-b416-b884b6626f55\\87aee5b8.png)
+  
+  ### Distributed cognition
+  - Definition of Situational Awearness (SA)
+    - The perception of elements in their environment within a volume of time and space
+    - The comprehension of their meaning
+    - The projection of their status in the near future
+  - “In the dynamic flight environment, effective aircrew decision making is highly dependent on situation awareness (SA) — a constantly evolving picture of the state of the environment.”
+  - Situation Awareness Error taxonomy
+    - Level 1: failure to correctly perceive the information
+    - Level 2: failure to correctly integrate or comprehend information
+    - Level 3: Failure to project future action or state of the system
+  
+  ![684adc58.png](:storage\\4575a5f6-cc97-44c7-b416-b884b6626f55\\684adc58.png)
+  
+  - Team SA is defined as:
+    - The degree to which every team member possesses the SA required for his/her responsibilitues
+  - In safety critical applications, it is very important that the design of the interface supports operators' shared understanding of the environment as well as each others' intentions and actions
+    - Example: cockpit system is composed of the pilots and their informational environment. 
+  
+  ---
+  
+  ## HCI
+  > A dicapline concerned with the design, evluation ande implementation of interactive computing systems for human users and with the study of the phenomena surrounding them
+  
+  ### Design
+  - Understanding users
+  - User research
+    - Enthography
+    - Interviews
+    - Needs
+    - Goals
+    - Participatory design
+  - Cognative psychology
+  - Behavioural economics
+  - Social sciences
+  - ...
+  
+  ### Prototyping
+  - Low fidelity
+    - Paper
+    - Storyboarding
+  - High fidelity
+    - Interactive
+  
+  ### Evaluation
+  - Heuristic evaluation
+    - Guidelines/usability principles, expert
+  - Usability testing
+    - Lab
+  - Diary studies
+  - Experements
+  - Identify usibility problems
+  - Expert evaluators
+  - Use of usability principles
+   
+  #### Jacob Nielson's heuristics
+  - Visibility of status
+    - What is going on
+    - Appropriate deedback in reasonable time
+  - Match between system and real word
+    - The system should speak the users language
+  - Consistency of standards
+    - Follow platform conventions
+  - Error prevention
+    - Careful design which prevents a problem from occuring in the first place
+  - Recognition rather than recall
+    - Minimise the user's memory load by making objects, actions, and options visible
+  - Flexibility and efficiency of use
+    - Shortcuts. Allow users to tailor frequent actions
+  - Aesthetic and minimilist design
+    - Dialogues should not contain information that is not relevant or rarely needed
+  - Help users recognise, diagnose, and recover from oerrors
+    - Error messages should be expressed in plain language (no codes) and offer a solution
+  - Help and documentation
+    - Better if a system can be used without documentation
+    - But if it is needed, it must be provided
+  
+  ### HCI techniques
+  - There are a number of techniques which HCI gives us which can be applied in a safety critical world
+    - Prototypes and simulators
+    - Cognative walkthroughs
+    - Think aloud protocol
+    - Eye tracking
+    - Task models
+      - KTS, GOMS, HTA
+    - Heuristic analysis
+    - Dry runs with "skilled" operator
+  
+  ### Usability testing
+  - Watching people try to use what you’re creating/designing/building with the intention of uncovering problems and making it better for people to use it
+  - A session
+    - Make participants cumfortable
+    - Think aloud protocol
+    - Tasks: what do you want users to do
+    - Probe (“Do you mean this?”, “What were you expecting?”)
+    - Participants tend to please tester
+    - Stay neutral
+    - 
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

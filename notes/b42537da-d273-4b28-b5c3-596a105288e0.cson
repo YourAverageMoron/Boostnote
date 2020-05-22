@@ -1,0 +1,153 @@
+createdAt: "2020-01-07T12:46:24.542Z"
+updatedAt: "2020-01-07T20:06:08.477Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Internet/Network Layer"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # Internet/Network Layer
+  
+  ## Internet Control Message Protocol (ICMP)
+  - E.g in MTU descoverty you get the "drop the packet and send error message back"
+  - We only have packets so the message must be in a packet
+  - Just a notmal IP datagram with particular contents
+  - Uses ICMP packets
+  - ICMP is used for general control of the Internet, in particular errors
+  - ICMP packets are contained withing IP packets but are considered to be part of the network layer
+  - Thus the data dield in an IP datagram might contain transport layer stuff, or it might contain network layer stuff
+  
+  ![91b3e021.png](:storage\\b42537da-d273-4b28-b5c3-596a105288e0\\91b3e021.png)
+  
+  ### Structure
+  - **Type**:
+    - The kind of message
+    - E.g "TTL expired" or "destination unreachable"
+  - **Code**:
+    - Additional information
+    - E.g "destination unreachable" has "host unreachable" codes
+  - **Checksum**
+  - **A fixed size field**:
+    - Has varying purposes for different types
+  - **General data field**:
+    - If needed
+  
+  - Thus ICMP packets of various types are used to indicate the different kinds of error message
+  - For example when a TTL packet decrements to zero:
+    - The router drops the packet
+    - It creates a ICMP "TTL expired" packet and sends it back to the source address of the dropped packet
+  - This message (in an IP packet) will have the IP source address of the router
+  
+  ### What if there is a problem with the ICMP packet
+  - ICMP packets are IP packets so they can be lost, duplicated or otherwise corrupted
+  - So ICMP error can be generated for ICMP packets with certain reservations
+  - ICMP error are not generated for:
+    - ICMP errors
+      - E.g TTL exprires on a ICMP packet
+    - A packet whos destination is broadcast or multicast
+    - A packet whose source is broadcast or multicast
+    - Any fragment other than the first
+  - This is to prevent broadcast storms where a single error is multiplied up into many ICMP packets
+  - Non-initial IP fragments don;t contain enough identifying information for the OS to do anything useful with them, so don't bother sending them
+    - One reason is because they dont have the port number, so the OS would not be able to identify the service
+  
+  ![5188e8d1.png](:storage\\b42537da-d273-4b28-b5c3-596a105288e0\\5188e8d1.png)
+  
+  - Messages marked with "e" are errors. There are many other types and codes, but above are the most common practices
+  
+  ### ICMP ping
+  - Descovering if a machine is up and running 
+  - A program usually called ping sends an ICMP "echo request" packet, waits a second, then repeats
+  
+  ![0f3a1951.png](:storage\\b42537da-d273-4b28-b5c3-596a105288e0\\0f3a1951.png)
+  
+  - ICMP type 0, code 0, with a random identifier
+  - A functioning host OS that gets a ping should return an "echo reply"
+  - This has ICMP type 8, code 0, and a copy of the identifier sequence of data
+  - The identifier field allows the originator OS to match up replies with requests
+  - The sequence starts at 0 and increases with 1 for each ping sent
+    - This allows us to spot lost, duplicated or reordered packets
+  
+  ![90cb5bf7.png](:storage\\b42537da-d273-4b28-b5c3-596a105288e0\\90cb5bf7.png)
+  
+  - The ping command also keeps track of the round trip time (RTT)
+    - Time between sending a request and getting the corresponding reply
+  - Some versions of ping can enable the IP header option record route
+    - This makes IP save teh address of each intermediate router in the header
+    - Only 60 bytes (so up to 9 addresses)
+  
+  ![ce4e27b4.png](:storage\\b42537da-d273-4b28-b5c3-596a105288e0\\ce4e27b4.png)
+  
+  ### Traceroute
+  - There are lots of routes that use more than 9 hops
+    - This makes using ping to descover routes a bit limited
+  - The traceroute program is a cleaver way to find routes by deliberately generating errors and looking at the ICMP messages that result
+  - It sends A packet to the intended destination but with an artificially small time to live
+  - When the TTL drops to zero on a hop, the packet is dropped and an ICMP "TTL exceeded" is returned by the router that dropped it
+  - As the source address on this ICMP error is the router's, this tells us where the packet had got to
+  - This is repeated for increasing values of TTL to get the entire route
+  
+  ![eb63c16f.png](:storage\\b42537da-d273-4b28-b5c3-596a105288e0\\eb63c16f.png)
+  
+  - The traceroute command sends three probes at each stage so we can see time variations
+  - Hop 8:
+    - There was no error packet recieved for this TTL
+    - There are a few possible reason for this:
+      - On a long route it is possible the router is setting an initial a too small to reach us
+      - The router refuses to send ICMP errors for TTL exceeded in a weak attempt at security
+  - A * before the name means the name lookup took too long traceroute decided to stop waiting and carry on
+    - The name subsiquently turned up
+  - Sometimes the same line is repeated, this is because some routers forward packets with TTL 0
+    - This is a bug
+  - ICMP errors are required to contain the IP header and at least 8 bytes of the origional data in the packet that caused the problem
+    - This is so the OS in the source machine can match up the ICMP packet to the origional packet and relay the error back to hte appropriate origional application
+    - 8 bytes is just enough to contain the interestin part of the next layer headers (UDP and TCP)
+  
+  ---
+  
+  ## ICMPv6
+  - ICMPv6 in IPv6 plays a similar but expanded role
+  - Eor example the ICMPv6 Neighbour Descovery Protocol also does the job of ARP
+    - With a Neighbour Solicitation request and Neighbour Advertisement reply
+  - IPv6 has its own DHCPv6 to serve IPv6 addresses, but ICMPv6 can (mostly) fulfill the role of supplying and configuring without DHCP
+  - IPv6 has the Stateless Address Autoconfiguration protocol (SLAAC)
+    - This is another part of the Neighbour Descovery Protocol
+  
+  ### Link-local addresses
+  - Any interface using IPv6 will generate for itself a link-local address
+    - Prefix fe80::/64
+  - I does this by generating a host part (based on its MAC address) and sticking it on the fe80::/64 prefix
+    - This address is only valid on the local network
+  - Now a host can communicate with its local network
+    - But only the local network as packets with the link-local address are never sent off the local network
+  - So it needs a globally routable address too
+    - An interface can have multiple addresses
+  - To get this the host multicasts (ff02::2) an ICMPv6 Router Solicitation message ("Is anyone a router?")
+    - It uses its link-local address as the source address
+  - A local router/gateway will read this and send a Router Advertisement reply that contains:
+    - Its address (the gateway address)
+    - The network prefix (the network address)
+    - The DNS servers
+  - This solicitaion is a multicast, the reply uses the host's unicast link-local address
+  - The host can then make up its own global address withing the network
+    - Often using its own MAC address and modified EUI-64 method
+    - Or something more random if there are privacy concerns with the MAC address being known outside of the local network
+  
+  #### Pros of using ICMPv6 over DHCPv6
+  - This is more light weight than DHCPv6
+    - It is also stateless so the gateways are not required to retain state
+      - E.g which addressed have been allocated to which host
+  - It requires little configuration on the gateway
+  
+  #### Cons of using ICMPv6 over DHCPv6
+  - If it requires that a given host gets a particular IPv6 address each time
+    - For authentication purposes
+    - DHCPv6 can do this
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

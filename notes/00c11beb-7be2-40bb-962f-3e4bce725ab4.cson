@@ -1,0 +1,44 @@
+createdAt: "2020-01-02T21:28:58.444Z"
+updatedAt: "2020-01-02T21:30:45.901Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Security in the Internet Protocol"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # Security in the Internet Protocol
+  
+  ## Introduction
+  - The Internet was mostly developed in Acaddemia
+  - This had a great effect on securaty
+  - There was little though taken for the issues of privacy or authentication
+  - The models are also weaker on securaty than they ought to be
+  - The OSI says "securaty should be involved at all layers"
+    - This isn't very useful
+    - The internet model is even less useful
+    - Early TCP/IP implementations were woefully poor
+  
+  ## Issues with securaty in the IP
+  - Data in transit is readable as it is passed through the various machines on the path to the destination
+  - Many protocols used are not resistance to malicious interference
+  - Authentication mechanisms are weak to non-existent
+  - Because of these the implementaiton were very fragile and easily hacked
+  - It lead to two seperate issues:
+    - Protocols are very fragile and easily breakable
+    - The implementations of those protocols were often poor
+  - Many of these issues have since been tackled
+    - Not always successfully
+  - There are several areas that could be improved
+  - New protocols and secure extentions to existing protocols are now available
+    - E.g HTTPS, SMTPS
+  - Management and use of cryptography has an overhead
+    - Extra workload on servers
+    - Some people are unwilling to pay this price
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

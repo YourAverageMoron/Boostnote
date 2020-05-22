@@ -1,0 +1,192 @@
+createdAt: "2020-01-07T16:52:06.266Z"
+updatedAt: "2020-01-07T19:32:09.486Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Domain Name System (DNS)"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # Domain Name System (DNS)
+  
+  ## Introduction
+  - IP addresses are bunches of bits, but we often address machines by names such as lcpu.bath.ac.uk
+  - This is a lot easier to use:
+    - E.g using news.bbc.co.uk instead of 212.58.226.20
+    - These names can be in arbritary character sets
+      - Not just latin
+  - The IP addresses are essential as they are hardware independent and have structure that aids routing
+  - But names make things like the Web usable
+  - Note we now have three kinds of addresses:
+    - Physical
+      - E.g MAC address
+    - Network
+      - E.g IP addresses
+    - Human
+      - E.g Domain name
+  - We have a repeat of the hardware-software address gap that ARP is for:
+    - There must be a mechanisim for turning lcpu.bath.ac.uk into 138.38.32.14
+  - In the early Internet every host had a file containing the names and addresses of all the machines on the Internet
+    - A simple lookup worked in this scenario
+  - There is no sensible, secure and economic way to store all the names and addresses on a single database
+  - Information has to be distributed amungst a large number of machines called DNS servers
+    - These machines run a DNS server program
+    - We blur the distinction between the service and the host it lives on
+      - The goust could run other services (e.g DCHP) as well
+  
+  ---
+  
+  ## Hierarchical nature of DNS
+  - Names are hierachical: lcpu.bath.ac.uk is a name of a machine on the domain bath.ac.uk
+  - ac.uk is the name for the JANET network, which is in the domain uk
+  - uk is in the domain . (dot or root)
+  - Each node in this tree is called a label
+  - Labels may be up to 63 bytes long
+  
+  ![3c4b149c.png](:storage\\f168a457-be27-451c-8e28-f4a48354cd31\\3c4b149c.png)
+  
+  - This tree is used to distribute the database
+  - The root tree is called . (dot) and is currently managed by the Internet Corporation for Assigned Names and Number (ICANN)
+  - They manage the top level domains (TLDs) including com and uk
+  - "Manage" means they keep the lookup tables for that level and say who can get labels in the next level
+  - They get to charge money for labels in the next level
+  - They delegate management of lower lables to other organisations
+  - So labels under uk are managed by the UK Network Information Centre (NIC) run by a UK company called Nominet
+  - Labels under ac.uk are managed by the Joint Information Systems Committee (Jisc)
+  - Labels under bath.ac.uk are managed by the University of Bath
+  - Lables under cs.bath.ac.uk are managed by the Department of Computer Science
+  - At each level, the relevant organisation keeps a list of labels it has delecated and who is responsible for them
+  - At the lowest level, before the leaves of the tree (the hosts), the relevant organisation keeps the name-to-IP-address mapping of the hosts
+  - So starting at dot (root) we can work our way down the tree to find the machine we want
+  - This is done by name servers
+  
+  ---
+  
+  ## Nameservers
+  - These are computers that run the DNS protocol
+  - E.g ns1.bath.ac.uk is (the name of) a name server for the University
+    - There is also ns2.bath.ac.uk for resiliance and spreading load
+    - They contain replicas od the same informatioN
+  - DNS server do 2 things:
+    - Keep track of name to IP address mappings for the domain
+      - This is a lookup in a database
+    - Help local hosts when they need to do a lookup of a non-local address
+  
+  ---
+  
+  ## Looking up non-local addresses
+  - For example the University requires a name lookup of news.bbc.co.uk, it sends a DNS request to the local DNS server (ns1.bath.ac.uk)
+  - Every host has the IP address of one or more local name server
+    - This is typically stored in a file
+      - E.g /etc/resolv.conf
+    - Setup by an administrator or was setup by DHCP
+  - So we can send a DNS request to one of these servers
+  - In our example the Bath server is not responsible for the name news.bbc.co.uk
+    - It needs to run down the DNS tree in a recursive lookup
+  - The Bath server sends a start of authority (SOA) request to a random top loevel server to find who is responsible for the uk label
+  - At the top level, there are 80 machines dotted around the world that serve the DNS root
+    - They have names like a.root-servers.net (198.41.0.4)
+    - The local name server has the IP addresses of these in a file
+  - The top level server responds to hte Bath nameserver with something like ns1.nic.uk, together with an IP address
+    - This is a machine that is reponsible fo the uk label
+  - The Bath server now sends an SOA request to ns1.nic.uk for co.uk
+  - It gets a reply ns1.nic.uk
+    - It just so happens that this is responsible for both uk and co.uk
+  - So hte server sends an SOA rewuest to ns1.nic.uk for bbc.co.uk
+  - It gets ns.bbc.co.uk
+    - Now we know the server responsible for the address we want
+  - The server sends an address (A) request for news.bbc.co.uk to ns.bbc.co.uk
+  - It gets the IP address 194.130.56.40
+  - The Bath server can relay this back to the origional requesting host
+  
+  ![fcad46af.png](:storage\\f168a457-be27-451c-8e28-f4a48354cd31\\fcad46af.png)
+  
+  - These responces are cached by the local server
+    - So we dont have to go through a complete lookup every time
+  - The next request for news.bbc.co.uk can be answered directly by the local nameserver
+    - Even justwww.bbc.co.uk would go directly to ns.bbc.co.uk
+  - Each reply has a time to live attached to it:
+    - This indicates how long the server should keep the information before asking again
+  
+  ---
+  
+  ## Reverse lookups
+  - Given an IP address we may want to ding the domain name
+  - There is a part of the tree dedicated with TLD arpa
+  
+  ![70db9504.png](:storage\\f168a457-be27-451c-8e28-f4a48354cd31\\70db9504.png)
+  
+  - If we have the IP address 138.32.14 we can do the request for 14.32.38.138.in-addr.arpa
+  - The same recursive lookup as before will lead us to Bath being responsible for 38.138.in-addr.arpa
+  - And a couple more steps takes us to a pointer (PTR) request for 14.32.38.138.in-addr.arpa from the Bath server
+  - We get mary.bath.ac.uk
+  
+  ---
+  
+  ## What does a DNS give
+  - **An address**: name to IP address
+  - **PTR**: IP address to name
+    - IPv6 uses the ip6.arpa branch
+  - **AAAA address**: name to IPv6 address
+  - **SOA start of authority**: name of the responsible name server
+  - **MX mail server**: name to mail server for that domain
+    - bath.ac.uk has the mail server 138.32.14
+  - Many more ...
+  
+  ---
+  
+  ## Many to many relationship of DNS
+  - DNS is actually a many-many relationship of names and addresses
+    - One address can have several names
+      - news.bbc.co.uk and newswww.bbc.net.uk both resolve to 212.25.226.33
+    - One name can have multiple addresses associated
+      - Helps with loadbalancing/ failover routing
+  
+  ---
+  
+  ## Looking up an address
+  - In programs if we need to lookup an address we can use a simple function call to getaddrinfo()
+    - This hides the complexity from us
+  - Under Linux the dig tool can be used to do direct lookups
+  
+  ![06fd85bc.png](:storage\\f168a457-be27-451c-8e28-f4a48354cd31\\06fd85bc.png)
+  
+  ---
+  
+  ## DNS requests
+  - DNS requests are usually send using UDP and fit a single UDP datagram
+  - When the reply fits within 512 bytes UDP is used to reply to the server
+  - UPD is fast but unreliable, also 512 byte datagrams won't be fragmented
+    - If a datagram is lost, the source will send a new request
+  - To keep datagrams small, if we reply with more than 512 bytes, the server sends a reply with a "truncated" flag set
+    - The client resends the request using TCP
+    - The server will reply using this reliable connection
+    - UDP is prefered as it is dast with little overhead, while a TCP connection has a considerable setup cost
+  
+  ---
+  
+  ## Problems with DNS
+  - There is no authentication
+    - If you get a reply saying 138.38.32.14 is the address for www.bath.ac.uk, can we trust it?
+    - Some server on the lookup path might have been subverted an made to hand out the wrong address
+    - Then I could get a spoof IP address leading to someone else's web page
+    - The spoof page could look identical to the origional page
+  - A solution does exist in Secure DNS (DNSSec) which issues cryprography to authenticat DNS lookups
+    - Not used much as it was introduced in a time where people though cryprography was too expensive
+  - Neither DNS nor DNSSec provide any privacy
+    - Anyone could see what josts you are trying to contact by monitoring you DNS requests
+    - There has been a move by some people to  use DNS over TLS 
+      - This has a fair overhead over plain DNS but provides both authentication an privacy
+  - There is also DNS over HTTPS (DoH)
+    - This sounds pretty silly as HTTPS is a heavyweight protocol designed to move large Web pages
+      - Not lightweight requests
+    - However the overhead can be managed be fairly well
+      - HTTPS keep-alive and TLS reconnections
+    - While an uncooperative ISP could block the DNS over TLS assigned port (853) the HTTPS prot (443) cannot be blocked without a lot of damage to normal browsing
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

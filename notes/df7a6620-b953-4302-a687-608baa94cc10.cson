@@ -1,0 +1,562 @@
+createdAt: "2019-12-28T17:13:11.126Z"
+updatedAt: "2019-12-30T01:09:11.785Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Communication and Ontologies"
+tags: [
+  "CM30174"
+  "Computer_Science"
+  "Intelligent_Agents"
+  "University"
+]
+content: '''
+  # Communication and Ontologies
+  
+  ## Motivation
+  - Agents and multiagent systems originate from distributed AI
+    - Distribute problem-solving 
+    - Coordinate activity
+    - Requires:
+      - Planning Communication
+      - Action coordination
+  - Agents are the actors
+  - Open agent systems
+    - Interoperability of MAS applications
+  - Workable if MAS use same platform
+  - Open architecture
+    - Interoperability of MAS platforms
+  
+  ### Agent communication
+  - Macro issue: affects agent society as much as individual
+  - How to communicate:
+    - Speach acts
+    - KQML and KIF, FIPA, ACL
+    - Ontologies
+    - OWL and RDF
+  - How to cooperate:
+    - What is cooperation
+    - Cooperative vs non-cooperative encounters
+    - Contract net protocol
+  - How to reach agreements
+    - Mechanisims such as auctions
+    - Negotiation
+    - Task-oriented domains
+  
+  ---
+  
+  ## Speech act theory
+  - Origin "How to do things with words"
+  - Inspiration for study of communication in MAS
+  - Pragmatic theory of language
+  - Accounts for use language to achieve goals and intentions
+  - Some utterances = 'physical actions'
+    - They appear to change the state of the world depends on the speaker
+    - Triggering article 50 'under Royal prerogative'
+    - 'Sold to the man in the second row'
+    - 'I declare this congregation open ...'
+  - Speach Act theory attempts to explain how utterances may achieve intentions
+  
+  ### Aspects of speach act
+  - Physical: locution, the act of speaking and its comprehension
+  - Significance: illocution, its social validity
+    - E.g the power o9f the speaker
+  - Effect: perlocution the change it brings about in hte hearer (intentional or not)
+  
+  ### Typology of speach acts
+  - **Representatives**
+    - Such as informing
+    - E.g its quite out there
+  - **Directives**
+    - Attempts to get the hearer to do something
+    - E.g please mind the gap
+  - **Commisives**
+    - Commit the speaker to doing something
+    - E.g I promise to pick up the shopping
+  - **Expressives**
+    - Speaker expresses a mental state
+    - E.g may the force be with you
+  - **Declarations**
+    - E.g let the games begin
+  
+  ### Components of speach acts
+  - Two parts:
+    - A performative verb:
+      - Request, inform, ...
+    - Propositional content compromising
+      - A (formal) language, defining structures
+      - An ontology, defining the concepts
+  - Different performatives result in different meanings:
+    - Performative = **Request**
+      - Content = "the door is closed"
+      - Speach act = "please close the door"
+    - Performative = **Inform**
+      - Content = "the door is closed"
+      - Speach act = "the door is closed!"
+    - Performative = **Inquire**
+      - Content = "the door is closed"
+      - speach act = "the door is closed?" 
+  - The basis for agent communication and ACLs
+  
+  ### Plan-based semantics
+  - Connect semantics if speech acts with plans
+  - Precondition + delete + add
+  - Example request(s, h, φ)
+    - Preconditions
+      - S believes H can do φ
+        - Because you don't ask someone to do something unless you think they can do it
+      - S believes H believes H can do φ
+        - Because toy don't ask someone unless they believe they can do it
+      - S believes S wants φ
+        - Because you dont ask osmeone unless you wan it
+    - Postconditions
+      - H believes S believes S wants φ
+        - The effect is to make them aware of your desire
+  
+  ### BDI connection
+  - Speach acts can be delivered as percepts
+  
+  ![1945ceb5.png](:storage\\df7a6620-b953-4302-a687-608baa94cc10\\1945ceb5.png)
+  
+  - Likewise for practical reasoning agents (BDI)
+  - Communicative effects: add/remove beliefs in S and H
+  
+  ---
+  
+  ## Agent communication languages
+  - Was a hot topic in 1990s
+  - Standardisation started but not completed
+    - disagreement over semantics
+    - disagreement over representation
+    - concern over usability
+  - Lack of understanding about what agents “talk” about
+  - Emerging issue (then) of relationship to semantic web
+  
+  ### KQML and KIF
+  - ACLs: Standard formats for the exchange of messages
+  - ARPA Knowledge Sharing Effort
+  - KQML: Knowledge query and manipulation language
+  - 'Outer' language, that defines 'communicative verbs', or performatives, such as:
+    - Ask-if ('is it true that...')
+    - Perform ('please perform the following action...')
+    - Tell ('is it true that...')
+    - Reply ('the answer is...')
+  - KIF: Knowledge Interchange Format
+  - 'Inner' language for expressing message content
+  
+  ### FIPA ACL
+  - FIPA: seconf generation simpler
+  - FIPA ACL usable through JADE platform
+  - Basic structure like KQML:
+    - Performance vocabulary: 20
+    - Basic performances: inform and request
+    - Macro performatives: other 18
+    - Message structure: e.g. sender, reciever, etc
+    - Content: the actual content of the message
+  
+  ```
+  // EXAMPLE //
+  (inform
+    :sender agent1
+    :reciever agent5
+    :content (price good200 150)
+    :language sl
+    :ontology hpl-auction
+  )
+  ```
+  ![bb8fbe6f.png](:storage\\df7a6620-b953-4302-a687-608baa94cc10\\bb8fbe6f.png)
+  
+  #### FIPA protocol specifications
+  - FIPAA contract net interaction protocol specification
+  - FIPA iterated contract net interaction protocol specification
+  - FIPA english auction interaction protocol specification
+  - FIPA dutch auction interaction protocol specification
+  
+  #### FIPA messages
+  |Performative   |Type of comunicative acts   |
+  |---------------|----------------------------|
+  |Sender         |Participant in communication|
+  |Reviever       |Participant in communication|
+  |Reply-to       |Participant in communication|
+  |Content        |Content of message          |
+  |Language       |Description of content      |
+  |Encoding       |Description of content      |
+  |Ontology       |Description of content      |
+  |Protocol       |Control of conversation     |
+  |Conversation-id|Control of conversation     |
+  |Reply-with     |Control of conversation     |
+  |In-reply-to    |Control of conversation     |
+  |Reply-by       |Control of conversation     |
+  
+  For a given protocol:
+  - Initiator must set conversation-id
+  - All responses must use that conversation-id
+  - Reply-by is the time-pit for the next message protocol
+  - Reply-with X tells reciever to use in-reply-to X
+  
+  #### FIPA inform reques semantics
+  - Semantics defined in two parts:
+    - **Pre-condition**
+      - Must be true for the speach act to suceed
+    - **"Rational effect"**
+      - What the sender of the message hopes to bring about 
+      - Perlocution
+  - "Inform" : content is a statement, and sender
+    - Holds that the content is true (**Belief**)
+    - Intends that the reciept believe the content (**Intention**)
+    - Does not already believe that the recipient is aware of whether content is true or not (**Belief about belief**)
+  - "request": content is an action, and sender
+    - Intends action content to be performed (**Intention**)
+    - Believes recipient is capable of performing action (**Belief**)
+    - Does not believe that the recipient already performs the action (**Belief about belief**)
+  
+  ### Representing messages
+  - Agents use a combination of:
+    - ACL to define message structure
+    - **Performative**
+      - E.g inform, request (FIPA, KQML)
+    - **Content language**
+      - E.g first order logic + concepts (ontology)
+  - Benefits of approach
+    - Interoperability for sender and reciever
+    - Mutual protection of sender and reciever
+    - Verification (or auditing) of communications by third-parties
+  
+  ---
+  
+  ## Ontologies
+  
+  ### Need for ontologies
+  - Communication depends on an agreed common set of terms
+  - An ontology is a formal specification of a set of terms
+    - Formal, explicit specification of a shared conceptualisation
+  
+  ### What is an ontology?
+  - Formal description of (relevant parts) of a domain
+  - Set of **classes concepts** and their **hierarchical relations**
+  - Set of **properties slots/roles** defining **arbitrary relations**
+  - A property can be assiciated with many classes
+  - **Constraints**: Restrictions on properties (type, number)
+  - **Individuals**: concrete instances of classes
+  
+  ### Example ontology
+  - Wordnet is a live domain-neutral ontology
+  - Words are nodes in a network of relationships:
+    - Hyponym: more specialized concepts
+    - Hypernym: generalized concept
+    - Meronym: parts of this concept
+    - Holonym: parts of something latger
+  
+  ### Kinds of ontology
+  - Degrees of formality 
+    - _**(HIGH)**_
+    - Controlled vocabularies
+    - Glossaries
+    - Thesauri
+    - Informal Is-a hierachy
+    - Formal instances
+    - Frames
+    - Value restriction
+    - General logic constraints
+  
+  ### Why use an ontology?
+  - To share common understanding of the structure of information aong people or software agents
+  - To enable reuse of domain knowledge
+  - To make explicit assumptions about the domain
+  - To seperate domain knowledge from operational knowledge
+  - To analyze domain knowledge through the ontology construction process
+  - But
+    - Ontologies do not usually succeed in being application independent and often require adaption for use in a new application
+  
+  ### How to build an ontology?
+  - Define domain terms and their relationships
+  - "Ontology Engineering"
+    - Define concepts in the domain (**Concepts**)
+    - Arrange concepts in a hiarachy (**Subclass-superclass hierarchy**)
+    - Define attributes and properties of classes (**Slots**)
+    - Define **constraints** on slot values
+    - Define **individuals** and default slot values
+  - Use an ontology delvelopment methodology
+  - Use an ontology modelling language
+  
+  ### Ontology engineering vs OO modeling
+  **Ontology**
+  - Reflects structure of the world
+  - Addresses concept relationships
+  - Physical representation is not relevant
+  - E.g
+  ![e3f0b04e.png](:storage\\df7a6620-b953-4302-a687-608baa94cc10\\e3f0b04e.png)
+  
+  **An OO class structure**
+  - Reflects structure of data and code
+  - Is usually about behaviour (methods)
+  - Physical representation is crucial
+  - E.g
+  ![39453c22.png](:storage\\df7a6620-b953-4302-a687-608baa94cc10\\39453c22.png)
+  
+  ### Reuse and extention of ontologies
+  - Saves effort + builds on validated ontologies
+    - Upper ontologies
+      - IEEE standart ontology
+      - Cys
+    - General ontologies
+      - WordNet
+    - Taxonomies (trees not graphs)
+      - ACM computing classification system
+    - Domain-specific
+      - Smart energy aware systems
+      - Quantities, units, dimenstions, types
+      - CSV structure
+  
+  ### Define classes and the class hierarchy
+  - A class is a concept in the domain
+    - A class of cheese
+    - A class of cheese producers
+    - A class of blue cheeses
+  - Class = collection of elements with similar properties
+  - Instances of classes
+    - Stilton
+    - Danish blue
+    - Brie
+  
+  ### Class inheritance
+  - Classes usually form a taxonomy
+  - Subclass-superclass relationship usuallt is-a
+    - An instance  of a subclass is an instance of a superclass
+    - Hyponym: super -> sub class
+    - Hypernym: sub -> super class
+  - Ontology
+    - A class is a set of elements
+    - A subclass is a subset
+  
+  ### Defining slots and properties
+  - Slots define
+    - Attributes of instances
+    - Relations to other instances
+  - Each cheese has colour, type of milk, fat content, producer, etc
+  - Types of properties
+    - **Intrinsic** properties
+      - Smell, appearance of chease
+    - **Extrinsic** properties
+      - Name and proce of cheese
+    - **Parts**
+      - Ingredients of a particular cheese
+    - **Objects**
+      - Producer of cheese
+  - Simple and complex properties/attributes
+    - **Simple**
+      - Literal values
+      - Strings and numbers
+    - **Complex**
+      - Other objects
+      - Producer
+  
+  ### Slot and class inheritance
+  - A subclass inherits all the superclass's slots:
+    - If a unit has a title and a code, a Masters level unit also has a title and a code
+  - A class can have more than one superclass:
+    - Inherits slots from them all
+    - Some units are available to more than one program
+  - Domain of a slot:
+    - Class(es) of instances that can have the slot
+  - Range of a slot:
+    - Class(es) of slot values
+  - Property constraints (facets):
+    - Limits on values for a slot
+    - E.g type, cardinality, range
+  
+  ### Defining classes and class hierarchy
+  - A single correct class hierarchy
+  - But can check consistency
+    - Is each instance of the subclass an instance of its superclass?
+  - Multiple inheritance
+    - A class can have more than one superclass
+    - Inherit slots andd facet restrictions from all parents
+    - Different systems resolve conflicts differently
+  - Disjoint classes
+    - Cannot have common instances
+    - Cannot have common subclasses
+  
+  ---
+  
+  ## RDF and OWL
+  
+  ### Requirements for ontology languages
+  - The main requirements are
+    - A well-defined syntax
+    - Efficient reasoning
+    - A formal semantics
+    - Sufficient expressive power
+    - Convenience of expression
+  - Expressive power <-tradeoff-> efficient reasoning
+    - Richer language -> higher complexity reasoning
+    - Sometimes intractable
+    - Find balance between
+      - Reasonably efficient reasoners
+      - Expression of large classes of ontologies
+  
+  ### What kind of reasoning?
+  - Class membership
+    - X is an instance of C, and C is an instance of D
+    - Therefore X is an instance of D
+  - Class equivalence
+    - A is equivalent to B, and B is equivalent to C
+    - Therefore A is equivelent to C
+  - Consistency
+    - X is an instance of A and B, but A disjoint B
+    - Then there will be an error
+  - Classification
+    - Property-value conditions determine class membership
+    - X satisfies conditions therefore X is an instance of A
+  - Uses
+    - Check ontology amd knowledge consistency
+    - Check for unintended relationships between classes
+    - Automatic classification of instances into classes
+  
+  ### Reasoning support for OWL
+  - OWL is the web ontology language
+  - Map ontology language to a logical formalism
+  - Use reasoner for formalism
+  - OWL(2) (partially) maps to a description logic (DL)
+  - Several reasoners: FaCT, RACER, Pellet, Jena
+  - Description logics are:
+    - More expressive than propositional logic
+    - Less expressive than (first-order) predicate logic
+    - Reasoning is (usuallt) decidable and efficient
+    - Monotonic is open world
+  
+  ### Description logics
+  - |= denotes logics
+  - A DL |= concepts + roles + individuals + relationships
+  - Family of logics of varying expressivity:
+    - AL: Attribute language
+    - C: Complex concept negation
+    - S = ALC with transitive roles
+    - H: role hierachy (subproperties rdfs:subPropertyOf)
+    - O: normals (enumerated classes of object value restrictions: owl:owlOf, owl:hasValue)
+    - I: inverse properties
+    - N: cardinality restrictions (owl:Cardinality, owl:MaxCardinality)
+    - R: limited complex role inclusion axioms, reflexivity and irreflexivity; role disjointness
+    - Q: qualified cardinality restrictions (OWL 2, cardinality restrictions that have fillers other than owl:thing)
+    
+  ### Three dialects of OWL
+  - W3C's web ontology working group defined OWL as three different sublanguages:
+    - OWL 2 provides expressiveness of SROIQ(D)
+    - OWL DL is based on SHOIN(D)
+    - OWL lite is SHIF(D)
+  - Each sublanguage orientated at different aspects of requirements
+  - OWL 2
+    - Allows a combination with RDF and RDF schema
+    - Fully compatible with RDF
+    - Undecided
+  - OWL DL
+    - A sublanguage of OWL 2
+      - Restrictions on constructors from OWL and RDF
+    - No constructor composition
+    - Efficient reasoning support
+    - Not fully compatible with RDF
+      - Not every RDF document is an OWL DL document
+      - Every OWL DL document is a RDF document
+  - OWL Lite
+    - Subset of language constructors
+    - Excludes enumerated classes
+    - Disjointness statements
+    - Arbitrary cardinality
+    - Simpler to learn, to implement
+    - Restricted expressibility
+  - Ontologically
+    - OWL Lite ⊂ OWL DL ⊂ OWL Full
+  - Ontology valid in first => valid in second
+  - Reasoning
+    - X |- OWL Lite Y => X |- OWL DL Y
+    - X |- OWL DL Y => X |- OWL Full Y
+  - Conclusion is valid in first, therefor it is valid in second
+  - All variaties of OWL use RDF for their syntax
+  - Instances declared as in RDF, using RDF descriptions
+  
+  ### OWL relationship to RDF
+  - RDF is a low-level ontology language
+    - Provides construct to lonke data: S -R-> O
+    - Labled directed edges
+    - Arbitrary graph structure
+  - OWL is a high level ontology language
+    - Provides constructs for classes + relationships
+    - Provides syntax for attributes + constraints
+    - OWL "complies" to RDF
+    - Lablled, directed edges
+    - Known graph structure
+  - Graph algorithm complexity -> reasoning complexity
+  
+  ### RDF basics
+  - Building block
+    - Subject-relationship-object triple
+    - Called a statement
+    - E.g CM30174 -instance of-> unit-code
+    - The fundimental concepts of RDF are
+      - Resources
+      - Properties
+      - Statements
+    - Allows expressions of relationships
+  
+  ![4da0828b.png](:storage\\df7a6620-b953-4302-a687-608baa94cc10\\4da0828b.png)
+  
+  ### Resources, relationships and statements
+  - A resource is an object
+    - Identified by a URI
+      - Universal resource identifier
+    - E.g authors, books, publishers, places, people, hotels
+  - A relationship is also a resource (or a literal):
+    - Describes the relations between resources
+    - E.g "Written by", "age", "title"
+  - A statement asserts the relationship between a subject and an object
+    - Relationships can be resources or literals (strings)
+  - A triple (x,P,y) ≡ logical formula P(x,y), where
+    - Binary predicate P relates object x to object y
+    - RDF has only binary  predicates
+  
+  ### Viewing statements as graphs
+  - Directed graph with labled nodes and arcs
+    - From the resource (the subject of the statement)
+    - To the value (the object of the statement)
+  
+  ![3c9243de.png](:storage\\df7a6620-b953-4302-a687-608baa94cc10\\3c9243de.png)
+  
+  - Called a "semantic net" in AI
+  - A set of triples as a semantic net:
+  
+  ![554109bc.png](:storage\\df7a6620-b953-4302-a687-608baa94cc10\\554109bc.png)
+  
+  - Presentation: XML or Turtle syntax
+  
+  ### RDF Schema
+  - Defines (small) vocabulary for RDF
+    - Class, subClassOf, type
+    - Property, subPropertyOf
+    - domain, range
+  
+  ![ce558025.png](:storage\\df7a6620-b953-4302-a687-608baa94cc10\\ce558025.png)
+  
+  - Where communicatesTo is a property
+  
+  ### RDF(s) semantics
+  - RDF(s) has a (very small) formal semantics
+    - X -R-> Y ∧ R -domain-> T ⇒ X -IsOfType-> T
+    - X -R-> Y ∧ R -range-> T ⇒ Y -IsOfType-> T
+    - T1 -SubClassOf-> T2 ∧ T2 -SubClassOf-> T3 ⇒ T1 -SubClassOf-> T3
+    - X -IsOfType-> T1 ∧ T1 -SubClassOf-> T2 ⇒ X -IsOfType-> T2
+  - Allows inference of missing statements for RDF databases (triple stores)
+  - Query with SQL-like language (SPARQL)
+  
+  ### Why RDF and OWL are useful
+  - **RDF** 
+    - uniform representation
+    - Easily generated
+    - Semantic annotation straightforward
+    - "Solves" communication syntax problem
+  - **OWL**
+    - Ontology construction
+    - Describe semantic properties of concepts
+    - Enables tractable reasoning over semantic properties
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

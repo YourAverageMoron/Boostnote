@@ -1,0 +1,64 @@
+createdAt: "2019-12-21T13:11:58.139Z"
+updatedAt: "2019-12-21T13:43:42.658Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Computer-Based Control Systems"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # Computer-Based Control Systems
+  
+  Many complex systems use computers as part of the mechanism for controlling the system
+  
+  There are forur main ways computers can be used in safety-critical loops
+  
+  ## 1. Provifing information or advice directly to a human controller upon request
+  
+  This could be done through reading the sensors directly
+  
+  ![89c9e815.png](:storage\\577d01f4-043c-4657-b9f5-84bb1def6c01\\89c9e815.png)
+  
+  If the computer gives incorrect process-control information, it may not be a big issue because the operator has direct access to controls + displays 
+  
+  However, this does require an experienced and knowledgeable operator
+  
+  
+  ---
+  
+  ## 2. Interpreting data and displaying it to the controller, who makes control decision
+  - The computer reads the sensor outputs, interprets it and displays its interpretation to the operator
+  - The operater no longer has direct access to the sensor output. The operator only has access to what the computer displays
+  - Now, any misinterpretation by the computer will affect how the operator controls the process
+  - The operator has los direct feedback on the state of the process
+  
+  ![4799dc3d.png](:storage\\577d01f4-043c-4657-b9f5-84bb1def6c01\\4799dc3d.png)
+  
+  ---
+  
+  ## 3. Issuing commands directly, but with a human monitorof the computer's actions providing varying levels of input
+  - Here the operator controls the process and recieves sensor information only via the computer
+  - The computer is interpreting both sides of the control loop
+  - This it is even more important that the computer works correctly, since the operator is totaly isolated from the process
+  
+  ![455da9ca.png](:storage\\577d01f4-043c-4657-b9f5-84bb1def6c01\\455da9ca.png)
+  
+  ---
+  
+  ## 4. Eliminating the human from the control loop completely
+  - Computer assumes complete control of the process
+    - The operator may provide advice or high level direction
+  - The operator only knows what the computer reveals about the state of the process
+    - Operator has no access to controls or sensors
+  - In such automated systems the operator usually has to set the initial parameters for the process and starts it running, but the computer then takes over control
+  - The implications of computer error or failure are now very serious.
+    - Upon error/failure, to control the process the operator may have to step in with little or no information to deal with the situation
+  
+  ![ffc8887f.png](:storage\\577d01f4-043c-4657-b9f5-84bb1def6c01\\ffc8887f.png)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

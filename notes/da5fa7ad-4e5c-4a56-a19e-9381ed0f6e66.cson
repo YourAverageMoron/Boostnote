@@ -1,0 +1,545 @@
+createdAt: "2020-01-09T10:43:45.590Z"
+updatedAt: "2020-01-10T13:00:32.488Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Presentation"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # Presentation
+  
+  ## Introduction
+  - These four bytes (1010000 1101100 1100001 1101110) can be represented in many different ways:
+    - An integer
+      - Signed or unsigned
+    - Floating point number
+    - String of four characters
+    - ASCII
+  - Bits are useless unless they have some agreed-on meaning
+  - It is the job of presentation to ensure that data at one end of a connection is interpreted in the same way when it reaches the other end of the conneciton
+    - It is avout preservation of meaning
+  - So if I send the number 3.14, on the other end you still get 3.14
+    - Even if we use different representations of floating point numbers
+  - Same for if I send "cat"
+    - Even if we have different ways of encoding characters
+    - Even if we are using different programming languages that encode strings in different ways
+  - We have many different ways of encoding data
+    - For example the letter 'l':
+      - We could use the 7 bit integer 108
+      - In ASKII 108 is 'l'
+      - However, in EBCDIC 108 is '%'
+  - The presentation problem is to ensure that we have the same meaning on any SYSTEM
+  - We can easily copy bits from system to system, but out interpretation of those bits changes from system to system
+  - So to make out inerpretation consisten we might have to change the bits
+  - Presentation is not addressed by IP, this is left to the applciation
+  - This means that presentation must be addressed by the programmer in all their applciations
+  
+  ---
+  
+  ## UCS/Unicode
+  - Some presentations for data have been more or less settled on
+    - ASCII for Roman letters and digits
+      - 7 bit encoding
+  - However for other character sets (e.g Chineese) we use UCS
+    - 31 bit encoding
+  - Unicode takes UCS and adds details like 
+    - Direction of writing
+      - Left-to-right or right-to-left or bidrectional
+    - Defines alphabetic orders
+    - Etc.
+  - Unicode only uses UCS values from 0 to 10FFFF
+  - 17 x 2<sup>16</sup> = 1,114,112 code points
+  - A code point can denote a character, character modifier
+    - E.g a variant or a combining character like an accent
+  - 2048 code points are excluded so the number of representable characters (graphemes) is just 1,112,064
+    - The surrogate values D800-DFFF for backwards comparibility with UTF-16 or below
+  - The glyph is the visible rendering of the grapheme in some font
+  - Code points are usually written as "U+hex"
+    - E.g U+C2A3 for the index of character '£' 
+  - Using 4 bytes per character wouldn't be appriciated by many programmers:
+    - Break the 1 character 1 byte assumption many programmers make
+    - Makes data files 4 times larger than they were origionally in ASCII encoding
+    - The zero byte is often conventially used to mean "end of string"
+      - So a value such as (hex) 12340078 is opent to misinterpretation
+  - Some encoding systems are defined
+    - They implement UCS but use differeing number of bytes to encode the index into its table of character
+  - Come systems are backwardly compatible with ASCII in the sens that 00 to 7f are the same as their ASCII equivalents
+  
+  ### Unicode Transformation Format 32 (UTF-32)
+  - This is the simplest solution
+  - Use four bytes per character
+  - Embeds ASCII in UCS by meerly adding three 0 bytes before each ASCII byte
+    - cat in ASCII is three bytes: 99 97 116
+    - cat in UTF-32 is 12 bytes: 0 0 0 99 0 0 0 97 0 0 0 116
+  - This has the expansion of zero problems
+  - But it is conveniant if we are working with individual character (rather than strings) as 32 bit characters
+  - For example, indexing into an array of characters is very easy:
+    - Exactly like indexing into an array of 32-bit integers
+  
+  ### UCS-2
+  - Is less inflationary
+  - Uses two bytes per character
+  - Prepends a single byte before each ASCII character
+  - This only doubles the size of the ASCII file
+  - Still has the zero problem
+  - Devised for a 16 bit encodeing (Basic Multilingual Plane BMP)
+  - Found to be too small
+  - UTF-16 uses pairs of UCS-2 values
+  - This extends the encoding range
+  - But there is a cods of dome complexity
+  - It uses pairs of 16 bit values in the range D800 to DFFF (surrogate pairs) to encode the extended values
+  - Given a pair of surrogate values x in the range D800-DBFF and y in the range DCOO-DFFF
+    - Get 10 high bits from x - D800
+    - Get 10 low bits from Y - DC00
+    - Concrentrate these bits to get a 20 bit value
+    - Add hex 10000 to get the UCS value
+  - The surrogate values can easily be identified in the byte stream
+    - Important if you are dipping into the middle of a string
+  - It does punch a hole in Unicode from D800 to DFFF that cant be used as characters
+  - Unicode consortium guarentees never to allocate character in this range
+  - UTF-16 is quite popular in ude:
+    - Java, C# and various versions of Windows OS use it
+  
+  ### UTF-8
+  - The most important representation
+  - Represents all ASCII (7 bit) values as themselves while still being able to represent the full UCS range
+  - UCS values 00000000 to 0000007F are encoded as single bytes 00 to 7f
+    - Ascii is a valid UTF-8 format
+  - E.g the byte 3F in a file encodes for UCS index 0000003F
+  - UCS values 00000080 to 000007FF become two bytes 110xxxxx 10xxxxxx
+  - The last 11 bits from the UCS values are copied across
+  - So '£' UCS 000000A3 binary
+    - 00000000 00000000 00000000 10100011
+    - Becomes 11000010 10100011 (C2A3), since
+      - 00010/100011 → 110/0010 10/100011
+    - The two bytes C2A3 in a file encodes the UCS index 000000A3
+  
+  ![8e9f2419.png](:storage\\da5fa7ad-4e5c-4a56-a19e-9381ed0f6e66\\8e9f2419.png)
+  
+  - This table is more than UTF-8 requires
+  - The UTF-8 encoding is only defined for values up to 10FFFF for compatibility with Unicode and UTF-16
+  
+  ### 31-bit range
+  - A full 31-bit range would require up to 6 bytes to encode
+  - Unicode will need at most 4 (and so will fit in a 32 bit int)
+  - Most common characters require 3 or fewer
+    - A majority need 2 or fewer
+  - ASCII only requires 1 byte
+  - An ASCII file is already a UTF-8 file
+    - No expansion of data is required when regarding it as UCS
+  - ASCII values represent themselves
+  - No ASCII character appears as a sub-part of any other character
+  - The convention of using 0 as end of string still works
+  - The length of each non-ASCII character is given by the number of leafing 1 bits
+  - When dipping at random into UTF-8 encoded file it is easy to find the start of a character
+    - Just search intil you find a byte starting with bits 0 or 11
+  - In the same way if a byte is lost it is easily re-syncronised
+  - All UCS valuses can be encoded
+  - The comparison order of UCS is preserved
+  - UTD-16 does not preserve UCS comparison order
+  - Both UTF-8 and UTF-16 need up to 4 bytes to represent unicode values
+  - UTF-8 is byte order independent
+  - UTF-16 comes in big (UTF-16BE) and little (UTF-16LE) endian variants as well as plain UTD-16
+    - When some files employ a special byte order mark (BOM, U+FEFF) at their start to establish order
+  - UTF-32 is big endian
+  - UTF-8 is more efficient on Western character sets
+  - UTF-16 is more efficient on Asian character sets
+  - As they are variable length encofings, neither UTF-8 for UTF-16 allow indexing directly into a string
+  - The advantages of UTF-8 are such that UTF-16 should be retired
+  
+  ---
+  
+  ## Numbers
+  - The problem when representing numbers is which byte order to use
+  - An integer is typically represented using 4 bytes
+    - But how these bytes are used varies
+  
+  ### Bif and little endian
+  - Some machines use big endian format:
+    - This stores the most significant byte of an integer at lowest machine address
+      - Less significant bytes at increasing addresses
+  - Others use little endian format:
+    - The least significant byte is stored at the lowest machine address, the more significant bytes at increasing addresses
+  - If a mcahine recieves 4 bytes (00 00 00 2A) does this meen the integer 42 (hex 0000002A) or 70463072 (hex 2A000000)
+    - Other arangements are possible too
+  - A typical solution so that everyone agrees on order is to pick a single order (the network byte order) and always transmit in that order
+  - When a machine recieves a value it converts it to its native order
+  - The de facto order on most networks is big endian
+    - For this the machine doesnt have to do anything
+    - Whereas for little endian the machine always convert
+      - Even when connected to a little endian machine
+  - This is simpler than having a protocol to negotiate endianness and having seperate chinks of code for each combination
+  
+  ### Other types of data
+  - For example floating point numbers
+  - This isnt a byte order problem, but how many bits are used for exponents and mantissas and so on
+  - The IEEE seemed to have solved this problem
+    - IEEE 754 I think
+    - Maybe look into this more??
+  
+  ---
+  
+  ## External Data Representation (XDR)
+  - Libraries such as XDR help with presentation issues not addressed by IP
+  - A collection of functions that convert data in and out of a standard network format
+  - XDR sees to swapping the byte orders in integers when necessary
+    - E.g different endian hosts or converting between floating point standards
+  - The programmer must remember to use these functions to encode their data before sending it over the network
+  
+  ---
+  
+  ## Multipurpose Internet Mail Extention (MIME)
+  - It origionally addressed presentation in email
+    - But is more widely used (e.g in the Web)
+  - Early email systems only supported 7-bit ASCII text, mime was developed to allow emailing of pictures, sounds and so on
+  - It converts everything to a common 7-bit based format
+  - MIME regards data as a sequence of 8 bit bytes and encodes them in one of a variaty of ways:
+    - **7 bit**: No transformation, only useful if the data were already ASCII
+    - **8 bit**: no transformation, for some basic extentions to ASCII
+      - Dont regard the top bit being set as an error
+    - **Quoted-printable**: bytes with values less than 128 represent themselves
+      - Values over 128 are represented by an ASCII '=' followed by a two digit hex value written in ASCII
+      - The but value 193 (which represents a special character - A with an accent) becomes three ASCII characters =C1
+      - '=' itself is represented by =3D
+  - This is good for messages that are mostly 7 bit ASCII, but with a few non-ASCII characters
+  - Mail clients that dont understand MIME can render a mostly-readable text
+  - However for binary data (e.g a picture) this is not a suitable encoding
+    - We need something more compact
+  
+  ### Base64
+  - The input is transformed into a 65 character subset of ASCII namely:
+    - A-Z a-z 0-9 + /
+    - The non 64 non-pad character can be represented in 6 bits
+  - The transform takes three 8-bit bytes and regards them as four 6 bit values
+  - These are encoded and output in the restricted subset as four ASCII characters
+  - If the message is not a multiple of three bytes pad with zero bytes
+  - If the length is:
+    - x mod 3 = o: no padding
+    - x mod 3 = 1: pad with two zeroes and append == at the end of the encoding string
+    - x mod 3 = 2: pad with one zero and append = at the end of the encoding string
+  
+  ![ae721ed1.png](:storage\\da5fa7ad-4e5c-4a56-a19e-9381ed0f6e66\\ae721ed1.png)
+  
+  **Example message: `bit`:**
+  - ASCII binary:  01100010 01101001 01110100
+  - 6 bit chunks: 011000 100110 100101 110100
+  - Encoding as 65 character ASCII: Ym10
+  
+  - Decoding is a simple reversal of the method above
+  - Every 8 bit value can be represented using the restricted character set
+  - There is a uniform 33% expansion on the data
+  - While quoted-printable has no expansion of ASCII, but a 300% expansion of non-ASCII characters
+  - Both base64 and quoted-printable reduce the range of values used in the hope they will be transmitted correctly
+  
+  ### MIME headers
+  - MIME encapsulation adds many headers
+  - Mime-version: 1.0
+  - Content-Type: text/plain; charset=ISO-8859-15 
+    - The original data was text using the ISO-4489-15 character set
+    - A simple 8-bit extension to ASCII
+  - Content-transfer-encoding: base64
+    - The encoding this message used
+  - Many more
+    - E.g multiple parts in a single emai;
+  - The end of the MIME header is indicated by a blank line
+    - The encoded data follows this
+  
+  **Example**
+  ```
+  The message “£100 is about e150” could become
+  Content-Transfer-Encoding: quoted-printable
+  Content-Type: text/plain; charset=ISO-8859-15
+  MIME-Version: 1.0
+  =A3100 is about =A4150
+  ```
+  or 
+  ```
+  Content-Transfer-Encoding: base64
+  Content-Type: text/plain; charset=ISO-8859-15
+  MIME-Version: 1.0
+  ozEwMCBpcyBhYm91dCCkMTUwCg=
+  ```
+  
+  ---
+  
+  ## Applications examples
+  
+  - Telnet: logging in to a remote machine for interactive useL
+    - Used TCP
+  - File transfer protocol (FTP): Basic way of transfering files
+    - Uses TCP
+  - Simple Mail Transfer Protocol (SMTP): Email
+    - Uses TCP
+  - Domain name system (DNS)
+    - Mostly uses UDP
+  - Network file transfer system (NFS): Allows remote disks to appear as a local file system
+    - UDP and TCP
+  - HyperText transfer protocol (HTTP): For requesting and transferring Web pages
+    - Web pages are encoded using Hypertext Markup Language (HTML)
+    - Uses TCP
+  - Voice over IP (VoIP): Telephone over the Internet
+    - Uses UDP
+  - Many more...
+  
+  ---
+  
+  ## Telnet
+  - A fairly simple application
+  - It connects to a port and relays back and forth between the user's terminal and the program running on that port
+    - `telnet mailhost.example.com 25`
+    - Would likely connect to a mail server on that host
+  - More usually telnet would be used to connect to a login program that runs on oprt 23
+  - This program usually asks for a username and password
+  - Telnet then relay characters between you and the shell runnin on the remote machine
+  - Gives remote access to machines
+  - This connection is insecure
+    - The data (including the login an password) is readable by the machines that route packets as they travel
+  - Telnet whas been replaced by secure shell (SSH)
+  
+  ---
+  
+  ## File transfer protocol (FTP)
+  - Its putpose is to share files
+  
+  ![e7427892.png](:storage\\da5fa7ad-4e5c-4a56-a19e-9381ed0f6e66\\e7427892.png)
+  
+  ![91bcc75b.png](:storage\\da5fa7ad-4e5c-4a56-a19e-9381ed0f6e66\\91bcc75b.png)
+  
+  - The primary use is tro transfer files:
+  
+  ![b4618864.png](:storage\\da5fa7ad-4e5c-4a56-a19e-9381ed0f6e66\\b4618864.png)
+  
+  - There is also a put command
+  - There is a "binary mode" and an "ASCII mode" in this presentation
+  - ASCII mode is a text mode
+    - Presumes an ASCII representation on the network
+  - More data travels over HTTP rather than FTP these days
+  - However FTP is very efficient at large data transfers
+  
+  ---
+  
+  ## Simple Mail Transfer Protocol SMTP
+  - The protocol behind email
+  - It udes human readable messages, such as HELO, MAIL FROM and so on
+  
+  ![26d19ab7.png](:storage\\da5fa7ad-4e5c-4a56-a19e-9381ed0f6e66\\26d19ab7.png)
+  
+  - Lines with numbers are from the server, the others are from the client
+  - Numbers are return code, indicating success, failure or other states
+    - 220: service ready
+    - 250: success
+    - 354: start mail input
+  - Client starts with HELO
+    - Or EHLO for an extended set of command
+    - Helo gives the name of the client, this can be checked against where the data is actually coming from
+  - MAIL FROM: the ender of the email
+  - RCPT TO: the intended recipient(s) of the email
+  - DATA: the message itself
+  - The text at the top is called the envelope
+  - The email contains its own conventional header (layering)
+  - The addresses here need not be the same as the envelope:
+    - The email is delivered to he address in the encelope
+    - But the address in the data is what is usually presented by the mail client application
+  - The end of an email is indicated by a full stop and a return
+  - Only ASCII encoded messages should be sent
+    - More interesting data can be encapsulated by MIME
+  - MIME encoding does allow arbitrary data to be sent
+    - In particular executable code
+    - This can spread worms and viruses
+  - Virus filters:
+    - Emails are checked before they are delivered
+    - These filters need continual updating wwith the patterns they require to recognise the latest viruses
+  - Spam filters:
+    - Emails are checked to see if they are likely to be spam
+    - Spam messages share many distinguishing deatures as they all have the same purpose
+      - Get as many emails to as many people as possible
+    - This makes them amenable to barious analyses:
+      - The envelope and sender
+      - Layour of the content
+      - Nature of the content
+  
+  ### Secure SMTP
+  - There are sevure versions of SMTP, namely secure SMTP (SMTPS and SSMTP)
+  - There is SMTP over an encrypted layer SSL/TLS
+    - This gives privacy but generally not authentication
+  - It makes email secure in transit but doesnt help the spam problem
+  
+  ---
+  
+  ## Network File Sytem (NFS)
+  - Sun's NFS is an approach to providing transparent file sharing
+  - "Transparent" - A user should be unaware whether a particular file is local to the machine or actually somewhere else on the network
+  - NFS is layered on the Remote Procedure Call (RPC) protocol
+    - The idea of RPC is to make calling a function on a remote machine as easy as calling a funcation on a local machine
+    - RPC could be used to support parallel programs that use several machines
+  - RPC is typically layered on UDP or TCP
+    - But in principle it could use any transport layer
+  
+  ![f9a3822a.png](:storage\\da5fa7ad-4e5c-4a56-a19e-9381ed0f6e66\\f9a3822a.png)
+  
+  - The local machine calls a function called a client stub 
+    - A piece of code either written by the programmer or taken from a standard library
+    - The stub collects the arguments on the function and packages them into a network message
+  - It sends the network message to the server, together with enough information to specify which function on the remote machine it wants to use
+  - The server stub on the server recieves and unpacks the message and calls the required function
+  - The results are similarly packaged by the server stub and returned to the client
+  - The client stub unpacks the result and passes them to the origional caller
+  - From a programmers point of view, they call a function and get the result
+    - Abstracted from everything else
+  - Examples:
+    - UDP timeouts and losses
+    - TCP connection setup and termination
+    - XDR encoding and representation
+    - Many more...
+  
+  ### RPC portmapper
+  - Its purpose is to provide a mapping between RPC services and UDP/TCP
+  - E.g a client wishes to use the NFS service, which port would it use?
+  - When NFS starts on the server it registers itself with the portmapper and supplies its port, for example 2049 
+  - When a client want to use NFS it first contacts the portmapper on the server (which always runs on port 111)
+  - The client ask "where is NFS" and gets the answer "on port 2049"
+  - The client can then contact the NFS server directly
+  - This allows dynamic systems where services come and go and use a variaty of ports
+  - A portmapper service is defined by a triplet of numbers
+    - Program number
+      - The service we want
+      - For example NFS is assigned to 100003
+    - Program version
+      - A service can have several versions
+      - E.g NFS versions 3 and 4 are often provided simultaniously
+    - Procedure number
+      - A service can offer several options
+      - E.g NFS allows us to create, read, delete, etc
+  
+  ### NFS
+  - NFS allows us to access a file as if it were on out local machine
+  - When a program does a file open, the OS know the file is on a remote machine and executes remote NFS open
+  - When the program does a read, the program OS converts this into a NFS read
+  - The file access is transparent on the application
+    - But it might be a bit slower
+  - NFS runs over RPC:
+    - When a NFS client starts it asks the server's portmapper which port the MFS service is running on
+    - Then the clients sends requests directly to the NFS server
+  - The actions of NFS are remote procedure calls
+    - If a program on the client wants to read bytes 10-20 from file `foo` it executes a normal OS read call
+    - The local operating system finds that `foo` lives on a remote machine and assembles an RPC request to send to it
+    - This request is essentially "get me bytes 10-20 from file foo"
+    - It sends the RPC request to the server with the appropriate version number and the read procedure number
+    - The server gets the request and returns the bytes
+    - The OS client recieves the bytes and hands them as the result of the original read call
+  - NFS takes care of:
+    - Presentation issues using XDR
+    - Composing and sending the RPC
+    - Recieving the reply
+    - Unpacking the results and returning them to the caller
+  - Traditionally NFS runs over RDP over UDP
+    - UDP has less overhead
+    - But then RDP or NFS has to deal with the reliability problems with UDP
+    - Most NFS operations are idempotent, they can be done more than once and get the same answer each time
+      - If a "read bytes 10-20 from file foo" message is lost, it can simply be resent
+  - NFS servers are stateless, no information is kept on the server about past requests
+  - Suppose a client makes a request but the server crashes:
+    - The client repeats the request, possibly several times
+    - The server reboots and restarts the NFS service
+    - The server gets the request and continues as if nothing had happened
+    - This is why the request is like "get the bytes 10 to 20 from file foo" and "get the next 11 bytes"
+      - The server does not have to remember where the request is refering to
+      - This is less efficient byt more resilient
+  - Version 3 and later of NFS can also use TCP
+  - This is appropriate now that TCP has been tuned so that UDPs speed advantage is minimal on large files or over a wide area
+  - Complications arise as TCP is stateful while UDP is stateless
+  
+  ---
+  
+  ## Hypertext Transfer Protocol (HTTP)
+  - The World Wide Web (WWW) is what many people wrongly think is the internet
+  - This is testiment to the fact that the WWW is the major driving force behind the growth, comercialisation and general acceptance of the Internet
+  - HTTP is the protocol that drives the WWW
+  - The WWW is at base very simple:
+    - A client (browser) makes requests
+    - A server delivers some data
+  - HTTP started as a simple request-response protocol
+  - Made easy to be debug by using human-readable messages
+  
+  ```
+  GET /home.html HTTP/1.0
+  Host:wibble:80
+  
+  ```
+  
+  - NOTE: There is a blank line at the end of this
+  - This is an example of HTTP version 1 for simplicity:
+    - Generally version 1.1 is used
+  - This requests the file home.html 
+    - From the server wibble 
+    - Connecting on port 80
+  - 80 is the conventionalprot number for HTTP
+  - The blank line ends the HTTP header:
+    - Sometimes additional information follows when the client needs to send some more data to the server
+  - The response has a similar header
+  
+  ```
+  HTTP/1.0 200 OK
+  Server: Wombat Server 1.0
+  MIME-version: 1.0
+  Content-type: text/html
+  Content-length: 81
+  Expires: Tue Feb 14 22:57:29 2006
+  
+  <html>
+  <head>
+  <title>Example</title>
+  </head>
+  <body>
+  Hello world.
+  </body>
+  </html>
+  ```
+  
+  - The response contains a http header followed by the data
+    - Some MIME encapsulated HTML in this case
+  - The header contains:
+    - HTTP version that the server uses followed by 200 (a success code)
+    - A description of the server software
+    - A mime header that encapsulates the actual data
+  - The MIME header gives aditional information, such as the kind of data, its length and its lifetime
+  - Web pages can change rapidly or slowly
+    - The "Expires" date indicates how long the page should be cached by the client
+    - It need not refetch intil then
+    - The blank lines at the header and the data follows
+    - This data is notmall the contents of the webpage
+      - Written using the display layout language HTML
+      - Encoded by MIME 
+  
+  ### Secure HTTP (HTTPS)
+  - This can be used when it is importnt the data can't be read by an eavesdropper as it passes by
+  - This is just HTTP over an encrypting SSL/TLS layer
+  - In contrast, another protocol SHTTP is an extention to the HTTP protocol to include security and authentication
+  - HTTPS is by far the most used in the real world
+  - HTTP/2 encourages the use of secure connecitons by default
+  
+  ---
+  
+  ## Voice over IP (VoIP)
+  - Using IP fot "telephone" communication
+    - And similarly videoconferencing
+  - The margional cost for the use of Internet is tiny, while long distance phone calls are expensive
+  - IP-to-IP calls are generally free
+  - IP-to-phone or visa versa incure a small scharge
+    - Dependent on the connection from the endpoint to the phone
+      - Usually a local call
+  - There are ahuge number of VoIP sustems in use:
+    - Free vs paid
+    - Hardware vs software
+    - Open vs proprietary
+    - Voice vs video
+  - BTs telephone network is no principally VoIP
+  - There is just a small analogue link from the home to the exchange
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

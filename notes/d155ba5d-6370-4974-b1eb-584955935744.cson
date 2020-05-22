@@ -1,0 +1,451 @@
+createdAt: "2020-01-10T13:00:10.776Z"
+updatedAt: "2020-01-10T20:56:41.037Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Security"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # Security
+  - IP (both the protocol and the implementations) was origionally developed in a "safe" achedemic encironment
+    - Little thought was given ot security and authenication
+  - There have been many developments in IP to lead to more secure and less fragile systems
+  - Experemental and poorly debugged code was encorporated into a number of systems
+  - Some bugs were benign:
+    - TTL being used for hop count
+  - Others could be exploited to:
+    - Crash the machine
+    - Tie up the machine with so much bogus data that real attach cant get throug
+      - Denial of service attack
+    - Gain control over the machine, which can then be used to attack a more important target or end spam
+  
+  ![937ac975.png](:storage\\d155ba5d-6370-4974-b1eb-584955935744\\a43cfd4d.png)
+  
+  ### Social engineering
+  - Although the internet has vounerabilities, humans are just as easy to manipulate
+  - Why bother attaching a machine when you can attack the human element
+  - For example:
+    - Phoning a support engineer and pretending to be a user who has forgotten their password
+    - Sending someone an email and getting them to click the link or run some code
+    - Simply putting fake news in a facebook post
+  
+  ---
+  
+  ## SYN floods
+  - Denial of service attack
+  - A TCP connection starts with an SYN
+    - The sernver sends an SYN+ACK which the client ACKs
+  - The server must save a chunk of information about the intial SYN so it can recognise the client ACK as part of the new connection
+    - It also save options like SACK and MSS
+  - A SYN flood is where an attacker sends many active SYN segments and never completes the handshake
+  - The SYN segment might come from a single source, bit more likely from many hacked computers in a distributed denial of service attack
+  - The hacked machines comprise a botnet, controlled by the hacker(s)
+  - The individual hosts are sometimes called zombies
+  - Each SYN recieved consumes resources on the server that are not released until a suitable timeout period has passed
+    - The server can run out of resources and not be able to respond to real conneciton requests
+  - The overload reduces the level of servixe for genuine users, often to zero
+  - This has been used many times, particulalt in extortion attacks against comercial (e.g betting) sites to get them to pay ransom
+  - These days it is also used to exert polotical pressure against companies, people or govenments
+  - A DDOS attack might be several GB/s of SYNs
+  - The return address on the bogus SYNs could be forged to implicate some other machine(s) in the attack
+    - These servers will recieve teh handshake ACKs
+    - Flooding a secondary target
+  - Servers could agressively drop half-open connections when resources are low
+    - E.g oldest first, or ar random
+    - Real connections might be dropped, but since most of the SYNs are bogus the probabilities are that the attack connections are dropped
+  - Another alternative is syncookies
+  
+  ### Syncookies
+  - Don't store any information on the server
+  - Encode it in the server's initial sequence number (ISN) for this connection
+  - So the ISN is not random, now it encodes some information called a syncookie
+  - When (or if) the client ACK gets back, we can decode the returned sequence number to retrive the information
+  - No resources can safely be allocated to this presumably valid connection
+  - Thi is good as it consumes no resources in the server until they are definitely needed
+  - It is tricky to encode enough information in the 32 bits if the ISN
+  - It must also be encrypted to prevent spoofing
+  - So syncookies are only used when the load gets too high
+  - Optional features are not used under a SYN attack
+  - The loss of SACK is no big deal when we have to cope with a SYN flood
+  
+  ### Botnets and the internet of things
+  - Recent botnets have used the Internet of Things (IoT), which consist of connected devices like security devices, thermostats etc.
+  - Thet are often poorly secured
+  
+  ### Amplification attacks
+  - A DNS amplification attack :
+    - The subverted hosts make DNS lookup requests to servers with a reply address forged to the address of the target
+  - DNS replies are much larger than requests
+  - Because the packets are coming from DNS servers it is hard to tell who initiates the attack
+  - This attack usually uses UDP instead of TCP
+  - Similar attacks using other public services such as
+    - Time servers (NTP)
+    - Directory servers (LDAP)
+  
+  ### Implementation attacks
+  - These exploit bugs in IP implementations
+  - Some hosts were vulnerable to oversized ping packets:
+    - The ping of death
+  - THese were sent as forged fragments that, when reassembled, were much larger than expected and overflowed OS buffers in the recieving host
+  - This resulted in a crash (another denial of service)
+  - To mitigate, we should ignore ICMP packets that claim to be larger than the MTU:
+    - Such packets are never generated naturally
+  - Or fix the reassembly code
+    - Modern implementations check the sizes are sensible before trying to reassemble fragments
+  
+  ### Fragment bombs
+  - Similar to SYN floods
+  - Too many fragments for packets that are never completed and so cant be reassembled
+  - This overflows the fragment buffer space
+    - Where fragments are kept pending reassembly
+    - Likely to cause a denial of service
+    - Or even a crash
+  - Implementations need a timeout to drop old fragments
+  
+  ### Other exploits
+  - Many other exploits exits
+  - Usually from the implemetnters making invalid assumptions about IP and assuming packets are all well-formed and correct
+  
+  ---
+  
+  ## Social engineering attacks
+  - These are a pre-computer attack, formaly known as confidence tricks
+  - If the machine is too hard to attack, attack the user instead
+  - Often this is much easer than attacking a machine
+  - It could be as simple as ringing a systems administrator and persuading them to give you a password to their machine
+    - Pretend to be supervisor and threaten to sack them if they dont comply
+    - Pretend to be a distraught user who has lost their password
+    - Anything els to unbalance them or get their sympathy
+  - This is much wasier than trying to crack a password by brute force
+  
+  ### Phishing attacks
+  - A form of impersonation to try and convince the user to hand over valuable information, such as credit card numbers
+  - A typical phishing attack
+    - The victim recieves an email purporting to be from thier bank to update their personal details
+    - It proveds a convenient WWW link
+    - The page looks plausibly like the bank's
+    - The victim enters their details and sends them off
+    - The email and Web page are faces, so now the details are in the hands of the criminals
+  
+  ---
+  
+  ## Firewalls
+  - One way to reduce the impact of an attack is to prevent bad packets reaching the host in the first place
+  - A firewall is a router/gateway that sits between a private network and the wider internet and tries to protect the private network from attackes
+  - This might be an ordinary router running girewall software
+    - But specialised firewall hardware also tosexist
+  
+  ![b1857536.png](:storage\\d155ba5d-6370-4974-b1eb-584955935744\\b1857536.png)
+  
+  - The firewall inspects each packet as it enters and decides what to do with it
+  - It might:
+    - Pass the packet through unchanges
+    - Pass the packet through, but modify it in some way
+      - E.g with the TOS bits changes or addresses changed with NAT
+    - Drop the packet and send an ICMP back, e.g "port is unreachable"
+    - Silently drop the packet
+    - Or other possibilities
+  
+  ### Dropping silently
+  - Dropping silently is a good defence against probes from malicious sources looking for vulnerable services
+  - The normal response to a packet to a packet sent to a closed UDP port is ICMP "port unreachable" and TCP sends a RST
+  - But this has the side effect of telling the sender that the machine is up and running and worth probing further
+  - Silence can make the attacker believe there is no machine at theat address at all
+  
+  ### Firewalls can be applied to any layer
+  - Packet filters work in the data link, network and transport layers at the individual packet level, making decisions based on protocol (TCP or UDP) source and destination addresses, port number, TOS bits and so on
+  - Application layer firewalls work in the application layer and can use information that the applications use:
+    - HTTP filters make decisions on the web page level
+  - Application proxies which also work on the application layer and act as an intermediate between the application and the server
+    - This can also make use of application layer information
+    - A Web proxy for an organisation might recieve all HTTP requests from a host within the organisation and choose to relay them onwards, or not, based on the details of the HTTP request
+  - Packet fileters are fast, effieient and transparent to the application
+    - Do not have the decrimination avoilable to application proxies
+  - Application layer filters are slower but more flixible
+  - Application proxies require some configureation in the application
+    - Setting up a web browser to use a proxy
+  - Of course you can combine them:
+    - Packet filter transparently rewrite packets to the Web to go via a proxy
+  
+  ### Protecting from attacks from outside
+  - Firewalls can protect services from attacks from outside
+    - E.g not fowarding inward TCP packets that have destination port 21
+    - This disallows external use of FTP into the private network
+  - Thise relieves some of the preasure of making all the FTP servers on the private network secure
+    - Does not help against attacks inside the firewall
+  - A safe default installareion is to not forward anything inward to effect maximum protection of the private network
+    - This has the same protection as NAT
+  - NAT works nicely alongside firewalling
+  
+  ### Efress filtering
+  - Also known as outward filtering
+  - E.g we can force the use of a HTTP proxy by internal hosts by blocking port 80
+  - More subtly, we could use NAT to rewrite connections to port 8- to the server running the proxy
+  - The proxy can then implemtent an application layer policy
+    - E.g disallowing access to certain web pages
+  - Another harsher way of doing this is for the firewall to drop the packet and return a RST
+  - Public wireless networks often block outward port 25 (SMTP) to prevent users sending spam
+  
+  ---
+  
+  ## Security and authentication in IP
+  - IP was not designed with security in mind
+  - Email and web pages are readable as they travel to their destination
+  - It is easy to write programs to trawl through millions of emails as they pass through a router
+  - As a lot of sensitive and valuable data travels over the internet, this needs to be fixed
+  - We can apply security in any layer (e.g in the IP model):
+    - Application: The application or the user can encrypt the data
+      - E.g yoju might use PGP to encrypt an email before sending it 
+      - Or an application might have built in encryption
+    - Transport: SSL/TLS, if trusting the user/application is too problematic we can get the transport layer to encrypt it for us
+    - Network layer: We can use IPSec
+    - Data Link: We can have encryption on the data link layer, e.g WPA
+  - Encryption is a small part of making a system secure as there are many other factors:
+    - Human factors like social engineering
+    - Also there is no point having military grade encryption if you have a easily guessable password
+  - There are two problems that need to be addressed:
+    - Secrecy
+      - Make sure that this data is not readable by anyone other than the recipient
+    - Authentication
+      - Make sure the recipient is who I think they are
+  - To authenicate on the internet we use chunks of mathematical data to act as identification (almost like a passport)
+  
+  ### Authorisation
+  - After authentication there is the question of whether this entity is allowed access to some resource
+  - For example, in WPA-PSK, a correct password is taken as authorisation
+    - In WPA-Enterprise the server will have a list of allowed users and passwords
+  
+  ---
+  
+  ## IPSec
+  - A network layer protocol
+  - Used to set up secure point-to-point links
+  - But can also be used to secure and authenticate individual connections when the other end supports it:
+    - Opportunistic encryption
+  - IPSec consists of several protocols and defines serveral IP optional header fields
+  - Secrecy is implemented by Encapsulating Security Payload (ESP)
+  - Authentication is implemented by the Authentication Header (AH)
+  - Keys are managed by Internet Key Exchange (IKE) which itsef uses the Internet Security Association and Key Management Protocol (ISAKMP)
+  - IPSec authenticates connections, not users
+  - You use it to ensure that the remote host is "Acme Widgets" (example company) before you send data to them
+    - You dont login with this
+  - Both ESP and AH require a secret key to work
+  - This key can be:
+    - Pre-agreed (manual keying)
+    - Negotiated by IKE
+  - IKE can iteself use a pre-agreed key to deliver ESP/AH key, or use a public-key certificate mechanism
+  - Normally there is one IKE process per host and it manages all exchanges for that host
+  - When a new IPSec/IP connection is started an IKE exchange will take place before the IPSec can continue
+  - This may take some time: even enough to cause TCP to time out on slow machines
+  - IPSec is derectly inside the IP layer (optional headers)
+    - So UDP and TCP are easily layered transparently on top
+  - AH does authentication ehilr ESP deos secrecy and authenication/Pure authenication is okay if you dont need secrecy, but pure secrecy is open to impersonation attacks without authentication
+  - ESP has a trailer as well as a header: this can contain padding to hide the length of the origional packet
+  - ESP only authenticates the payload, while AH authenticates the whole packet, excepting the mutable fields that change en route
+  - Applies to IPv6 and IPv6
+  
+  ### Problems
+  - Initial connection overhead is high
+  - IPSec is tricky to set up and manage
+  - It works at the OS host level, so needs a competent administrator
+  - Does not have the flexability that TLS/SSL have, IPSec doesnt allow each application to be managed independently
+  
+  - These days with faster computers IPSec is a useful option, provided that you are compitent enough to set it up
+  
+  ---
+  
+  ## Virtual Private Networks (VPNs)
+  - Some systems are based around creating VPNs
+  - A VPN allows a remote machine to appear to be on another network
+    - This is done through tunneling
+  - Tunnelling is where one protocol is layered over another so the lower protocol can transport the upper protocol transparently over a network that might not normally carry the upper protocol
+  - VPNs are private as they add encruption of the data in the tunnel t privide the securaty
+  - Traffic from the host travels through the tunnel to the remote network where it is routed as if it had originated there
+  - This allows the host to use the services on the network as if it were local
+  - Good for remote workers
+  - There are two common setups for VPNs, they treat data from the source in different ways:
+    - Where only the traffic destined for the remote network goes through the VPN. Other traffic from the source goes directly to its destination in the normal way
+    - Where all traffic goes through the VPN
+  
+  
+  ### Only traffic destined for remote network
+  ![b4d00174.png](:storage\\d155ba5d-6370-4974-b1eb-584955935744\\b4d00174.png)
+  
+  - A packet destined for the CS network goes through (virtual) interface tun0
+    - This actually sends the packet to the VPN software on the local machine
+  - This is encrypted and encapsulated in a packet with destination fire on the CS network
+    - And the port number of the VPN on the remote server
+  - This packet then goes through the host (H) route to CS through the real interface wlan0
+  - The routes are checked longest mask first, to prevent an infininate loop
+  - It rewrites the source address on the packet to its own address so that replies come back to it
+    - Think NAT
+  - The remote host forwards the packet to the destination which is on the local network
+  - Symettrically, it will encrypt, encapsulate and return any replies back through the tunnel
+  - Locally, all other (default) traffic goes through teh normal interdace not the VPN
+  
+  ### All traffic is routed through the VPN
+  ![d786c841.png](:storage\\d155ba5d-6370-4974-b1eb-584955935744\\d786c841.png)
+  - Here all default traffic goes through the interface tun0
+  - This is encapsulated in the same way
+  - And routed through the tunnel via the real interface
+  - The VPN software on tphe remote network gets the packet, deencapsulates it, rewrites its source address and forwards it to the destination which might be anywhere
+    - Not just on the local network
+  - Returning packets are sent back through the VPN
+  
+  ### Comparision of the two types of VPN
+  - When the traffic that is only destined for the remote network is fouted through the VPN you get a secure access to the network (e.g work network) but to the rest of the world you are still on your network (e.g home network)
+    - This means that if work employs security like firewalls on the workplace, you wont be protected by these
+  - When you route all traffic is routed through the VPN you will appear to everyone to be at work as all your packets have a work IP address on them
+  
+  ### Point-to-Point Tunneling Protocol (PPTP)
+  - Devised by Microsoft to support VPNs
+  - Tunnels IP over PPP over Generic Routing Encapsualtion protocol (GRE) over IP and sends connection control messages over a seperate TCP connection
+  - Layers only ver IP
+  - Can encapsulate other protocols such as IPX
+  - Uses PPP for authentication
+  - Can use Microsoft Point-to-Point encryption (MPPE) got privacy when combined with MS-CHAP authentication
+  - It is simple to set up
+  - PPTP is as secure as the authentication mechanism (MS-CHAP can be flakey)
+    - Later versions MS-CHAPv2 have tried to fix some of the problems (but not all)
+  
+  ### Layer 2 Tunneling Protocol (L2TP)
+  - Combines features of PPTP and Layer 2 Forwarding (LF2) developed by Cisco
+  - Tunnels IP over PPP over L2TP over UDP (over IP layer...)
+  - Is intended to be used over ATM, Frame Relay and X.25 networks
+  - Has no native encryption and must rely on IPSec for secrecy
+  - Mainly uses PPP for authentication, but acan also use ESP from IPSec
+  - Is believed to be more secure than PPTP
+  - Simple to set up
+  
+  ### Tunnelling TCP
+  - Note that almost all systems tunnel over UDP
+    - Generally tunneling TCP over TCP is a bad idea
+  - TCP has a large overhead to gain reliability
+    - There is no point in paying the cost twice
+  - Plus each TCP hsd its own idea of timeouts and retransmits
+    - They can start fighting with each other
+    - The retransmit of one TCP will be viewed by the other retransmit
+  
+  ### Problems with VPNs
+  - There is encryption and authentication header overhead in every packet
+    - May cause extra packets or extra fragmentation
+  - There is overhead in the time taken to encrypt or authenticate the packets
+  - Some routers or ISPs make decisions based on the type of traffic (e.g HTTP or video)
+    - Encryption hides this and makes effieient routing harder
+    - Some ISPs like to change more, or manage certain kinds of traffic and this hids the kind of traffic
+      - Some ISP have blanket bans on VPNs
+  - In VPNs speed is secondary to security, but people will not use them if they are slow
+  - Any kind of security is viewed with suspicion by law enforcement agencies
+  
+  ### Other VPN implementations
+  - Crypro IP Encapsulation (CIPE)
+    - Lightweight point to point protocol that layers over UDP
+  - ssh
+    - The remote login protocol also has a VPN mode, but layers over TCP
+  - OpenVPN 
+    - Tunnels over the transport layer SSL/TLS
+  
+  ---
+  
+  ## Transport layer security
+  - Transport layer security is used more often than network layer security
+  - Secure Socket Layer (SSL) was evolved into TLS
+    - SSL is no longer recommended as it has flaws in the protocols
+  - Both of these implement security over the transport layer (usually TCP)
+  
+  ### Transport Layer Security TLS
+  - This layer is employed within the application and sits on top of TCP
+  - It provides security of data and authentication of the remote host
+  - After a TCP connection has been made a TLS handshake authenticates the connection and negotiates a secret key
+  - The key is then used to encrypt subsequent data sent over the TCP connection
+  - TLS provides a new transport layer that can be used very much like TCP
+    - Reliable, connection-oriented, etc
+  - Sometimes called a shim layer as it sits between two other layers
+  
+  ![ad4787d8.png](:storage\\d155ba5d-6370-4974-b1eb-584955935744\\ad4787d8.png)
+  
+  - The client can authenticate the server through the use of public-key certificates
+  - During the handshake the client application recieves a certificate from the server that it can authenticate in a variaty of ways
+  - For example, Web browsers often contain a selection of master certificates from certification authorities that it can use to check the certificate from the server
+  - If it wishes the server can request a certificate from the client to authenticate the client a similar way
+  - It would be possible to use this instead of the usual "login and password" mechanism often used to authenticate the client
+    - But the requirements of administration of the certificates is much beyond the skill of an average user
+  - TLS is very flexible, but it requires the application programmer to understand and use the function calls to set up certificate checking and the handshake
+  - The programmer must involve the layer in their application:
+    - Correct use of TLS is not easy
+  - Their program can then read and write via the secure connection they get from this instead of reading and writing directly from the TCP socket
+  
+  ![421578a2.png](:storage\\d155ba5d-6370-4974-b1eb-584955935744\\421578a2.png)
+  
+  ![797f2165.png](:storage\\d155ba5d-6370-4974-b1eb-584955935744\\797f2165.png)
+  
+  ### Protcols layered over TLS
+  - Many protocols layers over TLS to give more secure versions
+    - HTTPS for HTTP
+    - SMTPS for SMTP
+    - IMAPS for IMAP
+    - Etc
+  - This is a relatively easy way of making secure protocols from insecure ones
+    - Just find the parts of the code that read and write from IP sockets and change them to use TLS
+  
+  #### HTTPS
+  - Secures the URL and content of a Web page, but cannot hide the IP address of the server
+  - The eavesdropper will not know which exact page you are on:
+    - www.a.com/something.html
+    - www.a.com/anotherThing.html
+    - They know you are won www.a.com, but not the exact page
+  - Traffic analysis of communications is a powerful tool that has been used for decades
+  - Some websites have multiple subsites hosted on the same IP address
+    - Virtual hosting
+    - E.g good.tumblr.com/home.html and e, bad.tumblr.com/home.html both have the same IP address
+    - The server name is included in the HTTP request and the server uses this to determine which sub-site the client wants
+  
+  ```
+  GET /home.html HTTP/1.1
+  Host: bad.tumblr.com
+  User-Agent: curl/7.60.0
+  Accept: */
+  
+  ```
+  - HTTP request for home.html on (virtual) server bad.tumblr.com
+  - HTTPS runs over TLS so this is hidden from an eavesdropper
+  - But the TLS handshake (before the HTTP request) requires an authentication certificate from the server that is based on the server name
+    - Server Name Indication (SNI; RFC6066) is part of the HTTPS handshake that asks for a certificate fot the server name (e,g bad.tumblr.com) which is not encrypted as we dont yet have a shared key that can be encrypted
+  - So access to such sub-sites are trackable
+    - In the DNS lookup of the sub-site name
+    - In the HTTPS SNI handshake that contains the name of the sub-site
+  - Although the content of the Web pages is always hidden and more importanly the content the client is sending to hte server is as well, which site being accessed is not hidden
+  
+  ### Overheads of TLS
+  - A one-off overhead of re-writing the application code to use TLS
+  - A per connection overhead of TLS setup messages and the associated computation to check certificates
+  - A per-packet overhead of the data expansion in the encryption
+  - A per-packet overhead in computation required to encrypt or decrypt the data
+  - These costs are not huge but you must make a choice whether they are worth while
+  
+  ### OpenVPN
+  - Uses TLS as a datalink layer
+  - It layers IP over TLS to build a private network
+  - I creates a virtual interface that the OS can pass IP packets to
+  - It then encrypts, authenticates and does whatever it needs (using TLS) before handing the results to the "real" translport layer (usually UDP)
+  
+  ![8434ceca.png](:storage\\d155ba5d-6370-4974-b1eb-584955935744\\8434ceca.png)
+  
+  - The encapsilated data then goes doen through the normal transport and network layers and is transmitted over the real physical layer
+  - At the end the real transport layer hands the data to the OpenVPN which decrypts and passes the IP packets to hte OS to pass up the rest of the stack
+  - There is a cost of about 10%
+  - We have the benefits of a VPN:
+    - User applications can be unsecured (but secured within the VPN)
+  
+  A web browser looking at a page secured by HTTPS on a VPN on a home network might might be layering:
+  - Web page in HTML/CSS over HTTP over TLS over TCP over IP over TLS over UDP over IP over PPP over Ethernet over Cat5e
+'''
+linesHighlighted: [
+  152
+]
+isStarred: false
+isTrashed: false

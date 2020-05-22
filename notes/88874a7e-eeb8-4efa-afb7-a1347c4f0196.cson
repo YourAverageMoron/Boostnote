@@ -1,5 +1,5 @@
 createdAt: "2019-10-15T20:10:54.303Z"
-updatedAt: "2019-10-16T20:01:15.834Z"
+updatedAt: "2020-01-02T18:10:30.344Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Layering Models"
@@ -160,6 +160,44 @@ content: '''
   Each layer simply hands off to the next, it doesnt care what the next layer does
   As long as it has the right behaviour it doenst matter how it is actually implemented
   This enables useful tricks like tunnelling
+  
+  --- 
+  
+  ## OSI vs Intenet Models
+  ![ba0e15bb.png](:storage\\88874a7e-eeb8-4efa-afb7-a1347c4f0196\\ba0e15bb.png)
+  
+  - OSI was developed before an implementation
+    - The Internet Model was created after TCP/IP
+  - OSI make a clear distinction between model and implemtnaiton
+    - The Internet is a bit fuzzy
+  - OSI is general and can apply to many systems
+    - Internet is specific
+    - Namely to TCP/IP
+  - Implementations following standards presented in the OSI model were dire
+    - TCP/IP is very successful
+  - Due to the larger number of layers and increased encapsulation OSI is slower than the Internet Model
+    - However you dont actually have to implement all of the layers thus reducing overheads
+  - In theory TCP/IP can be regarded as a standard that fits the OSI model
+  - The OSI models are widely used
+    - But the OSI protocols arent
+  - The Internet model is rarely used
+    - But TCP/IP protocols are everywhere
+  - TCP/IP is so successful because its standards (RFCs) are openly available (anyone can join in)
+    - Networks before the Internet were generally closed and proprietary
+      - You had to pay to get in
+  
+  ---
+  
+  ## Other layering models
+  - Tanenbaum’s Five Layer model
+    - Physical
+    - Data link
+    - Network
+    - Transport
+    - Application
+  - Still missing presentation
+  - But a lot more useful in a world where the physical layer is often changed
+    - E.g Ethernet to Wi-Fi
 '''
 linesHighlighted: [
   36

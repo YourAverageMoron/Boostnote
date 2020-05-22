@@ -1,5 +1,5 @@
 createdAt: "2019-10-16T11:03:29.902Z"
-updatedAt: "2019-10-16T18:13:22.364Z"
+updatedAt: "2020-01-02T16:13:52.757Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "OSI Layer Model"
@@ -38,6 +38,9 @@ content: '''
   - And many more
   
   Generally, anything to do with choices regarding hardware
+  
+  **IEEE 802**
+  Explains how the ohysical layer can be split into 3 sublayers
   
   ---
   
@@ -117,19 +120,17 @@ content: '''
   
   ---
   
-  ## Application layer - layer 6
+  ## Application layer - layer 7
   This is used by programmers - ideally they would not have to worry about the lower layers in their application
   
   It contains protocols like HTTP for the Web, SMTP for email, and so on
   
   Built on top of these protocols are the applications that the users can interact with e.g chrome and thunderbird
-  
-  
 '''
 linesHighlighted: [
-  63
-  31
-  50
+  14
+  98
+  80
 ]
 isStarred: false
 isTrashed: false

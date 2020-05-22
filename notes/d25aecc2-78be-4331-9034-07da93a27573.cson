@@ -1,0 +1,244 @@
+createdAt: "2020-05-16T17:30:31.656Z"
+updatedAt: "2020-05-16T18:32:51.771Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Consciousness and Cognitive Systems"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Consciousness and Cognitive Systems
+  
+  ## Introduction
+  - Can an artificial cognitive system beconscious?
+  - Who cares?
+  - Why care?
+  - What is consciousness in the first place?
+  
+  ---
+  
+  ## Cognitive Systems & Philosophy
+  - Science fiction uses robots and aliens to examine the human condition; the future to examine the present
+  - AI does the same thing
+    - But, AI is also real
+    - Well, some of it is real
+    - Some of it is tangled with Sci Fi
+  
+  ---
+  
+  ## Roadmap for Conscious Machines
+  **Arrabales et al 2009**
+  1. (-1) Disembodied
+  1. (0) Isolated
+  1. Decontrolled
+  2. Reactive - Sensing to action: intelligence
+  3. Adaptive
+  4. Attentional - Unconsciousness is more conscious!
+  5. Executive - multiple goals (unconscious 2)
+  6. Emotional - “human like”???
+  7. Self-conscious - knows about self
+  8. Empathic - knowledge (k) of others
+  9. Social - k of other’s k of self
+  10.Human-like - use Interweb to extend mind
+  11.Super Conscious - Multiple streams!
+  
+  --
+  
+  ## Consciousness ?= Like ME!!!
+  - From an AI & even Computer Science perspective, many of these criteria are easy to achieve.
+    - E.g. perfect self knowledge.
+  - Consciousness is easy but combinatorics is hard – computational explanation for biological phenomenon of unconsciousness?
+  - (Bryson, Philosophy Magazine, 2007)
+  
+  ---
+  
+  ## Modelling Natural Intelligence
+  - One of the best ways to understand how something works is to build it yourself.
+  - AI is used in scientific modelling, but also in Philosophy
+  
+  ---
+  
+  ## Consciousness as per Dennett
+  - The term conscious is itself culturally evolved
+  - May not refer to any one psychological phenomenon
+  - Like light before modern physics
+  
+  ### Dennett vs. The Cartesian Theatre
+  - Consciousness cannot work by infinite recursion.
+  - Must be composed of non-conscious elements.
+  - Nothing inside you is conscious; you are.
+  
+  ### Multiple Drafts / The Attentional Spotlight
+  - There are many candidate parallel processes which could be conscious.
+    - Only one is – leaves trace in episodic memory.
+  - Not necessarily determined in order, e.g. if driving may ‘see’ something you hit only after you hear the bump.
+    - ∴ Not really conscious all the time?
+  
+  ![63c4fba0.png](:storage\\d25aecc2-78be-4331-9034-07da93a27573\\63c4fba0.png)
+  
+  ### Fill In and Confabulation
+  - Things like the driving story & the fact we are never aware of our blind spot unless we really go out of the way to test for it indicate we cannot trust our intuitions about consciousness
+  
+  ### Dennett Critics
+  - Some people really hate these ideas.
+  - Chalmers is the main anti-Dennett champion.
+  - Chalmers’ Hard Problem: Explaining qualia.
+  -  How do you know someone else sees red the same way you do?
+  
+  ### The Zombie Problem (seriously)
+  - A standard problem in philosophy: how would you tell if someone wasn’t conscious?
+  - Dennett: the zombie idea is incoherent.
+    - (likes Brooks, embodiment theory.)
+    - Consciousness is what it’s like to act human.
+    - There’s nothing else.
+  - Critics: Dennett thinks we’re all zombies!
+  
+  ---
+  
+  ## Popular Theories of Consciousness
+  - Consciousness is self-awareness.
+  - Consciousness requires language.
+  - Consciousness is the root of ethical obligation / a soul.
+  - Consciousness is a special pattern of energy (e.g. Dahaene).
+  - Consciousness is a special extent of information integration (Tononi).
+  
+  ---
+  
+  ## What People Like in Consciousness Theories
+  - We’ll never understand consciousness.
+  - We will understand it, but not in 100 years.
+  - I have a quantitative, scientific measure of consciousness, but it will take 60 years until we can check if I’m right (Tononi).
+  - Only humans are conscious.
+  - Currently the most popular theory in Cognitive Systems Research is Barr’s Global Workspace Theory
+  
+  ---
+  
+  ## Global Workspace Theory
+  
+  ### Neural Parallelism
+  - An animal’s nervous system is massively parallel
+  - Massive parallelism surely underpins human cognitive prowess
+  - So how are the massively parallel computational resources of an animal’s central nervous system harnessed for the benefit of that animal?
+  - How can they orchestrate a coherent and flexible response to each novel situation?
+  - Nature has solved this problem. How?
+  
+  ### Global Workspace Architecture
+  - Multiple parallel specialist processes compete and co-operate for access to a global workspace
+  - If granted access to the global workspace, the information a process has to offer is broadcast back to the entire set of specialists
+  
+  ![5735cf73.png](:storage\\d25aecc2-78be-4331-9034-07da93a27573\\5735cf73.png)
+  
+  ### Conscious vs Non-Conscious
+  - Global workspace theory (Baars) hypothesises that the mammalian brain instantiates such an architecture
+  - It also posits an empirical distinction between conscious and non-conscious information processing
+  - Information processing in the parallel specialists is non-conscious
+  - Only information that is broadcast is consciously processed
+  
+  ### Combining a GW with Internal Simulation
+  - It’s possible to combine an internal sensorimotor loop with mechanisms for broadcast and competition, and thereby marry the simulation hypothesis with global workspace theory
+  
+  ### Remember / Revision
+  - Prescott after Brooks corrected Wooldridge 
+  
+  ![9bee4a91.png](:storage\\d25aecc2-78be-4331-9034-07da93a27573\\9bee4a91.png)
+  
+  ### Science & Evolution
+  - Selection requires variation – occurs between existing options (and their combinations & mutations).
+  - History matters – understanding it helps explain what we think.
+    - Some combination of what works well and what we were lucky someone thought of – culture.
+  
+  ### A Biologically Non-implausible Implementation
+  - Built out of spiking neurons with transmission delays
+  - Cortical columns comprise 32 × 32 fully connected nets
+  - Workspace nodes comprise 16 × 16 topographically mapped regions
+  - Cortical columns trained to associate successively presented pairs of images using STDP
+  
+  ![e808b272.png](:storage\\d25aecc2-78be-4331-9034-07da93a27573\\e808b272.png)
+  
+  ### Controlling a Robot
+  - The inner sensorimotor loop can be embedded in a larger system and used to control a robot
+  - This results in a form of “cognitively-enhanced” action selection
+  - The implemented action selection architecture 
+    - Is based on salience and winner-takes-all
+    - Imposes a veto at final motor output stage
+    - Modulates salience as a result of internal simulation
+    - Releases veto when salience exceeds a threshold
+  - The parallelism of the GW architecture enables the inner loop to explore alternatives
+  - (Pretty much Maes nets again)
+  
+  ---
+  
+  ## Search vs Time
+  - Combinatorics is the problem, search is the only solution
+  - The task of intelligence is to focus search.
+    - Called bias (learning) or constraint (planning).
+    - Most behaviour has no or little real-time search.
+  - For natural intelligence, most focus evolves.
+    - Physical/cognitive constraints limit search space.
+  
+  ### Hypothesis
+  - Consciousness & cognition are that mental stuff that takes time
+  - (Treisman & Gelade, Cognitive Psychology1980)
+  
+  ### Time & Consciousness
+  - Sometimes time is determined by the number of steps you need to do (e.g. counting to yourself, searching a screen.)
+  - But sometimes it seems to be determined by something else…
+  
+  ### Learning and Time
+  - Looking-time experiments rely on reaction-time delay being indicative of surprise.
+  - Flattening of reaction times correlates with failure to notice shift in reward schedule, but no impact on performance (Rapp et al 1998)
+  
+  ### Allocating Time & Attention
+  1. Individuals allocate more time when less certain (Bryson 2009; 2010).
+  2. Species allocate in response to niche e.g. tamarins & insects (Hauser 1999).
+  3.Species allocate inversely with age (Rapp et al 1998, Bryson 2009; 2010).
+  4.Individuals allocate inversely with urgency (Shadlen and Newsome, 1998; Bogacz et al., 2006).
+  
+  ### A Theory of Conscious Attention
+  - The basic function of conscious awareness is to update important models (learn).
+  - Time is allocated in proportion to uncertainty by inhibiting action.
+  - Not to choose immediate action!
+  - If new action is favoured due to model updates, may affect immediate behaviour
+  
+  ---
+  
+  ## Consciousness for AI
+  - Only need C if system learns, and learning relies on a bottlenecked cognitive resource.
+  - In this case, allocating C to tasks you are doing in proportion to how uncertain you are about them is a pretty good guess.
+  - Also attend to other novel / unpredicted by your internal model events (deer in the headlights).
+  
+  ### Point of Intervention
+  1. Action selection as usual.
+  2. Inhibit action expression while selected action is in mind, update models.
+  3. If new action becomes more salient, insight.
+    Flush plan & start over.
+  4. Update of models may not have immediate impact on behaviour.
+  
+  ### Conclusions
+  - The basic function of awareness is not to choose actions, but to inhibit actions once
+  selected and learn about their situation.
+  - A costly (in terms of time) allocation of resources for learning, varies in application by species and by individual situation.
+  - Easy to build.
+  
+  ---
+  
+  ## How does this relate to other theories of consciousness?
+  
+  ### Self Consciousness
+  - Consciousness of self: limited like all consciousness to likely useful search space.
+  - Much facilitated in humans by language &
+  instruction 㱺 probably less in other species.
+  - Google Search treats its own pages like other’s: self-awareness neither necessary nor sufficient for consciousness.
+  
+  ### Language Helps
+  - Symbolic representation allows more compact and / or less emotionally-salient representations.
+  - Concurrent search for useful concepts.
+  - Learn concepts from others; shared consciousness of events (Dennett 2008).
+  - Not a prerequisite for consciousness, basic functional component of action selection
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

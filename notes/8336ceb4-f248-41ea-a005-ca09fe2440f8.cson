@@ -1,0 +1,71 @@
+createdAt: "2019-12-18T17:32:10.525Z"
+updatedAt: "2019-12-21T11:07:53.717Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Problems With Automacy"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # Problems With Automacy
+  
+  ## Introduction
+  > When the algorithms are making the decisions, people often stop working
+  to get better
+  > The algorithms can make it hard to diagnose reasons for
+  failures.
+  
+  - On highly skilled activities need to be practised in order to maintain them
+  - Automatic control systems deny this practise
+  - Manual take over is normlly only used when something has gone wrong
+  - The operator will be less skilled to cope
+  
+  ---
+  
+  ## Automatic driving systems (ADS)
+  - These have the potential to significantly reduce highway fatalities by addressing the root cause of crashes
+  
+  ### Levels of automation
+  - **No automation**
+    - Zero autonomy; the driver performs all driving tasks
+    - Human does all the work
+  - **Driver assistance**
+    - Vehicle is controlled by the driver, but some driving assist feature may be included in the vehicle design
+    - Vehicle may assist with accelerating or steering, but not both simultaniously
+  - **Partial automation**
+    - Vehicle has combined automated functions, like acceleration and steering, but the driver must remain engaged woth the driving task and monitor the environment at all times
+    - The vehicle can perform both accelerating an steering at the same time
+    - The driver still be engaged
+  - **Conditional automation**
+    - Driver is a necessity, but is not required to monitor the environment. The driver must be ready to take control of the vehicle at all times with notice
+    - The vehicle anc itself perform aspects of the driving task under some circumstances
+  - **High automation**
+    - The vehicle is capable of performing all driving functions under certain conditions. The driver may have the option to take control
+    - The human does not need to pay attention when the vehicle is driving
+  - **Full automation**
+    - The vehicle is capable of performing all driving functions under all conditions. The driver may have the option to control the vehicle
+    - Passengers never need to be invlolved in driving
+  
+  ### Crash avoidance capability - hazards
+  - Entities are encouraged to have a documented process for assessment, testing, and calidation of their crash aviodance capabilities and design choices
+  - Based on the Operational design domain ADS should be able to cope with
+    - Appicable pre-crash scenrios that relate to control loss
+    - Crossing-path crashes
+    - Lane change/merge
+    - Head-on and opposite direction travel
+    - Rear-end, road departure, and low-speed situations such as parking manoeuvers
+  
+  ### Providing feedback
+  - The ADS should be capable of informing the human operator or occupant through various indicators that the ADS is:
+    - Functioning properly
+    - Currently engaged in ADS mode
+    - Currently 'unavailable' for use
+    - Experiencing a malfunction
+    - Requesting control transition from the ADS to the operator
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

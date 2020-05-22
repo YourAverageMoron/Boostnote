@@ -1,0 +1,70 @@
+createdAt: "2019-12-18T14:47:08.450Z"
+updatedAt: "2019-12-18T15:49:09.282Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Modeling Accidents"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # Modeling Accidents
+  
+  ## Models
+  - Models are abstractions 
+  - They simplify our world by removing irrelevant details and focusing on features that are assumed to be most relevant
+  - They are used to:
+    - Understand complex phenomena
+    - Record that understandong
+    - Communicate to others
+  
+  ---
+  
+  ## Modeling accidents
+  - Design and analysis methods used in safety-critical systems are based on underlying models of accident process
+  - Accident models attempt to reduce an accident description to a series of events and conditions that account for the outcome
+    - These models are used to:
+      - Understand past accidents (a way to organise data and set priorities)
+      - Learn how to prevent future accidents (predictive modeling)
+  - To design and implement safe systems we must understand these underlying models and the assumptions they make about accidents and human errors
+  
+  ---
+  
+  ## Domino models
+  - To protect workers against industrial accidents
+  - Emphasise unsafe acts above unsafe conditions
+  
+  > The occurance of an injury invaraibly results from a completed sequence of factors, the last of these being the injuty itself
+  > The accidents which caused the injury is in turn invariably caused or permitted directly by the unsafe act of a person and/or a mechanical or physical hazard
+  
+  - These are generally mapped into 5 "dominoes"
+    - Similar to the five whys
+  - Once one domino "falls" it causes a chain of falling dominoes intil the accident occurs
+    - Removing any of these dominoes will break the sequence of events
+  - Although it removing any domino will prevent the acident
+    - Removing domino #3 is generally considered easiest and most effective
+      - This domino is known as an unsafe act or condition
+    - Although this will precent the accident once, it is important to address all of the dominoes in the  
+  - This model is often used in accident investigations
+  - **But** has often been wrongly used to look for a single undafe act or condition, when causes are actually more complex
+  
+  ---
+  
+  ## Chain of events models
+  - Organise casual factors into chains of events
+  - Events are chained in chronological order
+    - But there is often no obvious stopping point when tracing back from the cause of an accident
+  - This model is very close to our view of accidents
+    - We often try to rationalise it into a series of events
+  - As with the domino model, if the chain is broken the accident won't happen
+  - To prevent an accident:
+    - Eliminating certain events or conditions
+    - Intervening between events in the chain
+    - Adding enough AND gates
+      - For an event to occur condition A AND B need to be present
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

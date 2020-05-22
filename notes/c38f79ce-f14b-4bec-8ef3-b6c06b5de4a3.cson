@@ -1,0 +1,643 @@
+createdAt: "2020-01-02T18:45:25.440Z"
+updatedAt: "2020-01-14T04:56:07.620Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Internet Protocol Hardware"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # Internet Protocol Hardware
+  ## Ethernet
+  - Ethernet arose in 1982, based on an earlier Aloha protocol
+  - It used carrier ende, multiple access with collision detection (CSMA/CD)
+  - It origionally had a 10Mb/s signalling rate
+    - The rate of delivery of bits across the physical network
+    - Due to the layering encapsulation and other physical overheads, this was not the delivery rate when the application was running
+    - However the lower rate is not the one that marketers use
+      - E.g a 54Mb/s Wi-Fi network might only deliver half that value to an application
+  - The Ethernet standard covers both the PHY and the MAC layers
+  
+  ### Ethernet frames
+  **An Ethernet frame:**
+  ![c2578bb9.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\c2578bb9.png)
+  
+  The numbers are the byte counts:
+  - Destination address: 6 bytes
+  - Type: 2 bytes
+    - Indicates what kind of (network layer) data follows (e.g hex 0800 for an IP packet)
+  - Data: 
+    - Minimum of 46 bytes, the data must be padded with extra bytes if fewer than 46 bytes are supplied
+      - A higher layer must detect and remove padding when necessary
+    - Maximum of 1500 bytes 
+  - Checksum: 4 bytes
+    - Cyclic redundancy check (CRC)
+    - Used to check for corruption errors in the frame
+  - (Origionally) Ethernet is shared, so every host sees every frame on the local network
+  - Every Ethernet card a unique address built into it
+    - _Not completely true, but it gives a good enough idea what is going on_
+  - The destination address allows the Ethernet card in a host to recognise that a frame was sent to it, it can then read and process the frame
+  - This creates a security issue
+    - The source address allows a host to determine who sent the frame so it can reply of needed
+  - If the address is no-local we cant just use a 6 byte address to locate a destination
+    - This is handled by the IP layer
+  
+  ### Ethernet CSMA/CD
+  - Ethernet is a multi access (shared) medium
+    - Several hosts use the same piece of wire to send data to one another
+  
+  ![b9b41d92.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\b9b41d92.png)
+  
+  - **Carrier sense**
+    - Suppose A wishes to send to B:
+      - If C is already sending to D, the whole network is occupied with its signal
+      - This means that A must wait
+    - If two hosts try to send simultaniously there will be a collision
+    - This is an actual physical condition where the electrical signal from th etwo hosts get mixed and thus corrupted
+    - So before they send data a host listens to the Ethernet to see if anyone else is using it at the moment
+    - If nobody is already using the Ethernet it will send the data
+      - Otherwise it must wait until the carrier is free
+  
+  This isnt quite enough:
+  ![7aadea0f.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\7aadea0f.png)
+  
+  - **Collision detection**
+    - Each host continues to listen while transmitting to make sure there are no collisions
+    - If a collision is detected each host stops transmitting, waits a (small) random period of time and retries with the carrier sense
+    - The random wait means that another collision is less likely as one host will come in slighly later and see that the other's signal in its carrier sense phase
+    - Detecting collisions on an Ethernet is simple:
+      - If you are on the network and you see signals that are different to the ones that you are putting out, this means that someone else is transmitting too
+  
+  ![8911b80c.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\8911b80c.png)
+  
+  - Collision detection is why there is a minimum frame size
+  - The frames must be on the wire long enough for the hardware to detect a collision
+  - The speed of the signal in the wire is the problem here:
+    - And this gets workse with faster Ethernets
+  
+  ### Physical ethernet
+  There have been many Ethernet physical layers
+  |Standard |Cable       |Max Size|Rate   |
+  |---------|------------|--------|-------|
+  |10Base5  |Thick coax  |500m    |10Mb/s |
+  |10Base2  |Thin coax   |200m    |10Mb/s |
+  |10BaseT  |Twisted Pair|100m    |10Mb/s |
+  |10BaseF  |Fiber optic |2000m   |10Mb/s |
+  |100BaseT4|Twisted Pair|100m    |100Mb/s|
+  |100BaseT |Twisted Pair|100m    |100Mb/s|
+  |100BaseF |Fiber optic |100m    |100Mb/s|
+  |1000BaseT|Twisted Pair|100m    |1Gb/s  |
+  |2.5GBaseT|Twisted Pair|100m    |2.5Gb/s|
+  |5GBaseT  |Twisted Pair|100m    |5Mb/s  |
+  |10GBaseT |Twisted Pair|100m    |10Mb/s |
+  
+  - The cabes used in the se PHYs change over time
+  - Unshielded twisted pairs (UTP) comes in various qualities;
+    - Category 1: No performance criteria
+    - Category 2: Rated to 1MHz
+      - Used for telephone wiring
+    - Category 3: Rated to 16MHz 
+      - Used for wthernet 10BaseT
+    - Category 4: Rated to 20MHz
+      - Used for token-ring 10BaseT
+    - Category 5: Rated to 100Mhz
+      - Used for 1000baseT, 100BaseT and 10Base10
+    - Category 5e (enhanced): Rated at 100MHz
+      - Has better cross talk specification than 5
+      - Used for 2.5GBaseT and 1000BaseT
+    - Category 6: Rated to 200MHz 
+      - Used for 5GbaseT and 10GBaseT up to 55m
+    - Category 6a (argumented): Rated to 500MHz
+      - Has extra crosstalk shielding
+      - Used for 10GBaseT up to 100m
+  - Cat 5e and Cat 6 are most widely used today
+    - They are roughtly the same price
+    - Cat 6a are a lot more expensive
+  - When creating new Ethernet standards we have to make sure it wont require us to replace the old cabling
+  
+  ![d0e5f33a.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\d0e5f33a.png)
+  
+  ![d27f0748.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\d27f0748.png)
+  
+  ![a45b5006.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\a45b5006.png)
+  
+  - Twisted pair uses hubs or switches
+  - Hubs are simple electrical repeaters
+    - An incoming signal is sent out on all outputs
+    - There is a single collision domain as all hosts see all signals
+      - Any pair of signals between hosts will collide
+    - The available bandwidth is shared amongst all the hosts
+  - A switch understands the link layer
+    - It only sends the signal out on the single wire that has the diestination host
+    - This requires the swich to read and understand the MAC addresses in the frames and to track the socket where each host is plugged in
+    - This is extra complexity in the switch hardware
+    - It reduces the number of possible collisions
+      - Which increases throughput
+    - The full bandwidth is available on each output simultaneosly
+    - Collision only if two hosts send to the same destination simuntaneously
+    - If an output is busy, rather than have a collision a switch may choose to store and forward the packet later when the output is free
+      - However buffers in the switch can fill up and then packets would have to be dropped by the switch
+      - So the switch can send a jamming signal on an input to get it to back off and resend it later
+    - Some switches can cut through, sending the start of the packet before the tail has arrived
+      - This leads to less latency through the switch
+      - It does forward corrupted packets that the "store and forward" method would discard
+    - Switches can run in full duplex
+      - With independent inward and outward traffic to each host
+      - This gives twice the total bandwidth
+      - No collisions are possible between opposing traffic as inward and outward traffic runs over different twisted pairs (below 1Gb)
+  
+  ![f1196bc0.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\f1196bc0.png)
+  
+  #### Faster Ethernet
+  - Ethernet is moving faster
+    - 10Mb/s to 1Gb/s and more, all using the same basic CSMA/CD protocol
+      - But they use differeing electical signaling
+  - Ethernet cards can autonegotiate to select optimim speed
+  - It's not just a case of increasing the frequency of the signal
+    - There are other complications to get around the limitations of the cables
+  - 1Gb/s Ethernet is everywhere, while 10Gb/s Etherent is currently gaining popularity
+  - These faster rates are mostly optical fibre
+    - But 40Gb/s can run over Cat8 twisted pair
+  
+  #### Physical encodings of bits on a 10MB/s Ethernet
+  - A simple 0V for 0 and 1V for 1, running at 10MHz:
+    - This has a number of problems
+    - An empty network and a stream of 0s look the same
+      - You would not be able to use carrier sense
+    - Bits need to be synchronised to prevent drifting out of step
+      - Was that 1000 or 999 0s?
+    - A long stream of 1s is a steady 1v
+      - This is electrically a bad design
+      - An average 0V is best
+      - To connect devices easily you need an AC signal, not a DC one
+  - Insead Ethernet uses Manchester Encoding:
+    - Split the time interval for a bit into two parts
+    - Low then high voltage as a 0
+    - High then low voltage is a 1
+    - This creates an average of 0V
+    - -0.85V for low
+    - +0.85V for high
+    - Easy to synchronise
+      - Transit through 0V is the middle of the bit
+    - This does double the frequency of the signal to 20MHz
+    - We can use Cat 4 (or better) cables for this
+    - It is self clocking
+      - The reading end does not need a clock to determine where the bits are
+  
+  #### Physical encodings of bits on a 100MB/s Ethernet
+  - We cant use Cat 5 cables with Manchester as it is only specified to 100MHz, and we would need 200Mhz
+  -  Instead we start encoding data bits as 5 physical bits in a 4B/5B encoding
+  -  This is done using a dictionary that maps 4 bits to 5 bits
+  
+  ![ebfdaf0c.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\ebfdaf0c.png)
+  
+  - This allows for a three level physical encoding MLT-3
+    - This has +, 0 and - levels (±0.85V)
+    - Again using transitions to encode bits
+  - Transitions are cyclical
+    - - to 0
+    - 0 to +
+    - + to 0
+    - 0 to -
+  - A transition marks a 1, no transition marks a 0
+  - The 4B/5B translation ensures that every chunk of 5 symbols has at least two transition so the average voltage is roughly 0V
+    - E.g input 0000 with no transitions becomes 11110 with 4 transitions
+  
+  ##### Example:
+  
+  ![e3f60dc3.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\e3f60dc3.png)
+  
+  ##### Baud rate
+  - A physical representation is called a symbol
+  - Symbols need to be binary
+  - Need not represent a whole number of bits
+  - The baud rate is the number of symbols per second
+  - Example
+    - 100Mb/s Ethernet runs up to 31.25MHz for a symbol rate of 125MBaud
+    - All 1s output (IDLE) is four transitions per cycle
+      - - to 0
+      - 0 to +
+      - + to 0
+      - 0 to -
+    - 4 symbols/cycle × 31.25MHz = 125MBaud
+    - This is a symbol rate of 125MBaud for a data rate of 100Mb/s
+      - 80% efficient or 1 physical symbol is 4/5 = 0.8 bits
+  
+  #### Physical encodings of bits on a 1Gb/s Ethernet
+  - For Gigabit Ethernet 1000Base-T: 8 bits become 4x3 physical bits in a continuously changing encoding (not a table lookup)
+  - Each 3 bit chunk is encoded using transitions between 5 levels (PAM-5)
+  - Over all four pairs in the cable simultaneously, in both directions over all pairs
+  - 10Gb Ethernet uses a PAM-16 over a very complicated coding
+  
+  ---
+  
+  ## Analogue
+  - Before digital networks were common, the physical layer of choice was an acoustic modem, using the existing telephone network
+  - This used **MO**dulation and **DEM**odulation to convert bits into acoustic symbols (i.e. sounds)
+  - The early Internet (Arpanet) ran over the existing analogue telephone network
+  
+  ---
+  
+  ## ADSL
+  - After  analogue, public telephone systems started to support purely digital networks
+  - Asymmetrical Subscriber line (ADSL) is a popular method of delivery to the home
+  - Analogue modems are limited to 56Kb/s, the maximum speed available from a standard analogue telephone line apart from a 3KHz chunk centred on the human voice are filtered and thrown away
+  - The telephone wire:
+    - While only origionally specified to be capable of sending vioce
+    - Is capable of more, ADSL tries to take advantage of this
+  - The data rate you get depends on the length of the copper loop connectinf you to the telephone exchange
+    - The longer it is the harder it is to get a clean signal down it
+  - It tops at 24Mb/s, dropping to 2Mb/s at the longest reach
+  - It is asymmetric:
+    - It divides the available bandwidth unequally
+      - E.g 24Mb/s downstream (towards the user) and 2Mb/s upstream (towards the Internet)
+      - This is what most users want, you end up downloading a lot more than you upload
+  
+  ---
+  
+  ## Last mile problem
+  - How to bridge the gap between the local telephone exchange and the final user
+  - Also called the first mile problem
+  
+  ---
+  
+  ## Fibre
+  - Optical fibre is not subject to electrical interference like copper wires
+  - Can carry huge (terabits is possible) datarates
+  - Expensive to install as it requires roads to be dug up
+  
+  ### Fibre hybrid
+  - We would like Fibre to the building/business (FTTB)
+    - Fibre to the premises (FTTP)
+      - Where fiber comes to a multi occupancy building
+    - Fibre to the home (FTTH)
+      - Where fibres come to individual occupancies
+  - Currently the popular solution is to lay new Fibre to the stree cabinet (FTTC) and then use a DSL over the existing copper wire (the copper loop) to the home
+  - VDSL2 is used on the copper from the cabinet to the home:
+    - With up to an 80Mb/s downlink
+  - The distance you live from the cabinet now governs what speed you get
+  - ADSL uses the copper loop to the home
+  - This can be many kms, making the maximum achievable bandwidth about 24Mb/s
+  - The FTTC hybrid represent the current cost effective way of geting decent bandwidth to hte home
+  - FTTH/P is sometimes marketed as "full fibre"
+  - Other developments
+    - Fibre to the distribution point (FTTdp)
+      - Lays new fibre from the cabinet to the distribution point where the cable bundle splits into individual wires to the premises
+      - A box at the distribution point converts the optical signal to an electrical  signal along the final copper loop to the premises
+      - This reduces the length of the copper loops (up to 500m)
+      - Offers speeds up to 1Gb/s, but trypically a few 100s of Mbs/s
+      - Need frequencies that are sufficiently highy that tehy will interfere with FM broadcasts
+        - Need to take care over power limitations
+  
+  ![e69eb45e.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\e69eb45e.png)
+  
+  ![25fd0dcb.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\25fd0dcb.png)
+  
+  ---
+  
+  ## Cable TV
+  - The cable TV system is also ble to deliver Internet connectivity
+  - Newer installations are full fibre
+    - But there are also a lot of fibre/copper hybrids
+    - With fibre to cabinets and then copper to the home
+  - However, the copper wires used is good(ish) quality coaxial cable that is well screened against interference and crosstalk
+    - So their data rates are much higher
+    
+  ![13f42b88.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\13f42b88.png)
+  
+  ---
+  
+  ## Wireless
+  - Wireless hardware is overseen by national and international bodies
+  - One wireless sustem can affect another hundreds or thousands of miles away
+    - There must be some cooperation
+    - So some wireless systems are only allowed with very low power (e.g WI-Fi)
+  - Eurome has the European Telecommunication Standard Institute (ETSI)
+  - USA has the Federal Communication Commission (FCC)
+  - Such bodies manage the radio spectrum
+    - Allocate various frequencies to various puroposes
+    - Ensuring Minimal interference between the competing concerns for parts of the spectrum
+  
+  ### Wi-Fi
+  - The IEEE 802.11 group of standards deal with "wireless Ethernet"
+    - More commonly known a Wireless Fidelity (Wi-Fi)
+  - In principle it is much like CSMA/CD over wireless, but with come extra problems unique to wireless
+  - Signal from multiple networks can interfere
+    - Not just the hosts within one network
+  - Wireless networks generally have fairly high error ratees due to interference from electronically noisy environments, signal refelctions, etc.
+  - The bandwidth achievable is dependent on the circumstances of the environment
+  - Wireless networks generate interference themselves which must be controlled so not to be too annoying to other people
+  
+  ### Wireless problems
+  - In IEEE 802.11, the allowed power of transmission is generally kept quite low by the standards bodies to minimise interference
+    - A typical laptop will transmit at about 32mW and can reade a signal as low as 0.00000001mW
+  - A typical digita TV mast transmits at 100kW
+    - Thus the range achievable by Wi-Fi is often quite limited (deliberately)
+    - Limited range can cause complications
+  
+  #### The hidden host problem:
+  ![29a7c005.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\29a7c005.png)
+  
+  - Host A and B can "see" each other
+  - B and C can see each other
+  - A cannot see C
+    - So A cannot tell if its packets that are being sent to B are colliding with the packets being sent from C to B
+  - In reality the ranges will not be circular as it is affected by the environment
+  - The limited ranges mean that CSMA/CD will not work for wireless
+  - CSMA/CD relies on everyone's signals being visible to everyone
+  
+  #### Security problems
+  - As packets are proadcast, wireless networks are intrinsically insecure
+    - Extra effort must be taken over security and authentication
+  - War Driving is driving with your laptop until you find an unsecured wireless signal
+    - This gives you free access to the Internet
+    - It is illegal in the UK and elsewhere
+  
+  ### Wireless 802.11
+  - There are several parts to the 802.11 standard, these are often branded:
+    - Wi-Fi 6 -> 802.11ax
+    - Wi-Fi 5 -> 802.11ac
+    - Wi-Fi 4 -> 802.11n
+    - Wi-Fi 3 -> 802.11g
+    - Wi-Fi 2 -> 802.11a
+    - Wi-Fi 1 -> 802.11b
+    - Other parts of 802.11 like 11c, 11d, 11e, 11f, 11h, 11i which deal with things like power management, wuality of service and authentication and so on
+  - The origional standard specified signalling rates of up to 2Mb/s
+    - Up to 100m indoors and 300m outdoors
+    - There was an infa-red mode as well as radio mode
+      - This was not widely implemented
+    - 802.11b extended this rate to 5.5Mb/s and 11Mb/s
+  - They used unlicensed 2.4Ghz waveband
+    - This means you do not need to get a licens to use that frequence at low power
+    - This frequency that was otherwise unusable commercially and is subject to interference from microwave ovens and other things
+    - The frequency fell within the capabilities of low power chips that were buildable at the time
+  
+  |IEEE Standard|Speed   |Frequency        |
+  |-------------|--------|-----------------|
+  |802.11a      |54Mb/s  |5GHz             |
+  |802.11g      |54Mb/s  |2.4GHz           |
+  |802.11n      |150Mb/s |2.4GHz/5GHz      |
+  |802.11ac     |867Mb/s |5GHz             |
+  |802.11ad     |6.75Gb/s|2.4GHz/5GHz/60GHz|
+  |802.11ax     |14Gb/s  |2.4GHz/5GHz      |
+  |802.11ay     |40Gb/s  |60GHz            |
+  
+  - Each will fall back to previous standards to maintain compatability with earlier devices
+    - E.g 60GHz will go through walls, so 11ad will dall back to 11ac if you move to the next room
+  - 802.11 hardware is branded as "Wi-Fi" which is actually a certificate of interopability given to manufaturers whose equiptment demonstatrably works with other manufacturers’
+    - Administered by the Wi-Fi Alliance, a consortium of interested companies
+  - The bits in 802.11 are not simply transmitted directly
+    - There is a lot of environmetal interference to overcome
+    - Instead the signal is spread over many frequencies using variaty of techniques collectively called spread spectrum
+  - For wifi, the allocated frequency band (2.4GHz) is split into overlapping 22MHz channels each centred on specified frequencies
+  
+  |Channel|GHz  |
+  |-------|-----|
+  |1      |2.412|
+  |2      |2.417|
+  |3      |2.422|
+  |4      |2.427|
+  |5      |2.432|
+  |6      |2.437|
+  |7      |4.422|
+  |8      |4.447|
+  |9      |4.452|
+  |10     |4.457|
+  |11     |4.462|
+  |12     |4.467|
+  |13     |4.472|
+  |14     |4.484|
+  
+  - Each of these are generally 5MHz appart
+    - So neighbouring channels overlap
+      - As they are 22MHz wide
+      - These interfere
+    - This means that you need to take care which channels you choose
+  - Recommendation when selecting channels:
+    - Seperate channels by at least 2 to reduce interference
+      - E.g 1 and 4
+    - Seperate channes by 4 to have no interference
+      - E.g 1 and 6
+    - This means that we have 3 non-interfering co-located networks
+      - 1, 6 and 11
+  - Seperating networks physically gives more leeway:
+    - Seperate by 1 is the networks are 40m apart
+      - E.g 1 and 3
+    - You can uses adjacent channels at 100m apart
+      - E.g 1 and 2
+    - Channels can be reused when networks are sufficiently sperated
+  
+  ![6547a305.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\6547a305.png)
+  
+  - More subtle channel allocations allow a little overlap:
+    - E.g 1 and 3
+    - These have a little interference
+    - But a greater overall aggregate bandwidth
+  
+  #### CSMA/CA
+  - 802.11 uses carrier sense, multiple access, collision avoidance 
+    - CSMA/CA
+  - Similar to CSMA/CD in Ethernet, but with a big difference:
+    - Carrier sense: To deal with with the common case of non-hidden hosts:
+      - First listen for a signal
+      - If free send packet
+      - If busy, wait until the end of the transmission and then enter a contention period
+        - Wait a random period
+    - Go back to carrier sense
+  - Waiting for the contention period is the collision aviodance
+    - A random wair means that several hosts waiting to transmit are unlikely to all start transmitting simultaneously
+    - We are trying to avoid a collision in advance rather than detect it after the fact
+    - But collision avoidance does not guarentee no collisions:
+      - Particularly with hidden hosts
+  - On the successful receipt of a packet, a host will broadcast an acknowledgement (ACK) packet
+  - This is just a packet to inform the sender that everything well and there was no collision or other loss
+  - If a sender never gets the ACK it will resend, staring from the collision avoidance again
+  - Measurements have ound that a typical loss rate around 30%
+  - The ACK is visible to everyone in the range of the destination, this gives extra indication when a transmission has finished
+  
+  ![17786d32.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\17786d32.png)
+  
+  **Why use collision avoidamce over collision detection?**
+  - Clearly the contention period means that the latency in transmission for CA is higher 
+  - But collisions in wireless can be hard to detect
+  - With Ethernet detecting another host's signal on the wire is easy as the power of its signal is roughly the same as yours
+  - Detecting another host's radio signal can be very difficult
+    - It can be a tiny fraction of the power of yours
+    - Your signal will drown out the colliding signal making it undetectable
+    - Another destination might be transmitting quite powerfully, but its signal can be very small by the time it reaches you
+  
+  #### RTS/CTS handshaking
+  This helps with the visibility problem
+  
+  1. Before sending a data packe the source A can send a **request to send** (RTS) packet to B
+  2. If the destination B is happy (it is not already recieving from another host that A cannot see) it responts with a **clear to send packet** (CTS). Every host within the range of the destination will see the CTS and so know not to send packets themselves
+  3. The RTS and CST contain the length of the desired transmission so other hosts know how long they have to wait
+  4. Similarly, the final ACK is visible to everyone
+  5. Then C ca7n send its oen RTS
+  
+  ![51c39db1.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\51c39db1.png)
+  
+  - This means there is even more latency overhead before data starts to be transmitted
+  - RTS/CTS can be switched off or on as required
+    - RTS/CTS always on: good for large or busy networks
+    - RTS/CTS never on: Good for small or lightly loaded netwokrs where every gost can see all other hosts
+    - RTS/CTS for large packets only: a compromise that reduces the relatively large overhead for small packets
+  
+  #### Wireless rates
+  - Although 802.11b is nominally 11Mb/s and 802.11g is nominally 54Mb/s
+    - Remember these are signalling rates not data rates
+  - The signalling rate is the raw bit rate over the airwaves
+    - A lot of that is consumed in overheads
+  - Realistically 802.11b gives about 3 to 4Mb/s and 802.11g gives about 20Mb/s
+  - Some of the later 802.11 standards improve speeds by reducing overheads
+    - As well as using better encoding
+  
+  #### Ad-Hoc or Independent Basic Service Set (IBSS)
+  - While the use of access points is common, it is not the only way to set up a wireless network
+  - 802.11 can be arranged in point-to-point networks
+  - Heach host communicates directly with each other without an access point
+  
+  ![ea5fd949.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\ea5fd949.png)
+  
+  #### Basic Service Set (BSS)
+  - Where a central hub (access hub) relays traffic between hosts
+  - More expensive to set up 
+    - You have to buy an access point
+  - Covers a larger area
+  - Also the access point can connect into a wired network and to the rest of the Internet
+  
+  ![bc6a701a.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\bc6a701a.png)
+  
+  #### Extended Service Set (ESS)
+  - Connects several APs by a wired network
+  - This allows hosts to roam and they can be configured to handoff automatically between APs if the required authentication ifastructure is setup in the APs
+  - An ESS can cover an area as large as you like
+  
+  ![811d3865.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\811d3865.png)
+  
+  #### Wireless security
+  - Wireless packets are readable by anyone in the neighbourhood
+    - So security is essential
+  - Origional 802.11 employed the Wired Equivelent Privacy (WEP) encryption scheme
+  - Both ends of a communucatuib share a secret key that is used to encrypt traffic between them
+  - WEP is now easily breakable:
+    - After collecting a modest amount of traffic the syste2m can be broken
+  - As can its successor, Wi-Fi Protected Access (WPA)
+  - There are two ways to set up authentication WPA-Personal and WPA-Enterprise
+  - **WPA-Personal**
+    - Also called WPA-PSK (pre-shared key)
+    - Where an access point has a secret key
+    - A host authenticated directly with the access point using the secret key
+  - **WPA-Enterprise**
+    - 802.11x
+    - Rquires a seperate authentication server that the AP will contact
+      - Typically a RADIUS server
+    - More difficult to manage
+    - Allows roeaming acress an extended service set
+    - Also roaming across institutions using hierachical RADIUS server
+  - We usually find:
+    - BSS using WPA-PSK
+    - ESS using WPA-Enterprise
+    - But either can use either
+  - WPA-PSK uses a security key usually derived from a password for ease of use
+    - The password can be communicated off-line
+    - Everyone on tohe network shares the same key/password
+      - Authentication is done in the AP
+  
+  ![7ff7c96f.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\7ff7c96f.png)
+  
+  ![3f6657c3.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\3f6657c3.png)
+  
+  - For WPA-Enterprise each user has their own key/password
+    - Authentication is done in the server on both the username and the password
+  
+  ##### WPS
+  - Some APs have Wi-Fi Protected Setups (WPS), a simplified way of setting up WPA/WPA2 security
+  - Designed for those who find typing a password too challenging
+  - It is seriously broken and should be dissabled on your AP
+  
+  #### Frame layout for Wi-Fi
+  - This is the same as for Ethernet
+  - In particular it uses the same format MAC addresses
+    - This alloes for the transparent mixing of Wi-Fi and Ethernet in a single network
+  - An access point con pass on a Wi-Fi frame unchanged to an Ethernet frame unchanged to an Ethernet or visa versa
+  
+  ### Other wireless
+  - Many other wireless networks exist
+    - From local to wide-area
+  - Bluetooth gives short range point-to-point communication
+    - Just two hosts in the network
+    - Range of 10m
+    - Yses 2.4Ghz band
+    - Not really designed to run the internet protocol
+      - But it can by layering a suitable protocol
+      - Bluetooth Low Energy (BLE) is a non-backwards-compatable evolution designed to reduce power consumption
+    - IEEE 802.16 Wireless Man standard
+      - For metropolitan area wireless
+    - 802.22 Mobile wireless MAN
+    - 802.20 Mobile broadband wireless access
+    - Etc
+  - Celular networks
+     - Used by mobile phones
+     - First important digital system was Global system for Mobile Communication (GSM)
+     - Retrospectively named 2G
+     - Rates of 9.6Kb/s to 14.4Kb/s
+     - Hight Speed Circuit Switched Data (HSCSD) takes this up to 57.6Kb/s
+     - General Packet Radio Service (GPRS), packet based, up to 171.2Kb/s
+       - Uses several GSM channels 
+     - Enhanced Data rates for GSM Evolution (EDGE) uses better encoding to get up to 384Kb/s
+     - High-speed Downlink Packet Access (HSDPA) ups this to 42.2Mb/s
+     - Evolved High-Speed Packet Access (HSPA+) will do 168Mb/s
+     - 4G
+       - Uses Long Term Evolution (LTE) to promise 300Mb/s
+       - Marketing as "4G" it origionally did not meet the proposed standard as it did not satisfy the proposed technical specification of a 4G system
+       - In particular, a 4G network should support 1Gb/s (for a stationary host)
+       - The ITU (who say what “4G” is supposed to mean) actually gave in to commerce and retroactively changed the definition of 4G to allow for LTE
+     - LTE
+       - This is data traffic only, does not have a voice channel
+       - Currently LTE systems that want to make a voice call drop back to 3G
+       - Just being introduced is voice over LTE (VoLTE) using a suitable digital encoding of sound
+     - 5G
+       - It uses the available spectrum much more effieicently than 4G
+       - Employs frequencies up to 86GHz (LTE uses up to 6GHz)
+       - Projections indicate users connected to a base station will share:
+         - 20Gb/s download
+         - 10Gb/s upload
+       - A base station will sipport "millions" of devices per square mile
+       - Devices can vonnect moving at 500Km/h
+       - Latencies will be 1ms compared to the 20ms of LTE
+       - Curent problems
+         - 5G chipset currently suck a lot of power
+         - Need to build a lot of base stations
+         - Fighting amongst pgone companies ove radio spectrum
+     - 6G
+       - Targets 100Gb/s using 100GHz to 1THz frequencies
+   - Satellite
+     - Can be used outside of well-connected urban areas
+     - Satelites can be very expensive to deploy and run
+     - Can have high latency
+       - About 1/10 of a second
+     - Cover a large area with a resonably good bandwidth
+     - They are good for remote and undeveloped areas with no other local infrastructure
+     - There are two main variants:
+       - One way satellite
+       - Two wat satellite
+     - **One way satellite**
+       - Employs the usual asymmetry
+       - Data from the home travels by telephone wire
+       - Data towards the home travels through satellite connection
+     - **Two way satellite**
+       - Satellite contections both ways
+       - More expensive equiptment in the home
+       - No reliance on telephone network
+  
+  ![e96c08af.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\b1136709.png)
+  
+  ![7f1facb2.png](:storage\\c38f79ce-f14b-4bec-8ef3-b6c06b5de4a3\\7f1facb2.png)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

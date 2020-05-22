@@ -1,0 +1,85 @@
+createdAt: "2019-11-06T12:42:25.827Z"
+updatedAt: "2019-11-07T14:10:51.524Z"
+type: "MARKDOWN_NOTE"
+folder: "e18bbc0c08e12d905b86"
+title: "Plan"
+tags: []
+content: '''
+  
+  ## Plan
+  Rough overview of how to solve it
+  
+  ### Searching for gold
+  - Should have a searching for gold belief when searching
+  - Move up Y number of times (where Y is the height of the map) then move right X number of times (X is dependent on the scan distance work out optimum for this)
+  - Scan every N moves (N is dependent on the scan distance)
+  - **I think practically doing this with pen and paper would make understanding this easier**
+  - Make sure that you log route each time!!!
+  
+  ### Moving to gold:
+  - Should have a moving to gold belief
+  - Called when resource is found
+  - Moves directly to the gold
+  
+  ### Rover collecting gold
+  - Should have a collecting gold belief
+  - Picks up gold
+  - Is there a way to add to a "amount of gold" belief each time
+    - So when you collect you get a higher amount of gold
+    - -+resources_carried(N+1);
+      - This is how it was done in that git guys work
+  - Deposits gold if nessesary
+  - Moves back to position where it scanned and found gold when when all of the resource is collected
+    - Can this be triggered when an unable to pickup error is thrown?
+      - Is it a different error to the full resources one?
+    - Alternatively you could try to scan again?
+      - Would this be a better way to do it?
+      - How would you handle the extra distance from where it origionally scanned?
+  
+  ### Rover has full resources
+  - If you have a "amount of gold belief this would be easier"
+    - Then decrement the belief when you deposit
+  - Can this be triggered by the error thrown when unable to pickup?
+    - Is it a differenct error to uable to collect error?
+  - Should have a resources full belief
+  - Rover moves back to base
+    - Can you use `mod` by the dimentsion of the grid to get the straight line distance?
+    - Can you then work out which direction it is quicker to travel in? This might be a bit tricky as the map wrapps around
+  - Deposits gold
+  - Then moves back to where it was collecting the gold
+  
+  
+  
+  ## Questions
+  ### Would depositing stuff half way be more efficient?
+  - Instead of having to travel all the way back to base, drop the gold somewhere you know the rover is going to go to that is closer to the base
+  - How do i handle no plan
+    - Go to searching again?
+  - How am i handling a lack of energy?
+  - Do i need something for at the end 
+    - Removing intentions and beliefs
+  - What rules will i need?
+    - They are pretty useful for determining if the rover is in a given state e.g if capacity is full (check git guy for more info)
+  - How is it best to structure stuff?
+    - Initial beliefs
+    - Rules
+    - Movement plans
+    - Scanning plans
+    - Collection plans
+    - Deposit plans
+  - Is it better to do all of the navigation methods in java?
+    - This might be easier to implement if you get it working???
+      - I.e calculating the quickest route to places
+  
+  This is worth having
+  ```
+  /* Initial Beliefs */
+  rover_location(0,0).
+  resources_carried(0).
+  ```
+  
+  During the lab session, we mentioned that nothing after the move statement is executed which is the same reason all distance being travelled have to be logged before performing the move operation
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

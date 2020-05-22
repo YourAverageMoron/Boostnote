@@ -1,0 +1,369 @@
+createdAt: "2019-12-23T10:59:45.345Z"
+updatedAt: "2020-01-11T15:30:09.614Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Hazards"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # Hazards
+  
+  ## Four phases of hazard management
+  
+  ### Hazard identification
+  - Use: Checklists, hazard indexes, event trees, HAZOPS
+  - Identify hazards that singly or in combination could lead to an accident
+  - You might also show that certain hazards cannot exist in the system
+  - What hazards exist?
+  - What effects do these hazards have?
+    - Possible damaging effects of the hazards (use catagories catastrophic, critical, marginal, negligible)
+    - Their compexity
+    - This determines how much management and engineering attention is required
+  - Hazard identification is essential in developing safety requirements
+  
+  ### Hazard casual analysis
+  - Use: Reliability block diagrams, failure modes and effects analysis, fault trees
+  - How do these hazards occur?
+  - Evaluate the casual factors of the hazards
+    - Determine if a particular casual factor is responsible for several hazards
+  - What accidents do the identified hazards lead to?
+  
+  **Hazard identification and hazard analysis are often considered as one stage**
+  
+  ### Hazard resolution control
+  - Use: Many varied techniques which depend on the type of hazard
+  - How can we control/eliminate these hazards?
+  - Identify general design criteria that the design must meet
+  - Identify safety devices/procedures
+  - Identify specific design methods for reducing, controlling or indeed eliminating hazards
+  
+  ### Hazard verification
+  -  Use: Many techniques such as testing, documentation, and operational experience
+  - How do we control these hazards?
+  - What hazards remain?
+    - Consider their
+      - Probability of occurance
+      - Potential losses
+      - Cost of removing them
+    - Do any of the remaining hazards need resolving?
+      - If they do go back tp the hazard resolution phase
+  - Does operation ecperience indicate the need for re-analysis?
+    - Operational feedback on incidents and accidents should always lead to re-analysis of hte hystem's hazards, as new ones become apparent
+    - Any proposed change to the system must be analysed for its potential to affect safety
+    - Re-analysis must show that the change does not
+      - Create new hazards
+      - Re-introduce a hazard that has already been resolved
+      - Increase the severity of an unresolved hazard
+  
+  ---
+  
+  ## Hazard analysis techniques
+  
+  ### Brainstorming
+  - Users must have background knowledge
+  - An effective technique for hazard identification
+  - Able to assemble a team with sufficient breadth of expertise
+  - One of the most widely ised methods of hazard analysis
+  - There are 3 apsects of the system that are considered
+    - Accidents that may occur
+    - The hazards that may lead to each accident
+    - The events that can cause these hazards
+  - Pros
+    - Very simple
+    - Can be applied to software
+  - Cons
+    - Needs a suitable team of experts
+    - Can be time consuming
+  
+  ### Checklists
+  - Basic checklists simple lists of hazards or specific design features
+  - More complex ones incolve open-ended questions
+  - Use checklists in relation to several elements of daily of profesional life
+  - Pros
+    - A large amount of existing experience can be passed from project to project
+    - Can be tailored to local practices and projects
+    - Can be derived from standards and codes of practice
+    - Guides thinking about the hazards in a system
+    - Good for analysisn well-understood sustems and standard design features
+  - Cons
+    - Users may rely on them too much and ignore hazards not on the list
+    - Can become very large making them difficult to use and giving a false sense of securaty
+    - Only feasable for simple systems
+  
+  ### Event tees
+  - Given some initiating events, identify all possible outcomes by determining all sequences of events that could follow it
+  - The event tree is drawn left to right with branches under each component heading corresponding to two alternatives
+    - Component operates
+    - Component fails
+  
+  ![ee002acc.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\ee002acc.png)
+  
+  - This can give the probability of how likely it is that components work or fail
+  
+  #### Probabilistic hazard analysis using event trees
+  - Assign each branch of the event tree a probability corresponding to the probability of a component operating or failing to operate
+  - The overall probability can be obtained by combining the probabilities of the various branches in the path
+  
+  ![35de61df.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\35de61df.png)
+  ![749acef9.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\749acef9.png)
+  
+  The probability of the alarm being active is:
+  ```
+  0.95 * 0.98 * 0.9 = 0.8379
+  ```
+  
+  Therefore the probability of the alarm being inactive is:
+  ```
+  1 - 0.8379 = 0.1621
+  ```
+  
+  #### Pros
+  - Useful for identifying the protection system features that contribute most to the probability of an accident
+    - Can determine where special care is needed
+  - Identfy top events for subsiquent fault tree analysis
+    - Fault trees tell you how hazards occurred
+  - Display various accident scenarios that may result from a single initiating event
+  - Can handle sequencing of events
+  
+  #### Cons
+  - Can become very complex, especially when a number of time-rdered interations are involved
+  - Seperate tree is needed for each initiating event
+    - Thus we cannot consider multiple initating events or interactions between initiating events
+  
+  ### Hazard and Operability Studies (hazops)
+  - This is a qualitative technique
+  - Aims to identify:
+    - All possible deviations from the design's expected operation
+    - Hazards associated with these deviations
+  
+  **Example in chemical industery**
+  - Using a description of the proposed proces plant, a HAZOPS team will consider:
+    - The design intention of the plant
+    - The potential deviations from the design intention
+    - The causes of these devieations from the design intention
+    - The consequences of such deviations
+  - Start by identifying the interconnections between components and determining corresponding interations 
+    - e.g
+    - Physical flow of material from one component to another
+    - Flow of signals/data
+  - These flows are called entities
+  - Entities possess attributes which will determine the correctness of the system's operation
+    - E.g the flow of material from one componenet to another might have attributes related to:
+      - Speed at which the material flows
+      - Temperature of the material
+  
+  - HAZOPS guide words These help prompt questions about the design:
+  
+  ![66e5c734.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\66e5c734.png)
+  
+  - Each line in a line drawing of the plant is examined
+    - The guide words are applied to generate questions
+  - As wach deviation is generated memebers of the team consider every potential cause and effect on the system as a whole
+  - E.g applying the `NO` to an attribute such as flow will generate a number of questions:
+    - Could there be no flow in this pipeline?
+    - If so, how could this arise?
+    - How will the process operators know if there is no flow?
+    - Are the consequences hazardous or do they just prevent efficient operation?
+    - If so, can we prevent no flow by changing the design?
+    -  Does the hazard justify the extra expense needed to prevent or control it? 
+  
+  ![e7b8a095.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\e7b8a095.png)
+  
+  - The next result of the HAZOP will be a report containing causes and consiquences for each guideword applied to each deviation
+  
+  ![4fd6c455.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\4fd6c455.png)
+  
+  - HAZOPS can be applied to computer based systems:
+  
+  ![aedfb513.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\aedfb513.png)
+  
+  #### Pros of HAZOPS
+  - Simple, easy to use, identifies problems at the design stage
+  - Does not concentrate on failures, but can uncover more complex types of hazardous events and causes
+  - The basic idea is applicable to new designs, complex systems which there is little experience, and procedures that occur infrequently
+  
+  #### Disadvantages of HAZOPS
+  - Time and effort required - very labour intensive
+  - Relies heavily on the judgement of those performing HAZOP analysis
+  - Rarely considers organisational factors
+  
+  ### Design criteria
+  - A particular hazard will usually have a related design criterion which is needed to avoid or mitigate the hazard
+    - It is common for these to be given as part of the hazard analysis process
+  - The design criterion states what is to be achieved
+    - Not how it is to be achieved
+    - It states a goal the designer must achieve
+  - This can be used to derive requiremetns
+  
+  **Example 1 in a pressured tank system**
+  - Hazard - Pressure rises above the design pressure of the tank
+  - Design criteria to aviod - pressure must be prevented from rising above the design pressure
+  
+  **Example 2 Design criteria for austomatic doors in a rapid transit system** 
+  
+  ![771cfb14.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\771cfb14.png)
+  
+  ### Fault Tree Analysis (FTA)
+  - A graphical method
+  - Means of analysing the underlying causes of hazards
+  - Assime a particular state
+  - Assime the required top level
+  - Write down the casual events related to the top event, and the logical relationship between them
+    - Going down the tree until the basic/primary events are reached
+  - Intermediate events are combined with logical operations (AND, OR, ...)
+  
+  ![928632d2.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\928632d2.png)
+  
+  - The top or root node is called the "top event" 
+    - The hazard whose cause is to be analysed
+    - Work backwards to determine its cause
+  
+  **Example**
+  
+  ![deabc422.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\deabc422.png)
+  
+  #### Pros of FTA
+  - Developting the tree forces a system-level examination, beyond the context of single components or sybsytems
+  - A graphical format provides pictorial representation of event relationships
+    - Humans are good at seeing patterns in graphics
+  - Can assist in identifying scenarios leading to hazards and suggest posibilites for hazard elimination or contril
+  
+  #### Cons of FTA
+  - Shows cause and effect replationships, but little else
+  - A fault tree is a simplification of some complex process
+    - May leave out important information
+  - Time and rate dependent-events are hard to represent
+  
+  ### Event trees vs fault trees
+  
+  #### Event tree
+  - Initiating event (may/may not lead to a hazard)
+  - Work forward in time to determine possible sequences of events arising from the initiating event
+  - Good at determining possible hazards becasue we can look at the hazard it shows us
+  
+  #### Fault tree
+  - Identified hazard
+  - Work backwards in time to determine intermediate events (causes) leading as to the hazard
+  - Allows us to work out how the hazards occured
+  
+  #### Bow-tie techinque
+  **These techniques usually go hand in hand**
+  
+  ![5633a2d5.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\5633a2d5.png)
+  
+  ### Reliability Block Diagram (RBD)
+  - Used to show subsystems which contribute to a porential hazard
+    - So that only those contributing hazards need to be analysed in detail
+  
+  #### Process
+  1. Construct an appropriate block diagram for the system
+  
+  ![9e9eb405.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\9e9eb405.png)
+  
+  In general the fault tree can easily be converted into an RBD:
+  
+  ![893fa30e.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\893fa30e.png)
+  
+  However it can be more difficult to convert an RBD into a fault tree, especially if oonly allows for highly complex configurations:
+  
+  ![bd5daf1a.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\bd5daf1a.png)
+  
+  2. Define the system's failure modes
+  3. Construct the RPDs by connecting the blocks identified in step 1 into success paths
+  4. Analyse the RBDs to determine which blocks of the system contribute to particular failure modes
+  
+  #### Some definitions
+  - **Failure rate λ**
+    - The failure rate of a device or component
+    - The number of failures that occur in a period of time
+    - I.e frequency of failures
+    - E.g if there is a failure every 100 hours
+      - 1/100 failures per hour
+  - **Mean time between failures (MTBF)**
+    - Often reported instead of λ
+    - MTBF = 1/λ
+    - E.g if λ=1/100
+      - MTBF = 100 hours
+  - **Anualised Failure Rate**
+    - Also used instead of λ
+    - λ in one year
+  - **Reliability R(t)**
+    - The probability of a device functioning correctly over a given period of time given a set of operating conditions
+    - R(t) = e<sup>-λt</sup>
+    - Exponential failure law: for a constant rate of failure, reliability falls exponentially with time
+  - **Unreliability Q(t)**
+    - Probability of a device failing to function correctly over a given period of time
+    - Q(t) = 1- R(t)
+  
+  #### Representation
+  - RBDs can be used to model both what happens hen components work and what happens whrn components fail
+  
+  ##### Modeling failure for a series system
+  - The following diagram represents failure if any component in the system fails
+  - Failure rate will be the sum of the individual components' failure states
+  
+  ![03e98792.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\03e98792.png)
+  
+  ##### Modeling success for a time series system
+  - The following diagram represent success if all the components in the system work
+  - Reliability will be the product of each component's reliability
+  
+  ![a7b14e94.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\a7b14e94.png)
+  
+  ##### Modelling failure for a parallel system (e.g redundency):
+  - The following diagram represent failure if all components in the system fail
+  - Failure rate can be a product of the individual components' failure rate
+  
+  ![ede268ee.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\ede268ee.png)
+  
+  ##### If we are modelling success for a parrallel system
+  - The following diagram represents success if one of the components in the system works
+  - Reliability has to be calculated indirectly
+  - Start by calculating the probability that an individual component will fail:
+    - Q<sub>i</sub>(t) = 1 - R<sub>i</sub>(t)
+    - The unreliability of tehe complete sustem must b the probability that all the compontent fail independently
+    - If we have N components with reliabilities R<sub>1</sub>(t) ... R<sub>N</sub>(t) then for the complete system:
+      - Q(t) = (1 - R<sub>1</sub>(t)) x (1 - R<sub>2</sub>(t)) x ... x (1 - R<sub>n</sub>(t))
+    - Reliability is then:
+      - R(t) = 1 - Q(t)
+  
+  ![bf9b3a5e.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\bf9b3a5e.png)
+  
+  
+  ##### Different configurations:
+  ![8b2bd850.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\8b2bd850.png)
+  
+  #### Example: Nuclear cooling reactor
+  ![b51e5d9f.png](:storage\\9257c418-aa11-4335-bff5-6eb552ce8153\\b51e5d9f.png)
+  
+  - We are given the failure rates of the valves:
+    - All valves have a failure rate of 1/1000 failures per hour whether they fail open or closed
+  - Since we have been given failure rates, we will draw the RBDs for the failures that can occur with the cooling system, and determine overall failure rates for each situation
+  
+  **RBD for no coolant**
+  - To get no coolant either the valve must fail closed in each pipeline
+  - V1 OR V2 must fail closed AND V3 OR V4 must fail closed
+  - ORs show series connections
+  - ANDs show parallel connections
+  - Overall failure rate:
+    - (λ<sub>V1</sub> + λ<sub>V2</sub>) x (λ<sub>V3</sub> + λ<sub>V4</sub>)
+    - (1/1000 + 1/1000) x (1/1000 + 1/1000)
+    - = 1/250000 per hour
+  
+  **RBD for over-pressure**
+  - To get an over-pressure situation causing hte pipes round the reactor to rupture, both valves must fail in one pipeline:
+  - V1 AND V2 must fail open OR V3 AND V4 must fail open
+  - Overall failure rate:
+    - (λ<sub>V1</sub> x λ<sub>V2</sub>) + (λ<sub>V3</sub> x λ<sub>V4</sub>)
+    - (1/1000 x 1/1000) + (1/1000 x 1/1000)
+    - = 1/500000 per hour
+'''
+linesHighlighted: [
+  2
+]
+isStarred: false
+isTrashed: false

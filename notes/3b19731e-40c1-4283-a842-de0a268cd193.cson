@@ -1,0 +1,194 @@
+createdAt: "2020-05-13T13:21:40.766Z"
+updatedAt: "2020-05-14T13:37:01.040Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Robot Localization"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Robot Localization
+  
+  ## Problem
+  - We have a robot travelling through a corridor, it only has the ability to sense whether there is a door in front or not
+  - Localization of a robot is required in many situations such as driverless cars
+  
+  ### Driverless car example
+  - The typical car carries several sensors that include laser range finder, one or more stereo cameras and GPS
+  - However, each sensor provides a signal with certain amount of probability
+  - GPS has an error range of around 10 meters
+  - Laser range finders use discrete beams such as Velodyne 16 or 64 beam and sense only in those beams
+  - Cameras are able to recognize lane markings but sometimes lane markings are absent and sometimes the algorithms may fail to detect markings
+  - Inspite of these, how do we ensure accurate localization for a car inside its lane in a particular direction
+  - Stanley was the fastest car to cross and complete the DARPA 2005 challenge of autonomously crossing 132 miles (team led by Sebastian Thrun)
+  - Second and third place was taken by two CMU teams
+  - Total of 5 teams were able to complete the distance (4 within the time limit)
+  
+  ---
+  
+  ## Basic robot localization
+  - We will consider the case of the robot in the corridor trying to localize itself
+  - Let us discretize the problem, consider that there are 5 cells in a corridor and the robot is dropped into the corridor and has no idea where it is
+  
+  ![1d4657cb.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\1d4657cb.png)
+  
+  - What would be the probability associated with each cell?
+  
+  ![40e10200.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\40e10200.png)
+  
+  
+  ### Incorporating sensing
+  - Now let us assume that two of the cells are colored blue and three cells are colored green
+  
+  ![23ad67b1.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\23ad67b1.png)
+  
+  - What would be the probability associated with each cell?
+  - Now let us assume that the robot can see, and it sees a blue door
+  - How do we incorporate this measurement into the beliefs
+  - Let us say any cell that has the right color, we multiply it by 0.6 and any other cell we multiply it by 0.2. That is we are three times more likely to have seen the right color as against seeing the other color
+  - Based on this we can update the beliefs by using a simple product rule that results in the following updated values
+  - This is our updated belief based on sensing. However, it is not a true probability distribution as it does not sum to 1
+  
+  ![742bc748.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\742bc748.png)
+  
+  - In order to obtain a true probability distribution, we sum the values
+  and divide each cell’s belief by the sum
+  - This gives us an updated belief for the probabilities in each cell as
+  follows:
+  
+  ![a26f9509.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\a26f9509.png)
+  
+  ### Incorporating Motion
+  - Let us say that the robot moves by one cell
+  - We assume a cyclic world, that the structure of patterns is repeating in terms of red and green cells and after the fifth cell, it goes back to the first cell
+  - What would the updated probabilities after motion be for the robot
+  - This would be the case if the robot moves exactly by one cell
+  
+  ![c409ce9a.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\c409ce9a.png)
+  
+  - In case we have inexact motion, then the update will be based on probabilities
+  - Let us assume that given a move command, the robot moves to the right cell with probability 0.8 
+  - The robot moves one cell less than the move commanded with probability 0.1
+  - The robot moves one cell beyond the move commanded with probability 0.1
+  - Let us assume that the initial state is 0,0.5,0,0.5,0
+  - And we use the move command to move two units
+  - Then the updated probabilities try to provide the total probabilities for the robot to be in that cell 
+  - The robot moves one cell beyond the move commanded with probability 0.1
+  - We have i.e. P(Xi+2|Xi) = 0.8, P(Xi+1|Xi) = 0.1, P(Xi+3|Xi) = 0.1
+  
+  ![11397ef9.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\11397ef9.png)
+  
+  ---
+  
+  ## Localization
+  - During localization we have steps of sensing and motion
+  - Every time we sense we gain information and every time we move, we lose information
+  - We have a prior Belief
+  - Each time we sense, we update the Prior Belief to obtain a Posterior distribution
+  - Each time we move, we update the Belief using total probability
+  
+  ---
+  
+  ## Bayes Rule
+  
+  ![fe264cf2.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\fe264cf2.png)
+  
+  - We can see that the measurements that we incorporated can result in Posterior probabilities and what we have been doing was using Bayes Rule in sensing
+  
+  ![1fbf6809.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\1fbf6809.png)
+  
+  ### Total probability
+  - In order to compute the probability of a particular grid cell at a particular time t, we use the following equation
+  
+  ![4f2a9082.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\4f2a9082.png)
+  
+  - This is based on the law of total probability
+  
+  ![adfde9b1.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\adfde9b1.png)
+  
+  ---
+  
+  ## Continuous case
+  - To obtain the discrete setting into the continuous setting, we use the Kalman filter
+  - The Kalman filter operates on the same measurement and prediction cycle
+  
+  ![7290ff73.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\7290ff73.png)
+  
+  ### Kalman filter
+  
+  ![8eea5265.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\8eea5265.png)
+  
+  - In Kalman filter we work with Gaussian distribution-based assumptions
+  - Gaussian distributions are characterized by the mean μ and variance 𝜎2
+  - The Gaussian distributions follow the following property for multiplication
+  
+  ![78e6618b.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\78e6618b.png)
+  
+  ![4fed4b99.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\4fed4b99.png)
+  
+  - To obtain Kalman Filters we need two things
+  - A State Transition matrix 
+  
+  ![9a5609da.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\9a5609da.png)
+  
+  - And a measurement function
+  
+  ![8986d9f4.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\8986d9f4.png)
+  
+  - Uses estimate X
+  - P = Uncertainty covariance
+  - F = State Transition Matrix
+  - U = Motion Vector
+  - Z = Measurement
+  - H = measurement function
+  - R = Measurement Noise
+  - Prediction
+  - X’ = FX+U
+  - P’ = F.P.FT
+  - Measurement update
+  - Error Y = Z – H.X
+  - The error is cast into measurement space using the system uncertainty
+  - S = H.P.H<sup>T</sup> +R
+  - This is then used to obtain a matrix K called Kalman Gain
+  - K = P.H<sup>T</sup>.S<sup>-1</sup>
+  - Then we finally estimate our estimate and our uncertainty
+  - X’ = X + (K.y)
+  - P’ = (I-K.H).P
+  
+  ![e1a65cbb.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\e1a65cbb.png)
+  
+  - 𝑧𝑡 is the observed measurement which is affected by observation noise 𝑣𝑡 for instance due to sensor noise
+  
+  ![19ab13b6.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\19ab13b6.png)
+  
+  ![d0a6d302.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\d0a6d302.png)
+  
+  We also have a dynamic model based on which we can predict the motion of the car
+  
+  ![9109a705.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\9109a705.png)
+  
+  Here, 𝑥𝑡 is the true position of a car, 𝑢𝑡 is the velocity of the car that is input 𝑤𝑡 is the process noise with covariance P (that is the error in modeling the motion (for instance due to wind)
+  
+  ![1acb33fb.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\1acb33fb.png)
+  
+  ![be035fee.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\be035fee.png)
+  
+  ![b58cb1f9.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\b58cb1f9.png)
+  
+  ![6e5da059.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\6e5da059.png)
+  
+  Let us say that the predicted variance is 0, i.e. we are absolutely sure about the prediction Final Optimal Prediction X’ = X + (K.y) = X+0.y = X
+  
+  
+  ![b7250295.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\b7250295.png)
+  
+  ![ce7d4c3d.png](:storage\\3b19731e-40c1-4283-a842-de0a268cd193\\ce7d4c3d.png)
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

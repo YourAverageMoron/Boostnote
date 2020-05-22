@@ -1,0 +1,108 @@
+createdAt: "2019-12-21T11:10:14.392Z"
+updatedAt: "2019-12-21T13:11:54.537Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Safety In Software"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # Safety In Software
+  
+  ## The safety lifecycle
+  The main concern of sysystem safety is management of hazards
+  - Identification
+  - Evaluation
+  - Elimination or control
+  
+  The safety lifecycle helps us do this
+  
+  When developing a safety critical system we must:
+  - Identify hazards and the accidents they may lead to
+  - Assess the risk of these accidents
+  - Reduce the risk, where possible and/or appropriate by eliminating/controlling the hazards that lead to the accidents
+  - Set safety requirements for the system. and define how they will be met in the system design and implementation
+  - Shaw that the safety requirements have been met in the system
+  - Provide a safety case for the system
+  
+  > The objective of the sfety lifecycle is a systematic approach to safety
+  
+  ### Basic concepts of the safety lifecycle
+  - **Build in safety, dont add it on to a completed design**
+    - Safety considerations must be part of the initial stages of concept development and requirements
+  - **Deal with whole systems**
+    - Safety issues in systems tend to arise at component boundaries as components interact
+  - **Try to analyse the current system rather that relyin on past experience and standards**
+    - Pace of change doesnt allow for experience to accumulate or for proven design to be used
+    - The safety lifecycle attempts to anticipate or prevent accidents before they occur
+  - **Take a wider view on hazards than just component failures**
+    - Serious accident have occured while all components in a system were working exectly as they should.
+    - Many hazards arise in the requirements and design stages of development
+  - **Recognise the importance of trade-oggs and conflics in system design**
+    - Nothing as absolutely safe
+    - Safety is not the only goal in system building
+    - Safety acts as a constraint on possible system design and interacts with other constraints such as cost, size, development time, etc
+  
+  ---
+  
+  ## Computer and softare safety
+  
+  ### Computer safety issues
+  Computer technology has revolutionalised the design and development of systems
+  - Few systems teday are built without computers to provide control functions and/or support design
+  - Computers now control most safety-critical devices, replacing traditional hardware controls
+  - Many important computer systems are extremely complex
+  - There is little legal control over who can build safety critical systems
+  - Accidents and financial disasters have already occurred
+  
+  ### Safety-critical software
+  - Poerforms or controls functions which, if excluded erroneously or id fail to execute, could directly cause serious injury to people and/or the environment and cause loss of life
+  - Performs or controls functions which are activated to prevent or minimise the effect of a failure of a safety-critical system. 
+    - Sometimes called safety-related software
+  
+  ### Software safety
+  > Features which ensure that the software will execute within a system without contributing to hazards
+  
+  - A product performs predictably under normal and abnormal conditions
+  - The likelyhood of an unplanned event occuring is minimised and its consequences controlled and contained thereby preventing accidental injury and death
+  - Must be able to deal with unexpected events, and perform in the right way even if given the wrong data
+  
+  ### Software safety features and procedures
+  - **Features** are designed into a product
+    - E.g software may include a range of checks to prevent the system operating on out of range data 
+  - **Procedures** must endure that the system is used:
+    - In an operational environment for which it was intended
+    - For a task for which it was intended
+    - There is likely to be verification that ensures that the system is being used in the right environment for the right task
+  
+  ### Predictable software behaviour
+  - Products are usually designed to perform under certain 'normal' conditions
+  - Safety critical systems must also be designed to take into account the performance under **abnormal conditions**
+  
+  > If a product has been designed to perform predictably under normal and abnotmal conditions, in theory, no unplanned events will occur
+  
+  **But**
+  - Loopholes that designers have not spotted can cause accidents
+    - Designers are not guarenteed to have considered all normal and abnormal situations
+    - Human operators/users of systems tend to make mistakes, particularly when they are bored, tired, in a hurry, or under pressure
+  
+  ### Considerations about software
+  Software safety is one of many components which determine overall system safety
+  - How does softeare contribure or ditract to/from the safety of the system?
+  - What safety role does the software perform?
+  - How does the software reduce the likelihood/everity of potential hazards?
+'''
+linesHighlighted: [
+  53
+  40
+  60
+  48
+  68
+  79
+  38
+]
+isStarred: false
+isTrashed: false

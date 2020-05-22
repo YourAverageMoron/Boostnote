@@ -1,0 +1,130 @@
+createdAt: "2020-05-12T17:12:11.419Z"
+updatedAt: "2020-05-18T12:32:28.547Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Action Selection and Planning"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Action Selection and Planning
+  
+  ## Problem
+  - Need to solve a basic problem that characterizes intelligent systems
+  - “What to do next?”
+  - The crucial element that makes it different from global planning problems?
+  - An agent must be autonomous and situated
+    - This implies:
+      - It exists in a dynamic environment
+      - It can manipulate or invoke change through its actions
+      - It can sense and perceive
+  
+  ---
+  
+  ## Production Rules
+  - Sometimes the simplest approach
+  - A production is a tuple: <sensory precondition, action>
+  - It implies an if-then rule, i.e. if condition then action
+  - A production system is a set of productions used to solve a particular problem
+  - The production rules could be organized in flat structures or organized into a hierarchy
+  
+  ### Hierarchical Production Rules
+  - An example is subsumption architecture that consists of layers of interconnected behaviors
+  - Each is actually a finite state machine which acts in response to an appropriate input
+  - These layers are then organized into a simple stack, with higher layers subsuming the goals of the lower ones
+  - Other systems may use trees, or may include special mechanisms for changing which goal / rule subset is currently most important
+  
+  ### Conflict resolution mechanism
+  - This is a mechanism for resolving conflicts between actions proposed when more than one rules' condition holds in a given instant
+  - The conflict can be solved for example by:
+    - Assigning fixed priorities to the rules in advance
+    - Assigning preferences
+    - Learning relative utilities between rules
+    - Exploiting some heuristics (such as recency)
+  
+  ### Example production rule
+    - In the thesis by JMP van Waveren (2001), the author has designed a Quake AI Bot that aims to emulate a human in the Quake game
+    - The architecture also makes use of production rules
+  
+  ![5f82fde5.png](:storage\\153e7585-e0af-4455-992e-f66f56340d27\\5f82fde5.png)
+  
+  - 1st layer, basic input output and pre-processing
+  - 2nd layer provides abilities that are sub-consciously decided, such as using fuzzy logic to select goals, AI to navigate towards a goal, AI to interpret chats
+  - 3rd layer uses a mixture of production rules. All the higher level thinking and reasoning takes place in this layer. This includes AI to navigate around obstacles and solve puzzles
+  - The 4th layer is the “brain” and is used to command team-mates to accomplish tasks
+  
+  ### Limitations of production rule
+  - The production rule construct only holds when each context uniquely determines an action
+  - It could be useful to consider a state to take care of the current context of the robot/agent
+  - For instance, if the robot is required to take an item to some place, there could be instances of conditions that have not been taken into account
+  
+  ### Formal methods
+  - Many formal methods exist that could be used to obtain “optimal” plan sequences
+  - These do consider the state of the system in planning
+  - However, most of the techniques involved in formal planning suffer from not being real time
+  - There are also other problems such as non-interleaved planners resulting in Sussman Anomaly
+  
+  ---
+  
+  ## Sussman Anomaly
+  - Consider the goal is to obtain B on top of C and A on top of B
+  
+  ![d747b663.png](:storage\\153e7585-e0af-4455-992e-f66f56340d27\\d747b663.png)
+  
+  - However, noninterleaved planners typically separate the goal (stack A on top of B on top of C) into subgoals, such as:
+    - get A atop B
+    - get B atop C
+  - Suppose the planner starts with goal 1
+  - However to obtain goal 2, it has to undo the work of goal 1
+  
+  ![4661eecf.png](:storage\\153e7585-e0af-4455-992e-f66f56340d27\\4661eecf.png)
+  
+  - Suppose the planner starts with goal 2
+  - However to obtain goal 1, it has to undo the work of goal 2
+  
+  ![f80cd7b4.png](:storage\\153e7585-e0af-4455-992e-f66f56340d27\\f80cd7b4.png)
+  
+  ---
+  
+  ## Methods of Dynamic Planning
+  - Environmental Determinism
+  - Finite State Machines
+  - Basic Reactive Plans
+  
+  ### Environmental Determinism
+  - Figure out a way to recognise all possible / relevant states of the world
+  - Say what to do in each one
+  
+  ![ebc58d0e.png](:storage\\153e7585-e0af-4455-992e-f66f56340d27\\ebc58d0e.png)
+  
+  ### Finite State Machine
+  
+  ![c54e540a.png](:storage\\153e7585-e0af-4455-992e-f66f56340d27\\c54e540a.png)
+  
+  ![773938e9.png](:storage\\153e7585-e0af-4455-992e-f66f56340d27\\773938e9.png)
+  
+  ![82cfb518.png](:storage\\153e7585-e0af-4455-992e-f66f56340d27\\82cfb518.png)
+  
+  ![985761a6.png](:storage\\153e7585-e0af-4455-992e-f66f56340d27\\985761a6.png)
+  
+  ![fa4111e0.png](:storage\\153e7585-e0af-4455-992e-f66f56340d27\\fa4111e0.png)
+  
+  ![24168aef.png](:storage\\153e7585-e0af-4455-992e-f66f56340d27\\24168aef.png)
+  
+  - Prefer not to specify “actions” that the world will take for itself
+    - Not always possible in VR, but more likely in robotics
+  - Want to focus on intentional goals, but to be able to handle contingencies
+  
+  ### Basic Rective plans
+  
+  ![8af5a1a3.png](:storage\\153e7585-e0af-4455-992e-f66f56340d27\\8af5a1a3.png)
+  
+  - Exploit representations & insights of earlier AI planning, e.g. preconditions
+  - But reactive – pre-programmed, very little real-time search
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

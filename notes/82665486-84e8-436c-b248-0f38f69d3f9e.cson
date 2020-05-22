@@ -1,0 +1,29 @@
+createdAt: "2020-05-17T12:46:02.320Z"
+updatedAt: "2020-05-17T14:42:13.524Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "ICCS Past Papers"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # ICCS Past Papers
+  
+  ## Draw analogies from at least one form of learning nature (including himanity) and exactly one form of machine learning. What are commonalites, and what are discrepencies?
+  
+  ## Describe two different aspects of cognition frequently labled as 'conciousness' in ordinary language. Describe how one might be implemented in an AI sustem without the other one.
+  
+  ## How can cooperation evolve? When is it adaptive? How does it relate to cognition?
+  
+  ## What are the advantages and disadvantages of touch sensors versus range sensors for robotics?
+  
+  ## What is the relationship between believability and transparency in conversation or domestic use in AI?
+  
+  ## Is it possible to regulate AI? What would be the most effective mechanisim(s)?
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

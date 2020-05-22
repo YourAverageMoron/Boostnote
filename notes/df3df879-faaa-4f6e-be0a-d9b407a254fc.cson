@@ -1,0 +1,251 @@
+createdAt: "2020-05-16T13:58:12.834Z"
+updatedAt: "2020-05-16T17:04:04.890Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Emotions, Drives and Complex Control"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Emotions, Drives and Complex Control
+  
+  ## Emotions in Cognitive Systems
+  - Natural Cognition
+    - Organise behaviour / provide another different kind of control state
+    - This includes social behaviour
+  - Artificial Cognition
+    - Organisation, communication, variation
+  
+  --- 
+  
+  ## What are emotions for?
+  - Emotions are the original form of intelligence, and still the core organising structure of mammal intelligence
+  - Intelligence is an evolved system that lets us change behaviour quickly
+    - Goal: do the right thing at the right time
+  
+  ---
+  
+  ## Very Simple Intelligence
+  - Plants can wind & unwind (reversing decisions) in pursuit of support, light, prey
+    - (Anthony Trewavas, Edinburgh)
+  - Single cell organisms also pursue multiple goals & hunt prey
+  
+  ---
+  
+  ## The Most Basic Emotions
+  - Emotions (or at least neurotransmitters) coordinate behaviour even in primitive animals that don’t have neurons
+  - The most basic emotions are excitement and depression
+  - Action Options: act urgently, withdraw, or act normally
+  
+  ---
+  
+  ## Intelligent Control
+  - Fast, complicated processes (e.g. perception) done by electrical state of neurons
+  - Long-term learning done by growth/change of neurons
+  - Intermediate action context – priorities – stored by chemical wash
+    - Emotions & Drives
+  
+  ---
+  
+  ## Emotions vs. Drives
+  - Emotions build acutely due to perceived events, decay with time or interference
+  - Drives build with time (sometimes acutely due to perception like emotions), decay acutely with consummatory actions
+  
+  ![bc7dee7b.png](:storage\\df3df879-faaa-4f6e-be0a-d9b407a254fc\\bc7dee7b.png)
+  
+  ### Basic Control: Latching
+  - Note zone where action is not determined only by
+  strength, but also by memory
+  - This is done in thermostats using a simple spring & magnet
+  
+  ![67cd421f.png](:storage\\df3df879-faaa-4f6e-be0a-d9b407a254fc\\67cd421f.png)
+  
+  - In NI, both emotions and drives use chemical “memory” (state) + attention as latches
+  - Stick to one behaviour a while, reduce dithering
+  
+  ### Durative State in Synthetic Control
+  - Emotions and Drives are a sort of temporary memory system to help you arbitrate between goals
+  - Simulate the chemical levels numerically.
+  - Other systems, e.g. going to just the most urgent goal, are inefficient, lead to dithering
+  
+  ### Experiments in Latching
+  1. No latch
+  2. Strict latch
+    Trigger behaviour if internal state is below δ
+    Maintain behaviour until internal state is above φ ≥ δ
+  3. Strict latching with interruptions; can be very inefficient
+    Agents may persevere for minimum gain
+    Inefficiency first identified by Hagen Lehmann
+  4. Flexible latch:
+    Introduce a third threshold, ψ such that δ ≤ ψ ≤ φ
+    Behaviour is triggered as before but if agent is interrupted:
+    if internal state is below ψ: continue,
+    otherwise: reset latch
+  
+  ### Experimental Questions
+  - Does flexible latching increase efficiency?
+  - If so, what is the optimal value for ψ?
+  - Experiment with three goals: two required resources + high-level goal of dancing
+  
+  ### Flexible Latch: Where do you reset?
+  - Want to know right threshold for reconsidering current direction if interrupted while acting
+  
+  ![5b23f447.png](:storage\\df3df879-faaa-4f6e-be0a-d9b407a254fc\\5b23f447.png)
+  
+  #### Experiments
+  - Test and compare all variants 
+    - Check frequency of execution of low-priority goals
+    - Also frequency ratio of primary and secondary actions 
+  - Two simulation settings
+    - Controlled environment
+    - Random (more realistic environment) 
+  
+  ![97116118.png](:storage\\df3df879-faaa-4f6e-be0a-d9b407a254fc\\97116118.png)
+  
+  ##### Results
+  
+  ![e2f8b7be.png](:storage\\df3df879-faaa-4f6e-be0a-d9b407a254fc\\e2f8b7be.png)
+  
+  - Sometimes time should be allocated arbitrarily in order to prevent dithering
+  - But arbitrary decisions should be easy to revisit
+  - The optimal value for the intervening? persistence threshold = latching threshold => revisit for all interrupts
+  
+  ---
+  
+  ## Implementing emotion in BOD
+  - Create a super-class for behaviour modules containing drive or emotion state and latching logic.
+  - Add ‘sense’ to detect whether latched.
+  - Add means and extent to increment & decrement
+  
+  ![11a12ae2.png](:storage\\df3df879-faaa-4f6e-be0a-d9b407a254fc\\11a12ae2.png)
+  
+  - Drives can (& if they are, should) have same priority
+  - mux due to latch state
+  - (Rohlfshagen labelled senses & actions.)
+  
+  ![3f07d5c9.png](:storage\\df3df879-faaa-4f6e-be0a-d9b407a254fc\\3f07d5c9.png)
+  
+  ---
+  
+  ## Emotions and Coherence
+  - Fully reactive AI can change state much too rapidly to be comprehensible
+  - Humans read goals largely by emotional facial expressions
+  - Artificial emotions can be used to make reactive systems more comprehensible, easier to use
+  - (Sengers 1998,1999)
+  
+  ---
+  
+  ## Emotions in Cognitive Systems
+  - Natural Cognition
+    - Organise behaviour / provide another different kind of control state
+    - This includes social behaviour
+  - Artificial Cognition
+    - Organisation, communication, variation
+  
+  ---
+  
+  ## Emotions as Communication
+  - Most AI emotion systems are for HCI:
+    - Increasing engagement
+    - Increasing believability 
+    - Facilitating comprehensibility
+  
+  ---
+  
+  ## Emotions for Human-Robot Interaction
+  - Humans have very complex social lives, with associated skills and emotions
+  - We read other’s emotions to interact correctly
+  - Hypothesis: we need the same interface for robots if we are to work or live with them
+  - These emotions could be “fake”, not aligned with real goals (just like for humans)
+  
+  ---
+  
+  ## Robots for Human Emotions
+  - Some robots are specifically designed to address attachment issues
+  - Claim: maintaining engagement is not just for sales, but also necessary for therapy
+  - E.g Paro “Robot Seal Healing Pet”
+  
+  ---
+  
+  ## Emotions in Games
+  - “Serious Games” e.g. Jon Gratch
+  
+  ![23957cb6.png](:storage\\df3df879-faaa-4f6e-be0a-d9b407a254fc\\23957cb6.png)
+  
+  ---
+  
+  ## Appraisal
+  - Problems for AI: what stimuli should trigger which emotions?
+  - Figuring out which emotions there are is necessary for this
+  - Psychology theory, based partly on human pathologies
+  
+  ![0549b112.png](:storage\\df3df879-faaa-4f6e-be0a-d9b407a254fc\\0549b112.png)
+  
+  ![7f565cb1.png](:storage\\df3df879-faaa-4f6e-be0a-d9b407a254fc\\7f565cb1.png)
+  
+  **A.C Marsella G. Gratch / Cognative systems research 10 (2009)**
+  
+  ### Standard Approaches
+  - Darwin hypothesised that emotional expressions were universal
+  - Eckman (1978) described such using Facial Action Coding System (FACS)
+  
+  ### Representation – Discrete or Dimensional?
+  
+  ![bc83ddbe.png](:storage\\df3df879-faaa-4f6e-be0a-d9b407a254fc\\bc83ddbe.png)
+  
+  ![a4980787.png](:storage\\df3df879-faaa-4f6e-be0a-d9b407a254fc\\a4980787.png)
+  
+  ---
+  
+  ## Open Questions
+  - How many different emotion systems / axes are there underlying the space?
+  - How much of emotional experience is a consequence of cultural construction?
+  - Remember: we are category-learning machines
+    - What would it be like if we didn’t have labels for emotions? 
+    - What is it like to experience emotions without labels?
+  
+  ---
+  
+  ## Gesture and temporal coherence
+  - There’s a lot more to communicating emotion than facial expression
+  - In games, much research on posture
+  - Also an issue in emotionally-neutral contexts
+  
+  ---
+  
+  ## Emotions as Memory
+  - Recent events:
+    - Episodic memory
+    - Emotions.
+    - (These fade / get replaced)
+  - “Knowledge”:
+    - Facts
+    - Expectations
+    - (These only build (more or less))
+  
+  ### Example: Emotions as Memory
+  
+  ![646c4c36.png](:storage\\df3df879-faaa-4f6e-be0a-d9b407a254fc\\646c4c36.png)
+  
+  - (Tanguy, Bryson & Willis 2007; Bryson & Tanguy 2010)
+  - Tanguy (2006)
+  
+  ![3a48a24f.png](:storage\\df3df879-faaa-4f6e-be0a-d9b407a254fc\\3a48a24f.png)
+  
+  ---
+  
+  ## AI Emotions
+  - Mood — longer term.
+  - Emotions — shorter term
+  - Behaviour (e.g. expressions) is altered by these
+  - Simplifies coding
+  - Increases variability
+'''
+linesHighlighted: [
+  180
+]
+isStarred: false
+isTrashed: false

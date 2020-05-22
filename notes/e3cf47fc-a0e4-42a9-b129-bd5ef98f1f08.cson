@@ -1,0 +1,132 @@
+createdAt: "2020-05-14T15:51:54.639Z"
+updatedAt: "2020-05-14T16:52:20.308Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Social Structures"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Social Structures
+  
+  ## Replication and Science
+  - Where there is a controversy / surprising result, the first thing to do is try to replicate it
+    - Fail → cast doubt on original result (and /or yourself)
+    - Succeed → 1) further evidence for theory 2) lets you test & extend theory
+  
+  ---
+  
+  ## Simulation and replication
+  - Leading role for simulation in science: 
+    - Show whether a parsimonious model really could explain the data
+  - Goals of replication:
+    - validate experiment
+    - Extend results
+      - Explain more data
+      - Understand the model better
+  
+  ---
+  
+  ## Multi-agent systems
+  
+  ![d9b34377.png](:storage\\e3cf47fc-a0e4-42a9-b129-bd5ef98f1f08\\d9b34377.png)
+  
+  - Thus a multiagent system contains a number of agents…
+    - …which interact through communication…
+    - …are able to act in an environment…
+    - …have different “spheres of influence” (which may coincide)…
+    - …will be linked by other (organizational) relationships
+  
+  ---
+  
+  ## Utilities and Preferences
+  - Assume we have just two agents: Ag = {i, j}
+  - Agents are assumed to be self-interested: they have preferences over how the environment is
+  - Assume a set of “outcomes” that agents have preferences over
+  - We capture preferences by utility functions:
+    - Utility functions lead to preference orderings over outcomes
+  
+  ---
+  
+  ## Competitive and Zero-Sum Interactions
+  - Where preferences of agents are diametrically opposed, we have strictly competitive scenarios
+  - Zero-sum encounters are those where utilities sum to zero:
+    - ui(w) + uj(w) = 0 for all w
+  - Zero sum implies strictly competitive
+  - Zero sum encounters in real life are very rare … but people tend to act in many scenarios as if they were zero sum
+  
+  ---
+  
+  ## The Prisoner’s Dilemma
+  - Two men are collectively charged with a crime and held in separate cells, with no way of meeting or communicating. They are told that:
+    - if one confesses and the other does not, the confessor will be freed, and the other will be jailed for three years
+    - if both confess, then each will be jailed for two years
+  - Both prisoners know that if neither confesses, then they will each be jailed for one year
+  - Payoff matrix for prisoner’s dilemma:
+  
+  ![df3aeb4f.png](:storage\\e3cf47fc-a0e4-42a9-b129-bd5ef98f1f08\\df3aeb4f.png)
+  
+  - Top left: If both defect, then both get punishment for mutual defection
+  - Top right: If i cooperates and j defects, i gets sucker’s payoff of 1, while j gets 4
+  - Bottom left: If j cooperates and i defects, j gets sucker’s payoff of 1, while i gets 4
+  - Bottom right: Reward for mutual cooperation
+  - The individual rational action is defect This guarantees a payoff of no worse than 2, whereas cooperating guarantees a payoff of at most 1
+  - So defection is the best response to all possible strategies: both agents' defect, and get payoff = 2
+  - But intuition says this is not the best outcome: Surely, they should both cooperate and each get payoff of 3!
+  - This apparent paradox is the fundamental problem of multi-agent interactions
+    - It appears to imply that cooperation will not occur in societies of self-interested agent
+  - Real world examples:
+    - nuclear arms reduction (“why don’t I keep mine. . . ”)
+    - free rider systems — public transport
+  - The prisoner’s dilemma is ubiquitous
+  - Can we recover cooperation?
+  
+  ### Iterated Prisoner’s Dilemma
+  - One answer: play the game more than once
+  - If you know you will be meeting your opponent again, then the incentive to defect appears to evaporate
+  - Cooperation is the rational choice in the infinititely repeated prisoner’s dilemma
+  
+  ---
+  
+  ## Smaldino et al 2013: Cost of Co-operation
+  - Study: Cooperation should increase in harsh environments
+  - Design:
+    - A spatial agent-based model to represent mutual co-operation enforced by Environmental adversity
+    - Benefiting from altruistic behavior is essential for survival and reproduction in this environment
+  - Studied:
+    - Cost of unreciprocated cooperation
+    - Environmental cost of living
+  
+  ### Base interaction: Prisoner’s Dilemma
+  - In Smaldino et al 2013 work, the base interaction is a prisoner’s dilemma game
+  - In each interaction between a pair of players the individuals can either cooperate or defect
+  - Let the payoff for a defector be T and that for a cooperator be S
+  - The reward for mutual cooperation be R
+  - Mutual defection be punished with a payoff of P
+  - Then the following holds: T>R>P>=S
+  - Defection is always therefore a best single shot strategy, but mutual cooperation outperforms mutual defection
+  
+  ### Two players
+  - Consider the case for two-player groups in a “harsh” environment
+  - Each individual has some initial amount of resources
+  - Two defectors will perish
+  - In a pair consisting of a co-operator and a defector, the co-operator will die quickly than the defector as the co-operator would give all its resources to the defector
+  - The defecting partner will last only until it finishes its resources and will then die
+  - The only stable pair will consist of two co-operators
+  
+  ![892bcf16.png](:storage\\e3cf47fc-a0e4-42a9-b129-bd5ef98f1f08\\892bcf16.png)
+  
+  ![69fabce2.png](:storage\\e3cf47fc-a0e4-42a9-b129-bd5ef98f1f08\\69fabce2.png)
+  
+  ![594b9112.png](:storage\\e3cf47fc-a0e4-42a9-b129-bd5ef98f1f08\\594b9112.png)
+  
+  ![bf877d6f.png](:storage\\e3cf47fc-a0e4-42a9-b129-bd5ef98f1f08\\bf877d6f.png)
+  
+  ![996c3e3c.png](:storage\\e3cf47fc-a0e4-42a9-b129-bd5ef98f1f08\\996c3e3c.png)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,188 @@
+createdAt: "2020-05-13T11:59:57.825Z"
+updatedAt: "2020-05-13T13:18:53.761Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Motion Planning"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Motion Planning
+  
+  ## Problem
+  - Need to often solve a problem in robotics to plan the motion
+  - It could range from planning the motion of robots (such as lego robots) to that of surgical robots which move the robotic arms (such as Da Vinci robot)
+  - Often, we have some source and destination for the motion
+  
+  ---
+  
+  ## Discrete Motion Planning
+  - We can always discretize the space by enumerating the set of actions
+  - For instance, we can think of one step forward, backward, left or right as one such discretization
+  - This discretization would be useful, as we could then treat the problem as a graph-based search problem
+  
+  ### Planning on graphs
+  - By discretizing it in terms of a graph, the problem we end up with is as follows:
+    - Given a start node S and a target node T, provide a plan to reach from S to T
+  
+  ![4ab00721.png](:storage\\323da3d5-e8de-4b02-b0dc-37464fdf662a\\4ab00721.png)
+  
+  ### Discrete graph representation
+  - Given the continuous space representation we then end up with a discrete node representation which we then approximate by denoting each cell as a vertex in the graph and an edge between two vertices if they are connected
+  
+  ![78fa5b3f.png](:storage\\323da3d5-e8de-4b02-b0dc-37464fdf662a\\78fa5b3f.png)
+  
+  ---
+  
+  ## Graph
+  ```
+  A graph 𝑮 = (𝑽, 𝑬) on
+  𝒌 = |𝑽| vertices
+  𝒑 = |𝑬| edges
+  𝝎:𝑬 → 𝑹+
+  ```
+  - A path from 𝒖 to 𝒗: a sequence (𝒖 =)𝒙𝟎, 𝒙𝟏,…, 𝒙𝒌(= 𝒗) where (𝒙𝒊,𝒙𝒊+𝟏) ∈ 𝑬
+  - Length of a path 𝑷 : sum of the weights on the edges of path 𝑷
+  - Shortest path from 𝒖 to 𝒗 : the path of smallest length from 𝒖 to 𝒗
+  - Distance from 𝒖 to 𝒗 : the length of the shortest path from 𝒖 to 𝒗
+  
+  ### 4 connected graphs
+  - Allows you to go:
+    - Foward + Backward
+    - Left + Right
+  
+  ![126e1311.png](:storage\\323da3d5-e8de-4b02-b0dc-37464fdf662a\\126e1311.png)
+  
+  ### 8 connected graphs
+  - - Allows you to go:
+    - Foward + Backward
+    - Left + Right
+    - Diagonal 
+  
+  ![15814446.png](:storage\\323da3d5-e8de-4b02-b0dc-37464fdf662a\\15814446.png)
+  
+  ### Partially blocked cells
+  
+  ![9f420fcb.png](:storage\\323da3d5-e8de-4b02-b0dc-37464fdf662a\\9f420fcb.png)
+  
+  - There are a selection of approaches for dealing with the partially blocked cells (M in the picture)
+  - Make it untraversable
+    - Incomplete may not find a path that exists
+  - Make it traversable
+    - Incorrect – may return a valid path where there is none
+  - Increase grid resolution
+    - Can be expensive
+  - Make discretization adaptive
+    - This uses a non uniform edge cost
+    - Lose uniform grid size
+  
+  ---
+  
+  ## Tree based search
+  - General search strategy is to find a path from source to target and keep track of the edge costs c(vi,vj)
+  - Set all g(v) to infinity
+  - Set the root of the tree as the source
+  - Let current node by u
+  - Choose one of the neighbours to expand
+  - Calculate its cost as g(v) = g(parent)+c(u,v) 
+  - In case it is lesser than existing g(v) then update g(v) and set parent(v) = u
+  
+  ![078fbf28.png](:storage\\323da3d5-e8de-4b02-b0dc-37464fdf662a\\078fbf28.png)
+  
+  ### Djikstra’s algorithm
+  
+  ![cf07ff93.png](:storage\\323da3d5-e8de-4b02-b0dc-37464fdf662a\\cf07ff93.png)
+  
+  ![cc6d11f6.png](:storage\\323da3d5-e8de-4b02-b0dc-37464fdf662a\\cc6d11f6.png)
+  
+  ![4d9b80c7.png](:storage\\323da3d5-e8de-4b02-b0dc-37464fdf662a\\4d9b80c7.png)
+  
+  ![8cea2081.png](:storage\\323da3d5-e8de-4b02-b0dc-37464fdf662a\\8cea2081.png)
+  
+  ![44caab4e.png](:storage\\323da3d5-e8de-4b02-b0dc-37464fdf662a\\44caab4e.png)
+  
+  1. Mark all nodes unvisited. Create a set of all the unvisited nodes called the unvisited set
+  2. Assign to every node a tentative distance value: set it to zero for our initial node and to infinity for all other nodes. Set the initial node as current
+  3. . For the current node, consider all of its unvisited neighbours and calculate their tentative distances through the current node. Compare the newly calculated tentative distance to the current assigned value and assign the smaller one. For example, if the current node A is marked with a distance of 6, and the edge connecting it with a neighbour B has length 2, then the distance to B through A will be 6 + 2 = 8. If B was previously marked with a distance greater than 8 then change it to 8. Otherwise, the current value will be kept
+  4. When we are done considering all of the unvisited neighbours of the current node, mark the current node as visited and remove it from the unvisited set. A visited node will never be checked again
+  5. .If the destination node has been marked visited (when planning a route between two specific nodes) or if the smallest tentative distance among the nodes in the unvisited set is infinity then stop. The algorithm has finished
+  6. Otherwise, select the unvisited node that is marked with the smallest tentative distance, set it as the new "current node", and go back to step 3
+  
+  #### Disadvantages
+  - It requires us to have the complete graph
+  - In order to reach a destination, we obtain the route through all nodes
+  - This is expensive and would not be feasible for robot motion planning
+  
+  ### A* algorithm 
+  - It is an optimal algorithm used for motion planning
+  - A* was created as part of the Shakey project, which had the aim of building a mobile robot that could plan its own actions
+  - Peter Hart, Nils Nilsson and Bertram Raphael of Stanford Research Institute first published the algorithm in 1968
+  - It is a best first search routine that combines the “cost to arrive” and an estimate of the “cost to go”
+  
+  ![8b105ea7.png](:storage\\323da3d5-e8de-4b02-b0dc-37464fdf662a\\8b105ea7.png)
+  - f(vn)= g (vn)+ h(vn) = cn +yn
+  - Here g (vn) is an estimate of the current best running cost to vn and h(vn) is a heuristic which estimates the cost to reach destination
+  
+  - There exists an f*(vn) = g*(vn) + h*(vn)
+  - There exists an f*(vn) = g*(vn) + h*(vn)
+  - The current g(vn) ---- g*(vn)
+  - There exists an f*(vn) = g*(vn) + h*(vn)
+  - The current g(vn) >= g*(vn) as a visited node could be updated with a cheaper cost 
+  - There exists an f*(vn) = g*(vn) + h*(vn)
+  - How about the cost to go estimate h(vn) -- h*(vn) 
+  
+  ![9162eb9d.png](:storage\\323da3d5-e8de-4b02-b0dc-37464fdf662a\\9162eb9d.png)
+  
+  - To understand this let us consider the effect in a two-node case
+  - Let us first consider the case that it over estimates
+  - We have a heuristic function that says h(v1) = 80 and h(v2) = 70 
+  - The corresponding value to determine priority are:
+    - f(v1)= g (v1)+ h(v1) = 180
+    - f(v2)= g (v2)+ h(v2) = 170
+  - Therefore path v2 is chosen at which time the true cost is estimated and we get g(vt) = 150 and h(vt) = 0. Therefore f(vt) = 150. However, we then do not consider the path v1 as h overestimates the path cost and gives us 180 which is still larger than 150
+  - Now let us first consider the case that it under estimates
+  - Therefore path v2 is chosen at which time the true cost is estimated and we get g(vt) = 150 and h(vt) = 0. Therefore f(vt) = 150
+  - However, we then do consider the path v1 as h underestimates the path cost and gives us 130 which is still lesser than 150
+  - In this case the best path is discovered, and the best cost for f(vt) is updated to 140
+  
+  #### Prioritizing nodes
+  - We thus know that for the A* algorithm, the requirement is to obtain the running cost of g(vn) and to have a heuristic function that underestimates the cost to go to reach the destination
+  -  This cost is used in deciding priorities on which nodes to visit instead of visiting all nodes
+  
+  #### Heuristics
+  - Consider that we are at some point v and the g(v) = 4 at that point
+  
+  ```
+  One heuristic for h(v) = |v – dest|
+  = √ 5^2+8^2
+  = 9.433
+  And the real cost could be 17
+  ```
+  
+  #### Example algorithm
+  ```
+  1.Mark source (s) as Open. Parent(S) = NIL. Closed = NIL. Update h(s). g(s) = 0
+  2.If Open ≠(). Pick Best node n and add it to Closed. Check if we have reached destination, if so reconstruct path.
+  3.Else – put successors = MoveGen(n)
+  4. For each m in successor
+  5.If m ∉ Open and m ∉ Closed,
+    • Compute h(m), set parent(m) = n, g(m) = g(n) + c(m,n). f(m) = g(m)+h(m), add m to Open.
+  6.If m ∈ Open
+    • If g(n) + c(m,n) < g(m)
+      • Parent( m) = n, g(m) = g(n) + c(m,n), f(m) = h(m)+g(m)
+  7. If m ∈ Closed
+  • If g(n) + c(m,n) < g(m)
+    • Parent( m) = n, g(m) = g(n) + c(m,n), f(m) = h(m)+g(m)
+    • Also propagate this updated value of g(m) to all children of m
+  ```
+  
+  ![ffa8c697.png](:storage\\323da3d5-e8de-4b02-b0dc-37464fdf662a\\ffa8c697.png)
+'''
+linesHighlighted: [
+  114
+]
+isStarred: false
+isTrashed: false

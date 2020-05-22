@@ -1,0 +1,182 @@
+createdAt: "2020-01-07T14:25:59.670Z"
+updatedAt: "2020-01-07T16:51:25.461Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Routing"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # Routing
+  
+  ## Introduction
+  - A packet does not know how to get to its destination
+  - It must rely on routers to send it in the right direction
+  - Routers dont know where everything in the workd is:
+    - It is only connected to a handful of neighbour routers
+  - There are many relevant criteria when picking a route:
+    - Smallest number of hops
+    - The fastest
+      - Some links might be faster than others
+    - The cheapest
+    - The most reliable
+  - There is also policy based routing
+    - Non technicalissues must be taken into account
+    - You may wish to restrict where your traffic goes through
+    - E.g all traffic that starts and ends in Canada must by law never leave Canada
+  - We normally consider two classes of routing:
+    - Local routing within an organisation
+      - Requiring an interior gateway protocol (IGP)
+    - Non-local routing between organisations
+      - Requiring exterior gateway protocol (EGP)
+  
+  ---
+  
+  ## Host routing
+  - The destination address on a packet is ANDed with each netmask in turn
+    - If the result is equal to the destination route via a given interface
+  - Use the first match from top to bottom of the table
+    - The table is sorted by mask length
+      - Longest to shortest
+  
+  ![89db986a.png](:storage\\a2dddc3e-96a5-4ec5-990c-0e8b3964c15d\\89db986a.png)
+  
+  **Flags**:
+  - U: the interface is up
+    - I.e working
+  - G: the route is to a gateway/rputer
+    - Otherwise the destination is on the local network
+  - H: the route is a host
+    - The destination address is a single host
+    - Not a network
+  - D: this entry was created by an ICMP redirect
+  - M: this entry was modified by an ICMP redirect
+  
+  - A static route is one added by hand
+    - E.g the `route` command in linux:
+      - `route add default gw 213.121.147.69`
+      - Adds a default route to a gateway
+  - Routing tables on most non-routers are trivial
+    - Set up "manually" by the operating system at boot time
+    - Often use DHCP
+    - In this context DHCP  is regarded as "setting by hand"
+  - However sometimes routing tables are not perfectly set up
+  
+  ![9c7a1207.png](:storage\\a2dddc3e-96a5-4ec5-990c-0e8b3964c15d\\9c7a1207.png)
+  
+  - H1 wants to send to H2 byt H1's routing table tells it via R2
+  - When the packet reaches R2 it should be routed out on the interface it came in on:
+    - So R2 know H1's table needs improving
+  - R2 forwards the packet to R1 and sends anICMP redirect to H1
+  - H1 hets the redirect and uses it to update its routing table
+    - The route will be marked D or M
+  - Next time H1 will be able to route directly to R1
+  - ICMP can modify routes in a small way, but it is not the main way the routes are set up
+  
+  ---
+  
+  ## Dynamic routing
+  - There are many routing protocols:
+    - Routing information protocol (RIP)
+    - Open shortest path first (OSPF)
+    - Border gateway protocol (BGP)
+    - Exterior gateway protocol (EGP)
+  - Each protocol is is suited for a certain purpose
+    - No single protocol fits all
+  - We start routing the top level, namely the Internet
+    - Local networks have different requirements
+  - The Internet is managed as a collection of Autonomous Systems (AS)
+    - Each administered by a single entity
+      - E.g a Univerity or company
+  - Between ASs run exterior gateway protocol (EGP)
+    - E.g BGP
+  - Each AS chooses a routing protocol to direct packets within itself
+    - These are typically interior gateway protocol
+      - E.g RIP and OSPF
+    - Large institutions might even run BGP and have their own internal ASs
+  
+  ---
+  
+  ## Distance-vector and link-state
+  - There are 2 main ways to route:
+    - Distance-vector protocols
+        - Usually subdivided into distance-vector and path-vector
+    - Link-state protocols
+    
+  ### Distance-vector
+  - Distance-vector gatheres collections (vectors) of hop counts (distances) from its neighbouring routers to selected destination
+    - From this it computes its own vector distances
+  - RIP is another example of distance-vector protocol 
+    - Occasionally used on smaller networks
+  - Simple but has problems
+  
+  ### Link-state
+  - Link-state gathers graphs of connectivityfrom all the routers (or some subnet) and uses this to compute its own map
+  - OSPF uses this
+  - More complext but has advantages
+  
+  - In either case routers periodically send all or parts of their view of the world to their neighbors
+    - Some protocols use broadcast, some use multicast
+  - A message would be "My view of the network is this..." in the case of link-state
+  - Or "I know a route to htis destination using this number of hops" for distance vector
+  - The routers can then update their tables in light of this
+  - For example in distance-vector
+    - Suppose a router knows a route (i.e the next hop router) for a given destination is n of hops
+    - It recieves a message from a neighbour that includes a route of m hops to that destination
+    - If (m + 1 < n) it can update its route to go through that neighbour, as that is a shorter route
+  
+  ---
+  
+  ## Slow convergence
+  - If a network changes (e.g a link is broken or a new one is made) it takes many interchanges of information for the routers to adjust to the new routes
+  
+  ![3d4431a9.png](:storage\\a2dddc3e-96a5-4ec5-990c-0e8b3964c15d\\3d4431a9.png)
+  
+  - R3 knows a route to network N of hop count 1
+  - After a break in the network R3 finds that the route no longer works
+  - So it needs to the send to its neighbours (R2) saying "no route to N"
+    - It uses a count of 16, which is interpreted as infinity
+  - R2 updates its routing table
+  - But R2 also gets a periodical update from R1 saying "route of 3 hops"
+  - So R2 now thinks the best route is via R1 (4 hops)
+  - And when R2 sends its periodical update message "4 hops", R1 and R3 now think there is a route via R2 of 5 hops
+  - After the next update R2 thinks there is a route via R3 of 6 hops
+  - And so on
+  - Eventually the hop count will reach 16 
+    - I.e no route so this route os dropped
+  - This is called the count to infinity problem
+  - If there was a valid route it might take a long time to converge on that route
+  - Meanwhile real data packets are bouncing forwards and back between the routers
+  - The logical information that distance vector provides is not enough
+  - RIP uses distance vector and this is a real problem for it
+    - RIP is only really used on small, stable networks
+  - Link state protocols converge faster, but need more complicated graph traversal algorithms to determine best routes
+  
+  ---
+  
+  ## Border gateway protocol (BGP)
+  - An AS ia denoted a 32 bit integer
+  - Top-level routers will need an entry in their tables for each AS
+  - The Univerity of Bath is within AS786, JANET
+  - All of JANET is on big AS:
+    - Routing within JANET is an internal issue
+    - JANET runs BGP internally 
+      - Bath has AS64857
+  - BGP allows policy based routing
+    - It's not just the shortest or fastest path that it chooses
+  - BGP is a path vector variation of distance vector:
+    - These have more information to spot loops that count to infinity
+  - ASs do not change very much so slow convergence is not too much od a problem
+  
+  ### Problems with BGP
+  - It is easy to trick BGP, for ecample it would be relatively easy to get BGP to transit data through an evil third party
+  - Parties can also block certain routes:
+    - For example Pakistan blocking youtube
+    - This caused a lot of issues
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

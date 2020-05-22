@@ -1,0 +1,454 @@
+createdAt: "2020-01-15T12:15:47.131Z"
+updatedAt: "2020-01-15T15:47:47.751Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Instritutions and Norms"
+tags: [
+  "CM30174"
+  "Computer_Science"
+  "Intelligent_Agents"
+  "University"
+]
+content: '''
+  # Instritutions and Norms
+  
+  ## Introduction
+  
+  ### Adjustable autonomy
+  - Cant design agents for all situations
+  - Cant design agents for future challanges
+  - Cant treat all situations the same
+  - Need to provide "just enough" guidance "just in time"
+  - Trade autonomy for achievement of goals
+  - Can ignore guidance and accept consequences
+  
+  #### What an agent aught to do:
+  - Procedural decision making = rigid + agile + safe
+  - Autonomous systems = flexible + resilient + dangerous
+    - Choose the correct ation for the situation
+      - Or least worst
+      - Or the right action judged by issues from an adjustable autonomy
+    - Accountability must remain with humans
+    - Continuous validation
+      - events -> institutions -> Forbidden | Permitted | Obliged
+    - Agent reasons about requirements to choose actions
+    - E.g institutions encode constraints
+      - Program chooses compliant action
+      - Program chooses non-compliant action
+    - Autonomy is an opportunaty not a threat
+  
+  #### Deontics = constraints on role actions
+  - An encelope of acceptable ations
+    - occured(event) <- observed(event) and permitted(event)
+    - remember(fact) <- occured(event) and permitted(event) and empowered(event)
+    - forget(fact) <- occured(event) and permitted(event) and empowered(event)
+    - fact = permission(event) | power(event) | obligation(action,deadline,violation)
+    - ... explicable decision-making
+  - With the autononmy to transgress:
+    - At a price... -> punishment
+    - ... but if enough to break the rules? -> change the rules...
+  
+  #### Habitable spaces
+  - Design patterns in OOP have origins in architecture: pattern languages for “habitable spaces”:
+  
+  > “Each pattern describes a problem which occurs over and over again...describes the core of a solution...in such a way that you can use this solution a million times over without ever doing it the same way twice.”
+  
+  - Normative institutional action spaces should be habitable for governors and governed
+  
+  #### Why mechanism design is not enough
+  - Game theory enables strategic analysis
+    - But games are (relatively) simple 
+  - Participants make bounded rational choices
+  - Negotiation:
+    - Typically one-shot encounters
+    - Components in more complex scenarios
+    - Coalition: typically created for single goal
+  - Need more complex frameworks for long term action:
+    - Virtual organisation:
+      - Collection of roles, subject to a rehulatory framework
+    - Virtual institution
+      - Pattern of (regulated/governed) actions, sanctions, roles and goals
+  
+  ### Institutions are essential
+  - Unconstrained behaviour is not freedom
+  - Institutions are:
+    - An abstract framework for interaction
+    - Foster achievement of common goals
+  - Agents can negotiate institutional change
+  - Instritutions can be repositories of emergent behaviour
+  - Instriutions can be formalized and reasoned about with limited computational resources
+  - Social institutions have a long history:
+    - Origins in sociaty or laws made by society
+    - So common that we are often unaware of them
+    - We play (or combine set of) roles
+  - Institutions offer a basis of trust and security
+    - Decrease uncertanty
+    - Reduce conflict of meaning
+    - Create expectations of outcome
+    - Simplify decision process
+  
+  #### Economic motivation
+  - **Norms** that guide and regulate behaviour
+  - **Scenes** whithin which agents may play
+  - **Roles** while interacting with another
+  
+  #### Social motivation
+  - **Role-rule** model for agent behaviour
+  - **Power** being ascribed to agents under a set of conditions
+  - **Episodes** in which agents interact
+  - **Dramaturgical model** that collects and organises episodes
+  
+  "Governing the Commons" organises several real world institutions and puts forwards a way to design institutions for human actors to deal with common pool resource problems
+  
+  ![4f70c2e2.png](:storage\\9f1365c1-b45c-42c0-8b42-f402efe85b1c\\4f70c2e2.png)
+  
+  ### Common pool resource
+  - “The Tragedy of the Commons” (Hardin 1968)
+  - "Goods" that contentional markets cannot handle:
+    - Shared resource
+    - Non incentive to retrict take
+    - But resource may be exhaustive
+    - E.g water, fish, bandwidth
+  - A generic problem without a generic solution
+  - “Governing the Commons” (Ostrom 1990) establishes foundations of “institutional patterns”
+  - Solutions characterized by:
+    - Novel institutional (norative) approaches
+    - Absence of money
+    - No compuers
+  
+  #### Onstrom's 8 principles of CPRs
+  1. Commons need to have clearly defined boundaries
+  2. Rules should fit local circumstances
+  3. Participatory decision making is vital
+  4. Commons must be monitored
+  5. Sanctions for those who abuse the commons should be graduated
+  6. Conflict resolution should be easily accessible
+  7. Commons need the right to organise
+  8. Commons work best when nested within larger networks
+  
+  ### Socio-cognative systems
+  - Society of programs and people + norms
+  - Human agents and software agents
+  - Physical twchnology intermediates (e.g phones)
+    - E.g games, museum guides, legal process
+  - Nature of tragedies of the digital commons
+  - Mechanical turkers:
+    - Even lower rates
+    - Peer support at scale
+  - Anything can be crowd-sourced
+  - Need CPR solutions for socio-cognative systems
+  
+  ---
+  
+  ## Agents and institutions
+  
+  ### What is an agent
+  - An agent is a computer system capable of autonomous action in some environment
+    - The situated agent
+  
+  ![b8262f3f.png](:storage\\9f1365c1-b45c-42c0-8b42-f402efe85b1c\\b8262f3f.png)
+  
+  - An agent can be more useful in the context of others
+    - Can concentrate on tasks within competence
+    - Can delegate other tasks
+    - Can use ability to communicate, coordinate and negotiate
+  
+  ![c84a63db.png](:storage\\9f1365c1-b45c-42c0-8b42-f402efe85b1c\\c84a63db.png)
+  
+  ### What is an institution
+  - A set of rules (norms)
+    - Capable of describing correct and incorrect action
+    - Obligations aquired through correct action
+    - Sanctions applied for incorrect action
+    - While maintaining a record though its internal state
+  - Interprets some but not necessarily all of an agent's actions against a set of notms
+    - The institutionally-situated agent
+  
+  ![3b315dff.png](:storage\\9f1365c1-b45c-42c0-8b42-f402efe85b1c\\3b315dff.png)
+  
+  #### Examples of institutions
+  - Institutions are everywhere—formal and informal, legal and social
+  - Conversation, negotiation, arguments
+  - Lecture, seminar, problem classes
+  - Shop: served vs self-service
+  - Business: sole-trader, partnership, Ltd. company, plc, cooperative, charity, non-profit organization
+  - Market: stock market, energy trading, brokering (stocks, flights), auction
+  
+  
+  ### What is a norm
+  - Informal or formal constraint on action
+  - A principle of right action binding upon the members of a group and serving to guide, control, or regulate proper and acceptable behaviour
+  - Norms emerge from agent interaction -> convention
+  - Agents revise norms when they dont work
+  - Agents use instritutions to govern the revision
+  - Objective is reguation not regimentation
+  
+  #### Norm categorization
+  - **R-norms**:
+    - Rule norms
+    - Imposed by an authority
+    - E.g law
+  - **S-norms**
+    - Social norms
+    - Based on custom or convention
+  - **M-norms**
+    - Moral norms
+    - Appeal to individual concience
+  - **P-norms**
+    - Prudential norms
+    - Rational choices
+  - MAS usually have r- and s-norms
+  - Humans comply because of:
+    - Fear of authority
+    - Rational appeal of the norms
+    - Feelings such as shame, enbarrassment and guilt from non-adherence
+  - Why should an agent comply?
+  
+  #### Examples of norms
+  - The distribution of radio frequencies between bidders should take into account their established interests
+  - If estimated fish stock is x tonnes and variable mass is y tonnes => catch should be < (x-y)/(number of fishermen)
+  - A front office trader should not carry out settlements
+  - Poluter pays? Kyoto protocol and carbon credits
+  - Don’t let market players design your mechanism
+  
+  #### Kinds of norms
+  - **Abstract**: express values
+    - What ought (not) to be - states
+    - But not how to achieve/avoid them
+    - E.g liberty
+  - **Concrete**: obligations, permissions or prohibitions on actions subject to circumstance
+  - **Constitutive**: add/remove institutional facts depending on presence/absence of institutional fact
+  - **Regulating**: requires explicit enforcement
+    - Agent goals affect complicance decisions
+    - Transgression may result in sanctions
+  - **Regimenting**: contraints on behaviour
+    - Only norm-compliant actions are possible
+    - Transgression is impossible
+  
+  ---
+  
+  ## Case study electricity markets in UK
+  
+  ### Pre-privatisation
+  - Origionally, electricity generation was controlled by a single (nationalised) organisation:
+    - Thr Central Electricity Generating Board (CEGB)
+    - This owned and controlled the power stations and the means of distribution (the national grid)
+    - Domestic distributions was controlled by local monopolies
+  - Privatisation split the CEGB up into 4 power generating companies (PowerGen, Nuclear Electric,...)
+    - One distribution company (National Grid Company)
+    - There were also several smaller generators
+    - The NGC bought electricity and distributed to the domestic distribution companies
+  
+  ### NGC and the "pool"
+  - The pool operated on a 24hr basis
+    - Each generator offered to supply x Megawatts for each period
+    - NGC ranked the bids by price (lowes to highest)
+    - Every day at 17:00 it accepted as many of those bids as needed to meet predicted energy requirements
+    - All accepted bids were paid at the price of the highest accepted bid
+  - Consequently, the pool could be manipulated by the largest generators who could predict the bid cut-off
+    - Thus put forward over-priced bids that were ranked around the predicted national energy requirement
+  
+  ### New Electricity Trading Arrangements (NETA)
+  A four phase market (see www.ofgem.gov.uk) started March 27th 2001:
+  - **Network access rights:** auction bundles of tickets (1MegaWatt (MW) per half-hour period) at regular intervals
+  - **Power/access trading**: unfacilitated bi-lateral generator / distributor trades (inform system operator (SO)) of 0.5hr periods from 6 months to 3.5hrs before dispatch (gate closure). Access trading unimplemented. Emergence of power exchanges.
+  - **Balancing market**: 3.5hr period prior to dispatch, controlled by the System Operator (National Grid Company (NGC)). Objectives: prevent thermal overload; prevent dynamic instability. Actions: back-off generation; shed load, increase generation; absorb excess.
+  - **Settlement**: (www.elexon.co.uk) distributors pay generators, NGC pays additional generation, compensates backed-off generation, distributors/generators pay penalties for being short/long
+  
+  #### NETA analysis
+  - Secondary market enables forward and futures trading
+    - Permits entry to market of traders without a physical position, e.g. Enron.
+  - Transmission costs are not integrated
+    - Too complicated for timescale; may be too unpredictable?
+  - Oriented to large-scale power trading (>5MW), inhibiting the participation of co-generation facilities and green power sources
+  - Under the pool system the nuclear generators always bid low, because switching nuclear plant on and off is a time-consuming and costly process. But, because of the pool, they were remunerated at a high level. Under NETA this was not possible.
+  - Significant modification needed to accomodate trading and generation at the domestic level.
+  - High penalties for being “short” or “long”, i.e. not having tickets to match generated output.
+  
+  #### NETA outcomes
+  Achieved primary objectives:
+  - Wholesale price of electricity reduced
+  - Price manipulation less feasible
+  
+  Unintended consequences:
+  - Nuclear generation capacity bankrupted—because of reduction in wholesale price
+  - Green generation rendered non-viable—because of penalties
+  
+  ### BETTA
+  - British Electricity Trading and Transmission Arrangements:
+  - Go-live April 1, 2005
+  - Introduced transmission charging
+  - The Transmission Network Revenue Restriction (placed on the National Grid Company) states that:
+  > The licensee shall use its best endeavours to ensure that in any relevant year the revenue from its transmission network services shall not exceed the maximum revenue, which shall be calculated in accordance with the following formula:
+  
+  ![307a0c84.png](:storage\\9f1365c1-b45c-42c0-8b42-f402efe85b1c\\307a0c84.png)
+  
+  ---
+  
+  ## Case study complimentary currencies
+  
+  ### The (ab)use of money
+  - What does money do?
+    - Metric for value comparision
+    - Efficient medium of exchange
+  - Issues arose
+    - Store of value
+    - Tool speculation
+  - In 1980s 40% of currency trading was to support international trade
+    - By the end of the 1990s this had halled to 2% while the volume had increased significantly
+  - Colume of hoarding and speculation domination creating
+    - Volitility
+    - Instibility
+  - In financial markets with significan consequences for economies and local markets
+    - “Instability is cumulative, so that eventual breakdown of freely floating exchanges is virtually assured.”
+  - Alternatively the use of complimentary currencies:
+    - Encourages local trading
+      - Necessity when liquidity is low
+      - liquidity is created at the point of trade
+  
+  ### Characterisitics of complimentary currency models
+  **Benefits**
+  - No need for central authority to guarantee or manage (backed currencies)
+  - Mutual credit systems (no shortage of currency)
+    - Encourages cooperation
+  - Generates more transations leading to greateer satisfaction and creating more trading relationships
+  
+  **Issuing currancy**
+  - “fiat” or mutual credit or commodity-backed
+  - Redeemable for good or service
+  
+  **Assigning value**
+  - Hour of service or direct correspondence with a fiat currency or goods/services themselves define value
+  
+  **Exchange rates**
+  - Fixed or negotiable?
+  - 1h of person A = 1h person B?
+  
+  **Structural incentives**
+  - CCs do not offer interest
+    - Encourages investment in production
+    - Less hoarding
+    - Trade and cooperation: “money” supply plentiful
+  - Demurrage (Silvio Gesell): negative interest to disincentivise to hoarding... egg currency
+  - Less susceptible to inflation than fiat.
+  
+  
+  - Working systems: Ithaca HOURS; LETS; Time Dollars; e-gold
+  - Combine with distributed ledgers: basis for data-driven/sharing economy?
+  
+  ---
+  
+  ## Formal model of institutions
+  
+  ### Constructing normative models
+  - An institutional model is:
+    - A set of institutional states that evolve
+    - In response to institutional events
+    - Where a state is a set of institutional facts
+  - How to create institutional facts
+    - **Brute facts** - Observed in the physical world
+    - **Institutional facts** - Not observable, have meaning only inside the institution
+  
+  ### States, events and runs
+  - Model the workld using states and events
+    - Events change the state of the world (encironment)
+    - Capture with notion of run:
+  
+  ![6ceda40a.png](:storage\\9f1365c1-b45c-42c0-8b42-f402efe85b1c\\6ceda40a.png)
+  
+  - Model institutional world using states and events:
+    - Events change the state of the institution
+    - Events with notion of run
+  
+  ![fe05cf64.png](:storage\\9f1365c1-b45c-42c0-8b42-f402efe85b1c\\fe05cf64.png)
+  
+  - Does α<sub>i</sub> (physical) count-as α<sub>i</sub>' (institutional)?
+  - Is the agent institutionally empowered to change the (institutional) state?
+  
+  ### Multiple individual institutions
+  - Several institutions may governa an agent simultaniously:
+  
+  ![b2f7f986.png](:storage\\9f1365c1-b45c-42c0-8b42-f402efe85b1c\\b2f7f986.png)
+  
+  - Each institution interprets the action in a different way
+    - An instritution may have no interpretation for an action
+  - Each institution has different competences
+  - Multiple instritutions model complex social contexts
+  - May create conflicting institutional states
+    - **Weak conflict**: permission/prohibition
+    - **Stron conflict**: obligation/prohibition
+  
+  ### Interacting institutions
+  - An action  I<sub>1</sub> brings about a change in I<sub>2</sub>
+    - Graduation brings a collection of student loan
+    - UK pollution legislation contravenes EU directive
+  - Interacting institutions interpret (other) institutional interpretations
+  - Different qualities:
+    - First-order: norm detatchment in I<sub>1</sub> causes norm detatchment in I<sub>2</sub>
+      - Allows institutions to observe actor complience
+    - Higher-order: norm detatchment in I<sub>1</sub> casuses meta-norm detatchment in I<sub>2</sub>
+      - Allows institutions to observe institutional compliance
+  
+  ### Events and states
+  - Events bring avout changes in state:
+    - Domain events (exogenous): Observed in environment
+    - Institutional (internal): generated by the institution
+  - Events may generate other events: conventional generation
+  - State is a set of facts:
+    - **Permission**: ability to carry out some action without receving a sanction
+    - **Obligation**: to do an action or achieve a state before a deadline
+    - **Power**: capacity to affect the state through action
+    - **Domain facts**: for the instituiton in question
+  
+  ### Conventional generation
+  - "Doing X [in A] counts as doing Y [in B] iff Z"
+  - Allows us to abstract institutional actions from real ones
+    - “Saying ‘aye’ in an auction counts as an offer to buy some goods at the current price”
+    - “Clicking ‘buy it now’ counts as an offer to buy some goods at a given price on Amazon”
+  - Generation is atomic: generated events occor at the same instant as the trigger event
+  
+  ### Regulation
+  - Not all sequences of actions are desirable
+  - Regulations identify "bad" paths of events
+  - Three regulatory mechanisims:
+    - **Obligation**: "You should do X before Y occurs"
+    - **Permission**: “You may do X” absence ⇒ prohibition
+    - **Prohibition**: “You may not do X” absence ⇒ permission
+  - Only need obligation + one other in practice
+  - Violation when rules are broken
+    - Failure to perform an action before a deadline
+    - Performing action without permission
+    - Performing action that is prohibite
+  - Autonomy allows agent to:
+    - Take prohibited actions
+    - Take actions that are not permitted
+    - Ignore obligations
+  
+  ### Formal model
+  
+  #### What do we need for a formal model?
+  - Domain facts
+  - Institutional facts
+    - Permission/prohibition
+    - Obligation
+    - Power
+  - Conventional generation (relation): counts-as
+  - State change (relation): add/delete facts
+  - Use four disjoint sets for facts:
+    - Domain (D)
+    - Permission (P)
+    - Obligation (O)
+    - Power (W)
+  - Use the functions for relations
+    - Generation (G): implements conventional generation
+    - Change (C): Implements constitutive norms
+  
+  #### Specification
+  ![5ebd58af.png](:storage\\9f1365c1-b45c-42c0-8b42-f402efe85b1c\\5ebd58af.png)
+  
+  - Where institutional facts (F) are power (W) + permission (P) + obligation (O) + domain facts (D)
+  - where C<sup>↑</sup> (X, e) and C <sup>↓</sup> (X, e) resp., contain those fluents which are added/deleted by the event e in any state matching X
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

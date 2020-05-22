@@ -1,0 +1,174 @@
+createdAt: "2020-01-11T19:30:36.956Z"
+updatedAt: "2020-01-11T21:06:29.221Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Advancement of Safety in the Aviation Industry"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # Advancement of Safety in the Aviation Industry
+  
+  ## Introduction
+  - Arguably one of the leading safety critical operations in every day life
+  - UK airspace alone handled over 2,270,000 flights in 2016 
+  - On it’s busiest day NATS handles over 8800 flights - in an airspace that is renowned for its small size and saturation
+  - FAA reports over 15,631,000 (UK is about 57% the size of California)
+  - 
+  ---
+  
+  ## Hazards
+  - Forign object debris (FDO)
+  - Weather
+  - Misleading equiptment and information
+  - Human /team factors
+    - Fatigue
+    - Training 
+    - Workload
+  - Animals (namely birds)
+  - Birds
+  - Pilots and passangers
+  - Governments and militaries
+  
+  **Despite these**
+  - Air travel is one of the safest methods of travel available today
+    - In terms of person miles
+  - For every one million departures of scheduled commercial flights, 2.1 of these resilted in what would be deemed as an accident in 2016
+  - In ~34.9 million departures, there were only 182 fatalities
+  - By compaerison in 2014, there were only three accidents per million deprtures, but 911 fatalities
+    - MH370 and MH17 made up 537 of this total.
+  
+  ---
+  
+  ## Technological advancements
+  - More reliable mechanical parts
+  - Fly-bu-wire automation
+    - Reduced workload, flight envelope
+  - Air France Flight 447
+    - Inaccurate instrumentation
+    - Stall situation - possibly a flat stall
+    - Lack of comprehension, missunderstanding or ignoring warnings
+    - Some have blamed dual independent sidesticks
+  - Extensive design and development
+    - De Havilland Comet
+  - Tools for aiding awareneess
+    - GWPS
+  - Redundency
+    - Systems on aircraft are designed to hace redundancy
+      - Often a significant reliance on these
+    - Doors - open inwards instead of outwards
+    - Fly-by-wire operates by having a number of systems that all hacve to "agree" before an action occurs, as well as backups.
+      - How much pilots can override differs
+    - Airbus uses "triple-redundency" and systems provided by different companies
+      - Needed as there is no fail-safe mode in flight
+  
+  ---
+  
+  ## Boeing 737 MAX
+  - Successor to the successful 737 NG and 737 Classic series'
+  - The 737 is the best-selling commercial airliner in history
+  - But 737 MAX may have had too much tech
+  - Ethiopian Airlines Flight 302 (2019) and Lion Air Flight 610 (2018)
+  - MCAS - Maneuvering Characteristics and Augmentation System
+    - Fly-by-wire rule (software) designed to make the MAX variants of the 737 exhibit similar handling characteristics of the previous NG variants, especially at low speeds.
+    - Some test pilots wanted this to be a physical system, but Boeing insisted on software.
+  - Similar characteristics saves money for airlines and Boeing - it allows pilots with a “type rating” on the old variant to fly the new ones as well.
+  - The new, more powerful CFM LEAP-1B engines and their mountings contribute to the aircraft continuing to pitch up at high angles of attack - something MCAS compensates for
+  
+  ### Fatal flaws
+  - When activated, this system directly engages the control surfaces on the aircraft. It could pitch the nose down without the pilots being able to override it and could do this in large increments and repeatedly.
+  - The system is fed by only a single Angle of Attack sensor - single point of failure.
+  - The few safety features that were in place were interdependent on one another and inoperable on the doomed flights.
+  - The system could not be independently switched off and the manual system is sometimes not powerful enough to override the MCAS.
+  - When changes were made to the system late-on to make it operate under normal Gforces, the FAA did not analyse it for safety, as it still operated the same in extreme conditions
+  - The system moves the control surfaces by up to four times the amount stated in the original safety analysis conducted by the FAA
+  - The aerodynamic forces mean that pilots quickly become exhausted trying to counteract it (the 737’s flight controls is a full-sized yoke between the legs)
+  - They didn’t account for humans:
+    - It was designed with the assumption that human pilots reaction time to any activation would be under three seconds
+    - The FAA characterised it as part of a stall protection system, but Boeing neglected to talk about it in manuals or training as it considered it part of the standard flight control system - nobody knew about it
+    - The flight simulators for training couldn’t accurately replicate it
+  - Boeing were heavily criticised for the lack of testing and putting profits above safety.
+  
+  ### Contributing factors:
+  - Lion Air Flight 610 (Final Report) 
+    - Newly replaced and mis-calibrated Angle of Attack sensor.
+    - Breakdown in Crew Resource Management - ineffective communication by the captain on what the first officer needed to do (more on this later)
+    - Delays in following checklists
+  - Ethiopian Airlines Flight 302 only has a preliminary report, so nothing concrete yet
+    - Initial findings suggest that MCAS was involved.
+    - Others have suggested a bird strike.
+  
+  ### Moving forward
+  - Boeing have implemented a number of improvements to MCAS since the incidents:
+    - Comparison between AoA sensors - removes the single point of failure.
+    - Ensured that MCAS can never fully override the pilots.
+    - Prevent MCAS from causing multiple inputs for a single event.
+  
+  ---
+  
+  ## Not just aircraft
+  - Shanwick and Gander Oceanic Control Areas - the airspace over the North Atlantic
+    - Bordered by Reykjavik, New York and Santa Maria
+  - Traditionally, no radar coverage - each day the relevant authorities publish “North Atlantic Tracks” (NATs) for transit across the ocean
+    -  These are one way, traffic flows East - West in the morning and West to East in the evening
+  - Aircraft separated “procedurally” based on time, distance, flight level and speed
+    - Very limited scope for deviation from the track system
+    - Large separation margins, position reports accurate to around 14 minutes using ADS-C
+    - Deviation due to misunderstanding instructions or human error common and very difficult for controllers to spot.
+  - Aircraft Communications Addressing and Reporting System (ACARS) has already been widely adopted to replace HF radio communications and automate certain aspects of the transit
+  - New satellite-based Automatic Dependent Surveillance-Broadcast (ADS-B) system debuted this year.
+    - Allows position reports accurate to a few seconds.
+    - Allows greatly reduced separation between aircraft.
+    - Provides scope for deviation from the established track system.
+    - Greatly improves safety - controllers can spot deviation from cleared flight levels and routes much earlier.
+  
+  ---
+  
+  ## The Deadliest Accident In Aviation History
+  - September 11 2001 (2900+ fatalities) doesn’t count.
+  - March 27 1977, Los Rodeos (Tenerife North), a small regional airport.
+  - Two Boeing 747’s, KLM4805 & PAA1736 carrying 248 and 396 persons respectively
+  - KLM had just taken off, when it collided with the Pan Am on the runway.
+  - Everybody on the KLM flight perished, 61 survived from the Pan Am aircraft.
+  - Both aircraft were bound for Gran Canaria, which had just been bombed by a separatist movement.
+  - They were forced to divert to Tenerife, which was not designed to accommodate them
+  -  Aircraft were parked along the parallel taxiway, so departures had to backtrack the runway from an intermediate point.
+  -  Airport was fogbound.
+  -  Both aircraft backtrack Runway 30.
+  -  KLM turns 180 at the end, Pan Am instructed to vacate at intersection C3
+  
+  ![b2325542.png](:storage\\e69510a2-0f4f-4013-9942-de1c7a28c373\\b2325542.png)
+  
+  ### Cause
+  - Root cause: The KLM proceeded to takeoff without ATC Clearance
+  - BUT: It would be a massive oversimplification to just blame the KLM crew
+    - Multiple simultaneous transmissions made it difficult to hear messages
+    - Ambiguous Radiotelephony by both the control tower and KLM
+    - Pan Am had missed the intersection - poor runway markings
+    - High traffic density at the airport - putting additional pressure on all parties
+    - Extra fuel on the KLM
+    - Cockpit procedures and challenging superiors - a flawed organisational structure, KLM captain had been a training captain for 10 years
+  
+  ### Responese
+  - Overhaul and further standardisation of radiotelephony
+    - Largely controlled by the FAA and ICAO.
+  - Crew Resource Management
+    - Cockpit voice recorders played a massive part in this - showed inability to respond appropriately.
+    - Flattening hierarchies and working relationships - Human factors and performance
+    - Making the best use of available resources and cooperation.
+  
+  ---
+  
+  ## Importance of standardisation
+  - A difference in procedures
+    - TCAS - Gave the flight crews instructions opposite to that of ATC
+    - TCAS - DHL pilots respected TCAS over ATC, contrary to the Russian crew (immediate cause)
+  - As a result, recommendations were made to standardise TCAS responses and controller staffing procedures
+    - Especially given a near-miss following conflicting instructions in Japan not two years prior
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,131 @@
+createdAt: "2020-05-12T15:08:50.525Z"
+updatedAt: "2020-05-18T12:27:59.588Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Behavioural Robotics"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Behavioural Robotics
+  
+  ## History of AI
+  - Early 20c Turing invents CS to solve AI
+  - Dartmouth Conference (1956) John McCarthy, Marvin Minsky, Nathaniel Rochester & Claude Shannon proposed, Alan Newell, Herbert Simon & Oliver Selfridge (among others) attended
+  - Proposal used the phrase “artificial intelligence”, apparently for the first time
+  
+  ### The Dartmouth Proposal
+  - We propose that a 2 month, 10 man study of artificial intelligence be carried out
+  - The study is to proceed on the basis of the conjecture that every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it
+  - An attempt will be made to find how to make machines use language, form abstractions and concepts, solve kinds of problems now reserved for humans, and improve themselves
+  - The summer vision project is an attempt to use our summer workers [11 UGs] effectively in the construction of a significant part of a visual system
+  - The particular task was chosen partly because it can be segmented into sub-problems which allow individuals to work independently and yet participate in the construction of a system complex enough to be real landmark in the development of "pattern recognition"
+  - The primary goal of the project is to construct a system of programs which will divide a vidisector picture into regions such as likely objects, likely background areas and chaos
+  - We shall call this part of its operation FIGURE-GROUND analysis
+  - It will be impossible to do this without considerable analysis of shape and surface properties, so FIGURE-GROUND analysis is really inseparable in practice from the second goal which is REGION DESCRIPTION
+  - The final goal is OBJECT IDENTIFICATION which will actually name objects by matching them with a vocabulary of known objects.
+  
+  ### The CMU Perspective
+  - Physical Symbol System Hypothesis (Newell & Simon 1963) “A physical symbol system has the necessary and sufficient means for general intelligent action
+  - This implies
+    - Human thinking is a kind of symbol manipulation (because a symbol system is necessary for intelligence)
+    - Machines can be intelligent (because a symbol system is sufficient for intelligence)
+  
+  ---
+  
+  ## Context for AI
+  - Initial model of AI assumed a symbolic model
+  - The assumption was that the world would be perceived through a set of perception blocks that would yield predicates
+  
+  ![0883682a.png](:storage\\097d5d6b-2fa9-476a-bb71-444583dc1bae\\0883682a.png)
+  - The predicates would be acted on symbolically using logic in the cognition block
+  - This would result in a set of actions being generated that would result in actions in the world
+  
+  ---
+  
+  ## Behavioural Approach
+  - First proposed in 1986 by Rodney Brooks 
+    - Main idea was presented in its crux by Brooks earlier in a seminar at MIT (cf: Cambrian Intelligence, Brooks)
+  - This robot was based on a **layered architecture** that was quite different from the “perception”,”cognition” and “action” sequence
+  - The main idea is to obtain a series of “functions” or ”tasks” that the robot was required to perform
+  - These were directly obtained and implemented instead of requiring an explicit “cognition” stage to control the method
+  - Cognition was thought to be an external precept observed by an external observer
+  
+  ![e7856ab6.png](:storage\\097d5d6b-2fa9-476a-bb71-444583dc1bae\\e7856ab6.png)
+  
+  ---
+  
+  ## Subsumption architecture
+  - The traditional decomposition for an intelligent control system was to break the task into a chain of information processing modules
+  - In the subsumption architecture the decomposition is in terms of behavior generating modules each of which connects sensing to action
+  - Layers are added incrementally, and newer layers may depend on earlier layers operating successfully but do not call them as explicit subroutines
+  
+  ![d38c6106.png](:storage\\097d5d6b-2fa9-476a-bb71-444583dc1bae\\d38c6106.png)
+  
+  - Control is layered, the higher layers subsume the roles of lower level layers when they wish to take control, the system can be partitioned at any level and the lower layers form a complete operational control system
+  
+  ![bf7b5b58.png](:storage\\097d5d6b-2fa9-476a-bb71-444583dc1bae\\bf7b5b58.png)
+  
+  - A level 0 control system that demonstrates the ability to move and not collide with an object
+  
+  ![a9ca4707.png](:storage\\097d5d6b-2fa9-476a-bb71-444583dc1bae\\a9ca4707.png)
+  
+  - Each module in Brooks 1986 is designed as a finite state machine
+  - Output message is computed as a function of the input buffers and variables
+  - A new specified state is then set
+  - Output signals can be inhibited and input signals can be suppressed
+  
+  ![22dcb6fd.png](:storage\\097d5d6b-2fa9-476a-bb71-444583dc1bae\\22dcb6fd.png)
+  
+  - The motor module communicates with the actual robot. The module can send and receive commands to and from the physical robot
+  - The sonar module takes a vector of sonar readings, filters them for invalid readings and produces a robot centered map of obstacles
+  - The collide module monitors the sonar map and if it detects objects dead ahead then it signals halt to the motor module
+  - The feelforce module sums the results of considering each detected object as a repulsive force, generating a single resultant force
+  - The runaway module monitors the 'force' produced by the sonar detected obstacles and sends command to the motor module if it ever becomes significant
+  
+  ![954e3459.png](:storage\\097d5d6b-2fa9-476a-bb71-444583dc1bae\\954e3459.png)
+  
+  - A level 0 system augmented with a level 1 system that has the ability to wander and explore a room
+  
+  ![1ae28f89.png](:storage\\097d5d6b-2fa9-476a-bb71-444583dc1bae\\1ae28f89.png)
+  
+  ---
+  
+  ## New AI
+  - **Functionalist Assumption**: All we care about is producing intelligent behaviour
+  - Physical Symbol System Hypothesis (Newell & Simon 1963); Build thinking first
+  - Consciousness as epiphenomena (Churchland 1988, Brooks 1991)
+  - We’ll build it if we need it
+  
+  ### Newer New AI
+  - Functionalist Assumption: All we care about is producing intelligent behaviour
+  - Physical Symbol System Hypothesis (Newell & Simon 1963). Build thinking first
+  - Consciousness as epiphenomena (Churchland 1988, Brooks & Stein 1993)
+  - We’ll build it to see if we need it
+  
+  ![111b661a.png](:storage\\097d5d6b-2fa9-476a-bb71-444583dc1bae\\111b661a.png)
+  
+  - Building brains for bodies
+  
+  ---
+  
+  ## Behaviour
+  - How do we realize behavior?
+  - In some cases such as avoiding collision it could be easy
+  - In some cases it could be very challenging
+  - For instance, how would we be able to realize the behavior of curiosity in a robot?
+  - A recent work by Pathak et al (ICML 2017) nicely shows how to realize this behavior
+  
+  ### Realizing curiosity behavior
+  - The main idea in the work is humans are curious by something that surprises them
+  - How do we know if some content is surprising
+  - One can try to predict the content and if the actual content is very different then it would be surprising, and the agent learns to explore that environment
+  - The authors extended their work by doing a large-scale study of curiosity and showed that this would be applicable for 54 Atari games and also for robots
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

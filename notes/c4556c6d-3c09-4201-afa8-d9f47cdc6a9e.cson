@@ -1,0 +1,103 @@
+createdAt: "2020-05-14T16:52:22.948Z"
+updatedAt: "2020-05-14T17:26:25.185Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Communication in Agents"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Communication in Agents
+  
+  ## Why Do We have Language?
+  - This lecture is based on the paper by Caˇce and Bryson (2007) ‘Agent ˇ Based Modelling of Communication Costs: Why Information Can Be Free’
+  - Language evolved as a means of communication
+  - There are works (Dennet, 1996, Chomsky, 1980) that stress the utility of language in thinking
+  - Dunbar (1993) views it as a social bonding process, to ensure stability of large social groups
+  - For the purposes of this lecture, we will focus on the aspects related to communication
+  
+  ## Communication in Agents
+  - Purely, viewing it as a means of communication, would language be a good thing or a bad thing?
+  - Communication can be seen as a form of altruism and co-operation
+  - Through communication we could be seen to share information with competitors
+  - We believe that communication should be beneficial
+  - The paper by Caˇce and Bryson (2007) provides ABM based model ˇ that shows communication is a good thing
+  
+  ## Communication as Signaling
+  - Communication can be viewed as signaling between a sender and receiver and studied
+  - Assume that not signaling (or communicating) has some effect on the sender and receiver’s fitness, that is obtained as nr for the receiver and ns for the sender
+  - Signaling will then be adaptive (likely of being selected as an action) if the following holds:
+    - fr > nr and c + fs > ns
+  - Here c is assumed to be the cost for signaling
+  
+  ![109558d0.png](:storage\\c4556c6d-3c09-4201-afa8-d9f47cdc6a9e\\109558d0.png)
+  
+  - Viewing it as signaling allows for more ideas to be examined (that have been discussed but not analysed in the work of Caˇce and Bryson ˇ (2007))
+  - In a cooperative setting, sender and receiver would gain from an accurate response to an honest signal
+  - In case of competition, the signaler may gain more by manipulating the receiver to a response that may not be accurate (try to pretend to be fitter to a strong adversary)
+  - One solution proposed (by Zahavi, Maynard-Smith and Harper) is to make signaling costly, so that weak animals cannot produce them
+  - Other solutions are to introduce penalties for lying
+  - Other ideas that have been considered are to consider ‘reciprocal altruism’
+    - This considers repeated interactions in which agents take turns as signalers and receivers
+  - This is possible if agents are endowed with memory that allows them to remember which agents are likely to co-operate
+  - It is also possible to consider relatedness of receivers to the signaler
+  - Hamilton (1964) suggests a formalism to obtain the relation of fitness f of an altruistic act to c, its cost to the actor, relatedness r of the recipient, and the benefit b they have from it. This is given by:
+    - f = c + P(r × b)
+  - Kin selection implies agent can distinguish between related and not related agents
+  
+  ---
+  
+  ## Modeling basic framework in ABM
+  - In the model the environment consists of 101x101 patch square on a torus space
+    - This means that agents that walk off the edge of the square will reappear on the opposite edge
+  - The agents move round, eat and reproduce
+  - At every time-step they lose a small amount of their energy and if their energy level drops under 0 they die
+  - The environment grows food, i.e. every patch grows food with a probability P
+  - For example, with a probability of 0.016 and a field size of 10201 (101 × 101), around 163 food-units will be added to the environment
+  - A patch can only contain one unit of food
+  - The agents also reproduce
+    - When an agent reproduces its energy is divided between it and its offspring
+  - The new agent gets 20% of the parents energy and is born in the same patch as parent
+  - The agents can walk. 
+    - Prior to taking a step the agents make a random turn, then they take a step of length l, where l is given by l = (0.7/n) 0.3 where n is a random value between 0 and 1 (not equal to 0)
+  - The knowledge distribution and communication is modeled as follows: A second type of food is added to the environment
+  - This special food comes in 6 varieties and has twice the calorie value of the regular food
+  - In order to collect any of the varieties, the agent needs specialized know how
+  - There are two ways to obtain the knowhow to eat one of the special food- types. Every agent has a small (5%) chance of knowing how to eat any one of the 6 items at birth
+  - At every time-step, all the communicating agents pick one thing they know and tell all their neighbors
+  - The knowhow itself is implemented as a 6-bit string. For example, an agent with string [0 1 0 0 1 0] knows two things
+  - The pseudo-code for agents becomes:
+    - take-credit
+    - if (random energy) > 30 [ offspring ] set energy (energy - 1)
+    - move
+    - set age (age + 1)
+    - if (breed = talker) [ communicate ]
+  - At every time-step all the agents go through this routine, then the food in the environment is grown as described earlier
+  - To prevent the special food from clogging up the environment when there is not enough knowhow among the agents to eat it, the regular food can overgrow the special food
+  - The pseudo-code for the environment is: for all patches:
+    - fill patch with special food with probability Pspecial
+    - fill patch with regular food, with probability Pregular
+  - In this model the cost of communication is not given but emerges from the spatial interactions between the agents and their environment
+  - If an agent shares food-information with its neighbors then it will have to deal with increased food competition
+  - Both communication and competition take place locally
+  - The question is which will be of greater influence: competition between nearby (possibly related) individuals or the positive effect of altruism towards nearby kin
+  - In the model the costs of the communication are caused solely by competition
+  - The fitness of agents depends on the amount of food they are able to collect, so the ratio between the two types of agents is a direct measure of the success of their strategies
+  - The results in the graph shown next suggest that the communicating agents have a clear advantage, and this advantage is larger if more food that requires knowhow is available
+  - Both the agent types learn during their lifetime, but the talker agents get a head start
+  - The offspring of communicating agents on average know how to eat a little more then one type of food
+  - The new talker agents are ‘born’, instantiated on the same spot as their talker parent. In a sense one could say the agents profit from parental investment
+  - Without the parental investment, is communication still adaptive?
+  - If the new agent is born at a random location in the field, the benefit from having a talker parent disappears.
+  - However the speed with which the talkers die out is lower than the speed with which the non-communicating agents died out.
+  
+  ![7f9a8bd5.png](:storage\\c4556c6d-3c09-4201-afa8-d9f47cdc6a9e\\7f9a8bd5.png)
+  
+  ![60012c87.png](:storage\\c4556c6d-3c09-4201-afa8-d9f47cdc6a9e\\60012c87.png)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

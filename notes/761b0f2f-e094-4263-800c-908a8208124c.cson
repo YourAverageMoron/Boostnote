@@ -1,0 +1,83 @@
+createdAt: "2020-01-12T11:07:18.296Z"
+updatedAt: "2020-01-12T12:17:50.250Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Challanger Case Study"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # Challanger Case Study
+  > January 28 1986
+  
+  **3 part system:**
+  - Orbiter: Rockwell
+  - Tank: Martin Marietta
+  - Solid Rocket Booster (SRB): Thiokol
+  
+  Already done 9 missions since 1983
+  7 crew members
+  Exploded 73 seconds into its flight
+  
+  ---
+  
+  ## Accident and the investigation
+  - NASA managers claimed there was a 1 in 100,000 chance of  catastrophic failure aboard the shuttle
+  - Feymann descovered that NASA's own engineers estimated the change of a catastrophe to be closer to 1 in 200
+  - During the investigation Sally Ride told Feynman that the O-rings were not tested at temperatures below 10°C
+    - [YouTube](https://www.youtube.com/watch?v=MKG4bvZGWag)
+    - 16:20 - investigation
+  
+  ### Results after several months
+  - The challanger accident was caused by a failure in the O-rings sealing a joint on hte right solit rocket booster
+  - Allowed pressureized hot hasses and eventually flame to "blow-by" the O-ring and make contact with the adjacent external tank
+    - This caused structural failure
+  - The failure in the O-rings was attributed to a faulty design whos performance could be too easily compromised by factors including low temperature on the day of launch (0°C)
+  
+  **Night before the launch:**
+  - Thiokol engineers re-expressed their concerns about the effect of low temperatures on the resilience of rubber O-rings
+  - Recommended a launch posptponement
+  - There was no backup if both primary and secondary O-rings failed
+    - Their failure would destroy the orbiter and its crew
+  - NASA scientists opposed a delay
+    - “My God, Thiokol, when do you want me to launch, next April?” Lawrence Mulloy
+    - Due to NASA's opposition, Thiokol management reversed itself and recommended that the launch proceed as scheduled
+  - Actually, NASA managers had known contractor Morton Thiokol's design of the SRBs contained a potentially catastrophic flaw in the O-rings since 1977, but failed to address it properly. 
+  
+  ### Result
+  - Grounding of the Space Shuttle fleet for neerly three years during which
+    - Solid rocket boosters were redesigned
+    - Various safety measures implemented
+    - A new policy on management decision-making for future launches were implemented
+  
+  ### Safety pre-Shuttle
+  - 1967: Apollo 1 accident – 3 astronauts die in a fire on the launch pad during a test
+  - After that, NASA built one of the best system safety programs in the world
+  - This led to the success of the Apollo 12 mission
+  - Which led to a diminished emphasis on safety
+  - After the Shuttle became operational in 1980, workforce and functions of several Shuttle safety, reliability, and quality assurance offices were reduced
+  - The Space Shuttle Program Crew Safety Panel ceased to exist
+    - NASA considered it only important to have the panel from design and development up to flight test phases
+    - No more focal point for flight safety
+  
+  ### Root causes
+  - Accumulation of organisational problems
+  - Management carelessness
+  - Bureaucratic interactions
+  - Disregard for safety
+  - Flaws in decision making process
+  - Lack of problem reporting requirements
+  - Misrepresentation of criticality
+  - Lack of adequate resources devoted to safety
+  - Lack of safety personnel involved in important discussions and decisions
+  - Inadequate authority, responsibiluty and independence of safety organisation
+  
+'''
+linesHighlighted: [
+  0
+]
+isStarred: false
+isTrashed: false

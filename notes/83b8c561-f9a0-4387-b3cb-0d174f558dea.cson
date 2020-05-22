@@ -1,0 +1,449 @@
+createdAt: "2020-01-15T15:48:48.511Z"
+updatedAt: "2020-01-15T19:04:26.855Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Trust and reputation"
+tags: [
+  "CM30174"
+  "Computer_Science"
+  "Intelligent_Agents"
+  "University"
+]
+content: '''
+  # Trust and reputation
+  
+  ## Introduction
+  - Rective + practive + social = new kinds of software systems
+  - Agent is “self-interested”: goals + agenda
+    - does what it wants/needs
+    - doesnt do what you want/need
+  - Societal mechanisms: provide control/inhibit anarchy
+  - Solutions?
+    - computational security: control behaviour
+    - normative systems: constrain behaviour
+    - trust and reputation: influence behaviour
+  - Model + approximate the the essential features in human experience
+  
+  ### What is the problem
+  - How can trust or reputation be relevant to software?
+  - Agent characteristics:
+    - Reactive: on-going interaction + reponsive to change
+    - Pro-active: generates and attempts to achieve goals
+    - Social: interact with agents + cooperate (perhaps)
+  - Conventional computer security has limited use:
+    - fragile
+    - algorithmic
+    - assumes opponents are automata
+    - inappropriate for human agents
+      - ⇒ inappropriate for software agents?
+  
+  ### Social ability
+  - The real world is a multiagent environment:
+    - Actors must account for others in attempting to achieve their goals
+  - Some goals need cooperation, agents need to share:
+    - Information/ models of other agents' state
+    - Trust metrics
+    - Reputation models
+  - Means to communicate with others (e.g ACL)
+  
+  ### Norms
+  - A standard pattern of social behaviour that is accepted in or expected of a group
+    - It specifies (in)correct behaviour in a setuation
+  - Agent characteristics => (non-)compliant behaviout
+  - Why should it observe or ignore
+    - Punish or insentivise
+  - How to enforce norms
+  - Who enforces norms
+  - Individuals:
+    - "Police" agents
+  - Groups?
+    - "Peer" pressure
+  - Trust + reputation
+    - These enforece "soft" security
+  
+  ### Soft security
+  - Tradeoff: protection vs restriction
+  - Cannot prevent all undesirable events
+  - Adapt sustem to reduve/prevent incidence
+  - Trust and reputation do this for humans
+    - Once bitten twice shy
+  - Two aspects
+    - **Local**: part of decision making
+    - **Global**: social control mechanism
+  - Agents observe each other
+  - Fear of ostracism is a deterrent
+    - Representation of social evaluation
+  - However this may be inaccurate
+  
+  ---
+  
+  ## Trust
+  
+  ### Trust models
+  
+  #### Computational representation
+  - Formalisms rely on agent reasoning
+  - Tradeoff: simplicity vs expressiveness
+  - Simple:
+    - Easy to calculate
+    - Losses information
+    - Limited reasoning
+  - Expressiveness... the converse
+  - Three classes:
+    - Boolean
+    - Numerical
+    - Qualitative
+  
+  #### Boolean
+  - True: => trustee is trustworthy
+  - False: => trustee is not trustworthy
+  - Rarely used
+  - Trust (and reputation) on continuous scales
+  
+  #### Continuous
+  - Real or integer value
+    - Trust in agent X is 0.4
+    - Reputation of agent Y is -1
+  - Most common representations:
+    - [-1,1] ReGreT
+    - [0,1]
+    - degree of trust (distrust)
+    - good (bad) reputation
+  - Permits absolute and relative comparison
+  - Semantics: does/should 0/0.5 -> neutral etc?
+  - Interpretation is typically subjective
+    - There is some ambiguity, if agents share values:
+      - "your 0.5 is not my 0.5”!
+  
+  #### Qualitative
+  - Human assessments typically impricise
+    - X's reputation is very good
+    - I can only trust Y so far...
+  - Is numerical any better? Compare 0.6 and 0.7?
+  - Paradox: small finite set of lables can help precision:
+    - {bad, neutral, good}
+      - Or
+    - {Very_bad, bad, neutral, good, very good}
+  - Loss: fine-grained comparison
+  - Gain: recognisable semantics
+    - Human accessible
+  
+  #### Probability and fuzzy sets
+  - Some applications want expected collective behaviour
+  - What is the probability that an agent behaves well/badly?
+  
+  1. Skewed distribution - one end of the scale: benevolent/malevolent
+  
+  ![6b40b845.png](:storage\\83b8c561-f9a0-4387-b3cb-0d174f558dea\\6b40b845.png)
+  
+  2. Bimodal - could be good or bad (bipolar)
+  3. Uniform distribution - could do anything: unpredictable
+  
+  - Similar effects achievable with fizzy sets
+  
+  ### Trust for agents
+  
+  #### Trust and reputation beliefs
+  - Integrate with agent architecture so agent can reason
+  - Add to BDI model as beliefs
+  - Socio-cognitive theory:
+    - an agent i trusts another agent j to do an action α with respect to a goal φ
+  - Builds on intentional systems + speach acts
+  - Key observation: trust is relative
+    - To an action
+    - To a goal
+  - ForTrust model formalizes this as occurent trust:
+    - OccTrust(i, j, α, φ)
+    - Is trust that hosts here and now
+    - Relates trustor (i), trustee(j), action (α) and goal (φ)
+  
+  #### BDI + RepAge
+  - RepAge uses distributions
+  - Belief predicate S is commiunity belief
+  - The reputation of agent j playing role seller is
+    - Rep(j, seller, [0.6, 0.1, 0.1, 0.1, 0.1])
+    - With respect to the finite fuzzy set:
+      - {VBad, Bad, Neutral, Good, VGood}
+    - THe belief set (for BDI reasoning):
+  
+  ![8093a4dd.png](:storage\\83b8c561-f9a0-4387-b3cb-0d174f558dea\\8093a4dd.png)
+  
+  - (I ASSUME ALL THE PROBABILITIES ADD UP TO 1)
+  
+  #### Reliability
+  - Issue so far is representation
+  - But how reliable is a reputation
+  - Some models add a reliability measure ∈ R (real numbers)
+  - Reliability factors:
+    - Opinion count (Higher number of opinions => more reliable)
+    - Opinion variance (Higher variance => less reliable)
+    - Opinion recency (More recent => more reliable)
+    - Opinion source credability (More creadible => more reliable)
+  
+  #### Trust as estimation
+  - Trust is the subjective probability by which an individual, A, expects another individual, B, performs a given action on which its welfare depends
+  - An estimationm a prediction for the future
+    - “an expectation about an uncertain behaviour”
+  
+  #### Trus as action
+  - Trust is an act:
+    - The decision and the act of relying on, counting on, depending on
+  - Trust is:
+    - A **mental state** of the agent (an evaluation)
+    - A **decision and intention** based on that disposition
+  - Connects evaluation and decision-making
+  
+  #### Summary of trust processes
+  - Trust evaluation
+    - A trustor X uses various information sorves to decide if trustee Y is trustworthy
+    - It consists of a set of social evaluations
+      - Image: (in)direct experience
+      - Reputation: collective assessment
+    - Trust decision
+      - A trustor X decides id a trustee Y can be relied on for a given task
+      - A decision that uses trust evaluations
+  
+  ### Sources of trust
+  ![5d3cc09f.png](:storage\\83b8c561-f9a0-4387-b3cb-0d174f558dea\\5d3cc09f.png)
+  
+  #### Trust evaluations
+  - Summary of all beliefs known by trustor
+  - Image: Is target good or bad with a behaviour
+    - Internal reasoning process
+    - Direct experiences: trustor ↔ trustee
+    - Communicated experiences:
+      - trustor ← A1 ← . . . ← An ↔ trustee
+      - More inputs but less reliable
+      - Liklihood of noise
+      - Risk of false reports
+    - Social information: trustee's position in (agent) society
+  - Reputation: Shared + aggregated social evaluations
+    - Not the same as communicated experiences
+    - Collected view of a social entity about an individual
+    - May not be the same as individual view
+  
+  #### Image formation
+  - Different images for different situations
+    - Context: description of interaction
+    - Satisfaction criteria
+    - Information source
+  - Related image to trustee's capabilities
+  - Empirical evaluation of trust models indicated that:
+    - Self-interested agents should not share opinions
+    - False reports destabilize model
+  - Compare communicated experiences and direct experiences:
+    - communicated: trustor ← X1 ← . . . ← Xn ↔ trustee
+    - direct: trustor ↔ trustee
+    - This identifies the reliable sources
+  
+  #### Trust disposition
+  - Image as a single value
+  - Trustor evaluates experiences with a in c using:
+    - {vg, g, b, vb} (very good, etc.)
+  - Relate trustee a, in context c to trust disposition td:
+    - trust(a,c,td)
+    - Where td ∈ {vt,t, u, vu} (very trustworthy, etc.)
+  - Most experiences are vg then a is vt
+  - Use an "average"
+  - Weight for factors such as:
+    - Recency
+    - Source credibility
+    - Other (domain) factors considered relevant
+  
+  #### Logic and belief generation
+  - Constiuative elements of trust
+    - Internal attribution od trustee
+      - Should have intention to behave as expected
+    - External attribution of trustee
+      - Should be able to act as expected and achieve goal on which the trust decision is made
+  - Dispositional trust is trust subject to a condition
+  
+  ![7b3af72d.png](:storage\\83b8c561-f9a0-4387-b3cb-0d174f558dea\\7b3af72d.png)
+  
+  - Alice trusts Bob to perform action in order to achieve when condition is true
+  
+  #### Trust decision
+  - Compare trust evaluation against threshold
+  - Risk being too ctisp
+  - Better: trust >> distrust threshold
+  - Threshold can (should?) depend on criticality of decision
+  
+  #### Trust belief
+  - (BDI) Trust decision can change an agents intention
+  - Truster intends to rely on trustee
+  - Dispositional trust is provable from occurent trust (ForTrust):
+  
+  ![fe88d3cf.png](:storage\\83b8c561-f9a0-4387-b3cb-0d174f558dea\\fe88d3cf.png)
+  
+  - Trustor i should decide to trust trustee j to perform action α in order to achieve a goal φ if agent i:
+    - Has relevant dispositional trust with conditions k
+    - Has goal φ
+    - Believes that conditions k currently hold
+    - Where Fφ means φ will finally be true
+  
+  #### Differences and similarities in trust models
+  - Difference in details:
+    - Formalisms
+    - Calculation
+    - Decision making
+  - Similar structure
+    - Experience gathering
+    - Trust evaluation
+    - Trust decision
+  - Not interoperable
+    - Value domain: Qualitive values, interval systems
+    - Semaintics of values: Different interpretation of numerical values
+      - Subjective
+    - Semantics of concepts: Different values by task
+  - How to change information between trust models
+    - Common ontology: communication
+    - Model alignment: veru hard
+    - Argumentation: justification abstracted from evaluation
+    - Transmission: observation
+  
+  ---
+  
+  ## Reputation
+  
+  - Trust is not equivelent to reputation
+  - Reputation is what a social entity says about an individual where:
+    - Social entity = {individuals} + {social relations}
+    - Makes reputation efficient and effective
+    - Group is responsible for evaluation
+    - "Says" means collective belief
+    - Requires communication
+  - Associates to a specific agent behaviour or property
+  - Contributes to trust
+  - Contributes to social order (stability)
+  
+  ### Reputation evaluation
+  - Three sources:
+    - Communicated/third party image
+    - Communicated reputation: from another social entity
+    - Social information: position of individual in entity/ies
+  
+  ![4e0ed244.png](:storage\\83b8c561-f9a0-4387-b3cb-0d174f558dea\\4e0ed244.png)
+  
+  ### Communicated image
+  - Aggregate images from members of social entity
+  - For a social entity of agents SE<sub>i</sub>={a<sub>1</sub>, ..., a<sub>n</sub>}
+    - n large
+    - define a<sub>k</sub>'s reputation in SE<sub>i</sub>:
+  
+  ![323dbcde.png](:storage\\83b8c561-f9a0-4387-b3cb-0d174f558dea\\323dbcde.png)
+  
+  - How to define ⊕?
+  - From communicated image to reputation:
+    - communicate evaluation (easy)
+    - individual images = good sample (hard)
+  - Generalizinf from a few images is unreliable
+  - Some models include a reliability metric
+  - Key point: image not the same as reputation
+  
+  ### Communicated reputation
+  - Aggregate reputation from other social entities
+  - For a collection of social entities SE<sub>1</sub>, ... SE<sub>n</sub>
+    - define a<sub>k</sub>'s reputation in SE<sub>i</sub>, i ∈ [1, n]:
+  
+  ![581b2964.png](:storage\\83b8c561-f9a0-4387-b3cb-0d174f558dea\\581b2964.png)
+  
+  - Communication is by individuals (necessarily)
+  - But value is from social entity
+  - Image is not reputation and reputation varies across SEs:
+  
+  ![0dea7fa1.png](:storage\\83b8c561-f9a0-4387-b3cb-0d174f558dea\\0dea7fa1.png)
+  
+  ### Shared voice
+  - Combined image from a selected sample
+  - Shared voice({a1, a2, a3}, a4) = image(a1, a4) ⊕ image(a2, a4) ⊕ image(a3, a4)
+  - May differ between SE's that a<sub>1</sub> etc. belong to
+  - Individuals chosen on purpose to be representative
+  
+  ### Inherited reputation
+  - Aquired from third party agents
+  - Depends on role of subject
+  - For example
+    - An employ of company X is ...
+    - An inhabitant of city/country Y is ...
+    - An article in publication Z is ...
+  - Useful combined with other information sources
+  - ReGret  
+    - Role played: system reputation
+    - Social relations: neighbourhood reputation
+  
+  ### ReGreT model
+  - Uses a weighted mean aggregate sources:
+  
+  ![cc7acb90.png](:storage\\83b8c561-f9a0-4387-b3cb-0d174f558dea\\cc7acb90.png)
+  
+  - Whenever b is true a must allso be true with repect to φ?
+  - Weighting (ξ) indicates reliability of source
+  - Source preference order:
+  
+  ![bd7374b0.png](:storage\\83b8c561-f9a0-4387-b3cb-0d174f558dea\\bd7374b0.png)
+  
+  - Fixed heuristic unsuited to changing environments
+  
+  ### Implementation and use
+  
+  #### Centralized approaches
+  - Pros:
+    - **Accuracy**: uses informations from all individuals
+    - **Low sensitivity** to bad data
+    - **Public values**: new participants benefit straightaway
+  - Cons:
+    - **Trust service** to be correct
+    - Bottlenexxk + **vulnerability**
+    - Security _ **attributability** of data in repository
+  - Combine rating with comment: qualitative
+  - Larger user count is better
+  - Low repeat transaction count is bad
+  - Use communicated images for reputation
+  
+  #### Decentralized approaches
+  - Depends on individual information
+  - Pros:
+    - No need to trust external services
+    - Suitable for scalable systems
+  - Cons:
+    - Hard to get enough data for a reliable metric
+    - Hard for new participants
+    - Puts burden on agents to maintain
+  - Several multiagent models: ReGreT, Travos, FIRE
+  
+  #### Use of reputation
+  - As basis for trust
+    - When there is a shortage of direct experienve
+  - For social order
+    - Maintain or enforce "normal" behaviour
+    - Acceptable behaviour leads to repeat/increased interaction
+    - Unacceptable behaviour leads to ostracism and exclusion
+  - Useful for simulation scenarios
+  
+  ### Weaknesses of reputation
+  - Susceptible to attacks from malicious agents
+  - Defences can lead to false positives
+  
+  #### Attacks
+  - **Unfair ratings**: gives false feedback
+    - Defence
+      - weighting in favour of past reliable informers
+  - Ballot stuffing: more feedback that interactions
+    - Defence
+      - Filter feedback from suspected agents
+      - Feedback per interaction, not accumulated feedback
+  - Dynamic personality: generate good reputation from low-value, high-quality service, then offer high-value service
+    - Defence
+      - Fixed memory transaction wondow
+      - Variable memory transaction window
+  - Whitewashing: use identity change to loose bad behaviour
+  - Collusion: enhances other kinds of attacks
+  - Sybil attacks: use multiple identities to improve reputation through artificail feedback
+  - Reputation lags exploitation: uses reputation inertia to behave badly with a good reputation, then behave well to recover bad reputation
+    - Defences
+      - Make reputation system more responsive
+      - Give agents means to identify behavioural patterns
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

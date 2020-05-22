@@ -1,5 +1,5 @@
 createdAt: "2019-10-15T09:59:36.238Z"
-updatedAt: "2019-10-15T11:30:43.571Z"
+updatedAt: "2019-12-17T23:24:00.632Z"
 type: "MARKDOWN_NOTE"
 folder: "07413230992e30754bd9"
 title: "Finding the root causes of accidents"
@@ -166,12 +166,119 @@ content: '''
   There had actually been an average of 20 fires a year from 1958 to 1987, which were called "smoulderings" presumably to make them sound less serious.
   They caused some damage but nobody was killed
   This may have lead to the views that these fires were not dangerous
+  
+  ##### Disregard or low priority for safety
+  Problems occur if management is not interested in safety
+  Workers will not be encouraged to think about safety
+  
+  The Government may disregard safety and ignore the need for government/industry watchdogs and standards comittees
+  These comittees often only appear after major accidents
+  
+  To prevent this:
+  - The organisation must have a high level of commitment to safety in order to prevent accidents
+  - The lead must come from the top and permiate ever organizational level
+  
+  ###### Clapham Junction rail crash (1988)
+  Train ran rear to another stationary train
+  After the impact the first train struck an oncoming train
+  Although the report stated that there was sincere concern for safety, no action was taken
+  
+  ##### Flawed resolution of confliction goals
+  Occurs if there are deficiencies in the safety culture of an organisation/industry
+  
+  The most common example is the "cost-safety" tradoff:
+  > Safety costs money
+  
+  Or it at least appears to cost money at the time of development/manufacture
+  
+  Often cost becomes more important and safety may therefore be compramised in the ruch for greater profits
+  
+  ### Flawed organisational structures
+  Many accident investigations find sincere concern for safety in an organisation, but the orginational structures in place were ineffective in implementing concern
+  
+  #### Diffuction of responsibility and authority
+  Accidents are often associated with ill-defined responsibility and authority for safety matters
+  There should be at least one person with overall responsibility for safety, these people should have real power within the organisation
+  
+  #### Lack of independence and low status of stafety personnel
+  This leads to their inability or unwillingness to bring up safety issues
+  Safety officers should not be under supervision of the groups whos activities theu must check
+  Low status means that there is no involvement in decision making
+  
+  #### Poor and limited communication channels
+  In some industries, strict line management means that workers report only to their direct superiors
+  Problems with safety may not be reported to the interested parties and will not be acted upon
+  All staff should have direct access to the safety personnel and visa versa
+  
+  > Companies do not factor the potential cossts of catastrophies when making decisions, therefore there is often insufficient resources allocated to managing safety
+  
+  Once this is understood, it clears the way for initiatives which can dramatically reduce the risk of catastrophes:
+  - Giving those closest the problem the decision-making power to respond
+  - Improving internal communications
+  - Encouraging employees to come foward with 'bad news'
+  - Not overworking employees
+  - Providing special training to alert workers to potential dangers
+  - Making sure that sophisticated technology does not diminish a workers ability to assess a situation
+  
+  #### Herald of Free Enterprise (1987)
+  This ferry sank moments after leaving the Belgian port of Zeebrugge
+  - It had been designed for rapid loading and unloading on the competitive cross-channel route
+  - 193 passsengers and creq died
+  - There was negligence from the the seaman through to the board of directors
+    - Seaman responsible for closing the door was asleep
+    - Officer responsible for monitoring the door-closing said he saw someone perpering to close them
+    - Captain followed the standing order which saidd that if no problems were reported assume that the vessel is ready for sea
+    - There was pressure on crew to cut turnaround time
+    - As the ferry was optimised for rapid loading it sunk in 90 seconds giving no time to evacuate passangers
+    - Owner company renamed to P&O
+    - Official inquary placed more blame on his supervisors and a general culture of poor communication in the ferry company
+  
+  ### Superficial or ineffective technical activities
+  This is concerned with poor implementation of all the activities necessary to achieve an acceptable level of safety
+  
+  #### Superficial safety efforts
+  - Hazard logs kept but no description of design decisions taken or trade-offs made to mitigate/control the recognised hazards
+  - No follow-ups to ensure that hazards have ever been controlled 
+  - No follow-ups to ensure safety devices are kept in working order
+  
+  #### Ineffective risk control
+  - Know risks but don't control them
+  - The majority of risks are **not** the results of a lack of knowledge of how to prevent them
+    - They are results of the failure to use the knowledge effectively when trying to fix the problems
+  
+  #### Failure to evaluate changes
+  - Accidents often involve a failure to re-evaluate safety after changes are made
+  - Any changes in hardware or software **MUST** be re-evaluated to determine whether safety has been comprimised
+  - Quick fixes often affect safety because they are not evaluated properly
+  - In the case of software
+    - Regression test
+    - System and software safety analysis
+  
+  #### Information deficiencies
+  - Feedback of operational experience is one of the most important sorces of designing, maintaining and improving safety
+    - This is often overlooked
+  - There are two types of data that are important
+    - Information about accidents/incidents for the system itself
+    - Information about accidents/incidents for similar systems
+  - Case studies provide information to affirm/diffirm hypotheses and intutions an to learn the mistakes not to repeat
+  
+  ---
+  
+  ## Conclusion
+  Root causes of accidents are broad
+  They are rooted in the company where they happened
+  They are not usually to do with the components failing or operator error
+  The level of management and design is usually to blame
+  
+  > To reduce the risk of accidents, root causes must be identified and eliminated
+  > If we are unable to iliminate a particular casual factor, we still may be able to provide protection against it leading to an accident
 '''
 linesHighlighted: [
-  33
-  51
-  78
-  84
+  97
+  108
+  118
+  130
+  147
 ]
 isStarred: false
 isTrashed: false

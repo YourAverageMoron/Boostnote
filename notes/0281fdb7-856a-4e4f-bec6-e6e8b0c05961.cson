@@ -1,0 +1,884 @@
+createdAt: "2020-01-07T19:32:41.797Z"
+updatedAt: "2020-01-14T06:21:02.069Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Transport Layer"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # Transport Layer
+  
+  ## Introduction
+  - The Internet Protocol has three main protocols that run on top of IP
+    - Two are for data, one is for control
+  - The data protocols are complimentary:
+    - **UDP**: Fast, unreliable and connectionless
+    - **TCP**: More sophisticated, reliable and connection oriented
+  - The control protocol ICMP is often considered as part of the network layer
+  - Other data protocols exist but TCP and UDP are the important ones
+  - Both UDP and TCP use the concept of ports
+  
+  ---
+  
+  ## Ports
+  - A port is just a 16 bit integer
+    - 1-65535
+  - They help determine which service a client wants from a server
+    - The server could be running web email and so on
+  - They also determine which process incoming packet should be delivered to on a client
+  - Every TCP and UDP connection has a source port and a destination port
+  - When a service starts, it listens on a port
+    - This indorms the operating system that it wishes to recieve data from packets directed to that port
+    - E.g a mail server may indicate it want packets addressed to TCP port 25
+  - The OS checks that port is not already being used by another program
+  - It then ensures packets with that port are sent to hte service program
+  - So when a TCP packet with destination port 25 arrices its data is given to the email program
+  - TCP and UDP ports are entirely seperate:
+    - One service can be listening on TCP port 25 while another service listerns on UDP port 25
+    - The OS can distinguish beteen the two as they are ports within different protocols
+  - TCP and UDP are completely seperate and do not interact at all (at the transport layer)
+  - Well know ports are reserved for certain services
+    - Web server: Port 80
+    - Email server: Port 25
+    - FTP server: Port 21
+    - Etc..
+  - A range of ports are reserved for privelaged (root/administrator) programs
+    - Typically port numbers under 1024
+  - Most are available to any program that wants them
+  - These associations of port number to service are purely convention and for convenience
+    - No port is special and you can run any service on any port
+    - It just means you dont have the extra problem of determining what port is for what
+  
+  ![5b9318c0.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\5b9318c0.png)
+  
+  - Ports also enable multiple simultaneous connections between two machines
+    - E.g fetching several web pages
+  - The source port (destination port on the returning packet) allows the client OS to identify which packet belongs to which client program
+  - Source source ports are usually chosen afresh "at random" (usually: just increment by 1 each time) for each new connection and called emphemeral ports as they only live for the duration of the connection
+  - There is no technical difference between ephemeral and well-known ports
+    - Just how they are used
+  - The quad
+    - Source address
+    - Source Port
+    - Destionation address
+    - Destination port
+    - Often called a socket pair
+  - The pair:
+    - Source address and source port
+    - Often called a socket
+  - Both TCP and UDP have port fields early in their headers:
+    - Thes is so that the port number are included in the "IP header plus 8 bytes of data" that an ICMP error contains
+    - Thus the OS can identify which process an ICAMP belongs to
+    - Non initial IP fragments wont have such information
+      - This is why ICMPs are not generated for errors involving such fragemts
+  
+  ---
+  
+  ## NAT
+  - Ports are how NAT firewalls work
+    - Returning reply packets to request packets
+  - It keeps a list of (internal) socket pairs against public (external) socket pairs
+    - This is enough to match replies to requests
+  
+  ---
+  
+  ## User Datagram Protocol (UDP)
+  - A transport layer for an unreliable, connectionless protocol
+    - Unreliable -> not guaranteed delivery
+  - UDP is not much more than IP with ports
+  - UDP packets are called datagrams
+  
+  ![cec1a8e4.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\cec1a8e4.png)
+  
+  - Ports (16 bits each)
+  - Length (16 bits)
+    - The length of the entired packet
+    - Including the 8 bytes of the header
+    - This could be deduced from the IP layer, but this keeps layer independence
+  - Checksum (16 bits)
+    - Checksum of the UDP header
+    - The data and some fields from the IP header
+  
+  - Incorporating fields from the IP header is poor design
+  - Changing the Network (e.g to IPv6 ) involves changing the way the checksum is computed
+  - This adds extra complication to the IPv4 to IPv6 transition
+  - The checksum is optional:
+    - Put 0 in this field if you want to save a little time 
+    - UDP is unreliable
+  - UDP is a very thin layer on top of IP
+  - It is as reliable or unreliable as the IP it runs on
+  - It is just about as fast and efficient as IP, with only a small overhead
+    - 8 bytes
+  - UDP is widely used in two areas:
+    - **One shot applications**
+      - Where we have a single request and reply
+      - E.g DNS
+    - **Where a fast response is required**
+      - We have no overhead in setting up a connection before data can be exchanged
+    - **Where speed is more important than accuracy**
+      - For example media streaming
+      - Where the occasional loss of packets is not a problem but a slow packet is
+  - There is no provision made for lost or duplicated packets in USP
+    - Any application that uses UDP must deal with these issues itself
+    - For example DNS over UDP sets a timer when a request is sent, if hte reply takes too long it assumes the request or reply is lost and resends the request
+  
+  ---
+  
+  ## Transmission Control Protocol (TCP)
+  - The transport layer for reliable, connection-oriented protocol
+  - Often called TCP/IP
+  - It is more complicated the UDP as it must create a reliable transport from the unreliable IP it run on
+    - There is a lot of complication to deal with error cases
+    - Such as packet loss and duplication
+  - There is overhead in setting up (and taking down) the connection to manage these mechanisms
+  - More complexity was added to improve performance and flow control
+  
+  ### Acknowledgement packet (ACK packets)
+  - This is the basis of the of the reliability
+  - Acknowledgement packets are sent for every sent packet
+  - If host A sends host B a packet, B must send an ACK packet back to A to inform it of the safe arrival of the packet
+  - If A does not get an ACK it resends the packet
+  
+  #### The two armies problem
+  - Suppose two armies A and B wish to coordinate an attack on C
+  - A sends a message to B: "Attack at dawn"
+  - A cannot safely attack until B has confirmed that it has recieved the message
+  - So B sends back an acknowledgement to A "OK"
+  - But the ACK might be intercepted and A might not get the ACK
+  - B cant attack until it knows A got the ACK
+  - So should A send an ACK for the ACK back to B
+  - But this might not go through
+  - For full reliability it looks like we might need an infinite regress
+  
+  ##### How TCP avoids the two armies problem
+  - It uses timeouts and packet retransmissions
+  - For every packet 
+    - Host A starts a retransmission timer when it sends to host B
+    - If the timer runs out before it gets an ACK it resends the packet and restarts the timer
+    - This repeats until A gets an ACK (or A gives up)
+  - But we need to know:
+    - How long to wait before a resend?
+      - It might be a slow but otherwise reliable link
+      - Resending will just clog the system with extra packets
+    - How many times to resend before giving up?
+      - The destination may have gone entirely (e.g crashed)
+    - How long B should wait before sending the ACK?
+      - You can piggyback an ACK on an ordinary data packet
+      - It may be better for B to wait until some data is ready to be returned rather than sending an otherwise empty ACK
+      - This will save on packets sent
+    - IP datagrams can arrive out of order
+      - We need some way to recognise which ACK goes with which packet
+      - How do we order the incoming data stream correctly?
+    - How do we manage duplicates?
+      - Resends can produce duplicate packets
+      - So we need a method of recognising and discarding extra copies
+    - Flow control:
+      - How to increase the rate of sending packets when things are going well
+      - Then decrease the rate when they are not
+  
+  ### Structure of TCP
+  - TCP packets are often called segments
+  - Note that segment, packet, datagram and frame mean pretty much the same thing
+  - A TCP header is complicated as it must address many complex issues
+  
+  ![6b443f45.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\6b443f45.png)
+  
+  ### Headers
+  - Ports (16 bits)
+    - Identical to UDP
+  - Two 32 bit values
+    - Sequence and acknowledgement
+  - Header length (4 bits)
+    - Measured in 32 bit words
+    - The header can have options so has variable length
+    - A maximum of 60 bytes
+    - A minimum fixed part of 20 bytes
+  - Checksum
+    - Checksum of the header and the data, plus some fields from the IP layer
+    - Again bad design
+  - Urgent pointer: active if the URG flag is set
+    - This urgent pointer is a pointer into the data stream
+    - Indicates where the urgent data block ends
+    - Urgent data includes things like interrupts that need to be processed before any other data that is buffered
+    - The OS should notify the application whan an URG is recieved
+      - e.g using an interrupt
+    - The OS interrupt code would then read through the urgent data block and act appropriately on what it finds there
+  
+  ### Sequence numbers
+  - These numbers are the heart of TCP's reliability
+  - Every byte in a TCP connection is numbered
+  - The 32 bit sequence number starts at some random number value and increases by 1 for every byte sent
+    - So if a segment contains 13 bytes of data, the sequence number on the next segment will be 10 greater
+  - The seuence number wraps around after 4294967295 bytes
+    - This is under 10 seconds for a 10Gb/s Ethernet
+    - Aditional mechanisims to extend the count have had to be devised in light of modern fast networks
+  - The sequence number in the header is the first byte of data in the segment
+  - The destination acknowledges those bytes have been recieved by setting the ACK field
+  - The ACK field is only active if he ACK flag is set
+  - The reverse connection from destination to source has its own sequence number as TCP is fully duplex
+    - Everything is true also for data traveling in the reverse direction
+    - The revers traffic has its own independent sequence numbers and flow control
+  - A destination might not immediately get the whole segment that wes sent due to fragmentation in the IP layer
+    - In this case TCP must wait for all the fragement and reconstruct the segment before it can send the ACK
+    - This plays havoc with TCP's timers
+    - Another reason to avoid fragmentation
+  - The returning ACK field contains the sequence number of the next byte the destination expects to recieve
+    - E.g if the sequence number is 20000 and 14 bytes are recieved it rturns 20015 in the ACK field
+  - ACKs can be piggybacked on normal returning data packets, they dont need seperate packets
+    - This helps reduce the amount of network traffic
+  
+  ![aa836239.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\aa836239.png)
+  
+  - A is sending 10 byte segments to B, and B is ACKing them
+  - The segment containing bytes 21-30 is lost
+  - When B next gets a segment it still ACKs with 21
+    - As this is the next byte it wants
+  - While the ACK travels aback to A, A is still sending new data
+  - Eventually A gets duplicate ACKs from B, this is a sign of a problem
+  - A resends bytes 21-30
+  - When B gets these bytes it can ACK all the way up to 60
+  - This diagram is not realistic
+    - It is over-simplified
+  - TCP specifies that A should continue until it gets three duplicate ACKs before resending
+    - I.e four ACKs with the same sequence number
+  - This is to avoid triggereing resends too easily
+    - It might be just a cas of A's packets being slighly reordered in transit
+    - A resend is not needed
+  
+  ### Flags
+  - URG: urgent data
+  - ACK: the acknowledgement field is active
+  - PSH: push this data to the application as fast as possible
+  - RST: reset (break) the connection
+  - SYN: synchronise a new connection
+  - FIN: finish a conneciton
+  - ECE: congestion notification
+  - CWR: congestion window reduced
+  - 4 reserved bits, set to 0
+  
+  #### PSH flag
+  - Set to indicate the destination OS should pass data to the application as soon as possible
+  - The destination OS might be holding back data for some reason before passing it on to the application
+    - E.g collecting together segments into one large buffer for efficiency reasons
+  - Or holding back notification to the applications that data has arrived
+    - Again not to swamp the application with loads of notifications of small amounts of data
+  - This flag says send the buffered data to the application (dont wait)
+  - Origionally it was intended the client application could send PSH when it felt the server not be hanging avout buffering data
+  - Thse days there is little to no mechanism (in the socket API) for application to specify this
+    - But TCP software itself sets PSH when appropriate
+    - E.g when the client's sned buffer empties
+  - The ideas is that there is no point in the reciever waiting for more data as thre is no more to send right now
+  
+  ### Options headers and data
+  - After the fixed header there are:
+    - Options: many and varied, including window scale and maximum size
+  - After all the headers is the data
+    - The data field can be empty for pure ACK
+  
+  ### Flow control
+  - 16 Bits of the advertised window size are used for flow control
+  - TCP implements flow control
+    - I.e adjusting the rate of sending packets up or down to make best use of current conditions
+    - Conditions in the network
+    - Conditions in the recieving host
+  
+  #### Advertised window
+  - The advertised window deals with conditions in the recieving host
+  - The destination has only a limited amount of buffer memory it can store new segment in
+  - If the application is not reading the data as fast as it arrives the buffer will fill up
+  - The window size is the amount of buffer the reciever has left:
+    - The reciever sends this value in each segment going back to the sender
+  - If the amount is very small the sender can slow down sending until space in the reciever is freed up
+  
+  ![9529c200.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\9529c200.png)
+  
+  ![aa8efa15.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\aa8efa15.png)
+  
+  ![617ab0ac.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\617ab0ac.png)
+  
+  ![0bf6636c.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\0bf6636c.png)
+  
+  ![78777fe8.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\78777fe8.png)
+  
+  ![5eace022.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\5eace022.png)
+  
+  ![6d8963eb.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\6d8963eb.png)
+  
+  - B can tell A to slow down or speed up as appropriate
+  - 16 bits gives a maximum buffer of 65535 bytes which is way too small for modern gosts
+    - These often have megabytes to play with
+  - There is a header option to scale this up to something reasonable
+  - Symmetrically, A has its own advertised window that it sends to B
+  
+  ### Setup and Teardown
+  - TCP is connection orientated, meaning a connection is setup between source and destination
+    - All packets flowing within this connection are related
+    - This relation is done through the sequence numbers
+    - For example a connection to fetch a web page from a server will involve many segments
+  - It is important to realise that this is a connection in the transport layer
+  - The underlying layer, usually IP, is not connection oriented, and each individual datagram maight take a different route to its destination
+  - This connection is a weak kind of session:
+    - Though no session mechanism is provided
+  - Setting up a TCP connection is complicated as there is a lot of state that must be set up
+    - E.g sequence numbers and initial advertised windows
+  - Similarly, closing connections is not trivial:
+    - We must ensure all sefments in flight have been ACKed properly
+    - Perhaps a segment needs to be resent
+    - Thus the connection will hang around for a little while after closing to ensure everything is tidied up
+  - Fortunately for the application programmer, all this detail is taken care of by the TCP lery software in the operating sytem
+    - Though it does have some occasional reprocussions in the application if the connection needs to outlive the application for a while
+  
+  
+  #### Three way handshake (setup)
+  ![bd4b372f.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\bd4b372f.png)
+  
+  - Three segments are needed to exchange the information needed to make a new connection
+  - The initiator, the client, sends a segment with a SYN (syncronyse new connection) flag set and its initial sequence number (ISN), n, randomly generated
+  - The reciever, the server, replies with another SYN segment containing its own ISN, m
+  - It also ACKs the client's ISN with n+1, the sequence number of the bytes it expects to recieve from the client
+    - The initial SYN can be lost just like any other segment, so we need to ACK it independently of the first byte of data that comes later
+  - The client ACKs the server's ISN with m+1
+  - This process is called a three way handshake
+  - These segments contain no data:
+    - They are overhead in setting up the connection
+      - Both in time and in packets on the network
+  - After this handshake we can start sending data
+  - The client (first one to initiate) is said to do an active open,
+    - While the server does a passive open
+  
+  ![23e2a773.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\23e2a773.png)
+  
+  - It is possible (but rare) for for both hosts to do an active open where the SYNs cross each other in flight
+  - Matching TCP port numbers will identify when this happens
+  - This will produce **one** new connection (not two)
+  
+  #### Closing a connection (tearedown)
+  ![06a83450.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\06a83450.png)
+  
+  - Closing a connection takes up to four segments
+  - TCP is full duplex and a connection in one direction may be closed independently of the other
+  - The FIN flaf is set to indivate a half close:
+    - This indicates no more data will be sent
+  - We can still recieve data at this end
+  - The FIN is ACKed
+  - When the other end wants to close it sends a FIN and gets an appropriate ACK
+  - Note there may still be data (and the corresponding returning ACKs) flowing from the server to the client before the server decides to close
+  - The first close is called an active close
+  - The other end does a passive close
+  - The passive close FIN can be piggybacked on the ACK
+    - This then only takes three segments
+  
+  ![600d1ff7.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\600d1ff7.png)
+  
+  - There can (rarely) be a simultanious active close
+    - This takes four segments
+  
+  ![89f2074a.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\89f2074a.png)
+  
+  - A connection ended by FINs is called an orderly release
+  
+  #### Teminating a connection with reset
+  - Another way to end a connection is to send a reset (RST) segment
+    - I.e with the RST flag set
+  - This is for error cases
+    - E.g a segment arrives that doesnt appear to be for a current connection
+    - This might happen after a server crashes and reboots while the client is still sending
+      - The server will reply with an RST
+  - When a host gets a RST it ends the connection immediately discarding all state and buffered segements
+  - Often seen by the application as a "connetion reset by peer" message
+  - A connection ended by RST is an abhortive release
+  - RSTs are not ACKed
+    - The connection ends then and there
+  
+  ### TCP state
+  - There is a standard state diagram that describes how TCP should act in most cases
+  - Though it only covers non error cases
+  - It also does not give much information about timeouts and retransmissions
+  
+  ![b2aa25a5.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\b2aa25a5.png)
+  
+  - E start (and end) in closed
+  - There are two opens:
+    - Active
+    - Passive
+  - LISTEN is a server waiting for a connection
+  - ESTABLISHED is the normal data transfer state
+  - There are two closes:
+    - Active
+    - Passive
+  - The host that did the active open needs not be the host that does the active close 
+  - This state diagram is followed for each end of the connection
+  
+  ![cf3b51d8.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\cf3b51d8.png)
+  
+  - The active close is somewhat complicated by teh need for reliability
+  - The TIME_WAIT state (also called 2MSL state) appears before the final close:
+    - The conneciton must remain non-closed until a time period has passed
+  - Just because the application has closed its end of the connection, doesn't mean the connection is finished and the OS can discard the conneciton state
+  - The maximum segment lifetime (MSL) is a value that represents the longest time a segment can live in the network before being discardes
+    - This is probably through TTL expiry
+    - There was origionally defined to be 2 minutes, but implementations chose smaller values
+      - Like 60 seconds
+  - A TCP connection is require to stay in TIME_WAIT for twice the maximum segment lifecycle (MSL)
+  - This is incase the final ACK (of the final FIN) was lost and needs to be retransmitted
+  - The OS has to keep the conneciton hanging around for a little to cover this case
+  - Even if the process that used the connection has exited
+  - While in this state, if a new process tries to make a connection using the same ports it will be denied
+    - We dont want to deliver late packet to the new process
+  - In this sense TCP connection and the process using it are quite seperate entities
+  - When an application exits, the OS sends FINs on behalf of the application for all currently open connections.
+    - This makes sure that everything is tidied up nicely
+  - The OS might need to hold connections in the 2MSL state:
+    - The connection definitely outlives the application
+  - If a host is shut down normally rather than crashing, the operating system should sned FINs for all currently open connections
+    - It should also do the TIME_WAIT, but many dont bother as it would hold up the shutdown
+  
+  ### TCP Options
+  ![158ed1a3.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\158ed1a3.png)
+  
+  - Options start with a 1 byte kind which indicated what the option is to do
+  - Kinds 0 and 1 are 1 byte ling
+    - Otheres have a length field
+  - No operation (NOP) is used to pad and align fields to have a multiple of 4 bytes
+  - Maximum segment size (MSS) specifies how large a segents that we can cope with are:
+    - The headers are not included in this count
+  - The MSS is the largest TCP segment the host can pocess
+  - Not that this segment might be reconstructed from more than one IP fragment
+  - If we want to ensure that there is no fragmentation, the MSS must be set to the MTU (maximum transmission unit) minus headers: 
+    - 40 = 20 + 20 bytes for IP and TCP
+    - A TCP implementation must be able to process and MSS of:
+      - 576 - 40 = 536 bytes
+    - The MSS is actually communicaed on the option header in the setup of the TCP connection
+      - Typically set to avoid fragmentation
+  - The window scale option allows us to multiply the advertised window size header field
+    - This option field contains a value from 0 to 14
+    - A value od n scales by 2<sup>n</sup> this gives a maximum window of:
+      - 2<sup>14</sup> x 65535 = 1,073,725,440 (roughly a gigabyte)
+    - But this is only about a seconds worth of data in a 10Gb/s Ethernet
+  - Timestamp (TS val) puts the time of day on the segment header onto the segment
+    - Allows accurate measurement of the round trip time (RTT) of a segment and its ACK
+    - Useful for computing retransmission times
+  - Timestamp Echo Reply (TC ECR) in an ACK segment is the timestamp being returned to the sender so it can compute the RTT
+  - Selective acknowldegement (SACK) is an extention of the ACK mechanism that allows more flexible ways of acknowledging segments
+    - SACK is negotiated in the connection setup with a SACK permitted option
+  - There are several options only allowed in SYN segments
+    - Window scale, MSS and SACK Permitted
+    - This is because things like buffer space need to be set up before a conneciton and varying them mid-connection is difficult
+  
+  ---
+  
+  ## TCP strategies
+  - How TCP manages to get the best out of a connection
+  - For example we mentioned above we can delay an ACK and piggyback it on returning data to reduce the number of packets on a network
+  
+  ### Advertised window
+  - As data arives at its destination the OS puts it into a buffer ready for the recieving application to read it
+  - The space left in this buffer depends on:
+    - How fast the sender is sending data
+    - How fast the application is reading the data
+  - We can return a segment that indicates how much buffer space is left so the sender can act accordingly
+  - The advertised window is how TCP tells the source to slow down and speed up
+  - It is a sliding window mechanism, used as a form of flow control
+  - Imagine the bytes being sent as a long stream, starting at byte n and going up
+  - A sliding window describes the range of bytes in the stream the sender can transmit next
+  - As the window gets smaller, the sender should slow down when sending
+  - As the window gets bigger, the sender should send more quickly
+  - The sender recomputes the space available in the reciever every time it recieves an ACK
+  - The left hand edge of the window is defined by the acknowledgement number in the latest ACK
+  - The right hand edge is then given by adding on the size of the advertised window
+  - The window size is sent in every ACK segment
+  - As more ACKs are recived the window closes as the left edge advances
+  - As the application reads data, the window opes as the right edge advances
+  - Rarely the window can shrink (right edge recedes), perhaps the buffer shrinks due to memory being used else where
+  
+  ![b5d5a03a.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\b5d5a03a.png)
+  
+  - This is from the point of view of the sending end of the connection
+  - We have recieved an ACK of 5 and a window of 7
+  - Bytes to the left of the window (1-4) have been ACKed and are safe designation
+  - The advertised window tells us there is 7 bytes in the destination:
+  - The bytes to the right cannot be sent yet
+    - 12 onwards
+  - Bytes within the window are wither not ACKed yet, or represent free space
+  - UnACKed bytes (5-7) are those that have been sent by the send, revieved by the destination but an ACK not yet recieved by the sender 
+  - Free space 8-11 is the actual number of bytes that the sender can be sure that can be buffered
+  - The sender can compute the fre space as the latest window value munis the number of bytes sent but as yet unACKed
+  - Thus the sender knows the limit on how much data it can send
+  - It is not unusual for the window to reduce to 0
+  - The dender will have to wait before sending more data
+  - When the reciever is ready to recieve more data it will send a duplicate ACK with the same ACK number as the ACK with window 0
+    - But this will have a non 0 window
+    - This is a window update segment
+    - It may or may not contain data
+  - Complications arise when this window update segment gets lost
+    - Persist Timer is used in this case
+  
+  ### Delayed ACKs
+  - Instead of immediately ACKing every segment, we can sligly delay it and piggyback it on returning data
+  
+  ![b50ca802.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\b50ca802.png)
+  
+  - For example when you log on to a remote terminal each keystroke is echoed back to your screen
+  - Where intermediate ACK uses 4 segments
+  - Delayed ACK piggybacking on the echoed key uses three segments
+  - As far as the user is concerned, they see the keystroke echoed in the same way, with no extra delay
+    - But fewer segments are sent
+  - It is important to reduce traffic on a heavily loaded network
+  - It also reduces the chance of a lost segment
+  - By delaying we might also be able to ACK more than one segment at a time
+  - If we recieve three segments in a delay period, we can simply ACK the last segment
+    - This implicitly ACKs the other two segments
+  - An ACK indicates which bytes we are expecting next and sey all the previous bytes were recieved
+  
+  ![41d5d70a.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\41d5d70a.png)
+  
+  #### How long to delay an ACK
+  - If too long, the sender might think hte segment was lost and resend
+  - If too short, we might not get many free piggybacks or multiple ACKed segments
+  - Typical delay is up for 200ms
+  - Spec says no more than 500ms
+  - So each time you recieve a data segment the TCP software should set a timer for that segment that exprires after 200ms
+  - If the segment has not already been ACKed (e.g on a returning data segment), ACK it (and any other pending ACKs) when the time expires
+  - Many operating systems have a single global timer that runs every 200ms instead
+    - Not as accurate but easier to implement
+  - If you get an out-of-order segment, you must not delay, but send an ACK back immediately
+    - This might be a duplicate ACK of the one you sent earlier
+    - This is to inform the sender that something may have gone wrong
+    - Though the other end will wait for three duplicate ACKs
+  
+  ### Nagle
+  - When sending keystrokes over the network there is a lot of wasted bandwidth
+  - A keystroke could be 1 byte
+  - This is sent in a TCP segment with 20 bytes for a header
+    - Which is contained in an IP datagram with 20 bytes of header
+    - And so on down the layers
+  - So we are essentially sending 40 bytes for each byte of data
+  - The proliferation of tinygrams causes additional congestion in a network
+  - Nagle created a stratry for reducing this
+  - It applies to the sender of the tinygram (client) rather than the reciever (server)
+  
+  **Nagle's Algorithm**
+  > A TCP connection can have only one outstanding unACKed small segment: no additional small segment can be sent until that ACK has been recieved
+  
+  - If you are sending tinygrams, only send one and wait until you get its ACK before sending more
+  - Any small segments waiting to be send should be collected together into a single larger segment that is sent when the ACK is recieved
+  - This segment can also be sent if:
+    - You collect enough small segments to full a MSS segment
+    - They have collectively exceeded half the destination's advertised window size
+  - This leaves open the definition of "small"
+  - Variants choose anything from "1 byte" to "any segment shorter than the maximum segment size"
+  - The faster the ACKs come back the more tinygrams can be sent
+    - The more congested the network, the slower the ACKs return
+    - Its kind of self regulating
+  - Sometimes this isnt the best idea:
+    - In a GUI over the internet each mouse movement becomes a tinygram
+    - This could cause the curser to jump erratically
+    - Nagle can be turned off in these cases
+  
+  ### Silly window syndrome
+  - Another problem with tinygrams
+  
+  ![1f649f4a.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\1f649f4a.png)
+  
+  - A is sending data to B, but B is reading only one byte at a time
+  - B's buffer fills, and B ATKs with a window of 0
+  - A holds off sending more data 
+  - B reads a byte
+  - B sends a window update segment, size 1
+  - A gets this and sends as much data as possible:
+    - I.e 1 byte
+  - B ACKs with window 0
+  - B reads a byte
+  - B sends an update, size 1
+  - A sends 1 byte
+  - And so on
+  - We are back to the two segment per byte high overhead:
+    - This is know as silly window syndrome
+  - It would be better if B did not send an update of 1, but waited until there is more space
+  
+  **Clarke's algorithm for SWS**
+  >Never send an update for window of 1; only advertise a new window when either:
+  >A. There os enough space for a full segment
+  >B. The buffer is half empty
+  
+  - Nagle and SWS fir together naturally
+  - When wondow scaling is in effect, "small" must be at least the siz of the window 
+    - We cant advertise a window smaller than that
+  - But that wont be a constraint until the scale is bigger than a segment:
+    - e.g 2<sup>10</sup> =  1024, but 2<sup>11</sup> > 1500
+  
+  ### Congestion
+  - TCP doesnt havce to implement Nagle or SWS or delayed ACKs
+    - It is just a good idea to
+  - Nagle and SWS are good where there is a small amount of data being transmitted
+  - When handling large amounts of data we want to get it to its destination as fast as possible, bur we have to consider:
+    - The destination's ability to cope
+    - The capacity of the network
+  - Congestion happens when more data is being sent htan the network can handle
+    - Routers will drop packets if there isnt enough onward bandwidth
+  - There are several strategies in TCP to help deal with and avioud congestion
+  
+  #### Spotting congestion
+  - This might be difficult given that it might be happening in a part of the network many hops away form both source and destination
+  - We watch for segment loss
+  - Segments can be lost through errors in transmission or being dropped at a congested router (or destination)
+  - Poor transmission is unusual these days, so we assume loss is due to congestion (which is more common)
+  - TCP treats missing or duplicate ACKs as a sign of congestion
+  
+  ![0157e1c1.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\0157e1c1.png)
+  
+  - Congestion can happen in the router due to lack of capacity in an onward link
+    - A router will drop the packet if it can't cope
+  - Similar to the advertised window for dealing with congestion, we have a congestion window for congestion in a network
+  - A source or destination connot determine this directly
+  - We can send segments and watch what ACKs we get back
+  - If we have a lot of data to send, we do not want to wait for each ACK before sending the next segment
+    - It is better to send several segments and then wait to see from the ACKs which were safely recieved
+  - But if we send too many segments at one time and the network is congested, the segments will be dropped
+    - The will make things worse
+  - So have to estimate the congestion window and send many segments at once, but not too many
+  - If we get it right, we get a continual stream of segments going out and ACKs coming back
+  
+  ### Slow start and congestion avoidance
+  - We estimate the network congestion by whatching the number of ACKs comming back
+  - This estimate controls the congestion window
+  - This is another constraint on sending additional data to the advertised window
+    - It is a cad idea to send more data than indicated by the either windoe
+  - We describe a basic flow control strategy that estimates the congestion window:
+    - Many modifications exist (TCP Tahoe, TCP Reno ...)
+  - The congestion window (cwnd) is initialized to the maximum segment size of the destination
+  - A variable ssthresh:
+    - The threshold is intialised to 64KB (this can vary)
+  - Every time a timely ACK is recieved, he congestion window is increased by one segment
+  
+  ![dc626714.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\dc626714.png)
+  
+  - So initially we send one segment
+  - Then two at a time
+  - Then four ..
+    - Note 4 because we get 2 more ACKs back
+  - This is called slow start
+  - It is actually a near-exponential increase in the congestion window over time
+  - It is "slow" in comparision with the earlier version of TCP that started by blasting out segments as fast as possible with no regard for the network
+  - The increase continues until we reach the threshold ssthresh or returning ACKs are duplicated or timed out
+  - The rate is also limited by the advertised window of the destination
+    - We can only send the minimum of the congestion window and the advertised window
+  - The congestion window is a limit set by the sender while the advertised window is a limit set by the reciever
+  
+  #### Congestion avoidance
+  - If we reach ssthresh without a problem, we can start the congestion avoidance phase
+  - Now we increase the congestion window cwnd by one segment each round trip (RTT)
+  - So one per burst of segments
+  - This is now a linear increase over time
+  
+  ![f8bbd01d.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\f8bbd01d.png)
+  
+  - Eventually the network's limit will be reached and a congested router somewhere will start dropping segments
+  - The sender will see this when either:
+    - It gets some duplicated segments
+    - There is a timeout waiting for ACKs
+  - Note we might be in either of the slow start or the congestion avoidance phases when congestion occurs: particularly if ssthresh was initially set very large, as its often done these days
+  
+  **When congestion is detected:**
+  - The threshold ssthresh is set to half the current transmit size
+  - This is smaller than the current congestion and advertised windows
+  - This is also rounded up to a minimum of 2 sements
+  - If it was a timeout, the congestion windwo cwnd 
+  - is set back to one segment
+    - And we go back into slow start
+  - Whan ACKs start coming through we resume increasing the congestion window again according to either slow start or congestion avoidance
+    - Depending on whether cwnd is less than ssthresh or not
+  
+  ![af6b879a.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\af6b879a.png)
+  
+  - The sender eventually converges on a rate that is neither too fast, nor too slow
+  - It is dynamic
+  - If conditions on the network chang, it can adapt to the new state
+  - If there is no congestion on the the network it will increase until it reaches the advertised window
+  
+  ### Fast retransmit
+  - When an out-of-order segment is recieved the TCP protocol calls for an immediate ACK (it must not be delayed)
+  - The sender can start seeing duplicate ACKs
+  - This is to inform the sender as soon as possible that something is wrong
+  - Jacobsen's fast retransmit strategy builds on the idea that the receipt of several duplicated ACKs is indicitive of a lost segment
+  - Note 1 or 2 duplicate ACKs might just be out-of-order delivery
+    - 3 indicaes a problem
+  - If three ACKs are recieved the sender should retransmit the indicated segment immediately
+  - Next Jacobsen says do not go intoto slow start but do congestion avoidance:
+    - This is the fast recovery
+  - We do not want slow start as the duplicate ACKs indicate that later data segments have reached the destination and is buffered there
+  - So data is still arriving (mostly) and we dont want to abruptly cut the flow by doing slow start
+  - Fast retransmit and fast recovery are quite effective at getting the flow going again after a loss
+  
+  - There have been many tweaks to this basic flow control strategy:
+    - Largecr initial ssthresh
+    - Larger initial cwnd
+    - Slow start counting numbe rof segments ACKed not just number of ACKs
+    - Treating duplicate ACKs like a timeout
+    - One timeout, setting cwnd to half ssthresh (not just 1 segment)
+    - Fast recovery : wait for the ACK of the entire transmit window before entering gongestion avoidance
+    - Many more ...
+  - Other kinds of congestion strategies exist:
+    - Explicit congestion notification (ECN)
+      - Aim to indicate congestion before it happens
+      - Router set flags on the segment when they think congestion is imminent
+  
+  ### tcpdump
+  ![72273307.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\72273307.png)
+  
+  - Flags: S is SYN, . is ACK, F is FIN, etc
+  - SEQ and ACK numbers are shown as offest after the open
+  - SEQ format is "deq of first byte:seq of last byte +1"
+  - wscale is the advertised window scale 2<sup>7</sup> = 128
+  - A advertised window of 5792 is then 5792 x 128 = 741376 bytes
+  - Times 14:47:57.806189 with microsecond precision
+  - Maximum segment size MSS 1460 = 1500 − 40 for 40 bytes of IP and TCP header
+  - Actual segment length is 1448 = 1460 − 12 since there are 12 bytes of TCP options
+  - melete sends 4 segments before an ACK; more than described in the basic strategy
+  
+  ### Path MTU descovery
+  - Aimed at getting the largest segment size a connection can handle
+    - But not too large
+  - The IP layer fragmentation is expensive, so we use MTU descovery
+  - We send segments of decreasing size
+    - Starting with the minimum MSS of the sending interface and the MSS announced by the other end
+      - In the TCP setup handshake
+      - Or 536 if other end did not give an MSS
+  - We use the IP flag DF (do not fragment)
+    - Note the cross layer activity
+  - If an ICMP erro "fragmentation needed but DF set" happens during a TCP connection
+    - The congestion window should remain unchanged
+    - But a slow start should begin
+  - This is to erflect the fact that there is not a congestion fault here:
+    - But we do need to back off a bit to allow ACKs to start coming through again
+  - It is recommended that you try a larger MTU once in a while
+    - Every 10 mins or so
+    - Routse ccan vary dynamically
+  
+  ### TCP timers
+  #### Retransmission timer
+  - The timer that determines when to send in the apsance of an ACK
+    - Retransmission timeoit
+    - A short time is porrt on slow but reliable networks
+    - A long time is poor for the data rate
+  - WE want a dynamic behaviout that adapts to changing conditions rather than a simple fixed timeout
+  - If the network slows down, the timeout should increase
+  - If the network speeds up the timeout should decrease
+  - Jacobson gave an easy algotithm:
+    - Keep a variable, the round trip time (RTT) for each connection
+  - RTT is the best current estimate for the time of a segment going out and the ACK returning
+  - If we haven't recieved an ACK in approximately this time, deem it lost
+  
+  ##### More detailed explanation
+  - When a segment is sent, its timer starts
+  - I the ACK returns before the timeout, TCP looks at teh actual round trup time M and update RTT using :
+    - RTT = αRTT + (1 − α)M
+    - α is a smoothing factor, usually 7/8 for easy arithmetic
+  - RTT increases smoothly as conditions change, it doesnt het too upset by the occasional straggler that is unusually late or early
+  - We need to determine a timeout interval given RTT
+  - This should take the standard deviation of the RTT into account
+    - If the measured RTTs have a large deviation it makes sense to have a larger timeout
+  - True standard deviations are difficult to compute quickly (they use square roots)
+    - Jacobson suggested using mean deviation
+  - Mean deviation:
+    - D = βD + (1 − β)|RTT − M|
+    - D is close to the standard deviation and is much easier to calculate quickly
+    - A typical value for β is 3/4
+  - The timeout value is set to:
+    - T = RTT + 4D
+    - The 4 and the values for α, β were found in good practice
+    - When sending a segment (in practice a burst of segments) set the timer to expire after time Y
+  - If the timer expires after teh ACK is recieved
+    - We resend the segment
+    - We need to update the RTT somehow
+  - We cant use the RTT of the resent segment as we might get the somewhat delayed ACK of the origional segment
+    - Not the resent segment
+  
+  **The retransmission ambiguity problem**
+  ![0b1268ba.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\0b1268ba.png)
+  
+  - The measured RTT would be much too small
+  - Karn's algorithm is to double the timeout T on each failure
+    - But not adjust RTT
+  - When segments start getting through normal RTT updates and RTT quickly reaches the appropriate value
+  - This doubling is called exponential backoff
+  - Alternatively, we have the option header timestamp and this solbes the retransmission ambiguity directly
+  - Note:
+    - A TCP option timestam is a 32 bit unsigned integer with no particular precision specified
+      - Just something that matches the presision of the retransmit timer
+    - Something in hte range 1ms-1s precision is suggested
+  
+  #### Persist timer
+  - The timer in TCP that aims to prevent deadlock throug the loss of window update segments
+  
+  ![aaf7272e.png](:storage\\0281fdb7-856a-4e4f-bec6-e6e8b0c05961\\aaf7272e.png)
+  
+  - A sends to B
+  - B replies with an ACK and window size of 0
+  - A gets the ACK and holds off sending to B
+  - B frees up some buffer space and sends a window update to A
+    - This update is lost
+  - Now A is waiting for the window update from B and B is waiting for more data from A
+    - Deadlock
+  - To prevent this, A starts a persist timer when it gets the 0 window from B
+  - If this timer expires A prods B by sending a 1 byte segment
+    - A window probe
+  - If B gets this the ACK will contain B's current window size
+  - If the window is still 0, A resets the timer and tries again later
+  - The persist timer starts with something like 1.5 seconds, doubling with each probe
+    - It is rounded up or down to low withing 5 to 60 seconds
+    - So timeouts are 5, 5, 6, 12, 24, 48, 60, 60, 60, ...
+  - The persist mechanism never gives up
+    - Sends window probes until either the window opens or the connection closes
+  - The persist timer is unset when a non-zero window value is recieved
+  
+  ##### Keepalive timer
+  - This timer is an optional part of the TCP/IP standard
+    - Some implementations dont have it and it is occasionally regarded as contrivertial
+  - When a TCP connection is idle no packets flow between the source and destination
+  - So part of the path could break and be restored and the connection would be non the wiser
+  - This gives a bit of resilience against flakey networks
+  - On the other hand sometimes the server wants to know if the client is still alive
+    - Each client TCP connection uses some resources in the server (buffers, timers, etc)
+  - If the client has crashed these resources could be better used elsewhere
+  - So ther server sets a keep alive timer when the connection goes idle
+    - Typically 2 hours
+  - When the timer expires, the server can send a keepalive probe
+  - This is simply an empty segment (i.e no data)
+  - If the server gets an ACK everything is okay
+  - If not ther server might conclude that the client is no longer active
+  
+  **This has four cases:**
+  1. **The client is up and running**: the keep alive probe is ACKed and everybody is happy, the keepalive timer is reset to 2 hours
+  2. **The client has crashed or is otherwise not responding to TCP**: The server gets no ACK and resends after 75 seconds. After 10 probes, 75 seconds apart, if there is no reponce, the server terminates the connection with "connection timed out" sent to the server application
+  3. **The client has crashed and rebooted**: The client gets the probe and responds with an RST. The server gets the RST and terminates the connection with "connection reset by peer" sent to the application
+  4. **The client is up and running, but is unreachable**: E.g in the case of broken routing. This is indistinguishable from case 2, so the same events ensue
+  
+  **There are several reason not to use keepalive**
+  - They can cause a generally good connection to be closed because of an intermittent failure of the a router
+  - They use bandwidth
+  - Some network operators charge per packet
+  
+  - Although packets are only sent every 2 hours so the later two problems are not too bad
+  - It is usually possible to disable keepalive in the application:
+    - Some people think that keepalive should not be in the TCP layer
+    - It should be handled by the application layer
+      - I.e the non-existant session layer
+  
+  ---
+  
+  ## TCP alternatives
+  - QUIC (quick UDP Internet connection):
+    - A google developed alternative to TCP
+    - Primarily aimed as a better transport layer for HTTP
+    - This is reliable, connection oriented, has congestion control, is encrypted and authenticated
+    - Is transmitted using UDP datagrams
+  - But routers tend to mess with or drop packets that they do not recognise the protocol
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

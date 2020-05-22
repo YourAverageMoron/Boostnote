@@ -1,0 +1,573 @@
+createdAt: "2019-12-30T11:30:51.575Z"
+updatedAt: "2020-01-17T05:51:31.135Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Reaching Agreements - Negotiation"
+tags: [
+  "CM30174"
+  "Computer_Science"
+  "Intelligent_Agents"
+  "University"
+]
+content: '''
+  # Reaching Agreements - Negotiation
+  
+  ## Introduction
+  
+  ### Reaching agreements
+  - How can self-interested agents reach agreements?
+  - Zero sum encounter -> no agreement is possible
+  - Expect mutually beneficial
+    - Gains for both
+  - Reaching an agreement depends on the agents' negotiation capabilities
+    - Represent an offer as:
+      - ![aa024c01.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\aa024c01.png)
+    - Individual validation is:
+      - ![eb3eee25.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\eb3eee25.png)
+    - Given threshold:
+      - T, V V ≥ T → accept, V < T → reject
+    - Weights -wi-> and threshold T are private
+    - Simple negotiation
+      - Each agent changes -vi-> in turn or simultaniously
+      - The validation monotonically approaches threshold
+    - Validations must be compatible
+  
+  ### Protocols and strategies
+  - Negotiation is governed by a mechanism or protocol
+  - The mechanism defines the "rules of encounter"
+    - Auctions are a large class of effective mechanisms
+  - Mechanism design is the activity of designing protocols to have desirable properties
+  - For a protocol, is there a strategy an agent can use?
+    - What is the dominant strategy for a particular mechanism
+  
+  ### Mechanism design
+  - Desirable (but not necessarily compatible) properties:
+    - Convergence/ guanrenteed success
+    - Maximise social welfare
+    - Pareto efficiency
+      - Best possible allocation of resources
+      - Any other allocation would make one agent worse off
+    - Individual rationality
+    - Stability
+    - Simplicity
+    - Distribution
+  
+  ### Spectrum of mechanisms
+  - Simple strategy + complext mechanism
+    - Trust in mechanism
+    - Limited capacity for negotiation
+  - Cede autonomy to mechanism
+    - E.g. auction
+  - Reveal (private?) information to mechanism
+  - Shift responsibility to agent strategy
+    - Trust in "self"
+    - Greater Capacity for decision making
+  - Keep more autonomy
+    - Accountability + reasonabilityfor decision
+  - Reveal less information
+  
+  ---
+  
+  ## Auctions
+  - Two roles:
+    - Auctioneer (1)
+    - Bidder (>1)
+  - Goal is to allocate the item to one of the bidders
+  - Auctioneer (normally) aims to maximise the price
+  - Bidders aim to minimise price
+  
+  ### Auction parameters
+  - Goods can have:
+    - Private value
+      - Or
+    - Public/common value
+      - Or
+    - Correlated value
+  - Winner may pay:
+    - First price
+      - Or
+    - Second price
+      - Or
+    - n<sup>th</sup> price
+  - Bids may be:
+    - Open cry
+      - Or
+    - Sealed bid
+  - Bidding may be:
+    - One shot
+      - Or
+    - Ascending
+      - Or
+    - Descending
+  
+  ### English auction
+  - Characterisitcs
+    - First-price
+    - Open cry
+    - Ascending
+  - Susceptable to
+    - Winner's curse
+      - Winning paying too much
+    - Shills
+      - False bidder
+  - Dominant strategy is
+    - bid current bid+δ
+    - Until bid reaches bidder's valuation
+    - Then withdraw
+  
+  ### Dutch auction
+  - Characteristics
+    - Open-cry
+    - Descending
+    - Auctioneer starts at price above likely market valuation
+    - Auctioneer lowers offer price until an agent bids
+    - The good is allocated to that agent
+  - Best strategy is to bid only at own validation
+  
+  ### Sealed-bid auction
+  - Characterisitcs
+    - First-price
+    - Sealed-bid
+    - One-shot
+  - Single round
+  - Bidders submit a sealed bid for the item
+  - Item is allocated to agent with the highest bid
+  - Best strategy is to bid less than the true validation
+    - This avoids overpaying
+  
+  ### Vickrey auction
+  - Characterisitics
+    - Second-price
+    - Sealed-bid
+    - One-shot
+  - Highest bid wins
+  - Pays price of second highest bid
+  - Untruthful bids can distort market
+  - Dominant strategy is to bid the true valuation
+    - Overbid -> risk paying above the valuation
+    - Underbid -> Reduced chance of success
+  
+  ### Continuous double auction
+  - Simple but effective
+  - Basis for may real world mechanisms
+  - Also known as bargaining or haggling
+  - The given buyer B and seller S, proceed in rounds:
+    - The seller announces an offer proce p1
+    - The buyer announces a bid price p2, assume p1 > p2
+    - If p2 ≥ p1, sale is agreed at (p1+p2)/2
+    - Seller reduces offer giving pi, i ∈ 3, 5, ...
+    -  Buyer increases bid giving pj, j ∈ 4, 6, ...
+    -  Repeat from step 3
+  -  Generalizes to multiple buyers and multiple sellers
+  -  More useful in an electronic than a physical setting
+    - As zero intelligence trading donstrates
+  
+  ### Zero intelligence traders
+  - Trader submits random bids and offers
+  - Simulations with CDA markets exhibit a human-like proce time-series
+    - Appear to converge to theoretical equilibrium price
+    - Allocate efficiency comparable to hman markets
+  - Three kinds of agent in experement populations:
+    - ZI-U: Unconstrained agents, settle at any price
+    - ZI-C: Constrained agents, may not make a loss
+    - Human agents
+  
+  > **Allocated efficiency** is a state of economy in which production represent consumer preference; in particular, every good or service is produced up to the point where the last unit provides a margional benefit to consumers equal to the margional cost of producing
+  
+  - Claimed conclusions
+    - No intelligence needed to trade in a CDA
+    - Not permitted to trade at a loss
+    - Market structure ensures allocative eddiciency
+  
+  #### Pathological market conditions for ZI
+  - **A**:
+    - Systematic supply and demand
+  
+  ![3ded37b9.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\3ded37b9.png)
+  
+  - **B**
+    - Flat supply
+  
+  ![dbf78feb.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\dbf78feb.png)
+  
+  - **C**
+    - Flat supply and demand curves with excess supply
+  
+  ![1ca7d72e.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\1ca7d72e.png)
+  
+  - **D**
+    - Flat supply and demand curves with excess demand
+   
+  ![4614a397.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\4614a397.png)
+  
+  #### Zero intelligence plus (ZIP)
+  - Add basic machine-leariningto ZI-traders
+  - ZIP trader adapt profit margin using four factors:
+    - Does the agent need to buy or sell?
+    - Was last quote an offer 9seller) or a bid (buyer)?
+    - Was las quote accepted or rejected
+    - Was last quote latger or smaller than own quote
+  - At time t trader i calculates
+    - The sout proce p<sub>i</sub>(t) for a unit j with
+    - Limit price λ<sub>ij</sub> using
+    -   Profit-margin µ<sub>i</sub>(t) = λ<sub>ij</sub>(1- µ<sub>i</sub>(t))
+  
+  ##### ZIP profit margin algorithm
+  - For a buyer with price pi
+    - If last shout accepted at price q then
+      - A buyer bi with pi ≥ q, increases its margin
+        - Moves its price down towards q
+      - If the last shout was an offer tehn y buyer bi with pi ≤ q, decreases its margin
+        - Moves its price up towards q
+    - Else 
+      - If last shout was a bid then a buyer bi with pi ≤ q, decreases its margin
+        - Moces its price up towards q
+  - In each case q is used to revide the buyer's margin and so bring its price closer to the current market price
+  - How big should the change be?
+  
+  ##### ZIP adaption
+  - Adaption comes from changing the profit margin, µ
+  - Widrow-Hoff Least Mean Squares filter:
+    - A(t+1) = A(t) + ∆(t)
+      - A(t) is the actual output
+      - D(t) is the desired output
+      - ∆(t) = β(D(t) − A(t)) is the change in output, where β is the learning rate
+      - For constraint D(t) get asymptotic convergence of A(t) to D(t) at a speed determined by β.
+  - To change profit margin, trader computes target price τi(t) and uses Widrow-Hoff to compute shout proce for the next time step pi(t+1)
+  
+  ### Combinatorial Auctions
+  - Auctions should achieve (economically) efficient, effective allocation
+  - Preceding mechanisims depend on intelligent and rational bidding
+  - Need complete information for Pareto optimal allocation
+  - CA aims for optimal allocation by making the auctioneer fo all the decision making
+  - Consiquence is the winner determination problem
+  - Given a set of bids
+    - Find an allocation of items (not all) to bidders
+    - That maximizes revenue (or some other criterion)
+  - We want allocations that maximizes the sum over all bidders of their valuations for the suset of items they recieve
+  - Bids are valuations for a subset of items
+    - A bundle
+  - Winner determination problem can be solved as an integer linear program
+  - Equivelelent to hte weighted set-packing problem (NP-hard)
+  - Need to check
+    - For wach subset of bids whether it is feasible (no bids share items)
+    - How much revenue results
+  - For k bids, there are 2<sup>k</sup> subsets
+  
+  #### Example
+  Given items (1,2,3,4,5,6,7,8,9) for sale:
+  |Bidder|Bid|Bundle   |
+  |------|---|---------|
+  |1     |45 |1,2      |
+  |2     |98 |1,4,7,8  |
+  |3     |86 |1,2,4,5,9|
+  |4     |62 |4,9      |
+  
+  - Bid 2 has the most revenue: 98
+  - But:
+    - Bids 1 and 4 do not overlap
+    - Can satisfy both
+    - Sell goods 1,2,4,9 for 45+62=107
+  
+  - (Naive) solution
+    - Compute all combinations
+    - Search for sets with the greatest revenue
+      - Take that combination
+      - Compare with every other combinations that
+        - Match
+        - Hace a higher score until done
+  - Practical solvers (e.g CPLEX) do this and add heuristics to prune search tree
+  
+  ### Which auction is best
+  - For bundles: CA is best, but may not be practical
+  - For simple encounters: CDA is effective
+  - Economic theory says there is no difference between the rest
+  
+  ---
+  
+  ## Negotiation
+  - Auctions are good for resource allocation
+  - We need negotiation for reaching agreements
+  - Characterisics of a negotiation
+    - A **negotiation set**
+      - Possible proposals
+    - A **protocol**
+      - Moves in the negotiation process
+    - **Strategies**
+      - Individual and private to each agent
+    - A **rule**
+      - For when a deal is struck and what it is
+  - Negotiation usually proceeds in a series of rounds
+  - Each agent makes a proposal each round
+  
+  ### Negotiation scenario
+  - A delivery problem
+    - Agent a1 has two goods G1 and G2
+    - Agent a2 has two goods G3 and G4
+    - Goods G1 and G3 need to be delivered to L1
+    - Goods G2 and G4 need to be delivered to L2
+  - Each good delivery problem is a task t1 - G1 -> L1 etc
+  - Worst case is that each agent goes to L1 and L2
+  - Better to exchange one task so one agent goes to L1 and the other to L2
+  - Task-orientated domains formalize this kind of problem
+  
+  ---
+  
+  ## Task orientated domains
+  - A task-oriented domain (TOD) comprises:
+    - T = t1, . . . ,tm
+      - A set of tasks
+    - A = a1, ..., an
+      - A set of agents
+    - c : 2<sup>T</sup> → R<suo>+</sup>
+      - The cost of executing each subset of tasks, where 2<sup>T</sup> is all the finite subsets of T
+    - The cost function is monotonic
+      - Adding tasks never decreases the cost
+      - Ti, Tj ⊆ T and Ti ⊆ Tj ⇒ c(Ti) ≤ c(Tj)
+  - An encounter is the assignment of an ordered list of tasks t1,...,tn such that ti ∈ T, to agent ai ∈ A
+  - Can agent ai do better by negotiating a reallocation of its tasks?
+  
+  ### Deals in TDOs
+  - Given agents {a1,a2} and encounters <T1,T2>
+    - A deal (re-)allocates tasks T1 ∪ T2 to agents a1 and a2
+    - For deals δ = <D1, D2>:
+      - Agents ai is allocated tasks Di with no tasks left over
+      - D1 ∪ D2 = T1 ∪ T2
+    - The cost of the deal to agent ai is c(Di), denoted costi(δ)
+  - The utility of deal δ to agent ai:
+    - utility<sub>i</sub>(δ) = c(Ti) - cost<cub>i</sub>(δ)
+    - Utility measures gain from deal... can be negative, in which case teh origional allocation is prefered
+    - In the absence of (re-)allocation, agents take the conflict deal, Θ = <T1,T1> (the origional allocation):
+      - utility<sub>i</sub>(Θ) = 0, ∀ai ∈ A
+  - Deal δ is individual rational if it has positive utility
+  
+  ### Deal dominance
+  - The deal δ1 dominates δ2 iff:
+    - C1: Deal δ1 is at least as good as δ2 for every agent
+      - ![b8a0cd6c.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\b8a0cd6c.png)
+    - C2: Deal δ1 is better than δ2 for some agent:
+      - ![3c2e3011.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\3c2e3011.png)
+  - Deal δ1 waskly dominates δ2 if at least C1 holds
+  - A deal is Pareto optimal if ∃δ' such that δ' weakly dominates δ
+  - A deal δ is individual rational if δ weakly dominates Θ
+  - The negotiation set is the set of deals that are:
+    - Individual rational
+    - Pareto efficient
+  
+  #### Example
+  - Two postment are based at C
+  - They have letters to deliver X, Y and Z
+  - The cost of going from node is denoted as a to f
+  
+  ![2ed5b152.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\2ed5b152.png)
+  
+  - Three tasks:
+    - t1 = {X, Y}
+    - t2 = {Y, Z}
+    - t3 = {X, Y, Z}
+  - Thus t1 has one letter to deliver to location X and one to location Y.
+  
+  **Assuming the postman starts and ends at C what are the task costs?**
+  - c(t1) = a + b + e OR 2a + 2b
+  - c(t2) = b + f + c OR 2b + 2c
+  - c(t3) = a + e + f + c OR b + f + d + a OR c + d + e + b
+  
+  **What are the possible allocations?**
+  - For postmen P1, P2
+  - Let the initial task alocation be Θ = <T1,T2>
+  - Where T1={t1,t2} and T2={t3}
+  - Assuming no additional cost for > 1 letter/locations:
+    - c(T1) = a + e + f + c
+    - c(T2) = a + e + f + c
+    - What are the alternatives
+      - δ1 is T1 = {t1,t3} and T2 = {t2}
+        - c(T1) = a + e + f + c and c(T2) = c + b + f
+      - δ2 is T1 = {t2,t3} and T2 = {t1}
+        - c(T1) = a + e + f + c and c(T2) = a + e + b + f
+      - δ3 is T1 = {t1,t2,t3} and T2 = {} or vice versa
+        - c(T1) = a + e + f + c and c(T2) = 0 (and v.v.)
+    - The Pareto optimal deal:
+      - δ3: P1 or P2 delivers all the letters 
+      - Neither is worse off
+      - One is better off
+  
+  ===
+  
+  ## A protocol and strategy
+  
+  ### The negation set
+  ![910b05eb.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\910b05eb.png)
+  
+  - Note: idealized visualization for illustration
+  - ABCD = possible deals
+  - Utility(E) > all deals left of B-D for aagentj
+  - utility(E) > all deals bellow A-C for agenti
+  
+  ### Monotonic concession protocol
+  - Negotiation proceeds in rounds
+    - Agents simultaneously propose a deal from the negotiation set
+    - Agreement if one agent finds that the deal proposed by the other is at least as good or better that its proposal, but which deal?
+      - If both agent's offers match/axceeds the others, choose at random
+      - If one offer matches/exceeds other, take that
+    - Otherwise, a new round of simultanious proposals
+    - At each round, no agent may propose a deal that is less prefered by the other agent than previously
+      - Utility must increase
+    - If neither agent makes a concession, then the negotiation terminates with the conflict deal
+      - Named E
+  
+  ### Zeuthen Strategy
+  **Tree questions:**
+  - What should an agent's first proposal be?
+    - Its most preferred deal
+  - On any given round, who should concede?
+    - The agent least willing to risk the conflict deal
+  - If an agent concedes, then how much should it concede?
+    - Just enough to change the balance of risk
+  
+  ### Willingness to risk conflict
+  - Suppose an agent has conceded a lot then:
+    - Its proposal is close to conflict deal
+    - If a conflict deal occurs, it is not much worse off
+    - Therefore, it is willing to risk conflict
+  - Propensity to risk conflict rises as:
+    - utility(δ) − utility(Θ) → 0
+  
+  ### Quantifying Risk
+  - Risk at round t, for agent i denoted riskti ∈ [0, 1] is:
+  
+  ![d39859ec.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\d39859ec.png)
+  
+  - Higher risk values -> less to loose from conflict hence:
+  
+  ![c1b4a70f.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\c1b4a70f.png)
+  
+  ### Ideal strategy
+  The Zeuthen strategy is ideal:
+  - If one agent uses Zeuthen
+    - The other cannot do better than to use the same strategy
+  - Important for design of automated agents
+  - No need for secrecy about strategy
+  - Situation cannot be exploited using a different strategy
+  
+  ### Lessons from TDOs
+  - Small, contrived exmple
+  - Illustrates principles of reducing problem to essential elements
+  - Cost function can reflect as many factors as required
+  - Wxhaustive analysis -> scalability issues
+  - Demonstrates mapping of logistical reasoning to multiagent domain
+  
+  ---
+  
+  ## Coalitions
+  
+  ### What is a coalition?
+  - Temporary collection of agents working together to complete a task
+  - Coalition formation is how an agent decides to cooperate with others
+  - Because
+    - A task cannot be completed alone
+      - OR
+    - It is more efficient for several agent to work toygether
+  - Draws on auctions, nehotiathions anf TDOs
+  - Agents may have complementary capabilities
+  - When a task is completed:
+    - Payoff is distributes
+    - Agents return to undividual goals
+  - Given n agents, k tasks, there are k(2<sup>n</sup>-1) different possible coalitions
+  - The number of configurations is O(n<sup>(n/2)</sup>)
+  - Hence an exhaustive search is indeasible
+  
+  ### Issues in coalition formation
+  - For task T and agents A1, ..., An
+    - Which coalitions are good ones?
+  - What mechanisms can an agent use for coalition guarantees?
+  - What are the mechanism's efficiency and quality guarentees?
+  - How to handle distribution of work/payoff?
+  - When, and how, does a coalition dissolve?
+  
+  ### Solution types
+  - Self-intrest vs benevolence
+    - Simpler for benevolent, no need for payoff maximisation
+  - Centralization vs distrobution
+    - Central simpler to execute and enforce
+  - Environment super-additivity
+    - In super-additice environment any unification of two coalitions increases overall payoff
+  
+  ### Coalition formation 
+  
+  #### External
+  - By imposition
+    - An external agency makes decisions
+  - Agents advertise skills and prices
+  - Requestor defines properties for coalition
+  - External process computes optimal coalition
+  - Essentially equevelent to a combinatiorial auction
+  
+  #### Internal
+  - By self-organisation
+    - Buid coalitions by communication
+  - Process:
+    - Multi-lateral negotiation
+  - Identification of tasks (responsibilities)
+  - Negotiation of outcomes (self-interested agents)
+  
+  #### Coalition formation activities
+  - **Coalition structure generation**
+    - Partition into exhaustive disjoint coalitions
+    - Given {a1,a2,a3}, ∃ 7 coalitions:
+      - {a1}, {a2}, {a3}, {a1, a2}, {a1, a3}, {a2, a3}, {a1, a2, a3}
+    - And 5 coalition structures:
+      - {a1, a2, a3}, {{a1}, {a2, a3}}, {{a2}, {a1, a3}}, {{a3}, {a1, a2}}, {{a1}, {a2}, {a3}}
+      - It isnt desirable to generate all coalition structures in advnce
+  - **Optimizing coalition value**:
+    - Pool tasks and resources (agents) to maximise coalition value
+  - **Payoff distribution**
+    - How to share payoff to agents
+    - Equally, inputs, outputs, role
+  
+  ### Modeling agents
+  - A set of n agents: N = {A1, A2, ..., An}
+  - Each agent Ai has a vector of capavilities
+    - ![cd787450.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\cd787450.png)
+  - Each capability is a property that quantifies agent ability to perform a specific action
+  - Resources (and capabilities) are limited
+    - Each capability may be expendable (energy) or non-expendable (carry capacity)
+    - A coalition evaluation function computes the overall coapbility of a group of agents
+      - ![d9ad0543.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\d9ad0543.png)
+  
+  ### Modeling tasks
+  - A set of m independent tasks T={t1,t2, ..., tm}
+  - Describe each task tn with a vector of capabilities
+    - ![8d370fb7.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\8d370fb7.png)
+  - Utility fained from performing a task depends on the capabilities required to perform it
+  - A linear function of the resource amount is good enough
+  - Tasks may be (partially) ordered to show that task ti must be completed before starting task tj
+  
+  ### Modelling the coalitions
+  - A coalition C has a vector of capabilities Bc that is the element-wise sum of its members' capabilities
+  - For overlapping coalitions:
+    - Agent contributes a fraction to each coalition it is in to prevent double counting
+  - A coalition can perform a task t iff Bt satisfies:
+    - ![b752c3ca.png](:storage\\ec499997-e5e9-453e-9e07-df4638bdb00a\\b752c3ca.png)
+    - And t has no unsatisfied predecessor tasks
+  - An approximation of the value V of a coalition is the joint utility that the members can reach by cooperating
+  
+  ### Coalition formation algorithm
+  - Practical solution is to use a greedy anytime algorithm
+    - **Greedy**: makes a locally optimal decision at each step hoping this result in th eflobal optimal decision
+    - **Anytime**: Can be stopped at any time returning the best answer so far, more time may produce better answers
+  - Algorithm outline:
+    - Stage 1:
+      - Distributed computation of all possible coalitions and initial coalition values
+    - Stage 2
+      - Interative process
+      - Recalculate coalition values
+      - Agents decide upon prefered coalition and join them
+      - Agents in coalition do not participate further (no detaching)
+      - Repeat stage 2 until no agents are left
+  - Heuristic:
+    - Prefer smaller over larger coalitions
+    
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

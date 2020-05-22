@@ -1,0 +1,314 @@
+createdAt: "2019-12-26T15:03:59.098Z"
+updatedAt: "2019-12-28T17:10:03.090Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Practical Reasoning Agents"
+tags: [
+  "CM30174"
+  "Computer_Science"
+  "Intelligent_Agents"
+  "University"
+]
+content: '''
+  # Practical Reasoning Agents
+  
+  ## Achivement and maintenance tasks
+  - Most common types of task are achievement or maintenance tasks
+  - **Achievement task**
+    - A set of "good" states G ⊂ S
+    - Agent suceeds if it can bring about g ∈ G
+    - There is no preference in the order of G
+  - **Maintenance task**
+    - A set B of "bad" states B ⊂ S
+    - Agent suceeds if it can avoid all states in B
+    - It never takes an action that results in b ∈ B
+  - Use utility functions to capture these (system) goals
+  - Or make a plan to achieve goal
+  
+  ---
+  
+  ## Reasoning
+  
+  ### What is reasoning
+  - World state A = {fact<sub>a1</sub>...}
+  - World state B = {fact<sub>b1</sub>...}
+  - Want A -> B
+  - Need a provedure for ->
+    - Requires planning
+    - Means to evaluate plans
+    - Choose an appropriate plan
+  - Given A:
+    - Find a sequence of actions α*
+    - THat result in B
+  - Properties of environment => difficulty
+  
+  ### Automated reasoning
+  - Objective: carry out -> automatically 
+  - Hard because
+    - The real world is inacessible
+    - Reosources are bounded (dynamic)
+    - The world changes (dynamic)
+    - Don't know if action will work (non-deterministic)
+    - Actions of others will interfere (non-deterministic)
+  
+  ### Formilating the problem
+  - Decide on a simpler world model
+  - Restrict to problem-relevant features
+    - Decide what to consider
+    - Decide what to ignore
+  - Single or multiple agents
+  - Choices determine complexity of reasoner
+  
+  ### Abductive vs deductive
+  
+  #### Abduction
+  - **Abduction** works forward to the best explanation
+    - D is a collection of data (facts, observations, givens)
+    - H is an explanation for D: if true, H explains D
+    - There is no H' that explains D as well as H does
+    - Therefore His probably correct
+  - Good for diagnosis, plan recognition, natural language understanding and vision
+  - Explanation is not necessatily true
+  - It just happens to be consistent with available infomation
+  
+  #### Deduction
+  - **Deduction** works forward from premises to conclusion
+    - Predictive
+    - Inderence rule drive process
+    - Use presence of facts to infer (via rules) new facts
+    - Conclusion is proven with respect to available facts
+  
+  ### Forward vs backward chaining
+  - **Forward chaining**
+    - Current soluction -> goal
+    - Rules infer new facts from existing facts (deduction)
+    - Process continues until no more rules apply
+    - How (most) expert systems work
+  - **Backward chaining**
+    - Goal -> current solution
+    - Rules infer preconditions (lhs) from (sub)goal
+    - Process continues until no more rules apply 
+    - How Prolog (selective linear definition resolution) works
+  
+  ### Common features
+  Whatever kind of reasoning you need:
+  - Description of the world
+  - Specification of the goal
+  - A (large) search space of (sequences of) actions
+  - A process for exploring the search space
+  
+  ### Concrete approaches
+  - Case based reasoning
+  - Model based reasoning
+  - Qualitative reasoning
+  - Planning systems
+  - Constant satisfaction reasoning
+  - Rule based reasoning
+  - Ontologu inference
+  - Symbolic reasoning
+  - Logic programming
+  - These are not necessarily disjoing
+    - For example there are constrint logic based planning systems
+  
+  ### Summary of approaches
+  - All of these approaches try to solve the same problem:
+    - How to navigate a search space of possibilities (or possible facts)
+  - No one approach is better that another
+  - Choce depends on problem
+  - Formulation of problem impacts traceability
+    - Relies on deterministic turing machine using a polynomial amout of computation time
+  
+  ---
+  
+  ## Symbolic reasoning agents
+  - Views agents as knowledge-based systems
+  - Known as symbolic AI
+  - A deliberative agent:
+    - Has an explicit, symbolic representation of the world
+    - Maked decisions (action selection) using symbolic reasoning
+  
+  ### Why sysmbolic reasoning is hard
+  - The transduction problem
+    - How to maintain an accurate, adequate description of the (real) world
+    - How to do it fast eough to be useful
+    - How to solve vision, speach understanding, learning
+    - Use models
+  - The representation/reasoning problem
+    - How to represent information symbolically
+    - Realword entities and processes are complex
+    - How to get agents to reason with this information
+    - How to reason fast enough to be useful 
+    - How to solve knowledge representation, automated reasoning, automatic planning
+    - Use Ai technology
+  - Problem: Computational complexity of search-based symbol manipulation algorithims
+  
+  ---
+  
+  ## Deductive reasoning agents
+  - Use theorem proving
+  - Logic encode theory best action for situation
+  - Formally:
+    - ρ: the theory (typically a set of rules)
+    - ∆: A set of facts describing the state of the world
+    - Ac: set of agent actions
+    - ∆ |- <sub>ρ</sub> φ means can prove φ from ∆ using ρ
+  
+  ```
+  /* try to find an action explicitly prescribed */
+  for each a ∈ AC do
+    if ∆ |- ρ Do(a)
+      return a
+  
+  /* try to find an action not excluded */
+  for each a ∈ AC do
+    if ∆ not|- ρ notDo(a)
+      return a
+  
+  /* no action found */
+  return null
+  ```
+  
+  ### Things to consider
+  - Practical problems:
+    - How to convert video into predicates
+    - Assumes static environment
+    - Decision-making by first-order logic is undecidable
+  - Even decision-making with propositional logic is co-NP-complete
+  - Practical solutions
+    - Weaken teh logic
+    - Use symbolic, non-logical representations
+    - Shift some reasoning from run time to design time
+    - Accept complexity but recogniese common special cases
+  
+  ---
+  
+  ## Agent orientated programming
+  - Program agent in terms of intentional notations:
+    - Belief
+    - Commitment
+    - Intention
+  - AOP system should have tehse components:
+    - Logic to specify agents and describle mental states
+    - Interpreted programming language to program agents
+    - 'Agentification' process to convert applictations into agents
+  
+  ---
+  
+  ## Belief desire intention
+  
+  ### Intentions
+  - Intentions drive means-end reasoning:
+    - Decide how
+    - Try again if actions fail
+  - Intentions persist:
+    - Until achieved
+    - Unless unachievable
+    - Justification does not hold
+  - Intentions constrain future deliberation
+    - Only ocnsider options consistent with intentions
+  - Intentions influence beliefs upon which future practical reasoning is based:
+    - Plans assume achievement of intentions
+    - Not to do so is irrational
+  - Intentions not closed under implication:
+    - Side effects are not necessarily intended
+  
+  ### BDI model
+  - BDI agents, where:
+    - B is a variable of type Bel
+    - D is a variable of type Des
+    - I is a variable of type Int
+  - 2<sup>x</sup> denotes the power set (set of all subsets)
+  - Deliverations = option generation:
+    - 2<sup>Bel</sup> x 2<sup>Int</sup> -> 2<sup>Des</sup>
+  - Choose between options by filtering:
+    - 2<sup>Bel</sup> x 2<sup>Des</sup> X 2<sup>Int</sup> -> 2<sup>Int</sup>
+  - Updade beliefs using belief revision
+    - 2<sup>Bel</sup> x 2<sup>Per</sup> -> 2<sup>Bel</sup>
+  
+  ---
+  
+  ## Means-end reasoning: planning
+  - Symbolic AI assumes planning is central to agency 
+  - Uses first order formulae action schematica
+  - A planning system given:
+    - (Representation of) goal/intention to achieve
+    - (Representation of) action to perform
+    - (Representation of) environment
+    - This generates a plan to achieve the goal
+  - How to represent:
+    - Goal to be achieved
+    - State of environment
+    - Actions available to agent
+    - Plan itself
+  - Closed world assumption
+    - Anything not stated is false
+  - Represent a goal as a set of formulae
+    - {Goal(1), Goal(2), Goal(3)}
+  - Action representation
+    - Name + optional arguments
+    - Pre-condition(s): facts that must hold
+    - Add list: facts that hold after action
+    - Delete list: facts that fo not hold after action
+    - Each of which may contain variables
+  
+  ### Planning theory
+  - Ac = {α1, ..., αn}: a fixed set of actions
+  - <P<sub>α</sub>, D<sub>α</sub>, A<sub>α</sub>> : a descriptor for an action α ∈ Ac
+    - P<sub>α</sub> is a set of formulae of first-order logic that characterise the pre-condition of action α
+    - D<sub>α</sub> is a set of formulae of first-order logic that characterise those fact made false by the performance of α (the delete list)
+    - A<sub>α</sub> is a set of formulae of first-order that characterise those facts made true by the performance of α (the add list)
+  - O = {<P<sub>α</sub>, D<sub>α</sub>, A<sub>α</sub>> : α ∈ Ac}
+    - A set of plan operators
+  - A planning problem is a triple
+    - <∆, O, γ>
+    - With goal γ
+  - π = (α1, . . . , αn)
+    - A plan with repsect to a planning problem <∆, O, γ> determines a sequence of n+1 (state) models:
+    - ∆0, ∆1, ..., ∆n
+    - Where ∆0 = ∆ 
+    - and ∆i = (∆i−1 \\ D<sub>αi</sub>) ∪ Aαi   for1 ≤ i ≤ n
+  - π is acceptable iff ∆i−1 |- P<sub>αi</sub>, for all 1 ≤ i ≤ n
+  - π is correct if
+    - π is acceptable, and
+    - ∆n |- γ
+  - Plan function:
+    - 2<sup>Bel</sup> x 2<sup>Int</sup> x 2<sup>Ac</sup> -> Plan 
+  
+  ### Time 
+  - Deliberation and meanss-ends reasoning take time
+  - Deliberation output is optimal
+    - Maximises utility
+  - Intention was optimal at observation time
+  - Problem of calculative rationality: world mau change
+  - Behaviour optimal if (some or all)
+    - Deliberation and means-ends reasoning almost instantanious
+    - World is static while agent decides
+    - Optimal intention is still optimal
+  
+  ### Commitmentt: too much or too little?
+  - Several identified notation of committment:
+    - **Blind** commitment
+      - Maintain intention unitl achieved
+    - **Single-minded**
+      - Maintain unitl achieved or no longer possible
+    - **Open-minded**
+      - Maintain as long as believed possible
+  - Agent committed to:
+    - Ends: State of affairs to achieve
+    - Means: Actions to bring ends about
+  - Need agent to replan if plan goes wrong
+  - May lead to intention reconsideration
+  - Time problem gets worse
+    - Decide whether to reconsider or not
+  
+  
+  
+'''
+linesHighlighted: [
+  117
+  172
+  184
+  217
+]
+isStarred: false
+isTrashed: false

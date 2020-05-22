@@ -1,0 +1,85 @@
+createdAt: "2019-12-18T15:56:26.374Z"
+updatedAt: "2019-12-18T17:28:11.783Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Terminology"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # Terminology
+  
+  ## Failure
+  - A failure is the inability of a system or component to fulfil its operational requirement
+  - Failure is an event or behaviour that occirs at a partucular instant or time
+  
+  ---
+  
+  ## Error
+  - An error is a design flaw or deviation from a desired or intended state
+  - An error is a static condition, a state, which remains until it is removed (usually through human intervention)
+  - An error may lead to an operational failure
+  
+  ## Accident
+  - An undesired and unplanned (but not necessarily unexpected) event that results in (at least) a specified level of loss
+  - An accident for any particulat system must be defined:
+    - Level of loss
+  - Loss
+    - Life
+    - Property or environment
+    - Immediate or long-term
+  - A definition of what constiutes an accident may com from an individual regulator/government/company
+  - To prevent accidents, something must be known about their precursors and these precursors must be under the control of the system designers
+  
+  ---
+  
+  ## Near-miss or incident
+  - An event ehich involves no loss (or only minor loss) but has the potential loss under different circumstances
+  - An incident for a particular system depends on how accidents are defined for the system
+  
+  ---
+  
+  ## Hazard
+  - A hazard is a state of the system that may give rise to an accident
+  - Hazard is a situation which there is actual or potential danger to people or to the the environment
+  - Hazards are specific to a particular system and is defined with respect to the environment of the system/object
+  
+  ### Hazard and software
+  - Software is an abstraction not an object, so we can only talk about safety of software and it hazards within the context of the system in which it is used 
+  - We must define boundaries for the system we are considering otherwise everything around the system may be viewed as a hazard
+  - Boundaries are chonsen by the system designer
+    - This choice defines whar hazards are part of the system
+      - And controlable by the designer
+    - And what hazards are outside of the system
+      - And not controlable by the designer
+  
+  ---
+  
+  ## Risk (defined in terms of hazard)
+  - Risk is the hazard level (severity + likelihood of occurring) combined with the likelihood of hazard leading to an accident (danger) and hazard exposure or duration (latency)
+  - Exposure of hazard:
+    - The longer the hazardous state exists, the greater the chance that the other prerequisite conditions occur
+  - When we look  at the risk associated with hazardous events, the various factors which constitute the overall risk can be very complex
+    - This can make it very difficult to find a meaningful value for risk
+  
+  ---
+  
+  ## Safety
+  - Freedom from accidents or losses
+  - It is often argues that there is no such thing as absolute safety
+    - Instead, safety is is the attendant risks are judged acceptable
+'''
+linesHighlighted: [
+  8
+  13
+  2
+  26
+  32
+  48
+  57
+]
+isStarred: false
+isTrashed: false

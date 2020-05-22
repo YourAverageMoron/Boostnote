@@ -1,0 +1,184 @@
+createdAt: "2020-05-14T13:37:52.294Z"
+updatedAt: "2020-05-14T14:27:12.500Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Agent Based Modeling"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Agent Based Modeling
+  
+  ## Motivation
+  - How do birds flock?
+  - Do they have a central leader?
+  - Do they know where they have to be at all times?
+  - Is it a deterministic process?
+  
+  ---
+  
+  ## Boids
+  - These questions were first considered by Craig Reynolds
+  - Flocks, herds, and schools: A distributed behavioral model. (SIGGRAPH’87)
+  - Academy award – 1998, For his pioneering contributions to the development of three-dimensional computer animation for motion picture production
+  - The birds follow three simple rules, can you guess?
+  
+  ### Three rules for boids
+  - Separation - avoid crowding neighbours (short range repulsion)
+  - Alignment - steer towards average heading of neighbours
+  - Cohesion - steer towards average position of neighbours (long range attraction)
+  
+  ---
+  
+  ## What is a model?
+  - A model itself is a description of a phenomenon
+  - Certain aspects are exaggerated at the expense of others
+  
+  ---
+  
+  ## An agent based model
+  - An agent is an autonomous individual element with properties and actions in a computer simulation
+  - Agent-Based Modeling is the idea that the world can be modeled using agents, an environment, and a description of agent-agent and agent-environment interactions
+  
+  ### Software tools
+  - SWARM
+  - Repast
+  - ASCAPE
+  - MASON
+  - MASS
+  - Breve
+  - NetLogo
+  
+  ---
+  
+  ## Turtle
+  - Netlogo is based on Logo that was proposed by Wally Feurzeig, Seymour Papert, and Cynthia Solomon in 1967
+  - Logo was aimed at giving an individual a means for programming based on movement of themselves
+  - They used what is known as turtle graphics where the cursor drawing is called turtle
+  - Netlogo retains this nomenclature
+  
+  ---
+  
+  ## Leverage Points
+  - An agent-based model can allow us to check the system for leverage points. These are places where a complex system can be shifted from one regime to another with minimum effort
+  - Related to Tipping point, - where a small change in an input can dramatically change an outcome
+  
+  ---
+  
+  ## Path dependence
+  - Cases where current possibilities are limited by past choices
+  - E.g the qwerty keyboard
+    - This layout was chosen as it prevents typewriters from jamming
+    - However this isnt a problem in modern computers and this layout potentially limits type speed
+  
+  ---
+  
+  ## Sensitivity to Initial Conditions
+  - In certain systems, a small change in a starting point may lead to significantly different future (Especially, in conditions of Chaos)
+  - In certain cases, where you start would matter significantly
+  - Chaos: When the present determines the future, but the approximate present does not approximately determine the future. (E. Lorenz)
+  - AKA the butterfly effect
+  
+  ### Non-linearity and Dynamics
+  - Inputs do not necessarily affect outputs in a linear manner
+  - Interactions between various inputs mean that you can not just solve problems by breaking them down one by one
+  
+  ---
+  
+  ## Robustness
+  - Robustness is when a system maintains its characteristic behavior even after perturbation
+  - Schelling’s model for segregation in Netlogo shows robustness and similar behavior even when you randomly initialize the starting point
+  
+  ### Interconnectedness and interaction
+  - Individuals are connected and affect each other’s decision
+  - E.g if you try to model twitter you will see patterns in user behaviour:
+  
+  ![4e6b2ac3.png](:storage\\7c530db9-c998-406f-b8c2-425404ec55e9\\4e6b2ac3.png)
+  
+  - Similarly there is a theory as to why standing ovations happen
+    - Not all people have the same threshold to do one
+    - But the ones with high threshold may have a behaviour in which they copy people with low thresholds and standup despite thir theshold not being met
+  
+  ---
+  
+  ## Representation
+  - Representation is the key to understanding any phenomenon
+  - When one uses an agent-based representation, it can compactly capture the simulation related to that phenomenon
+  - For instance, Flocking model can be compactly captured. On the other hand using a physics-based dynamics model may not suitably capture the representation
+  - Agent-based representations can help in communicating results
+  - New representations can help us solve problems we could not solve before
+  - Changing representations can help us ask new questions 
+  - Modeling the environment differently or posing new behavioral characteristics are naturally obtainable in agent-based modeling
+  - Complex systems are composed of many interacting parts
+  - The parts are often connected in complex ways
+  - Agent-based modeling helps by providing a powerful way to represent those connections
+  
+  ---
+  
+  ## Integrative Understanding
+  - If one knows the first principled rules, how do we predict or determine the aggregate behavior
+  - This is often difficult and agent-based modeling provides a way to understand this
+  - This is what agent based modeling is really useful for
+  
+  ---
+  
+  ## Differential Understanding
+  - What if the aggregate pattern is known and we want to figure out the individual level rules
+  - ABM cannot be directly applied here
+  - However, we can try various first principle rules and see if they generate the phenomenon
+  - It may be that there are various rules that could generate similar phenomenon, and this can be investigated
+  
+  ---
+  
+  ## When to use agent based modeling
+  ### Medium Numbers
+  - Too	few	agents and the simple may be too simple	
+    - Game theory and ethnography work well
+  - Too	many agents and	means	may	describe the system well
+    - Mean-field approaches	and	statistical	descriptions
+  - The key is that the number of agents can affect the outcome of the system to be a medium number
+  
+  ### Heterogeneity
+  - Agents can be as hetrogeneous as they need to be
+  - Many other approaches assume homogeneity over individuals
+  
+  ### Complex but local interactions
+  - ABM can model complec interactions
+    - History dependent
+    - Property dependent
+  - The assumption is that these are local
+    - No global knowledge
+  
+  ### Rich environments
+  - The environments the agents interact in can be extremely rich
+  - Social networks
+  - Geographical systems
+  - The environment can even hav its own agent-like rules
+  
+  ### Time
+  - Almost all agent-based models feature time
+  - ABM is a model of process
+  - Nearly nexessary
+  - There are exceptions
+    - Solving complex equilibrium problems
+  
+  ### Adaptation
+  - When an agent's actions are contingent on their past history
+  - An agent may take different actions depending on its own past experience
+  - Usually sufficient
+  - Very few modeling approaches besides ABM feature adaptive individuals
+  
+  - Heterogeneity
+  - Complex	but	Local	Interactions	
+  - Rich	Environments
+  - Time
+  - Adaption
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

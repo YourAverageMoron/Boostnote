@@ -1,0 +1,937 @@
+createdAt: "2020-01-04T18:46:01.764Z"
+updatedAt: "2020-01-14T06:32:55.947Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Internet Protocol"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # Internet Protocol
+  
+  ## Introduction
+  - IP is a best effort, connectionless, unreliable (does not guarentee), packet based protocol
+  - It represents the lowest common denominator of network properties
+  - IP doesnt rely on any particular property of a link layer
+    - It can run on top of almost any link layer
+    - Even unreliable ones
+  - IP is a cooperative system:
+    - For a packet to get from source to destination it is handed from one network to hte next
+    - Hop by hop
+  - No single machine anywhere has any idea what the entirety of the Internet looks like
+  
+  ## Nodes
+  - The nodes in a network can have various roles
+    - Host:
+      - A machine that you actually use to do some work
+    - Bridge:
+      - Connects two physical networks together
+    - Gateway:
+      - Prvides a connection off the local network
+    - Router:
+      - A machine joining two or more networks and whose primary function is to determine where a packet goes next
+  - These are not mutually exclusive:
+    - Gateways and routers can be hosts
+    - Gateways do trivial routing
+  
+  ---
+  
+  ## Datagrams
+  - The basic idea is that a packet does no know how to get from a source to a destination
+    - This is the routers' job
+  - The IP layer takes bytes from the transport layer and prepends a header
+    - Producing a packet often called datagrams in this layer
+  - The IP specification says datagrams can be up to 64KB in size
+    - But they are usually somewhere in the region of 1500 bytes
+  
+  ![9d9b606c.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\9d9b606c.png)
+  
+  ### Headers
+  - Version:
+    - 4 bit field containing the value 4 for IPv4
+    - Or 6 for IPv6
+  - Header length:
+    - There are some optional fields so headers can vary in size
+    - This is needed to distinguish the end of the header
+    - Given as a number of 4 byte words
+    - 4 bits, maximum value of 15, so a maximum header length of 60 bytes
+  - Type of service:
+    - 8 bits
+    - To indicate to a router how this datagram should be treated in terms of cost, speed and reliability (if possible)
+    - E.g audio needs to get through quickly but not necessarily reliably
+  - TOS/DS:
+    - Differential Services field
+  - Total length:
+    - Of the entire datagram including the header in bytes
+    - 16 bits, so giving a maximum size of 65535 bytes
+      - Much larger than domestic networks need
+      - But too small for high-speed networks
+  - Identification:
+    - 16 bits
+    - A value that is unique to each (source) datagram
+    - Often incrementing by 1 for each successive datagram sent
+    - Used in fragmentation to reassemble the the fragments of a single datagram
+    - All the packets get their own IP header, but share the same identification
+  - Protocol:
+    - 8 bit field
+    - Connects the IP layer to the transport layer
+    - This is a value indicating which transport layer to pass the datagram to
+    - For example UDP is 17 and TCP is 6
+  - Header checksum:
+    - Simple function of the bytes in the IP header
+    - If the checksum is bad, the datagram is silently dropped
+    - A higher layer must detect this and perform whatever action it needs
+    - This works because IP is not reliable
+    - The checsum incluses the TTL so it must be recomputed by each router the datagram passes through
+  - Source and destination address:
+    - 32 bit number that uniquely determine the source and destination machines on the Internet
+    - "Uniquely" is now not true
+    - 32 bits limits us at most 4,294,967,296 hosts on the internet
+  
+  #### Optional headers
+  - The optional header allows for items that are either
+    - Not common, so you dont pay the overhead allways having them
+    - Extentions that are useful but were not included in the origional IP specification
+  - When IP was first devised, networks ran over telephone at a few thousand bits/sec
+    - Now we expect giga and terabits
+    - The physical layer has changed immensely while basic TCP/IP is pretty much unchanged
+  - A flexible approach accross the entire TCP/IP suite such as for options is part of this
+  - Options are not much used
+  - Options include:
+    - Security
+    - Record route
+      - Each router records its address in the option header as the datagram passes by
+    - Timestamp
+      - Each router records its address and the current time in the header of the datagram as it passes by
+    - Strict source routing
+      - A list of addresses that give the entire path from source to destination
+    - Loose source routing
+      - A list of addresses that must be included in the path from source to destination
+  - Most IP options are dor debugging or profiling behaviour
+    - Mobile IP uses source routing
+  - As the macimum header length is 60 bytes, this leaves 40 bytes for options
+    - This limits what the options can do
+    - E.g recording paths: at 4 bytes of IP per hop, we can only record 4 hops
+      - If we take RR the length of the recording route option into acount
+      - Many real paths are over 30 hops
+  
+  ### Differential services field TOS/DS
+  - Informs routes on the best way to treat this datagram
+  - It allows the implementiation of Quality of Service (QoS)
+  - The full range of options available is complex but can indicate things like:
+    - Minimise delay: Do not hold onto htis datagram longer than necessary
+      - Perhaps prioritise it over others 
+    - Maximise throughput: Collecting together several small datagrams and sending them off together may be more bandwidth efficient
+    - Maximise reliability: Try not to drop this datadram id the router is becoming overloaded
+      - Drop another datagram first
+    - Minimise cost
+      - Cost is more importanct than reliability or speed
+      - Datagram can be delayed if it makes transmission cheaper
+    - x (see RFC2474 for details)
+  - Routers may ignore this if they wish
+    - However they are strongly recommended to make use of it
+  
+  ### Larger packets leads to lower overheads
+  - Time overhead in hosts splitting data into datagrams, adding headers, then removing headers and reassembling
+  - Bandwidth overhead as each header is 20 or more bytes that is not data
+  - Time overhead in routers processing packets
+  
+  ---
+  
+  ## Fragmentation
+  - The path a packet takes from source to destination will typically go through a wide variaty of differeing kinds of hardware
+  
+  ![8db44d3f.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\8db44d3f.png)
+  
+  - IP faces the problem of differeing link layer properties, in particular maximum packet sizee
+  - If a big datagram gits a part of the Internet that only allows small datagrams, there is a problem
+  - IPv4 deals with this by fragmentation:
+    - A datagram can be subdivided be a router into several smaller datagrams
+    - It is the destination's problem to glue them back together in the right order
+    - The fragmentation fields in the IP header deal with this
+  
+  ### Flags 
+  - Three bits: two used, one in reserve
+    - RF: Reserve for use later, must be 0
+    - DF: Don't fragment
+      - If a host can't (or doesn't want to) deal with fragments this bit is set to inform the routers on the path to the destination
+      - A router migh choose an alternative non-fragmenting route, or simply dorp the datagramand send an error message back to hte source
+      - All hosts are required to access datagrams of 576 bytes
+    - MF: More fragments
+      - All fragments except the last have this set
+  
+  ### Fragment offset
+  - Where this fragment came from in the origional datagram
+  
+  ![f67a71c5.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\f67a71c5.png)
+  
+  - Fragment offset is 13 bits giving the offset divided by 8
+    - E.g value of 20 means an offset of 160
+  - 13 bits is enough to cover the 16 bit range of sizes
+  - Every fragment (apart from the last) must be a multiple of 8 bytes long
+    - The router doing the fragmentation must ensure this
+  
+  - Every fragemtn has a copy of the origional IP header
+    - But with various fragmentation length fields set appriopriately
+  - Each fragment header will be ca copy from the origional header apart from:
+    - Totel length: Set to the fragment size
+    - MF: Set to 1 if it isnt the end fragment
+    - Fragment offset: Set appropriately
+    - TLL and checksum: Set approprately
+  - All fragments have the same identification field value
+  - When the fragment MF=0 is recieved, its fragment offset and length will give the length of the origional datagram
+  - The destination can then reassemble the origional datagram when the fragments have arrived
+  - The fragment can arrive in any order (or not at all)
+  - IPv4 spends a lot of effort copying fragmentation
+    - It is costly and should be avoided
+      - Performing fragmentation in a router takes time
+      - More overhead as more datagrams for a given amount of data
+      - More overhead as more datagrams are traversing the network
+      - More datagrams means a greater probability of one being lost or corrupted
+      - If a fragment is lost the entire origional datagram must be retransmitted
+        - There is no mechanism in IP to indicate which fragment was lost
+      - Fragments are datagrams in their own right and can be themselves fragmented
+  - Fragment processing software has a history of buggy implementation leading to hacked machines
+  - Setting DF in the header prohibits fragmentation
+    - If a router cannot avoif fragmenting it drops the datgram and returns a "fragmentation needed but DF set" error message back
+    - The sender can then sender smaller datagrams
+  
+  #### MTU descovery
+  - Df allows MTU descovery
+    - Maximum transmission unit
+    - Largest datagram a host or network can transmit
+    - THe path MTU is the smallest MTU for the entire path from source to destination
+  - A datagram not larger than the path MTU will not get fragmented
+  - MTU descovery works by sending variously sized datagrams with DF set, and monitors errors returned
+  - When a datagram reaches a destination no fragmentation we have found a lower bound for the path MTU
+  - This bound is approximate as the network dynamic and paths may change
+  - This is the approach IPv6 adopts:
+    - Don't have fragmetation in routers, but require MTU descovery
+  - In IPv6 a datagram is never fragmented, but a router will always just drop a too large datagram and return an error message
+  - MTU discovery is a required behaviour in IPv6, options in IPv6
+    - This is simpler and faster
+    - IPv6 is greatly simplified as it has no fragmentation fields
+  
+  ---
+  
+  ## Time to live
+  - An eight bit counter used to limit the lifetime of the datagram
+  - Poorly configured routers might bounse datagrams back and forth in circles indefinitely
+    - This cloggs the network with lost datagrams
+  - The TTL starts at 64 or 32 and is reduced by one as it passed through each router
+  - If the TTL ever reaches 0 that datagram is discarded and the error "time exceeded in-transmit" is sent back to the source
+  - This limits errant daraframs:
+    - Eventually the TTL must reach 0 and the diagram is dropped
+  - Eight bits means a maximum path of length 255 but this seems enough for the current Internet
+    - No valid paths as long as these are known
+  - The width of the Internet is the length of the longest path
+    - Thid is uncertain and constantly changing
+      - But definitely over 32
+  - Origionally the TTL was to be a measure of time, reducing by one each second in a router
+    - In practice no implementations did this, just decremented by 1 regardless
+    - Now not using time is expected
+  
+  ---
+  
+  ## IP addresses
+  - Roughly (incorrectly) speaking every machine on the Internet has a unique address
+    - These are not random
+    - Allocated in such a way to make routing between hosts much easier
+  - If there were no structure on on the addresses every router everywhere would have to know where every host in the world was
+  - An IP address is split into two parts:
+    - A network number
+      - A network uniquely on the Internet
+    - A host number on that network
+      - The host uniquely on a network
+  - Host routing is relaively trivial:
+    - If the destination is on the same network, simply put the packet out in the network
+    - If not send the packet to the gateway and let it deal with it
+    - It can tell if the destination is on the same network by comparing the network part of their addresses
+      - If they are the same, they are on the same network
+  
+  ### Routing from a gateway or routers
+  - Routers contain a table of IP addresses, with next-hop routers associated with those addresses
+    - This is a more complicated datastructure than a table but it is easier to just think of it as a table
+    - These contain network addresses but individual host addresses are possible
+  - Each row in the table contains:
+    - **A destination address**: This is usually a network address
+      - It can be a single host
+    - **The address of the next hop router**: The address of where to send the packet next
+      - This is the address of a router that is directly connected to hte current one
+    - **Which interface to send the packet out on to get to that router**
+      - A router has many interfaces and this descrbes which one to use
+  - When a packet arrives at a router it check the table:
+    - If the packet destination matches a host address in the table
+      - Send the packet to the indicated gost on the indicated interface
+    - Else if the packet's destination's network part matches a network address in the table
+      - Send the packet to hte indicated router on the indicated interface
+    - Else find an entry in the table marked "default", and send the packet to the indicated router on the indicated interface 
+    - Else drop he packet and return an error message "network unreachable" to the source
+  - End hosts have routing tables too, they are very simple just encoding the local/non-local decision
+  
+  #### Example 1 of a simple routing table
+  ![9ed7bbfb.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\9ed7bbfb.png)
+  
+  - This might be found on an end host on network 138.38.96
+  - Sends local traffic directly to the destination
+    - Uses eth0 as the interface
+  - Otherwise send to the default gateway
+    - 138.38.96.254
+    - Uses eth0 as the interface
+  - The netmast (Genmask is an example) tells us how to divide an IP address into the network and host parts
+    - 1 bit set in the mask indicates this bit is part of the network address
+    - A mask 255.255.248.0 is 1111111111111111111110000000
+      - For this example the network part is the top 21 bits of the IP address
+  - When using the table we generally work downwards until we find a match
+    - If a match is found we can use that row to route the packet
+  - "default" is actualy destination 0.0.0.0
+    - This matches any address
+    - It uses a mask of 0.0.0.0
+  - There is also a loopback address 127.0.0.1
+    - For a virtual internal network, connecting the machine to itself
+    - Uses the (virtual) interface lo0
+    - Often useful for testing
+  
+  #### Example 2 of a simple routing table
+  ![66032cfc.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\66032cfc.png)
+  
+  - This has multiple real interfaces
+    - eth0, eth1 and ppp1 (as well as lo)
+  - A packet with the address 213.121.147.69 goes firectly out on interface ppp0
+  - Packets with the network addresses  172.18 go directly on eth0
+  - Packets Packets with the network addresses  172.17 go directly on eth1
+  - Otherwise the packets are routed to the gateway 213.121.147.69 on the interface ppp0
+  - The first row is actually redundant here, as if it was left out, packets to 213.121.147.69 would still get routed there as they would be picked up by the default
+  
+  ### How to divide a 32 bit IP address into network and host parts
+  - 8 bits for network?
+    - 2<sup>8</sup>=256 networks
+    - 2<sup>24</sup>=16777216 hosts
+    - Not enough networks
+    - Too many hosts for most installations
+  - 24 bits for network?
+    - 16777216 networks
+    - 256 hosts
+    - Plenty of networks
+    - Not enough hosts
+  - 16 bits for network
+    - 65536 networks
+    - 65536 hosts
+    - Not really enough hosts
+    - Plenty of hosts per network
+  - We can use all of the above
+    - Divide the space of IP addresses into parts
+    - Each part has a different network/host split
+  - Class A networks
+    - From 0.0.0.0 to 127.255.255.255.255
+    - The leading bit of the address is 0
+    - Have 7 bits for network and 24 bits for host
+    - This has 126 networks (networks 0 and 127 are reseved) each with 16777216 hosts
+    - The address x.y.z.w has x as network, y.z.w us the host
+  - Class B networks
+    - From 128.0.0.0 to 192.255.255.255
+    - The leading bits of the address are 10
+    - Have 14 bits for network and 16 bits for host
+    - This is 16384 networks and 65536 host addresses
+    - The address x.y.z.w has x.y as network, z.w as host
+  - Class C networks
+    - From 192.0.0.0 to 223.255.255.255
+    - The leading bits of the address are 110
+    - Have 21 bits for network and 8 bits for host
+    - This is 2097152 networks each with 256 host addresses
+    - The address x.y.z.w has x.y.z as network and w as host
+  - Class D networks
+    - From 224.0.0.0 to 239.255.255.255
+    - The leading bits of the address are 1110
+    - Used for multicasting
+  - Class E networks
+    - From 240.0.0.0 to 255.255.255.255
+    - The leading bits of eh address are 1111
+    - These are reserved
+  
+  ![c7cab676.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\c7cab676.png)
+  
+  #### Example
+  - University of bath has been allocated addresses in the network 138.38.0.0
+    - This is in the class B address range and so there are 65534 possible hosts
+  - Network 17.0.0.0, a class A address allocated to Apple
+  - Network 193.0.0.0, a class C address used to be allocated to the Reseaux IP Europeens (RIPE)
+    - The internet registry responsible fot the allocation of IP addresses within Europe
+  
+  - Two of the host addresses on each network specially
+    - Hosts parts of "all zeroes" and "all ones" are not used as general host addresses
+    - These are reserved for a special purpose
+    - E.g., 138.38.0.0 and 138.38.255.255 in a class B
+    - THus the number of usable host addresses in a network is 2 fewer than you might think
+  - The host part all 0s:
+    - Origionally specified to refer to he origionating host
+    - Some implementatinos mistakenly ise this as a broadcast address
+      - So for safety it is not commonly supported as a valid host address
+    - For say a class B network 17.16
+      - A packet semt tp 172.16.0.0 should boomerang right back to the sender
+        - But it rearly does
+  - The host part all 1s:
+    - Broadcast address to network
+    - E.g 172.16.255.255 sends to all hosts on the 172.16 network
+    - This is very commonly used
+  - Network part all 0s
+    - This network
+    - e.g 0.0.12.34 would dend to a gost on the current network
+    - Not often implemented
+  - Loopback addresses:
+    - Network 127.0.0.0: the loopback network
+    - Always implemented
+    - The address 127.0.0.1 is commonly used as a way for a host to send a packet to itself over the internal loopback network interface lo
+    - This is different from a host sending a packet to itself via an external network (e.g using the interface's own address)
+      - The packet might not go through the normal Ethernet/whatever software and hardware with the loopback network
+      - The loopback network is there even if there is no real network hardware attached
+  - So class schemes allows IANA to allocate large chunks of addresses to people who need them 
+    - Small chunks to those that only need a few
+    - This scheme has been historically very successful
+    - Athough it has revealed several weaknesses
+    - Thsese days classless allocation is used (CIDR)
+    
+  ---
+  
+  ## IP address subnetting
+  - Suppose you have been allocated a class B network: 64 thousand host addresses
+    - These are hard to manage
+      - Broadcast traddic
+      - Ohysical/technical issues
+      - Pollitical issues (one department must be kept seperate from another)
+  - We can use subnetting to split our network into smaller pieces
+  - Subnets can be administered by seperate departments and joined by routers
+    - Just like the Internet
+  - To do this we further split the host part of the IP address into some bits for the subnetwork and the rest for the actual hosts
+  
+  ![6e40e74a.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\6e40e74a.png)
+  
+  - Hosts will need to know which bits are part of the subnet to be able to decide how to route packets
+    - There is no class system here
+  - For example the University of Bath has a class B address 138.38, the top 16 bits are the network address
+  - The netmask 111111111111000000000000 indicates which bits are the network part
+  - THe department of mathematical sciences has a subnet consisting of addresses 138.38.96.0 to 138.38.103.255
+    - This corresponds to the netmask
+    - 11111111111111111111100000000000
+  
+  ![434703a8.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\434703a8.png)
+  
+  - A machine can tell if an address is on a network if the address AND with the netmask gives the network address
+  - This is not on a nice byte boundary, so visually is harder for humans to work using decimal x.y.z.w style notations
+  
+  ![f4fedf68.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\f4fedf68.png)
+  
+  - 138.38 is split into many subnets of appropriate sizes for each department
+  - Outside of 138.38 the subnetting is invisible so no changes to global routing tables are necessary if we rearrange the local network
+  - Subnets can be further subnetted
+  - The subnet is described as "138.38.96.0, netmask 255.255.248.0"
+  - More commonly as "138.38.96.0/21" where 21 is the number of 1 bits in the netmask
+  - You dont have to use the top n bits for a netmask, but it is common to do so
+  - The /n notation is only for a top-n-bit netmask
+  - The "all 0s" and "all 1s" addressess no apply within the subnet:
+    - All 1's boadcasts to hte subnet
+    - You dont really use all 0's
+  
+  ---
+  
+  ## IP address exhaustion
+  - Everyone wants a class B:
+    - C is too small
+    - A is too large
+    - This is caled hte Three Bears Problem
+  - All the B classes have been allocated
+  - Can we split some As
+    - Doable but needs everyone to take care their software understands that those addresses are no longer class A
+    - Most class A's have not been split and the subnets allocated to various institutions
+  - Can an institution use several class C's?
+    - Yes but it's awkward as this leads to multiple networks each needing serarate routing
+    - For example having eight class C networks 194.24.0.0 to 194.24.7.0 would require everyone's routing tables to have eight entries that all point to the same destination
+    - And internally to the institution there are eight separate networks
+  - Class E has 286 million reserved addresses, can we use them?
+    - Wouldnt last long maybe a couple of years
+    - Class E addresses are treated as illegal by a lot of software
+      - Particularly on routers
+  - There are 3 main soilutions:
+    - Change the way classes are defnied and uses
+    - Use private addresses with network address translation
+    - Increase the number of addresses available by changing the IP
+  
+  ---
+  
+  ## Classless interdomain routing (CIDR)
+  - An approach to reduce address exhaustion
+  - Takes class C networks and joins them together in such a way that simplifies routing
+  - Blocks of C addresses are allocated to regions:
+  
+  ![81ff9739.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\81ff9739.png)
+  
+  - Starting with about 32 million addresses per region
+  - This allows easy routing: anthything 194 or 195 goes to Europe
+  - Repeat the idea within each region
+    - Contiguous block of C networks are allocated to ISPs or organisation
+    - Keeps simple routing within the region
+  - Example
+    - 194.24.0.0 to 194.24.7.255 normally written as 194.25.0.0/21 or even 194.25/21 exactly like subnetting
+    - Any packet with address that has addr AND 255.255.248.0 = 194.24.0.0 should be routed to that ISP or organisation
+    - A network of 2<sup>32-21</sup>=2048 addresses
+  
+  ![38a8adb1.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\38a8adb1.png)
+  
+  - This is a flexable and backwards-compatible scheme
+  - End hosts do no need to know about CIDR
+  - Classless networks can be subnetted
+  - CIDR has allowed the continued growth of the Internet well beyond the origional possible size
+  - We have repurposed class A and B networks similarly
+  - Classful networks are no longer used
+    - CIDR is the only way addresses are currently allocated
+  - CIDR merges small networks into a larger one
+  - Subnetting divides a large network into smaller ones
+  - CIDR is sometimes called supernetting
+  - We have:
+    - **Classful**: Implicit, fixed split of network/host
+    - **Classless**: Explicit (netmask), variable split of network/host
+  
+  ---
+  
+  ## Network Address Translation (NAT)
+  - An approach to reduce address exhaustion
+  - Some IP addresses are reserved for private networks
+    - Origionally reserved to allow local experementation:
+    - 10.0.0.0 - 10.255.255.255 (Class A)
+    - 172.16.0.0 - 172.31.255.255 (Class B)
+    - 192.168.0.0 - 192.168.255.255 (Class C)
+  - Once class A-sized network, 16 class B and 256 C-size networks are guarenteed never to be allocated for public use in the Internet
+  - Routers on the public internet will never forward packets with with such addresses
+    - They will drop them immediately
+    - Such addresses can be used by anyone locally for any purpose:
+      - A common use is NAT
+  - NAT udrd the malleability of packets to map many hosts onto a single address
+  - A private network can be set up using one of the above address ranges 
+    - E.g 10/8
+  - The gateway host joins the private network to the public Internet
+    - Modifying the address on packets as they go past
+  
+  ![e2ac24f4.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\e2ac24f4.png)
+  
+  - A packet from 10.0.1.1 (A) is sent to 212.58.226.33 (B)
+  - The packet reaches B the normal way
+  - B replies to destination address G
+  - The gateway recognises this packet as a reply to A and rewrites teh destination address to A before passing it on to the private network
+  - A thinks it is connected to teh public network
+  - B thinks the data is coming from G
+  - G needs to keep a record of connections from A to the world and recognise replies to outward travelling packets
+  - G needs to keep a record of connections from A to the world and recognise replies to outward travelling packets
+  - C will want to do the same as A, so G must be able to distinguish between replies to A and replies to C
+    - Even if both were communicating with B
+  - As a fortunate side-effect, NAT provides some measure of protection to hosts on the private network from an external attack
+  - Machines on the public Internet (e.g. B) cannot initiate traffic to A as 10.0.1.1 as this is a private and unroutable address
+    - No public router will forward a packet with such an address
+    - It will simply drop it
+  - External hosts will generally not even know what A's (private) address is as they never see it
+  - Even is a packet get to the gateway, the gateway will not know how to rewrite its address as this was not a reply to an outgoing packet, so it will get dropped here too
+  - NAT has helped to mitigate the address exhaustion problem
+    - Now all addresses on a network can essentially share one public address
+  
+  ### Problems with NAT and ceratain protocols
+  - Problems arise when the data in the packet contain IP addresses
+    - For example, IP addresses that will be used to set up new connecitons
+    - E.g File transfer protocol FTP
+  - In our ecample this would be its private unroutable address that the external server couldnt contact
+  - Unless the gateway is intelligent enough to look inside the data and know where the IP addresses are to be douns (in the application layer data) and rewrite them, the address will remain untranslated and the protocol will fail
+  - Not many protocols so this kind of thing
+    - But each one needs to be treated specially by the NAT gateway
+  - This problem is due to a violation of layering in the protocol
+    - IP layer infomation in the application layer
+  
+  ### Carrier grade NAT
+  - Many phone companies use this to supply IP connectivity to the millions of phones they manage
+  - This is done by the ISP rather than the end-ser
+  
+  ### Costs of NAT
+  - Complexity of gateway software
+  - Scalability problems in a gateway tracking large numbers of connections
+  - Bad interactions with some protocols
+  - Difficulty of making end-to-end connections whn both ends are behind a NAT gateway
+    - E.g Skype
+  - IP addresses no longer identify the host uniquely
+    - A problem for law enforcement
+  - Inability for external hosts to initiate connections to hosts behind NAT
+    - So you can't run servers on hosts behind a NAT
+    - But this invisibility is often regarded as a good security feature
+  
+  ---
+  
+  ## IPv6
+  - The next approach to the IP address exhaustion problem
+  - This changes the IP address itself
+  - 128 bit addresses (CIDR-style allocation only)
+  - Designed to:
+    - Have a larger address space
+    - Reduce the size of router tables
+    - Simplify the protocol so routers can process packets faster
+    - Provide security authentication
+    - Pay propper attention to the type of service
+    - Have better multicasting support
+    - Have mobile hosts with fixed IP addresses
+    - Allow room for evolution of the protocol
+    - Permit IPv4 and IP v6 to coexist duting transition 
+  
+  ![b025bd43.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\b025bd43.png)
+  
+  ### IPv6 headers
+  - Version (4 bits):
+    - The number 6
+    - This is identical in position to IPv4 and can be used to distinguish packets in a mixed-version environment
+    - In an Ethernet fram IPv4 has a protocol number 0800 while IPv6 has 86DD
+      - Remember they might be using a different physical layer that does not give the type of its data
+  - Traffic class (8 bits):
+    - Similar to TOS (DS) in IPv4
+  - Flow label (20 bits):
+    - Allows routers to recognise packets in a single flow and treat thme identically
+    - In essence it is a virtual circuit identifier
+    - E.g a connection or session
+    - This speeds up routing
+  - Payload length (16 bits):
+    - The number of bytes following the fixed 40 byte header
+    - Unloke IPv4 it does not include the header in the count
+  - Next header (8 bits):
+    - Like the protocol header in IPv4
+    - Also allows for IPv6 optional header fields (if any)
+  - Hop limit (8 bits)
+    - The TTL field
+    - Renamed to make clear what it actually does
+  - Source and destination addresses (128 bits each):
+    - Four times as long as IPv4
+    - 2<sup>128</sup>=3x10<sup>38</sup>
+    - There are unicast, multicast and anycast addresses
+  - There is no header length field:
+    - Header length is always 40 bytes
+  - There is no checksum field:
+    - There are checksums in other layers
+    - Networks are resonably reliable
+    - Designers though this would not be helpful
+    - This means you dont have to recompute the checksum as the TTL decreases
+    - This is faster
+  - IPv6 has 8 fields, this is much simpler for the router to process than the 13 of IPv4
+  - IPv6 addresses are 4 times as long as IPv4, but the whole header is only twice as long
+  
+  ### Extention headers
+  - This header field daisy chains options
+    - Or it can give the protocol of hte next layer (TCP,UDP)
+  - The only limit on the options is the total datagram limit
+  - Most options are not even looked at by routers
+    - Again this speeds up processing on routers
+  
+  ![c240c919.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\c240c919.png)
+  
+  - **Optional headers include**
+    - Routing options
+      - Loose source routing IPv4
+    - Authentication
+    - Security
+    - Jumbograms
+      - Packets up to 4GB in length
+    - And others...
+  - Note the type of the header option is given in the previous header
+    - Or the main IPv6 header for the first option
+  
+  ![16f596b7.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\16f596b7.png)
+  
+  ### Structure of IPv6
+  - Addresses are typically written in hex with colon separators
+    - E.g. fe80::21c:c0ff:fea3:99f4
+  - The :: may appeer once as a shorthand for a string of 0s
+    - This is common when making addresses up to 128 bits
+    - For the example above:
+      - fe80:0000:0000:0000:21c:c0ff:fea3:99f4
+  
+  ![8f83f91e.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\8f83f91e.png)
+  
+  - The University of Bath has been allocated:
+    - 2001:0630:00e1::/48
+  - Meaning 128-48=80 bits of the address for the hosts on for the University network
+  - 2<sup>80</sup>= 1.2x10<sup>24</sup> addresses which is a lot more than IPv4
+  
+  ### No fragmentation fields in IPv6
+  - There are no fragemtation fields in IPv6
+  - A router never fragements
+  - It can drop a packet and send back a "packet too big" message to the source
+    - The source can then send back smaller backets
+  - There is therefore less processing within the router
+    - Packets can be sent on much faster
+  - Every IPv6 host is required to do path MTU descovery
+    - End hosts are expected to use the path MTU descovery to find the MTU
+    - Or it eill just send packets no larger than 1280 bytes
+  
+  ### Transition to IPv6
+  - IPv4 address allocation have run out
+    - We need to move to IPv6
+  - But it is expensive to do so:
+    - Needs sofware reqrites
+  - The majority of modern routers and end hosts contain the necessary IPv6 software support
+  - By design the two protocols can run side-by-side on the same networks
+  - Lots of large companies eant to encourage the transition
+  - But many ISPs don't
+    - Most home users cant use it
+  - There have been a variaty od transition mechanisims suggested
+    - Often based on NAT-like packet mingling
+    - But they are complicated and unsatisfactory (for the same reasons NAT is unsatisfactory) 
+  
+  ---
+  
+  ## Addresses
+  - Several types of address that can refer to one or more than one host at a time
+  - IPv4 has 3 types of address
+    - **Unicast**: An address refers to a single destination
+      - Ignoring NAT
+      - A "notmal" address
+    - **Broadcast**: As in the link layer, a single packet goes to every host on the local network
+      - But this works for the "network" at the IP layer
+      - This can link of more than one link layer network
+    - **Multicast**: In between unicast and broadcast
+      - A single packet goes to one or more hosts
+  - IPv6 has 3 types of address
+    - **Unicast**
+    - **Multicast**
+    - **Anycast**: A packet goes to any one of the selection of servers
+      - Usually the closest in some sense
+    - It removes broadcast as its functionality can be achieved by multicast
+  
+  ### Unicast
+  - 1-to-1 data flow:
+    - One source, one destination
+  - Most current IP traffic is unicast
+  
+  ### Broadcast
+  - 1 to many dataflow
+    - One source, "all" destinations
+  - A single packet read by all hosts on the local network
+  - Reduces traffic on the local network as network
+    - As for most link layers we dont have copies of mostly-identical packets (one for each destinaiton)
+    - But one packet that is read by every host
+  - Scales well (locally)
+    - It is independent of the number of destionation hosts
+  - Dont have to know how many destination addresses there are
+  - Broadcasts are generally limited to the local network
+    - Otherwise the entire internet would be flooded
+  - An IPv4 address when the host part is all 1s:
+    - E.g 172.16.1.255 on subnet 172.16.1/24
+    - We can also use 255.255.255.255 to broadcast to the local network when we dont know our network address
+  
+  ### Multicast
+  - For sending a single packet to multiple hosts
+    - Not necessarily all hosts
+  - E.g for streaming radio we could send individual packets to all listening hosts
+    - It is more efficient to send a single packet that the lisnening hosts pickup
+  - It can be used over multiple networks
+    - Not network-limited like broadcast
+  
+  #### IPv4 multicast
+  ![57b03ec0.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\f747fa6c.png)
+  
+  - There is one IPv4 address reserved for multicast
+    - In IPv4, class D (224.0.0.0 to 239.255.255.255) addresses are used for multicast
+  - Multicast groups are formed from those hosts that wish to recieve packets from a given source
+  - A multicast group id is a 28 bit number with no further structure
+    - About 270 million possible groups
+  - The set of hosts listening to a particular multicast address is a host group
+  - Host froups can cross multiple networks and there is no limit on the sizw of the group
+    - Generally you cant know how big a group is
+  - Some group addresses are preallocated by the IANA
+    - The permenent host groups
+    - 224.0.0.1: All multicast aware hosts on this subnet
+    - 224.0.0.2: All multicast routers on this subnet
+  - Not all IPv4 hosts support all of multicasting
+    - Level 0: No support
+    - Level 1: Can send multicast, but cant recieve
+      - Recieving is harder as it involves understanding groups
+    - Level 2: Can send and recieve
+  - The process of joining and leaving groups is governed by the Internet Group Management Protocol (IGMP)
+    - A host that wishes to join a multicast group provided by a server sends a IGMP message towards the server
+    - The reouters on the path to the server note and know to route multicast packets for this group towards the joing hosts
+    - The server itself is not interested or involved in the IGMP message
+    - Similarly for a host leaving a group, a host is supposed to send an IGMP messahe towards the server that the routers can read and act upon
+    - Extra complication arises as hosts may not always send the "group leave" message
+    - So there is more protocol to monitor and maintain groups using timeouts and maintenance messages
+  
+  ![6c375147.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\6c375147.png)
+  
+  - TTL plays a special role in multicast on IPv4:
+    - It defines the scope of a group
+    - How wide the area a group may range over
+      - 0 Host
+      - 1 Subnet
+      - < 32 Organisation
+      - < 64 Region
+      - < 128 Continenet
+      - < 255 Globe
+    - The definition of these (e.g "Organisation") is left open to the network administrator to define as they wish
+    - Routers are set to discard multicast packets that would cross a boundary
+  
+  #### IPv6 multicast
+  - In IPv4 IGMP is a seperate protocol and its packets are layered over IP
+  - In IPv6 the corresponding protocol is called Multicast Listener Descovery (MLD)
+  - It forms part of a larger protocol suite
+    - ICMPv6
+  - All IPv6 hosts are required to implement multicast
+  - IPv6 multicast is a simpler version of IPv4's implementation
+  
+  ![a5143d53.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\a5143d53.png)
+  
+  - Addresses that start hex FF
+  - Four bits of flags, including the T bit which means transient group
+    - As opposed to a permanent IANA allocated group
+  - For bits of scope 
+    - Rather than using TTL
+  
+  
+  - When we say "a packet only goes through a certain set of machines" we really mean "only a certain set of machines process the packet"
+    - The network interface card may filter packets, but those packets are still occupying the network in a shared medium like Ethernet
+  - A broadcast and a multicast will result in the same number of packets on the local network, but:
+    - A multicast will only be read an processed by a subset of machines
+    - A broadcast is limited to hte local network, a multicast can spread further
+  - Both are better than multiple near-identical unicast packets
+  - Multicast isnt used as much as it should be
+    - It is used in routing protocols (I.e those protocols that help routers create their routing tables)
+    - But relatively little elsewhere in IPv4
+  - Multicast is hard to use for an on-demand system (e.g Netflix) as it requires everyone to be recieving the same thing at the same time
+    - There has been some experementation with hybrid systems
+      - "Buffer-up" unicast burst follwed by a shared multicast stream
+    - Most bug streaming providers rely on having many local distribution points containing identical data
+  
+  ![b6836cbb.png](:storage\\b53ab318-51c4-4f65-83fd-1cfc0f4739fe\\b6836cbb.png)
+  
+  - The source supplies (relatively few) distribution points using unicast, which serve content directly using unicast
+  - Although it is useful for TV broadcast systems, many home systems do not support multicast
+  - Routing companies want to avoid multicast, claiming undue complexity to support it
+    - It needs an extra state in every router the multicast traffic passes through
+    - Makes scaling to the full Internet a problem
+  - A router must keep a record of all multicast paths passing through it
+    - So routers on popular paths (e.g internet exchanges) mightn need to keep a large amount of data
+  - Multicast is used by some pay-tv services, but usually in the context of a closed controllable system
+    - E.g an institutional intranet multicasting seminar
+    - Or holding a multi-way video conference
+  
+  ### Anycast
+  - In IPv6 this sends a single packet to a single destination out of several possible destinations
+  - For example replicated Web servers:
+    - There are many servers around the world with identical content and the same anycast address
+    - Browsers will choose the closest server, thus sharing the load
+    - Sort of loadbalancing, but also probably choosing the most appropriate server (distance wise) for the request
+  - Only works well with connectionless transport protocols as multiple requests might go to different servers
+    - This doesnt fit well with connetion-orientated protocols
+  - It uses any unicast address that happens to be assigned to more than one server
+    - It is up to the routers to figure this out
+  - There are anycast groups with join and leave protocols
+  - Notice the symmetry:
+    - Multicast is groups of clients
+    - Anycast is groups of servers
+  - Anycast has potential but IPv6 is required to support it
+  
+  ---
+  
+  ## How does a host get an IP address?
+  - An Ethernet address is burned into the hardware
+  - IP addresses are software addresses
+    - They must be setup somehow
+  - The simplest way is for the host simply to be configured to have that address
+    - Stored in a configuration file on the host somewhere
+  - An administrator takes into account certain criteria
+    - Network or subnetwork addresses and gives the machine a currently unused address
+    - This isnt always feasable
+  
+  ### Dynamic Host Configuration Protocol (DHCP)
+  #### Why use DHCP?
+  - Not all machines have administrators
+  - Some administrators are not sufficiently compitent to allocate addresses correcly
+  - Some installations have too many machines to configure them all
+  - Some installations have machines that come and go all the time
+  
+  #### What is DHCP?
+  - When a machines needs an IP address it can use DHCP to get one
+  - When a host boots and finds it needs an IP address it makes a DHCP broacast
+  - This is like a host saying "can anyone give me an IP address?" to the network
+  - With DHCP there is usually just one (occasionallt more as backup) hots that is configured to respond to the DHCP request
+    - As allocation of addresses must be centrally managed to avoid duplication
+    - This is the opposite to ARP
+  - Also in contrast to ARP, this is a network layer broadcast using an IP packet
+    - Uses the address 255.255.255.255
+      - Broadcast address when you dont know the network address
+  - A DHCP server (i.e the DHCP program running on some host) listens for such requests
+    - It will choose a currently unused IP address and send it back to hte requesting client
+    - The value might be chosen by the server according to some defined policy
+      - E.g the next free address taken from a list of currently unused addresses
+    - The client get this rely and reads it IP address which it can then configure itself
+  
+  ##### Outline of DHCP
+  1. The client broadcast "Who out there is willing to do DHCP with me?" (a DHCPDESCOVER message)
+  2. One or more servers broadcast a reply "I will, here is an address" (DHCPOFFER)
+  3. The client picks a server and broadcasts "Can I have that address please?" (DHCPREQUEST)
+  4. The chosen server broadcasts "OK, its yours" (DHCPACK)
+  5. The client sets its IP address
+  
+  - DCHP is an extention of an earlier protocol called BOOTP
+    - Both extend RARP
+  - RARP is at the link layer, while DHCP runs on top of a transport layer (UDP) on top of IP
+  - Note the confusion of layering here;
+    - DHCP is considered to be in a layer lower than the protocol it runs on top of
+  - DHCP runs over (UDP over) IP, so DHCP packets must have source and destination addresses
+  - But the client doesnt yet know its own IP address, or any server's address
+    - It must fill the IP address fields with something:
+    - Source: 0.0.0.0
+    - Destination: 255.255.255.255
+      - Local network broadcast
+  - Packets returning from the DHCP server will have:
+    - Source: The server's IP address
+    - Destination: 255.255.255.255
+    - Again the client doesn't yet kave an IP address so we have to just broadcast to everyone
+  
+  #### Considerations with DHCP
+  **There is an identification field DHCPOFFER that allows a host to recognise if a reply is for itself**
+    - This prevents a host mistakenly taking an offer for some other host that is doing DHCP at the same time
+  
+  **A DHCP server has a pool of available addresses it can assign to hosts as they need them**
+  - When a host leaves the network it should send aa DHCPRELEASE to the DHCP server
+  - This releasing it IP address to be reused for another host
+  - But not all clients do this (e.g if one crashes before sending a release)
+  - To fix this DHCP gives a lease time on an address
+  - The address is unusable by the requesting host for this period of time
+  - If the lease expires the host can request a renewal of the lease from the server
+    - Which will grant a further lease on the address
+  - The renewal reques and reply can be a normal unicast interchange
+    - The client already has an IP address
+  - Id a host leaves the network or crashes, there will be no renewal request
+    - Thus the server can put the IP address back into the pool
+  - How long should the lease time be?
+    - This is configurable by the DHCP server's administrator
+    - A short time is used when there is a fast turnover of machines
+      - E.g laptops in a library
+    - A long time (up to infinity) is used for more permanent machines
+      - E.g desktops
+  
+  #### What else can DHCP supply?
+  - Mostly just does:
+    - IP addresse
+    - Netmask
+    - Gateway
+    - Name servers
+  - But can also do:
+    - Lease times
+    - Print servers
+    - Boot servers
+    - Mail servers
+    - Host names 
+    - Web servers
+  
+  - After getting a new address a client might broadcast an ARP reply containing its new address
+    - Gratuitous ARP
+'''
+linesHighlighted: [
+  2
+  673
+]
+isStarred: false
+isTrashed: false

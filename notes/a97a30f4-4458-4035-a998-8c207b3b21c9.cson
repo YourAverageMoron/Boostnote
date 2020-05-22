@@ -1,0 +1,419 @@
+createdAt: "2020-01-12T10:18:10.940Z"
+updatedAt: "2020-01-12T15:44:45.836Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Software Testing for Safety Critical Computer Systems"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # Software Testing for Safety Critical Computer Systems
+  
+  ## Validation and verification
+  - **Validation**
+    - Are we building the right product?
+    - The software should do what the user really requires
+  - **Verification**
+    - Are we building the right product right?
+    - The software should conform to its specification
+    - Check against functional and non-functional requirements
+  
+  ---
+  
+  ## Black box testing
+  - We dont have any source code
+    - Only the specification
+  
+  ![db0a6512.png](:storage\\a97a30f4-4458-4035-a998-8c207b3b21c9\\db0a6512.png)
+  
+  - First step is to validate the specification itself
+  - At least 50% of system errors origionate in the specifications
+  - We cannot assumre that the specs are complete and correct
+  - Uncertanties need to be resolved before we can complete our test case planning
+  
+  ---
+  
+  ## White box testing
+  - We have access to the internals of the software
+    - Source code
+  
+  ![6563fd0e.png](:storage\\a97a30f4-4458-4035-a998-8c207b3b21c9\\6563fd0e.png)
+  
+  ---
+  
+  ## Generating test cases
+  - **Input validation**
+    - Verify that invalid inputs are rejected as expected
+    - Verify that the right number of inputs can be entered
+  - **Normal data**
+    - Verify that the system works under "normal" cases
+  - **Boundary values**
+    - Verify that extreme data is still handled correctly
+  - **Assumed logic**
+    - Examples:
+      - Verify that the result displayed on screen is in an acceptable manner
+      - Verify that the process exits and shuts down without any problems.
+  - **Invalid data**
+    - Verify that the system handles invalid data appropruately
+  
+  ### Documenting tests
+  ![857ddc73.png](:storage\\a97a30f4-4458-4035-a998-8c207b3b21c9\\857ddc73.png)
+  
+  ### Test cases
+  Test cases should contain
+  - Clea statement of its objective, refering to development documents, especially requirements
+  - Test case name
+  - Test case identifier
+  - Description of the test conditions/setup
+  - Input data
+  - The steps to be performed with test setup
+  - The results of the test are expected, if all is working properly
+  
+  ---
+  
+  ## Test show the presence of errors
+  - Just because a program passes all test cases doesnt mean it is free from bugs
+  
+  > Testing can only show the presence of errors, not their absence
+  
+  > The process of exercising or evaluating a system or system component by manual or automated means to verify that it satisfies specified requirements or to identify differences between expected and actual results
+  
+  ### Only meaningful with specification
+  - Better specification = better testing
+  - Clear expectations
+  - Prioritisation
+  - Success criteria/mechanics
+  - Use cases
+  
+  ---
+  
+  ## Positive and negative testing
+  
+  **Positive testing**
+  - Testing for valid behaviour
+  - Correct response to valid behaviour
+  
+  **Negative testing**
+  - Checking for defects or non specified behaviour
+  - E.g repsonse to valid input
+  
+  - Effective testing requires both positive and netative tests
+  - Effective testing reqires both black and white box approaches
+  
+  ---
+  
+  ## Dynamic vs static testing
+  
+  ### Dynamic testing
+  - Means that one operates the system under test
+  - The tests may be carried out in the system's natural working environment
+    - Or within a simulation of the environment
+  - Done by the execution of test cases, which investigates apsects of the system
+  - Each test set consists of:
+    - A set of input test data
+      - Test vector
+    - A specification of expected output
+      - Output vector
+  - In case of interactive programs, the test data will usually a sequence of inputs
+  - With each test case one associates
+    - Pre-conditions
+      - Pecify the state of the system before the test is executed
+    - Post-condition
+      - Define the state the system must be in after the test
+    - Tests will check whether the given a test input vector that fulfils the pre-condition, the test output vector filfuls the post-condition
+    - The goal is to show that for any input fulfiling the precondition, will fulfil the post-condition
+  - Some tests investigate the operation of the system under the condition that the pre-conditions are not met
+  - Used in order to check what happens of the system deviates from its operation
+  
+  #### Functional testing
+  - The testing of functionalities of the system defined by its specification:
+    - For each operation tests are carried out
+    - However, tests might cover more than one function
+    - One has to make sure that all functions are covered by the tests
+  - This is black-box testing
+    - No details about the implementation needed
+  
+  #### Structural testing
+  - Looks at the structure of the system
+  - Checks the operation of individual components and their interactions
+    - Tests to check certain routines or certain execution paths
+    - Allows to investigate critical conditions
+  - White-box testing
+  
+  #### Random testing
+  - Uses a test data which are randomly chosen from the input space
+    - Could be randomly sampled from the entire input space
+    - Could be sampled following some probability distribution
+      - The distribution might match the one expected for the operation
+  - Aims to detect dault conditions which are missed by more systematic techniques
+  
+  ### Static analysis
+  - Investigates a system without operating it
+  - Manual
+    - Walkthroughs
+    - Inspections
+    - Checklists
+  - Automated static code analysis tools:
+    - Formal measurements
+    - Complexity measurements
+    - Range checking
+    - Data flow analysis
+  - Aims to establish properties of the software which are true under all circumstances
+    - In contrast with dynamic testing, which can only test a small subset of the input set
+  
+  #### Techniques
+  - A code walkthrough means that an engineer leads colleagues through the design or implementation of software and try to convinces them of its correctness.
+  - Design review means peer review and systematic investigation of d0ocuments by a number of engineers.
+  - Checklists consists of a set of (usually very general) questions used in order to critically and systematically check certain aspects of a system.
+  - Formal proofs are used to show the correctness of some aspects of the design or implementation of a system.
+  
+  ---
+  
+  ## Test coverage
+  - The proportion of software that has been tested
+    - Provides a measure of confidence in the rigour of our testing process
+  - Common coverage metrics are
+    - Statement coverage
+      - % of executable statements run at least once
+    - Decision coverage
+      - % of decision outcomes (branches) run at least once
+    - Condition coverage
+      - % of conditions causing decisions independently tested
+  
+  ---
+  
+  ## Error seeding
+  - Error seeding is a dynamic testing technique
+  - Intentionally introduce “typical” defects into the code
+  
+  ![ab23b9a3.png](:storage\\a97a30f4-4458-4035-a998-8c207b3b21c9\\ab23b9a3.png)
+  
+  Example:
+  - TD = total detected = (SD+UD) = 40
+  - S = 100 (known)
+  - SD = 30 (how many seeded errors were found)
+  - UD = TD-SD = 40-30=10
+  - U = estimated total unseeded = 10*100 / 30 = 33
+  
+  ---
+  
+  ## Verification of safety
+  - A parallel can be made with verification of safety:
+  
+  When considering the safety of a system, verification will be used to determine whether or not any mistakes have been made in areas such as:
+  - Identification of hazards
+  - Their control in the design of the system
+  - The construction of the system
+  
+  This is achieved through a process of safety verification.
+  
+  **Verification – traditional view:** 
+  - The process of determining whether a component or the output of a development phase meets its specification i.e. its requirement.ns
+  
+  - Verification doesnt tell us if the requirements or specification is correct
+  
+  ### Verification of safety
+  - Goes beyond software verification
+    - System safety constraints
+    - Safety-related functional requirements
+  - Hazard analysis servers as a basis for safety verification
+  
+  #### Dynamic analysis
+  - This is what most people call "software testing"
+  - It involves the execution of a system or a component (eg. a piece of software) to investigate its characteristics
+  - Testing for hazardous outputs
+  - Testing safety design features 
+    - Features that are included to eliminate/control hazards
+  - In practice, dynamic testing is often success-oriented, focusing on what the software is supposed to do, rather than what it is not supposed to. Specifications tend to state what should be achieved rather than what should not happen.
+  - These should also be included
+    - How the software handles erroneous inputs
+    - Off-by-one errors
+    - Unusual cases
+      - Such as failure of a sensor the software must read
+  - In general, the following safety-related aspects of the software should be considered in a dynamic analysis
+    - Critical functions and variables
+    - Boundary conditions
+    - Special features – firewalls, safety kernels…
+    - Incorrect and unexpected inputs including timing of inputs
+    - Reaction to hardware faults
+    - User interface
+  
+  ##### Limitations of dynamic analysis
+  - It is difficult to provide realistic test conditions
+    - Testing in a real setting may not be possible and simulations may not be accurate
+  - Exhaustive testing is usually impossible
+    - Testing uses the specification as the standard to test to
+    - Rare events unanticipated by the designer are likely to be unanticipated by the tester
+      - Why testing is invariably done in teams
+  
+  #### Static analysis
+  - Use different teams for the static and dynamic analysis
+  - It involves the evaluation of a system or a component
+    - Io investigate its characteristics, without executing it
+  - There are many techniques for static analysis, including:
+    - Walkthroughs/design reviews
+      - Systematic investigation of the code/design documents, by reading them
+    - Formal proofs
+      - Prove correctness of those components of the design or implementation that have a formal description
+    - Data flow analysis
+      - Check appropriateness of the operations performed on the data by drawing a diagrammatic representation of the flow of data through a system
+  
+  #### Modelling
+  - Model part of reality
+  - Useful both in the design and testing of safety-critical systems, modelling techniques include:
+    - Formal methods
+      - Can’t get proof of everything. Use of mathematical languages to model system components at the spec level. The spec can be checked/proved for correctness and consistency
+    - Software prototyping
+      - Partial implementation of the system to investigate key features of the system. Commonly used in UI design
+    - Performance modelling
+      - Construct a model of the systems processes and their interactions, will add appropriate input data. Aim is to check the working capacity of the system
+    - State transition diagrams
+      - Help validate the state transition requirements in the specification and ensure all the states are readable + that appropriate intermediate states are used where necessary
+    - Environmental modelling
+      - Use of a simulation environment in which a system can be used to test that system
+  
+  ---
+  
+  ## Testing strategies depending the stage of development
+  **(S)tatic/(D)ynamic/(M)odelling**
+  - Requirements analysis and functional specifications
+    - (S) Walkthroughs/design reviews
+    - (M) Formal methods
+    - (M) Software prototyping
+  - Top-level design
+    - (S) Walkthroughs/design reviews/formal proofs
+    - (M) Performance modelling
+    - (M) State transition diagrams/Petri nets
+  - Detailed design
+    - (S) Walkthroughs/design reviews
+    - (S) Data flow analysis
+    - (M) Formal methods
+  - Implementation
+    - (S) Static analysis
+    - (D) Testing (functional, structural, error seeding)
+  - Integration testing
+    - (S) Walkthroughs/design reviews
+    - (D) Testing (functional, structural, error seeding, stress)
+    - (M) Environmental modelling
+  - Validation
+    - (D) Functional Testing
+    - (M) Environmental modelling
+  
+  ---
+  
+  ## Picking a programming language for safety critical systems
+  -Logical soundness.
+    - Is there a sound, unambiguous definition of the language?
+  - Complexity of definition.
+    - Are there simple, formal definitions of the language features?
+    - Too high complexity results in high complexity within compilers and support tools and therefore can lead to errors
+  - Expressive power.
+    - Can program features be expressed easily and efficiently?
+    - The easier the program is written, the easier it is to verify it
+  - Security.
+    - Can violations of the language definitions be detected before execution?
+    - Some interpreted languages detect errors only when running it.
+    - Various languages like Eiffel and even Java allow to define programs, which
+      - the compiler regards as type correct,
+      - although they aren't,
+      - run time errors are caused by this
+  - Verifiability.
+    - Is there support for verification that program code meets the specification?
+  - Bounded space and time requirements.
+    - Can it be shown that time and memory constraints are not exceeded?
+  
+  ---
+  
+  ## Three phases of software testing
+  - Unit testing
+    - Individual program units or object classes are tested. Unit testing should focus on testing the functionality of objects or methods.
+  - Integration testing
+    - Several individual units are integrated. Integration testing should focus on testing interfaces between units.
+  - System Acceptance testing
+    - Where some or all of the components in a system are integrated and the system is tested as a whole. 
+  
+  ### V-Model (Planning for Verification)
+  - The verification activity typically runs throughout the software lifecycle
+  
+  ![cf9d5996.png](:storage\\a97a30f4-4458-4035-a998-8c207b3b21c9\\cf9d5996.png)
+  
+  ### Unit testing
+  - The “lowest” level of systematic testing
+  - A “unit” is the smallest component with a specification
+  - Focus is on the functional requirements of unit.
+  - Each unit is tested in isolation.
+  - Usually white box
+  - Can create temporary stubs for external calls.
+  - Drivers sometimes needed
+  
+  ![536a17f8.png](:storage\\a97a30f4-4458-4035-a998-8c207b3b21c9\\536a17f8.png)
+  
+  **Advantages**
+  - Easier to test a unit thoroughly when in isolation
+  - Many units can be tested in parallel
+  
+  **Problems**
+  - Can be a lot of work.
+  - Computer-Aided Software Engineering (CASE) tools can help
+  - Object Orientation introduces additional complexity with classes that use objects of other classes
+    - Remember the coupling and cohesion OO principle
+  - Networking and concurrency can introduce additional complexity
+  - Temporal dependency
+  
+  ### Automated testing
+  - Devising test cases: difficult to be automated
+      - But running (many of) them can be!!!
+  - Test harnesses automate the running of test cases
+  - Test harness = automated test framework
+    - collection of software and test data configured to test a program unit by running it under varying conditions and monitoring its behaviour and outputs.
+  - It has two main parts
+    - the test execution engine
+    - the test script repository
+  
+  ### Debugging
+  - Diagnosis the cause of an error and
+  - Designing and implementing a fix
+  
+  ![4a877222.png](:storage\\a97a30f4-4458-4035-a998-8c207b3b21c9\\4a877222.png)
+  
+  - Debugging, like programming, is learnt primarily through experience.
+    - Learn common errors (more about this later) and spot patterns.
+  - Interactive Development Tools (IDEs) help debugging
+    - Access to symbol table in compiler.
+    - Allow developer to “step through” code
+      - Set “breakpoints”.
+      - Add variable “watches”.
+  - When debugging design documentation - some tools are also available
+  
+  ---
+  
+  ## Common causes of defects
+  - There are two classes of common defect
+    - General issues, regardless of particular language
+    - Faults that are common to specific programming languages
+  - Data faults
+    - Variables initialised before they are used?
+    - All constants named?
+    - String delimiters
+    - Compound statements (inconsistent scope)
+  - Control faults
+    - All cases accounted for in case constructs
+    - Predicate logic on conditional statements
+    - Compound statements (control)
+  - Exception management
+    - All possible error conditions handled?
+  - Interface faults
+    - Number/type/order of arguments match?
+    - Shared data structures.
+  - Memory
+    - Insufficient memory allocated (overflow).
+    - Memory leaks and garbage collection.
+    - Stack overflow (recursion)
+    - Pointer arithmetic
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

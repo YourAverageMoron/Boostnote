@@ -1,0 +1,119 @@
+createdAt: "2020-01-02T16:14:13.879Z"
+updatedAt: "2020-01-02T18:03:12.914Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "The Internet Model"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # The Internet Model
+  
+  ## Introduction
+  - This consists of 4 layers
+    - Link layer
+    - Network layer
+    - Trasport layer
+    - Application layer
+  - Based on RFC1122
+  - Take care to distinguish between the model and its primary instance (TCP/IP)
+    - They often get confussed as they are similar
+    - It is possible, though unlikely that there could be another network protocol, not TCP/IP, based on the four layer internet model
+  
+  ---
+  
+  ## Link layer
+  - The Internet link layer corresponds to the OSI physical and data link layers
+  - This layer is not described in much detail
+    - Only that it has to be capable of sending and recieving teh next layer's packets
+    - So what you do with your hardware is pretty open
+  - TCP/IP have many implementations here including:
+    - Ethernet
+    - ADSL
+    - Wi-Fi
+  
+  ---
+  
+  ## Network layer
+  - Also known as the Internet layer
+  - This layer handles the movements of packets
+    - Particulary routing
+  - Directly corresponds to the OSI network layer
+  - In TCP/IP, the Internet Protocol (IP) is defined in this layer
+  - IP is an unreliable protocol
+    - This means it does not guarantee the delivery of packets
+  
+  ### Reliability
+  - Sometimes it is better to deal with an occasional packet loss
+    - Instead of holding up the entire system while the lost packet is re-requested and resent
+    - E.g in videos fast delivery is more important than accuracy
+  - In the non-technical sense of the term internet hardware is pretty reliable (doesnt break much)
+    - But wireless (Wi-Fi etc) and some wired (ADSL) are more unreliable than you might think
+  
+  ---
+  
+  ## Transport layer
+  - The transport layer corresponds to the OSI layer
+    - Provides the flow of packets between source and destination
+  - In TCP/IP there are two protocols in this layer:
+    - Transimssion control protocol (TCP)
+    - User datagram protocol (UDP)
+  - TCP is a reliable protocol
+    - It guarentees delivery
+  - It makes a reliable layer out of a potentially unreliable IP underneath by a complex mechanisim of packet acknowledgements
+  - UDP is unreliable as we do not always want the non-trivial cost of the mechanisim that makes TCP reliable
+  - Packets have a header field indicating what the protocol of the data is:
+    - TCP has the protocol number 6
+    - UDP has the protocol number 17
+  
+  ---
+  
+  ## Application layer
+  - Covers rouchly the OSI session, presentation and application layers
+  - Internet applications must take care over presentation issues if they want to be completely interoperable
+    - the ability of computer systems or software to exchange and make use of information
+  - Many for get this, for example:
+    - Many programmers forget that not all machines represent integers in the same way and so the bit pattern they use for the number they want to send is (mis)interpreted as a different number by the reciever
+  - Typically an OS kernel will implement everything below the application layer
+    - Such as TCP, UDP, IP, Ethernet, Wi-Fi etc
+    - This is because they use system resources that must be shared fairly amungst applications
+  - Anything above the transoprt layer is done by the application programmers in their code
+  - A typical email application will need to apply a presentation encapsulation and add application layer headers (T, From, etc)
+    - The Mulitpurpose Internet Mail Extentions (MIME) standard is a way to encode data (text, images, sound) in as safe way
+      - Origionally it was developed in the context of emial, it is now used in other areas like Wrb page delivery where there are mixed kinds of data to transmit
+  - Similarly for the session layer
+    - If a persistent session is needed, the application must code it
+    - Many application, like HTTP, don't
+    - Note: if the TCP/IP had session management, applications would get this "for free"
+    - The counter-argument is that many application do not want session management, these should not have to pay the overhead of supporting it
+    - Any applications that want session management has to re-implement it for itself
+      - There are libraries that help with this
+  
+  ---
+  
+  ## Example of layering
+  **How an email might be transmitted over an Ethernet**
+  - Start with the text of the email
+  - Application: the email application transforms the text using a MIME encoding (presentation)
+  - Application: the email application adds an envelope header (MAILTO, MAILFROM, etc)
+  - Transport: TCP adds its header (reliability)
+  - Network: IP adds its header (routing)
+  - Datalink: Ethernet adds a header (local routing) and a trailer (checksum)
+  - Datalink: The bits are transformed using a 4B/5B encoding to smooth the bit patterns and are sent using a three-level electrical coding MLT-3 (physical)
+  
+  ---
+  
+  ## Problems with the Internet Model
+  - It is only good at describing TCP/IP
+  - The physical and data link layers are merged:
+    - Makes it difficult to talk about
+    - Say copper vs optical fiver installations
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

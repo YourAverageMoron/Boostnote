@@ -1,0 +1,314 @@
+createdAt: "2020-01-03T18:44:25.411Z"
+updatedAt: "2020-01-04T18:40:21.597Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Link Layer Protocols"
+tags: [
+  "CM30078"
+  "Computer_Science"
+  "Networks"
+  "University"
+]
+content: '''
+  # Link Layer Protocols
+  
+  ## Serial line internet protocol (SLIP)
+  - An early protocol used on modems to encapsulate IP traffic over serial (telephone) lines
+  - It is a point-to-point protocol
+    - It links just two machine to each other
+    - The normal requirement in warly dial-up systems
+  - Uses a very simple frame encapsulation with a terminating byte (hex) c0
+    - Also often starting with a c0 byte
+  
+  ![6046869f.png](:storage\\614370c0-076d-48f0-b950-047113a9fe69\\6046869f.png)
+  
+  - To allow data containing c0 to be sent SLIP uses byte stuffing:
+    - To send `c0` you actually send two bytes `db dc`
+    - The pair `db dc` is reconstructed as `c0` at the other end
+    - It is a minor data expansion but it enables the transparent transmission of data
+  - There is no frame size limit
+    - It is suggested that you should support at least 1006 bytes
+    - 296 bytes was common
+      - 40 bytes of TCP/IP headers plus 256 bytes of data
+    - Larger frames have relatively less overhead
+      - But at 9600b/s (a typical early modem speed) 1006 bytes takes about 1 second to transmit
+    - If there is a bulk transfer of full-sized frames at the same time as an interactive session
+      - The session frames would have to wait 0.5 seconds on average to get through
+        - This is too slow
+      - Interactive resoponse of over 100-200mc is felt to be slow
+    - 296 bytes is a compromise
+      - Not too slow to be interactive
+      - Not too ssmall for bulk transfer
+    - On modern modems it was increased to 1500 bytes
+  
+  ### Problems with slip
+  - Only Internet protocol is supported
+    - There is no type field in the frame
+  - The ends must have pre-agreed IP addresses
+    - No mechanism for agreeing addresses
+  - No checksum
+    - Telephone lines were noisy and created data corruption
+  - No authentication
+    - No way to check who is connecting
+  
+  ---
+  
+  ## Point-to-Point Protocol (PPP)
+  - Like SLIP it is a point to point protocol
+  - It has 3 parts
+    - A framing layout for packets
+    - A link control protocol (LCP) for managing and configuring links
+    - A set of network control protocols (NCP) to manage network layer specific options
+  
+  ![6a0b7f59.png](:storage\\614370c0-076d-48f0-b950-047113a9fe69\\6a0b7f59.png)
+  
+  - Frame delimiters:
+    - 7E
+    - At the start and end
+  - Address:
+    - Always ff
+  - Control
+    - Always 03
+  - Protocol:
+    - Tells us what the next layer is
+    - E.g IP is 0021
+  - Cyclic redundancy check
+    - Spots corruption
+  - Still no address field
+  - Up to 1500 bytes of data
+    - But this csn still be negotiated
+  - Values are escaped by 7d (similar to SLIP)
+    - 7e -> 7d 5e
+    - 7d -> 5d
+    - x, where x<20<sub>16</sub> -> 7d [x+20]
+      - So 01 -> 7d 21
+  - Network control protocols can negotiate extras
+    - Compression
+    - Frame size
+    - Authentication e.g passwords
+  - While it was devised to be used over telephone modems, PPP is still actively used
+    - E.g in PPP over Ethernet (PPPoE) as it allows authentication of connection
+    - Current FTTC products use PPPoE over VDSL to pass authentication to the ISP
+  
+  ---
+  
+  ## Link layers
+  - Several other link layers exist
+  - Where the Ethernet frame is effective over local area networks
+  - There are many link layers carrying data over long distances at high data rates
+    - Asynchtonous Transfer Mode (ATM)
+      - Designed by telephone engineers
+      - Connection oriented data voice network into which you could squeeze data packets
+    - Multiprotocol Label Switching (MPLS)
+      - Designed post-ATM when the technology decisions that dorve the ATM were deemed no longer applicable
+      - Designed to be a general long-distance network
+      - It is much better suited to modern data networks
+  
+  ### Etherent link layer
+  
+  ![351dda59.png](:storage\\614370c0-076d-48f0-b950-047113a9fe69\\351dda59.png)
+  
+  - The interesting fields here are the addresses
+  - The addresses allow a frame to get from the source to the intended destination
+  - This works well when the destination is on the local Ethernet network
+    - Which is shared (or switched) so the frame has no problem being seen by the destination
+  - When the destination is non-local
+    - We cant treat the world as a shared medium and boadcast the packet to everyone
+    - The network destination might not even be an Ethernet address
+    - So we need hardware independent addresses to identify hosts that work independently of the physical network
+    - In the Internet Protocol these addresses live in the network layer
+  
+  ---
+  
+  ## IP
+  - The network layer used in the Internet Protocol is called the Internet Protocol (IP)
+  - It has the major function of dealing with routing
+    - Determining where a packet should go to
+  - The IP header has network layer addresses
+    - These are hardware independent, and in the same format across the entire Internet
+  - Each host on the Internet has an IP address that identifies it uniquely over the entire Internet
+    - At least that was the origional intention
+    - This is no longer true
+    - But for now assuming it is true:
+  
+  **IP Header**
+  ![35861940.png](:storage\\614370c0-076d-48f0-b950-047113a9fe69\\35861940.png)
+  
+  If we stack the heafer vertically:
+  
+  ![bf09ab5b.png](:storage\\614370c0-076d-48f0-b950-047113a9fe69\\bf09ab5b.png)
+  
+  - The source and destination addresses are both four bytes long:
+    - 10001010001001100010000000001110 is an example IP address, a 32-bit value
+    - This is 2317754382 in decimal (not easy to work with)
+    - We can write this as:
+      - 138.38.32.16
+        - Decimal representation of four 8-bit values
+        - The dots just make it easier to read
+  - The structure of the IP helps with routing:
+    - With 138.38.32.14 the first half 138.38 is a 16-bit network address
+      - It identifies the University of Bath
+    - 34.14 is a 16-bit host address which identifies a single machine on the university's network
+      - Although we right 138.38 it should really be thought of as 1000101000100110 (a bunch of 16 bits)
+  - This division into network and host parts helps immensely in routing
+    - All packets destined for the University of Bath can be routed in the same manner
+    - Only when the packet reaches the University is some local knowledge of the network needed
+    - The host part of the address splits further into subnet addresses that help local routing within the University
+  - IP addresses are independent of Ethernet
+    - It can be used regardless of the hardware used
+  
+  ### Encapsulating to hardware layer 
+   - The IP packet is further encapsulated by a hardware frame
+     - The OS cannot send the packet on the physical medium until it know the Ethernet address of the destination
+     - Ethernet does not know about IP addresses
+     - The IP does not know about the Ethernet addresses
+     - This seperation of layers is desirable
+   - The corresponding Ethernet address is found from the IP address
+     - This is done by the Address Resolution Protocol (ARP)
+     - ARP is a very simple link-layer protocol that essentially broadcasts a special frame on the local medium
+       - Essentially "Who has the IP address 138.38.32.14"
+     - All hosts on the network hear this broadcast and the host with that address replies
+       - "Me and I have the Ethernet address 08:00:20:9a:34:dd"
+       - This is a security problem
+   - We dont want to use ARP for every packet we send
+     - So we send an ARP cache kept why the OS kernel that records the relation:
+       - 138.38.32.14 ↔ 08:00:20:9a:34:dd
+     - Entries in the cache time out and are removed after, for example, 20 minutes
+     - This is in case the host using 138.38.32.14 goes away and is replaced by a different host with the same IP address
+       - As this new host may have a different Ethernet address
+     - Once expired the next packet to 138.38.32.14 will need a fresh ARP
+  
+  #### When the destination is not on the local network
+  - IP routing for the source host is quite simple
+    - If the destination is on the local network send the packet directly
+    - Send the packet directly
+    - This probably uses ARP (on the first packet) to get the hardware address of the destination
+  - If the destination is not on the local network, the solution is to send the packet to a gateway host and let it deal with where to send it next
+  - The gateway is just a machine on more than one network
+  - This reduces the complexity required on the hosts' software
+    - Only the gateway will need to to know about the routing
+  
+  ![7758c572.png](:storage\\614370c0-076d-48f0-b950-047113a9fe69\\7758c572.png)
+  
+  - The only infomation the source host needs to know to do routing is:
+    - Its own address
+    - The address of a gateway machine
+  - For a host the routing software does something like this:
+    - Is teh destination on the local network?
+      - Yes: send it directly, possibly with ARP if needed
+      - No: send it to the gateway, with ARP if needed
+  - When a packet is going to a gateway:
+    - We might ARP to find the hardware address of the gateway
+    - The packet, with the IP address of the final destination, is put into a framw with the Etherent address of the gateway
+  
+  #### Another reason why the hardware and software addresses are sperate
+  - The IP address is the utimate destination
+  - The hardware address is for the next hop
+  - ARP is not restricted to Ethernet and IP, it can be used to pair any physical and network layer addresses
+  
+  ---
+  
+  ## Address Resolution Protocol (APR)
+  - ARP is a simple protocol
+  - It broadcasts an ARP request packet (protocol number 0806) in an Ethernet frame with a destination hardware address ff:ff:ff:ff:ff:ff and a source address set to its own Ethernet address
+    - ff:ff:ff:ff:ff:ff is a broadcast address and sends to all hosts
+  - All gosts on the local network read this frame
+  - The target gost recognises the request for its IP address
+  - The target sends an ARP reply packet containing its own Etherent address (the other hosts are not required to do anything)
+  - It knows the source's Ethernet address by reading the request packet
+  - The source gets the reply and reads out the target's Ethernet address
+    - It can now use that Ethenet address to send IP packets
+  
+  ![af100a62.png](:storage\\614370c0-076d-48f0-b950-047113a9fe69\\af100a62.png)
+  
+  - Contained within the Ethernet frame:
+    - Frame type:
+      - 0806 for ARP
+      - The Ethernet frome type field allows the software that reads the packet from the Ethernet cart to pass the contents of the packet to the software that implements ARP
+    - Hardware type:
+      - 1 for an Etherent address
+    - Protocol type
+      - 0800 for an IP address
+    - Size:
+      - Sizes of bytes of the address fields
+      - 6 for Etherent
+      - 4 for IP
+    - OP:
+      - 1 for request
+      - 2 for reply
+    - Address fields:
+      - The data
+  - In a request the destination hardware field is not filled in as this is what we are trying to find out
+  - In a reply hte sender Ethernet address is the address we seak
+  - If no machine on the local network has the requested IP address, or that machine is down, no reply will be recieved
+    - In this case, after a few seconds, and a few repeated ARP requests, the OS returns an error message to the application trying to make the IP connection
+      - E.g "No such host" or "Host unreachable"
+  
+  ### Gratuitous ARP
+  - It is sometimes useful to give an ARP reply even if nobody has asked for it
+  - For example if a new machine joins a network or an existing machine changes its IP address
+  - Machines on the local network can read this ARP and handle it as they see fit
+    - This could include adding it to their cache
+  - This would break old assiciations that are no longer valid but still cached
+    - Without this a host might send an IP packet to the old cached and now wrong hardware address
+  - ARP is a purely local network thing:
+  - It descovers a hardware (next hop) address on the local network
+  - It makes no sense for an ARP to be forwarded to another network
+    - Which might not even be of the same physical type
+  
+  ### ARP Bridging
+  - There is a trick that allows us to extrnd an Ethernet (or other network) over a physically larger distance than its specifications allow
+    - It also allows us to join a wireless network to a wired one so they appear to be a single network
+  - A bridge is a host that joins two physical networks into one
+    - It has two interfaces, one for each network
+  
+  ![da1db316.png](:storage\\614370c0-076d-48f0-b950-047113a9fe69\\da1db316.png)
+  
+  - This example joins a Wi-Fi to an Ethernet
+    - But we could use any two networks that share the same MAC address type
+  - If host oh1 wishes to send to host h2 it must determine its hardware address
+    - As it is on the "same" local network
+  - So h1 does an ARP broadcast for h2
+  - The bridge sees this reques and responds on behalf of h2
+    - A proxy ARP
+    - But it supplies its own hardware address b1
+  - Now h1 sends data to what it thinks is h2, but is actually b1 (the bridge)
+  - The bridge reads the packet, sees that it is destined for h2 (by its IP address) and forwards it to the other network where h2 can read it
+  - Furthermore it reqrites the forwarded frame's header to have h2 as the destination and b2 (the other interface of the bridge) as the source
+  - If h2 replies, it can either use b2 which it got from the packet or do an ARP request
+    - In wither case the packet goes to the bridge which forwards it to h1, again rewriting the frame addresses appripriately
+  - This is all transparent to h1 and h2 who believe they are on the same network
+  - If h1 is communicating with bth h2 and h3 its cache will show them to have the same hardware address (b1)
+    - This is not a problem
+  
+  ### Bridging
+  - ARP bridging is fine for joining a pair of small networks but less so for joining larger collections of networks
+  - IEEE 802.1d Ethernet Bridging standard addresses this
+    - Dealing with the cases of multiple routes between hosts
+  
+  #### Virtual bridging
+  - More commonly called Virtual LANs (VLANs)
+  
+  ![7dc61d41.png](:storage\\614370c0-076d-48f0-b950-047113a9fe69\\7dc61d41.png)
+  
+  - A company has two seperate sites 1 and 2 with a single dedicated link between them
+  - Thet want to run two seperate LANs, A and B, but not buy a second link between the sites
+  - They can use 802.1q tagging
+  - A packet from LAN A in Site 1 arrives at the switch
+  - The switch knows to route the packet over the remote link:
+    - I places a 802.1q tag on the frame
+  - A tag is an extra 4 byte header containing the Virtal LAN Identifier (VID)
+    - This is a 12 bit integer
+  - The frame in the physical later (typically Ethernet) is changed from 0800 to 8100 to indicate a tagged packet
+  - The switch in Site 2 recieves the packet, sees the tag, reads and removes it and forwards the packet to its part of the LAN A
+  
+  ![42d29723.png](:storage\\614370c0-076d-48f0-b950-047113a9fe69\\42d29723.png)
+  
+  - This generalises well too many virtual LANs
+    - Allows many networks to share infastructure
+    - Thus saving on cost
+  - However it leads to larger network traffic
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,167 @@
+createdAt: "2020-05-15T14:47:26.474Z"
+updatedAt: "2020-05-15T15:29:13.172Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Believeability"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Believeability
+  
+  ## The Turing Challenge
+  - How do you recognise when you’ve achieved AI?
+  - How often could you tell a man from a woman on IM, (if they were playing to deceive?)
+  - Could you tell a computer from a woman as often? 
+  
+  ---
+  
+  ## Believability
+  - Believability is associated with engagement, immersion and suspension of disbelief
+  - It is not the same as realism
+  
+  ### The Archetype
+  - “Classic” animation maintains engagement despite (or because of) exaggerated gestures and implausible situations
+    - (Bates 1994, Blumberg 1998)
+  
+  ### Playing games
+  - Believability is the goal of computer game characters
+  - Emotional engagement with characters and narrative maintains interest
+  - Reminding the player of artifice (or boring them) is bad
+  
+  ---
+  
+  ## Immersion / Engagement
+  - Forgetting yourself & the media
+  - Entirely wrapped in the narrative / action / task
+  - Goal for films and novels as well as games and VR
+  
+  ### Graphics and VR Engagement
+  - Frederick Brooks used VR to treat PTSD in Vietnam Veterans
+  - Reported that:
+    - Increasing graphics quality (photorealism) **decreased** engagement
+    - Increasing sound quality **increased** engagement
+  - Higher realism in graphics => higher expectations
+  - Fewer glitches in sound?
+  
+  ---
+  
+  ## The Uncanny Valley
+  
+  ![588896e0.png](:storage\\353469e5-fef9-474d-8083-a6a127ba03bf\\588896e0.png)
+  
+  ![4f16e027.png](:storage\\353469e5-fef9-474d-8083-a6a127ba03bf\\4f16e027.png)
+  
+  ---
+  
+  ## Loebner Prize
+  - Annual competition for passing the Turing Test
+  - $2,000-$3,000 to the best program per competition
+  - $25,000 for a chatterbot that beats the judges
+  - $100,000 for an AI that wins with video & audio input too (then the contest ends.)
+  
+  ### Strategies That Work for a While
+  - Misspelling
+  - Typing rhythm
+  - Getting the other person to talk about themselves (fools many judges.)
+  - Steering the conversation to a favourite domain
+  
+  ### Julia
+  - Written by Michael Loren (CMU)
+  - Entered into Loebner competition, but “lived” in MUDs
+  
+  ---
+  
+  ## What Makes a Believable Character?
+  - Autonomy [motivation]
+  - Personalisability [programability]
+  - Discourse, risk & trust [delegation]
+  - Domain [context], 
+  - Graceful degradation, cooperation, anthropomorphism, expectations [natural stupidity] 
+  - (Foner 1993)
+  - More recent emphases: episodic memory, emotional continuity, behaviour variation (e.g. Ho & Dautenhahn 2008)
+  
+  ---
+  
+  ## Secret to AI? - Teaching
+  
+  ![aeddff6c.png](:storage\\353469e5-fef9-474d-8083-a6a127ba03bf\\aeddff6c.png)
+  
+  ---
+  
+  ## AARON (by Harold Cohen & UCSD)
+  - Rule-based painting in a particular style (Cohen’s)
+  - Code (and robot) developed over decades
+  
+  ---
+  
+  ## My Favourite Application of GA
+  - Karl Sims (1994)
+  - Artist working for Thinking Machines
+  - Worked because of modularity (+ supercomputers)
+  
+  ---
+  
+  ## AI Best Done by Hobbyists?
+  - Most commercial chess programs built by one person in a garage
+    - Can beat most people with a cheap processor
+  - NetHack (1987) has some of the best Game AI available
+  - Peter Molyneux says it inspired Fable II
+  
+  ---
+  
+  ## Basic Dialog
+  - Default behaviour should be clever
+  - Not too redundant (stochastic?)
+  - Encourage other to drive conversation (ask them questions about themselves)
+  - Check if it’s time to “leave”
+  - Can also use regular expressions to recognise fixed situations and reactively respond: production rules
+  
+  ---
+  
+  ## Template Matching & Memory
+  - Recognise context, grab info, use later
+    - e.g. “my name is $NAME”
+    - “My name is HAL, what’s yours?” $NAME
+  - Eliza (and progeny): reacts to keywords, uses standard sentences, repeats back what you have said a little while earlier
+  
+  ---
+  
+  ## Abuse
+  - “My name is HAL, what’s yours?” $NAME – obvious hacks (or just errors) here
+  - Many people enjoy abusing robots
+  - Ignoring (failure to detect) can be a serious problem in a learning bot, seen as unacceptable to the brand of some customers
+  
+  ---
+  
+  ## Believability Issues
+  - Emotion transitions
+  - Goal transitions / motivations
+    - Sengers 1999
+  - Probability of repeating actions
+  - Probability of doing low utility actions
+    - Evans 2011
+  - Remembering too little or too much
+  - Interest, character, narrative
+  
+  ---
+  
+  ## Oz Group Guide to Believability
+  - Rich personality: many actions oriented towards expressing this
+  - Emotions: obvious in self, meaningful & of concern in others
+  - Change: happens, within constraints of personality
+  - Social Relationships
+  - Illusion of Life
+  
+  ### Illusion of Life
+  - Pursuing multiple, simultaneous goals and actions (Mateas uses BTs)
+  - Having broad capabilities (e.g. movement, perception, memory, language)
+  - Reacting quickly to stimuli in the environment
+  - Mateas (1997)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,135 @@
+createdAt: "2020-01-12T17:34:38.524Z"
+updatedAt: "2020-01-12T18:32:08.367Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Managing safety principles"
+tags: []
+content: '''
+  # Managing safety principles
+  
+  - If we look at sefety management in more detail, there are a number of key principles that need to be followed
+    - Principle 1: Use the safety lifecycle
+    - Principle 2: Have a safety culture
+    - Principle 3: Ensure competence and training
+    - Principle 4: Ensure accountability
+    - Principle 5: Have a safety management system
+  
+  ---
+  
+  ## Use the safety lifecycle
+  - The safety lifecycle should be followed for all safety-critical development
+  
+  **Safety lifecycle**
+  - Identify the hazards and the accidents they may leade to
+  - Assess the risk of these accidents
+  - Reduce/eliminate the risk
+    - Where possible and/or appropriate by controlling the hazards that lead to the accidents
+  - Set safety requirements for the system
+    - Define how they will be met in the system design and implementation
+    - Safety plan
+  - Meet them!
+  - Show that the safety requirements have been met in the system:
+    - Documentation records
+  - Independent professional review
+  - Privide a safety case for hte system for certification purposes
+  - Seek safety approval
+  
+  ### Safety plan
+  - Desctibes hw the project will meed the safety requirements
+  - Must be submitted to the appropriate safety authority who will check that the course of action being proposed is safe
+  - Approval by the safety aithority provides assurance that the approach documented in the safety plan is appropriate
+  
+  ### Documentation and records
+  - Records must be kept to prove that the safety plan has been followed
+    - Including: record of design activities, tests, meetings etc
+  - Hazard log describing:
+    - Hazards/accidents identified
+    - Action to remove them or reduce them
+  
+  ### Independent professional review
+  - Checks by independent engineers providing assurance and supporting safety case
+  - Two types:
+    - Audits
+    - Assessments
+  - Frequency and depth of each type of review depends on the risk involved
+  
+  ### Safety case
+  - A document that provides an argument for the safety of the project
+  - It is a compilation of evidence
+    - Records
+    - Independent review
+  - Objective is usually to gain certification
+  
+  ### Safety approval
+  - Approcal from safety authority
+  - Based on the safety case
+  - Issue of a safety certificate
+  
+  ---
+  
+  ## Have a safety culture
+  - The difficulties of management are primarily related to people
+    - The management of safety is no exception
+  - Competent staff cannot ensure safety
+  - Flaws in safety culture of an organisation are common cause of accidents
+  - Organisations must be run so that safety is seen as hte primary goal with conciousness on safety evident in every activity
+  
+  ---
+  
+  ## Ensure competence and training
+  - All staff involved in safety-related activities must be competent in terms of:
+    - Training
+    - Technical knowledge
+    - Experience
+    - Qualifications
+  - Inter-personal skills are also important
+    - Team work
+    - Acceptance of constructive criticism
+  - The level required of all the above will depend upon the particular task being undertaken
+  
+  ---
+  
+  ## Enusre accountability and responsibility
+  - Accountability
+    - Assessment and measurement of results
+  - The person ultimately accountable for safety is the safety authority
+  - Responsibility for safety can be delegated, accountability cannot
+  
+  ---
+  
+  ## Havinging a safety management system
+  - Part of achieving a safety culture is getting every project to use the best same practice process and engineering techniques
+  - Best management practice to achieve this is:
+    - Establish a safety management system
+      - A documented process that embodies all principles we have discussed for enhancing safety
+    - Ensure that the safety management system is auditable and can be easily changes as best practice evolves
+  
+  ---
+  
+  ## Final considerations
+  
+  - Safety is a **system issue**, we cannot consider safety of a system's components in isolcation
+    - In particular, the safety of software can only be evaluated in the contect of the system it operates in
+  - **Building safety into a sustem is much more effective than adding protection devices into a complete design**. The earlier safety is considered in the development process, the better the results will be
+  - Our most effective tool in making systems safer is **simplicity**
+    - Boulding systems that are intellectually manageable
+    - The opposite is a complex systemthat has unneeded features and/or is overengineered
+      - The designing of a product to be more robust or complicated than is necessary for its application
+    - Do nut mix simple design with simplistic design
+      - Simplistic: Treating complex issues and problems as if they were much simpler than they really are
+  - **Complacency** is probably the most important risk factor in the development and use of safety critical systems and safety culture must be established to minimise it
+  - **Safety and reliability** are different and must not be confused
+    - Although safe systems are generally reliable, reliable systems may not be safe
+  - **Hazard identifiaction and analysis is essential** for designing safety into a system
+  - **Accidents must not be over-simplified**
+    - Recognise that they are complex and caused by many factors
+    - Fixing symptoms and ignoring the root level causes will not preven the repetition of most accidents
+    - In particular concentrating on one or a few aspects of the problem (e.g concentrating on technical issues whilst ignoring managerial and organisational ones) will not result in an effective safety progrmme
+  - **Learn from past accidents** to avoid repeating mistakes
+  - **Replacing humans with computers** doesnt nexessarily make the systems safer
+    - Just moves the humans to another job
+  - Ony use **compuers and software if their advantages** outweigh their disadvantages
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

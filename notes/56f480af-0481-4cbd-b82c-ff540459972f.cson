@@ -1,0 +1,99 @@
+createdAt: "2019-12-21T13:44:44.151Z"
+updatedAt: "2019-12-21T15:43:58.157Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Computer and Software Myths"
+tags: [
+  "CM30072"
+  "Computer_Science"
+  "Safety-Critical_Systems"
+  "University"
+]
+content: '''
+  # Computer and Software Myths
+  
+  ## The cost of computer is lower than that of analogue or electromagnetical devices
+  - Computer hardware is often cheaper than analogue/electromagnetical devices
+  - However, the cost of designing, writing and certifying reliable and safe software, along with the cost of software maintenance can be enormous
+  
+  ---
+  
+  ## Software easy to change
+  - Superficially this is true
+  - But making changes without introducing errors is very hard
+  - Any changes mean the software must be re-tested, re-verified and re-certified for safety
+  - Software tends to become more brittle as changes are made
+    - This makes it difficult to make chenges without introducing errors
+  
+  ---
+  
+  ## Computer provide greater reliability thant the devices they replace
+  - In theory this is true
+  - Computers hardware is highly reliable and computer software doesn't 'fail' in the normal enginerring sense
+  - But, errors in software are (design) errors in the logic of what the software does, and they will affect system behaviour
+  
+  ![45eb4809.png](:storage\\56f480af-0481-4cbd-b82c-ff540459972f\\45eb4809.png)
+  
+  ---
+  
+  ## Increasing software reliability will increase safety
+  > There are two views on reliability:
+  
+  ### 1. Reliability in software is frequentlu defined as "compliance with the origional requirements specification"
+  But in this case reliability wont necessarily increase safety:
+  - Many safety-critical software errors can be craced back to errors in requirements
+  - Many software-related accidents hace occured whilst the software is doing exactly what the requirements specification said it should
+  - So we might increase compliance with the specification, ut that doesn't do anything for safety if the specification is wrong
+  
+  ### 2. Reliabiliy can also be viewed as "running without errors"
+  This is also untrue, just because we remove errors doesnt mean the system is safer
+  - Safety and reliability, while partially overlapping, are not the same thing
+  - Increasing computer and software reliability does not necessarily result in an increased system safety
+  
+  ---
+  
+  ## Testing and/or proving software is correct (using formal verification techniques) can remove all errors
+  - Testing tools and verification of software are getting better anf better
+  - Testing shows the presence of bugs, not their absence
+  - The large number of possible paths through most realistically sized programs maked exhaustive testing impossible
+  - We can try to verify that software meets its origional specification, but, this wont tell us if the specification itself is wrong.
+    - We have no formal techniques for checking the correctness of requirements specifications
+  - We can do some formal verification of code
+    - Mostly mathmatical proofs
+    - This is only plausable for small pieces of software
+  
+  ---
+  
+  ## Reusing software increases safety
+  - Could be true for reliability, but not safety
+  - Unfortunately reusing code ay actually reduce safety
+    - It gives rise to complacency
+      - "It worked in the previous system so it'll work in the new system"
+    - Specific hazards of new system connot be considerred in the origional development of reused software
+  - Examples
+    - THERAC-25 used parts of THERAC-20
+  
+  ---
+  
+  ## Computer reduce risk over mechanical systems
+  - This is paritially true
+  - Computers have the potential to reduce risk, particularly where they are used to automate hazardous/tedious jobs
+  - They can allow finer, more accurate control of a process or machine
+    - Yes -> They can process parameters more often, perfom calculations qucker
+    - But -> thhis could lead to processes running with reduced safety marhines, closer to its optimim
+  - Automated systems allow operators to work father away from hazardous areas
+    - Yes -> in normal running conditions they do allow this
+    - But -> operators end up habing to work in unfamiliar hazardous conditions
+  - Eliminating operators eliminates human error
+    - Yes -> Operator errors are reduced
+    - But -> We still have human design and maintenance errors
+    - Humans are not eliminated, only shifted to different jobs
+'''
+linesHighlighted: [
+  17
+  2
+  8
+  26
+]
+isStarred: false
+isTrashed: false

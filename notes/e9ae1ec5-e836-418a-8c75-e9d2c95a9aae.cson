@@ -1,0 +1,122 @@
+createdAt: "2020-05-12T14:25:05.306Z"
+updatedAt: "2020-05-17T12:56:47.812Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Introduction"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Introduction 
+  ## Intelligence
+  - The computation of action from perception
+  - Doing the right thing at the right time
+  - Judged by expressed behaviour
+  - Judgement by people
+  - 'Judegement'by natural selection
+  
+  ---
+  
+  ## Ways of obtaining AI
+  - Symbolic AI
+    - Use of logical reasoning
+  - Behavioural AI
+    - Modeling the interaction between and its environment
+  - Conncetionist AI
+    - Using neural networks and such architectures to solve for AI
+  - Probabalistic AI
+    - Statistical techniquest that capture the uncertanty in perception
+  - Combinations of these
+  
+  ---
+  
+  ## Applications of AI
+  - Robotics
+  - Healthcare/Medicine
+  - Media and e-commerce
+  - Government
+  - Finance
+  - Education
+  
+  ---
+  
+  ## Components of behaviour
+  - Behaviour is the interaction between an agent and its environment
+  - **Morphology**
+    - How the robot hits its environment
+  - Sensing
+    - How the robot knows it got hit
+  - Action Reflexes / Motor skills
+    - Rquire sensing / perception
+  - Cognition
+    - Realtime search
+  
+  ---
+  
+  ## Designing intelligent systems
+  - “Programming the robots isn’t hard…
+    - Making them intelligent is
+  - AI development requires trading off and integrating many techniques
+    - Programming, sensors, morphology, actuators, cognition, learning
+    - All of thse combined are AI
+  
+  ---
+  
+  ## Types of robot sensor
+  - Contact sensor
+    - E.g bump sensor
+    - Contact sensors are (almost) unambiguous
+      - But they only give you one bit of information
+  - Range sensor
+    - E.g sonar, infared, lazer range finders
+    - Range sensors allow continuous functions, easy plans
+      - Range sensors aren’t reliable
+  - Proprioception
+  
+  ### Range sensors
+  - Infared (IR)
+    - Very accurate
+      - Works on a limited range
+      - Depends on the colour it reflects from
+  - Sonar
+    - Sonar has a range longer than most rooms
+    - Is not as accurate
+  
+  ![24e4ed1b.png](:storage\\e9ae1ec5-e836-418a-8c75-e9d2c95a9aae\\24e4ed1b.png)
+  Sonar beam pattern - Green is real, Black is simulated
+  
+  --
+  
+  ## Vision
+  - Really difficult
+    - Brain does a hell of a lot of work to do vision
+  - If you use vision more like a range sensor it gets more tractable
+  
+  ---
+  
+  ## Dealing with noisy input
+  - Intelligence needs robust algorithms to handle noisy input
+  - Bad to design for a snapshot / time slice, need to consider information over a range of time and sources
+  - Need to unit test
+  
+  ---
+  
+  ## Examples of AI systems
+  - Shakey was the first mobile robot that could be autonomous and complete tasks on its own 1966-1972
+  - Tesla AutoPilot
+    - Involves 48 Networks that takes 70,000 GPU Hours to train
+    - Output 1000 tensors at each time step
+  
+  ---
+  
+  ## AI Shortcomings
+  - Still doesn't have the common sense to understand human language
+    - Natural-language processing has taken great strides recently - but how much does AI really understand of what it reads? -> less than we thought
+  - A recent paper from Allen AI shows that state of the art NLP techniques have trouble with the Winograd challange
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

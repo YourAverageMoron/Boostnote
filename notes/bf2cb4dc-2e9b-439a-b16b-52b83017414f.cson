@@ -1,0 +1,144 @@
+createdAt: "2020-05-14T19:52:07.607Z"
+updatedAt: "2020-05-18T12:36:49.018Z"
+type: "MARKDOWN_NOTE"
+folder: "07413230992e30754bd9"
+title: "Behaviour Oriented Design"
+tags: [
+  "CM30229"
+  "Computer_Science"
+  "ICCS"
+  "University"
+]
+content: '''
+  # Behaviour Oriented Design
+  
+  ## Introduction
+  - Behaviour oriented design (BOD) was developed by Joanna Bryson through her thesis on this subject
+  - The motivation is that it is a natural approach for design of AI systems. For instance, it can be seen that behaviour oriented design is also used in nature
+  - Most animals allocate a packet of time to each goal
+  - Even very hungry Siamese fish will alternate time between eating and patrolling
+  - Subsumption cannot support this (because it assumes a hierarchy of layers for realising a single behaviour)
+  
+  ---
+  
+  ## BOD Features and Origins
+  - Differs from Subsumption Architecture by allowing
+    - Centralised, hierarchical action selection
+    - Memory
+    - Refactoring
+  - It keeps lightweight perception specialised to action
+  - Differs from conventional OOD by focussing on motivated action hierarchical plans specify priorities for an agent
+  - It keeps code reuse, module decomposition, software engineering focus
+  - Keeps modularity (which is key to both approaches.)
+  
+  ---
+  
+  ## Requirements
+  - Bryson observed that every autonomous agent architecture seems to need:
+    - A modular structure and approach for developing the agent’s basic behaviours, including perception, action and learning
+    - A means to easily engineer individual competencies for complex tasks
+      - This implies a need to order action selection in both sequential and hierarchical terms using both situation based and agent based priorities derived from the task structure
+    - A mechanism for reacting quickly to changes in the environment
+      - This generally takes the form of a system operating in parallel to the action selection, which monitors the environment for events
+  
+  ---
+  
+  ## Three elements of BOD
+  1. A iterative design process
+  2. Parallel, modular behaviours which determine how an agent behaves
+  3. Action selection, which determines when a behaviour is expressed
+  
+  Based on these, Bryson proposed “Parallel-rooted, Ordered, Slip-stack, Heriarchical (POSH) Reactive Plans”
+  
+  ---
+  
+  ## POSH plan elements
+  - POSH plans consist of several elements
+    - Action Patterns
+    - Competences
+    - Drive Collections and the Slip-Stack
+  
+  ### Action Patterns
+  - Action patterns are used to describe simple sequences of actions
+  - Action patterns supply quick, simple control in situations where actions reliably follow one from another
+  - Executing a sequential plan involves priming or activating the sequence, then releasing for execution the first primitive act τi
+  - The completion of any τi releases the following τi+1 until no active elements remain
+  
+  ### Competences
+  - A ‘competences’ is a form of Basic Reactive Plan
+  - Like an Action Pattern, a competence focuses attention on a particular set of elements suited to performing a particular task
+  - A competence is useful when these elements cannot be ordered in advance
+  - The main difference between competence and BRP is that, a competence allows for specification of a limit to the number of retries
+  - This limit can be set individually for each competence step
+  - Thus, a competence is a quadruple (φ, ρ, α, η) where η is the optional maximum number of retries
+  - A negative η indicates unlimited retries
+  - Competence also returns a value that indicates whether they terminated due to their goal trigger firing or not
+  
+  ### Basic Reactive Plan
+  - A BRP step is a tuple (φ, ρ, α), where π is a priority, ρ is a releaser, and α is an action
+  - A BRP is a small set (typically 3 to 7) of plan steps (φ, ρ, α)* associated with achieving a particular goal condition
+  - The releaser ρi is a conjunction of boolean perceptual primitives which determine whether the step can execute
+  - Each priority πi is drawn from a total order, but is not necessarily unique
+  - Each action αi may be a primitive action, another BRP or a sequence as described above
+  
+  #### Basic Reactive Plan Example
+  - The example shows a BRP for lifting a blue block
+  - In the example the agent has not already fixated on a blue block, it fitst executes that step
+    - Else it goes to the next step
+  - Once it is fixated, then the grasp step is triggered
+  - If step 2 is successful it does onto step 3
+    - Else it repeats step 2
+  - Once step 3 is successful, it moves to step 4 where it realizes that the goal is achieved
+  
+  ![3afff8fa.png](:storage\\bf2cb4dc-2e9b-439a-b16b-52b83017414f\\3afff8fa.png)
+  
+  ### Drive Collections and the Slip-Stack
+  - A reactive agent must be able to change the current focus of its action selection to deal with context changes (whether environmental or internal) which require switching between plans, rather than reordering steps within them
+  - A drive collection is also an elaboration of the BRP
+  - It consists of five elements (φ, ρ, α, A, ν)
+  - The priority π and the releaser ρ are as in a BRP
+  - The actions are different. A is the root of a BRP hierarchy, while α is the currently active element
+  - If α is a competence and triggers a child β, then α for that drive element is assigned the value β
+  - This policy of having only one active POSH element assigned to each step of the drive collection is one of the key features of POSH - the slip-stack hierarchy
+  - The slip stack improves reaction time by eliminating the stack that might be produced while traversing a hierarchy
+  - The last element of a drive element is ν, that is an optional maximum frequency at which this element is visited
+  - The frequency in a real time system sets a temporal limit on how frequently a drive element may be executed
+  - For example, a mobile robot might have its highest priority drive element check the battery level, but execute it every two minutes
+  
+  ---
+  
+  ## BOD Examples
+  
+  ![9a17cca5.png](:storage\\bf2cb4dc-2e9b-439a-b16b-52b83017414f\\9a17cca5.png)
+  
+  ![fdd66437.png](:storage\\bf2cb4dc-2e9b-439a-b16b-52b83017414f\\fdd66437.png)
+  
+  ![3d005260.png](:storage\\bf2cb4dc-2e9b-439a-b16b-52b83017414f\\3d005260.png)
+  
+  ---
+  
+  ## BOD Development cycle
+  - The BOD Development cycle consists of an initial decomposition 
+  - This is followed by an iterative development process. The initial decomposition consists of a sequence of steps
+  
+  ### Initial Decomposition
+  - Specify at a high level what the agent is intended to do
+  - Describe likely activities in terms of sequences of actions
+  - Identify an initial list of sensory and action primitives
+  - Identify the state necessary to enable the described primitives and drives
+    - Cluster related state elements and their dependent primitives into specifications for behav- iors
+  - Identify and prioritize goals or drives that the agent may need to attend to
+  - Select a first behavior to implement
+  
+  ### Iterative Development
+  - Select a part of the specification to implement next
+  - Extend the agent with that implementation:
+    - Code behaviors and reactive plans, and
+    - test and debug that code
+  - Revise the current specification
+'''
+linesHighlighted: [
+  7
+]
+isStarred: false
+isTrashed: false
